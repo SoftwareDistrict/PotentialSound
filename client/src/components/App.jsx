@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './Login'
-import HomeFeed from './HomeFeed'
+import Login from './Login.jsx'
+import HomeFeed from './HomeFeed.jsx'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -11,7 +11,7 @@ class App extends Component {
       <div>
         <h1>TESTING</h1>
         <Login />
-        <HomeFeed/>
+        <HomeFeed />
       </div>
     )
   }

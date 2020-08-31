@@ -18,5 +18,11 @@
   "homepage": "https://github.com/SoftwareDistrict/PotentialSound#readme",
   "devDependencies": {
     "husky": "^4.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"pre-commit: Pre-commit working...\"",
+      "pre-push": "echo \"pre-push: Pre-push working...\""
+    }
   }
 }

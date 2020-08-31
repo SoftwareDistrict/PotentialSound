@@ -4,7 +4,7 @@ const path = require('path');
 const { PORT } = process.env;
 
 module.exports = {
-  entry: path.join(__dirname, '/client/src/index.js'),
+  entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
     path: path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.js?$/,
+        test: /.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

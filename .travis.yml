@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - '14'
-  - '10'
-  
+  - 14
+  - 10
+cache: npm
+
+install:
+  - npm ci
+
+script:
+  - npm run build

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const HomeFeed = (props) => {
 
     return (
@@ -17,7 +17,8 @@ const HomeFeed = (props) => {
 					<img src="https://tinyurl.com/y2v9h8rz" style={{ width: "15%", height: "15%" }}/>
 				</button>
 				<div>
-					<button type="button" style={{ fontSize: '20px', padding: '5px', paddingLeft: '10px', paddingRight: '10px', borderRadius: '5px' }}>Creat A Post</button>
+					{/* <Link to="/"><button type="button" style={{ fontSize: '20px', padding: '5px', paddingLeft: '10px', paddingRight: '10px', borderRadius: '5px' }}>Creat A Post</button></Link> */}
+					<Link to="/createPostMessage">Creat A Post</button></Link>
 				</div>
 			</div>
 			<div style={{  backgroundColor: 'rgb(40, 84, 52)', height: '500px' }}>

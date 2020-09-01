@@ -9,11 +9,11 @@ function Profile(props) {
         city:  'Kingston',
         email: "bob123@gmail.com"
     });
+
     return (
         <div>
-    <h1>{`Profile Page`}</h1>
-    <div id='profile'>
     <h1>{`${state.userName}'s Profile Inforamtion`}</h1>
+    <div id='profile'>
                <div class='profileInfo'>{`Username: ${state.userName}`}</div>
                <div class='profileInfo'>{`Email: ${state.email}`}</div>
                <div class='profileInfo'>{`Cell Phone Number: ${state.cell}`}</div>

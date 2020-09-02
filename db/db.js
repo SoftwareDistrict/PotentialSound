@@ -15,7 +15,8 @@ const connect = async () => {
 }
 connect();
 // creating the tables
-const User = sequelize.define('User', {
+//1//
+const Users = sequelize.define('Users', {
   userName: Sequelize.STRING,
   city: Sequelize.STRING,
   desciption: Sequelize.STRING,
@@ -23,88 +24,89 @@ const User = sequelize.define('User', {
   gmail: Sequelize.STRING,
   cell: Sequelize.TEXT,
 });
-
-// const Messages = sequelize.define('Messages', {
-//   message: Sequelize.STRING,
-//   userId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Users',
-//       referencesKey: 'id'
-//   }
-// },
-//   chatId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Chats',
-//       referencesKey: 'id'
-//     }
-//   },
+//2
+const Messages = sequelize.define('Messages', {
+  message: Sequelize.STRING,
+  userId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Users',
+      key: 'id'
+  }
+},
+  chatId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Chats',
+      key: 'id'
+    }
+  },
   
-//   created_at: {
-//     type: 'TIMESTAMP',
-//     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-//     allowNull: false
-//   },
-//   updated_at: {
-//     type: 'TIMESTAMP',
-//     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-//     allowNull: false
-//   }
-// })
-
+  created_at: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false
+  },
+  updated_at: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false
+  }
+})
+//3//
 const Chats = sequelize.define('Chats', {
   name: Sequelize.STRING,
 })
-
-// const ChatJoin = sequelize.define('ChatJoin', {
-//   userId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Users',
-//       referencesKey: 'id'
-//     }
-//   },
-//   chatId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Chats',
-//       referencesKey: 'id'
-//     }
-//   }
-// })
-
-// const Posts = sequelize.define('Post', {
-//   userId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Users',
-//       referencesKey: 'id'
-//   },
-//   message: Sequelize.STRING,
-//   created_at: {
-//     type: 'TIMESTAMP',
-//     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-//     allowNull: false
-//   },
-//   updated_at: {
-//     type: 'TIMESTAMP',
-//     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-//     allowNull: false
-//    }
-//   }
-// })
-
-// const Tags = sequelize.define('Tags', {
-//   postId: {
-//     type: Sequelize.INTEGER,
-//     references: {
-//       model: 'Posts',
-//       referencesKey: 'id'
-//     }
-//   },
-//   tag: Sequelize.STRING
-// })
+//4
+const ChatJoin = sequelize.define('ChatJoin', {
+  userId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Users',
+      key: 'id'
+    }   
+  },
+  chatId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Chats',
+      key: 'id'
+    }
+  }
+})
+//5//
+const Posts = sequelize.define('Posts', {
+  userId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Users',
+      key: 'id'
+    }
+  },
+  message: Sequelize.STRING,
+  created_at: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false
+  },
+  updated_at: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false
+   }
+  
+})
+//6//
+const Tags = sequelize.define('Tags', {
+  postId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: 'Posts',
+      key: 'id'
+    }
+  },
+  tag: Sequelize.STRING
+})
 
 
 // .then(() => sequelize.query('createdb potentialsound -O root'))
@@ -116,12 +118,16 @@ const Chats = sequelize.define('Chats', {
 // .then(() => {
 //   })
 
-User.sync({ force: true});
-// Messages.sync({ force: true});
-Chats.sync({ force: true});
-// ChatJoin.sync({ force: true});
-// Posts.sync({ force: true});
-// Tags.sync({ force: true});
+Users.sync({ force: true})
+.then(() => {
+  Posts.sync({ force: true});
+  Chats.sync({ force: true})
+  .then(() => {
+    ChatJoin.sync({ force: true});
+    Messages.sync({ force: true});
+    Tags.sync({ force: true});
+  })
+})
 
 
 module.exports = {

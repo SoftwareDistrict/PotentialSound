@@ -36,6 +36,7 @@ function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
                 <br /><br />
                 <label>Message  <input size="60" onChange={(event) => onEvent(event, setMessage, message)} type="text" placeholder={'Message'} /></label><br /><br />
                 <button onClick={() => {
+                    //-
                     var arrayTags = []
                     var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
                     for (var i = 0; i < checkboxes.length; i++) {

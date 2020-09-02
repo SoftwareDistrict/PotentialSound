@@ -4,9 +4,10 @@ import PostFeedEntry from './PostFeedEntry.jsx'
 const HomeFeed = (props) => {
 	console.log(props);
 
-	const { arrPosts } = props
+	const { arrPosts, userName } = props
 	return (
 		<div>
+			<Link to={`/profile/${userName}`}> Go to Profile Page </Link>
 			<h1>
 				PotentialSound
 				<div style={{ width: "100px", height: "100px", borderRadius: '50%', position: 'relative', overflow: 'hidden' }}>
@@ -21,11 +22,9 @@ const HomeFeed = (props) => {
 				</button>
 				<div>
 					<Link to="/createPostMessage"><button type="button" style={{ fontSize: '20px', padding: '5px', paddingLeft: '10px', paddingRight: '10px', borderRadius: '5px' }}>Creat A Post</button></Link>
-
 				</div>
 			</div>
 			<div style={{ backgroundColor: "rgb(200,200,200)", height: '500px' }}>
-
 				{arrPosts.map(post => <div><PostFeedEntry post={post} /><br /></div>)}
 			</div>
 		</div>

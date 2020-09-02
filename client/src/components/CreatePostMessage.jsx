@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-function CreatePostMessage({ makeNewPost, userName }) {
+function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
     const [message, setMessage] = useState('');
-    const [profilePic, setProfilePic] = useState('https://mma.prnewswire.com/media/1138309/UMe_Bob_Marley_1973_London.jpg?p=publish');
     const onEvent = (event, setFunc, val) => {
         if (event.target.value === '' || event.target.value === undefined) {
             setFunc(val);
@@ -14,9 +13,7 @@ function CreatePostMessage({ makeNewPost, userName }) {
     return (
         <div>
             <h1>Make a Post</h1>
-
             <div>
-
                 <label for="tag1">Collab</label>
                 <input class="messageCheckbox" type="checkbox" id="tag1" name="type" value='#collab' />
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -44,11 +41,9 @@ function CreatePostMessage({ makeNewPost, userName }) {
                     for (var i = 0; i < checkboxes.length; i++) {
                         arrayTags.push(checkboxes[i].value)
                     }
-                    const post = { posterName: userName, profilePic: profilePic, message: message, tags: arrayTags }
+                    const post = { posterName: userName, profilePic: userProfilePic, message: message, tags: arrayTags }
                     makeNewPost(post);
-
                 }}>Submit</button>
-
             </div>
             <Link to="/">Back to HomeFeed</Link>
         </div>

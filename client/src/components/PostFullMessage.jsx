@@ -16,7 +16,6 @@ function PostFullMessage({ arrPosts, match }) {
             setFunc(val);
         } else {
             setFunc(event.target.value);
-            console.log(message);
         }
     }
     return (

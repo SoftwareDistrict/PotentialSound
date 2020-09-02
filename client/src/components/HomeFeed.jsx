@@ -7,6 +7,7 @@ const HomeFeed = (props) => {
 	const { arrPosts, userName } = props
 	return (
 		<div>
+			<Link to="/createProfile">CreateProfile</Link><br/>
 			<Link to={`/profile/${userName}`}> Go to Profile Page </Link>
 			<h1>
 				PotentialSound

@@ -5,6 +5,7 @@ import Profile from './Profile.jsx';
 import CreatePostMessage from './CreatePostMessage.jsx';
 import PostFullMessage from './PostFullMessage.jsx';
 import CreateProfile from './CreateProfile.jsx'
+import UpdateProfile from './UpdateProfile.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -53,7 +54,8 @@ class App extends Component {
             <Route exact={true} path="/profile/:id" render={() => (<Profile userName={userName} />)} />
             <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} userName={userName} userProfilePic={userProfilePic} />)} />
             <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage arrPosts={arrPosts} match={match} />)} />
-            <Route path="/createProfile" render={() => (<CreateProfile />)}/>
+            <Route path="/createProfile" render={() => (<CreateProfile />)} />
+            <Route path="/updateProfile" render={() => (<UpdateProfile userName={userName} />)} />
           </Switch>
         </div>
       </Router>

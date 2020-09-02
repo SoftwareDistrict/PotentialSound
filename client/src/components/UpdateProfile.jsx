@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 const UpdateProfile = ({userName}) => {
 
@@ -9,7 +10,14 @@ const UpdateProfile = ({userName}) => {
     const [newDescription, setNewDescription] = useState('Previous Description');
 
     const updateProfile = () => {
-        console.log({newUser, newCity, newCell, newDescription}, 'hit');
+        Axios.put('/updateProfile', {
+            userName: newUser,
+            city: newCity,
+            cell: newCell,
+            description: newDescription
+        })
+        .then(({data}) => console.log(data))
+        .catch((err) => console.error(err));
     }
 
     return(<div>

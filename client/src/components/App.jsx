@@ -58,7 +58,7 @@ makeNewPost(post){
                <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} userName={userName} userProfilePic={userProfilePic} />)} />
                <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage arrPosts={arrPosts} match={match}  />)} />
                <Route path="/createProfile" render={() => (<CreateProfile/>)}/>
-               <Route path="/updateProfile" render={() => (<UpdateProfile />)}/>
+               <Route path="/updateProfile" render={() => (<UpdateProfile userName={userName}/>)}/>
                {/* <Route path="/fullMessage/:id" component={() => (<PostFullMessage arrPosts={arrPosts}  />)} /> */}
             </Switch>
       </div>

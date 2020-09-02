@@ -3,6 +3,11 @@ node_js:
   - 14
   - 10
   - 13
+
+os:
+  - linux
+  - osx
+   
 cache: npm
 
 install:

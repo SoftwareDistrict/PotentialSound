@@ -15,13 +15,29 @@ function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
 
     const onCheck = (event) => {
         let selectedTag = event.target.value
-        // one make a condition to see if the tag is already in the state
 
-        // if it's not in the state then add it to tag state
-        console.log(selectedTag, 'event')
-        setTags([...tags, selectedTag])
-        setTimeout(()=>{console.log(tags,'these are the tags in the state')},1000)
+        let foundTag = tags.find(tag => tag === selectedTag) 
+
+        console.log(foundTag, 'found tag')
+        // one make a condition to see if the tag is already in the state if it is remove it
+        if(foundTag) {
+            
+            let proxyTags = [...tags]
+            console.log(proxyTags, 'im the proxy array')
+            // then want to remove found tag from proxy array
+           proxyTags.splice(proxyTags.indexOf(foundTag),1)
+            // then set proxy array with new array
+            console.log(proxyTags, 'removed element from proxyarray')
+            setTags(proxyTags)
+        } else {      
+            // if it's not in the state then add it to tag state
+            console.log(selectedTag, 'event')
+            setTags([...tags, selectedTag])
+        }
+        
     }
+
+    console.log(tags)
 
     return (
         <div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PostFeedEntry from './PostFeedEntry.jsx'
-const HomeFeed = (props) => {
-	console.log(props);
+import PostFeedEntry from './PostFeedEntry.jsx';
 
-	const { arrPosts, userName } = props
+const HomeFeed = (props) => {
+	const { arrPosts, userName } = props;
+
 	return (
 		<div>
 			<Link to="/createProfile">CreateProfile</Link><br/>
@@ -17,19 +17,16 @@ const HomeFeed = (props) => {
 				<button type="button">MENU</button>
 			</h1>
 			<div>
-				<input type="text" placeholder="Search for Post" style={{ width: '500px', height: '30px', fontSize: '14px', paddinLeft: '10px' }}></input>
-				<button type="button" style={{ borderRadius: '5px' }}>
-					<img src="https://tinyurl.com/y2v9h8rz" style={{ width: "15%", height: "15%" }} />
-				</button>
+				<input type="text" placeholder="Search for Post" style={{ width: '300px', height: '25px', fontSize: '14px', paddingLeft: '10px' }} /><button type="button" style={{ borderRadius: '5px' }}>Search</button>
 				<div>
 					<Link to="/createPostMessage"><button type="button" style={{ fontSize: '20px', padding: '5px', paddingLeft: '10px', paddingRight: '10px', borderRadius: '5px' }}>Creat A Post</button></Link>
 				</div>
 			</div>
-			<div style={{ backgroundColor: "rgb(200,200,200)", height: '500px' }}>
+			<div style={{ backgroundColor: "rgb(200,200,200)", width: '455px', height: '700px' }}>
 				{arrPosts.map(post => <div><PostFeedEntry post={post} /><br /></div>)}
 			</div>
 		</div>
 	);
-}
+};
 
-export default HomeFeed
+export default HomeFeed;

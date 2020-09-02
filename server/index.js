@@ -14,7 +14,7 @@ app.use(express.static(CLIENT_PATH));
 
 app.post('/createProfile', (req, res) => {
   console.log("hit", req.body);
-})
+});
 
 app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT}`);

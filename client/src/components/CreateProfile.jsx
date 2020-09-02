@@ -1,25 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { response } from 'express';
-
 
 const CreateProfile = () => {
-    const [username, setUsername] = useState('');
-    const [city, setCity] = useState('');
-    const [cell, setCell] = useState('');
-    const [description, setDescription] = useState('');
+    const [ username, setUsername ] = useState('');
+    const [ city, setCity ] = useState('');
+    const [ cell, setCell ] = useState('');
+    const [ description, setDescription ] = useState('');
 
     const createProfile = () => {
-        // console.log({username, city, cell, description});
         axios.post('/createProfile', {
             userName: username,
             city: city,
             cell: cell,
             description: description
         })
-        .then(({data}) => console.log(data))
+        .then(({ data }) => console.log(data))
         .catch(err => console.error(err));
-    }
+    };
 
     return(
         <div>
@@ -30,9 +27,8 @@ const CreateProfile = () => {
             <input placeholder='Enter Descrition' onChange={(e) => setDescription(e.target.value)}></input><br/>
             <p>~ Insert Profile Picture ~</p>
             <button onClick={() => createProfile()}>Submit</button>
-            
         </div>
-    )
-}
+    );
+};
 
 export default CreateProfile;

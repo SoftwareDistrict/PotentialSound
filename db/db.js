@@ -1,7 +1,10 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('potentialsound', 'root', ' ', {
-  host: 'localhost',
+const {DB_NAME, DB_USER, DB_HOST} = process.env;
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, '', {
+  host: DB_HOST,
   dialect: 'postgres'
 });
 

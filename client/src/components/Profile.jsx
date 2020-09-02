@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import UpdateProfile from './UpdateProfile.jsx';
 
 const Profile = () => {
     const [ state, setState ] = useState({

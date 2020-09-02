@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
-const UpdateProfile = ({userName}) => {
+const UpdateProfile = ({ userName }) => {
 
     const [newUser, setNewUser] = useState('Previous Username');
     const [newCity, setNewCity] = useState('Previous City');

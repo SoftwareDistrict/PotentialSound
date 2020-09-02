@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
-const UpdateProfile = () => {
+const UpdateProfile = ({userName}) => {
 
     const [newUser, setNewUser] = useState('Previous Username');
     const [newCity, setNewCity] = useState('Previous City');
@@ -18,7 +18,7 @@ const UpdateProfile = () => {
         <input value={newCity} onChange={(e) => {setNewCity(e.target.value)}}></input><br/>
         <input value={newCell} onChange={(e) => {setNewCell(e.target.value)}}></input><br/>
         <input value={newDescription} onChange={(e) => {setNewDescription(e.target.value)}}></input><br/>
-        <Link to='/profile/:id'><button type="button" onClick={() => updateProfile()}>Submit Change</button></Link>
+        <Link to={`/profile/${userName}`}><button type="button" onClick={() => updateProfile()}>Submit Change</button></Link>
     </div>)
 }
 

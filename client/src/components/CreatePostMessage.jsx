@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-function CreatePostMessage({ makeNewPost }) {
+function CreatePostMessage({ makeNewPost, userName }) {
     const [message, setMessage] = useState('');
-    const [userName, setUsername] = useState('Bob');
     const [profilePic, setProfilePic] = useState('https://mma.prnewswire.com/media/1138309/UMe_Bob_Marley_1973_London.jpg?p=publish');
     const onEvent = (event, setFunc, val) => {
         if (event.target.value === '' || event.target.value === undefined) {

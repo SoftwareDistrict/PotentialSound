@@ -31,7 +31,8 @@ class App extends Component {
         profilePic: 'https://www.saintmarys.edu/files/images/Womens-Choir-WEB-2.jpg',
         tags: ['#help-wanted', '#vocalist'],
       }
-    ]
+    ], 
+    userName: 'Bob'
     }
     this.makeNewPost = this.makeNewPost.bind(this);
   }
@@ -42,7 +43,7 @@ makeNewPost(post){
 
 
   render() {
-    const { arrPosts } = this.state;
+    const { arrPosts, userName } = this.state;
     return (
               <Router>
       <div>
@@ -50,7 +51,7 @@ makeNewPost(post){
                <Route exact={true} path="/" render={() => (<HomeFeed arrPosts={arrPosts} />)} />
                <Route exact={true} path="/login" render={() => (<Login />)} />
                <Route exact={true} path="/profile/:id" render={() => (<Profile />)} />
-               <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} />)} />
+               <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} userName={userName} />)} />
                <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage arrPosts={arrPosts} match={match}  />)} />
                {/* <Route path="/fullMessage/:id" component={() => (<PostFullMessage arrPosts={arrPosts}  />)} /> */}
             </Switch>

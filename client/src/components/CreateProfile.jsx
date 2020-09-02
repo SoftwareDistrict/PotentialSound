@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import { response } from 'express';
+
 
 const CreateProfile = () => {
     const [username, setUsername] = useState('');
@@ -7,8 +10,15 @@ const CreateProfile = () => {
     const [description, setDescription] = useState('');
 
     const createProfile = () => {
-        console.log("hit");
-        console.log({username, city, cell, description});
+        // console.log({username, city, cell, description});
+        axios.post('/createProfile', {
+            userName: username,
+            city: city,
+            cell: cell,
+            description: description
+        })
+        .then(({data}) => console.log(data))
+        .catch(err => console.error(err));
     }
 
     return(
@@ -18,7 +28,7 @@ const CreateProfile = () => {
             <input placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input><br/>
             <input placeholder='Enter Cell' onChange={(e) => setCell(e.target.value)}></input><br/>
             <input placeholder='Enter Descrition' onChange={(e) => setDescription(e.target.value)}></input><br/>
-            <p>~ Insert Image ~</p>
+            <p>~ Insert Profile Picture ~</p>
             <button onClick={() => createProfile()}>Submit</button>
             
         </div>

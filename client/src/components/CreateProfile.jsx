@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { response } from 'express';
 
 
 const CreateProfile = () => {
@@ -10,7 +9,6 @@ const CreateProfile = () => {
     const [description, setDescription] = useState('');
 
     const createProfile = () => {
-        // console.log({username, city, cell, description});
         axios.post('/createProfile', {
             userName: username,
             city: city,

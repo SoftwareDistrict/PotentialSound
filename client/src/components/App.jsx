@@ -6,6 +6,8 @@ import CreatePostMessage from './CreatePostMessage.jsx'
 import PostFullMessage from './PostFullMessage.jsx'
 import PostFeedEntry from './PostFeedEntry.jsx'
 import CreateProfile from './CreateProfile.jsx'
+import UpdateProfile from './UpdateProfile.jsx'
+
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 class App extends Component {
@@ -56,6 +58,7 @@ makeNewPost(post){
                <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} userName={userName} userProfilePic={userProfilePic} />)} />
                <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage arrPosts={arrPosts} match={match}  />)} />
                <Route path="/createProfile" render={() => (<CreateProfile/>)}/>
+               <Route path="/updateProfile" render={() => (<UpdateProfile userName={userName}/>)}/>
                {/* <Route path="/fullMessage/:id" component={() => (<PostFullMessage arrPosts={arrPosts}  />)} /> */}
             </Switch>
       </div>

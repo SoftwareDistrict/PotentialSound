@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-require('../db/db');
+require('./db');
 require('./passport.setup');
 
 const PORT = process.env.PORT || 3000;

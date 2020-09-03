@@ -21,7 +21,7 @@ const Nav = ({ userName, toggleMenu }) => {
       </h2>
       <br />
       <br />
-      <Link onClick={toggleMenu} style={linkStyle} to="/">
+      <Link onClick={toggleMenu} style={linkStyle} to="/home">
         General
       </Link>
       <br />

@@ -8,9 +8,8 @@ require("./db");
 require("./passport.setup");
 
 const PORT = process.env.PORT || 3000;
-const CLIENT_PATH = path.join(__dirname, '../client/dist');
-const INDEX_PATH = path.join(__dirname, '../client/dist/index.html');
-
+const CLIENT_PATH = path.join(__dirname, "../client/dist");
+const INDEX_PATH = path.join(__dirname, "../client/dist/index.html");
 
 const app = express();
 app.use(express.json());
@@ -53,13 +52,13 @@ app.get("*", (req, res) => {
   res.sendFile(`${CLIENT_PATH}/index.html`);
 });
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(INDEX_PATH), function(err) {
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(INDEX_PATH), function (err) {
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
-})
+  });
+});
 
 app.listen(PORT, () => {
   console.info(`App listening at http://localhost:${PORT}`);

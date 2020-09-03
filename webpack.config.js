@@ -6,9 +6,9 @@ const { PORT } = process.env;
 module.exports = {
   entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {
-    path: path.join(__dirname, '/client/dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: path.join(__dirname, "/client/dist"),
+    filename: "bundle.js",
+    publicPath: "/",
   },
   devServer: {
     inline: true,

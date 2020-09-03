@@ -77,12 +77,12 @@ class App extends Component {
         {menu}
         <Nav userName={userName} toggleMenu={this.toggleMenu} />
         <Switch>
+          <Route exact={true} path="/" render={() => <Login />} />
           <Route
             exact={true}
-            path="/"
+            path="/home"
             render={() => <HomeFeed arrPosts={arrPosts} userName={userName} />}
           />
-          <Route exact={true} path="/login" render={() => <Login />} />
           <Route exact={true} path="/profile/:id" render={() => <Profile userName={userName} />} />
           <Route
             exact={true}

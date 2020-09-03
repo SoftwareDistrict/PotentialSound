@@ -1,8 +1,8 @@
 require('dotenv').config();
+require('../db/db.js');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const sequelize = require('../db/db.js')
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_PATH = path.join(__dirname, '../client/dist');
@@ -14,10 +14,12 @@ app.use(express.static(CLIENT_PATH));
 
 app.post('/createProfile', (req, res) => {
   console.log("hit", req.body);
+  res.sendStatus(201);
 })
 
 app.put('/updateProfile', (req, res) => {
   console.log('updateProfile hit', req.body);
+  res.sendStatus(201);
 })
 
 app.listen(PORT, () => {

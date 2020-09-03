@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
+import UpdateProfile from './UpdateProfile.jsx';
+
 function Profile(props) {
   
     const [ state, setState ] = useState({
@@ -20,6 +23,7 @@ function Profile(props) {
                <div class='profileInfo'>{`Hometown: ${state.city}`}</div><br/>
         </div>
                <div class='profileInfo' style={{margin: '0 auto', textAlign: 'center', fontSize: '125%' }}>{`Profile Picture`}<img src={state.propic}/></div> 
+               <Link to='/updateProfile'><button type="button">Update Profile</button></Link>
     </div>
     )
   }

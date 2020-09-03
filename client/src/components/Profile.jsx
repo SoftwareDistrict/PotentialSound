@@ -12,9 +12,11 @@ const Profile = () => {
     email: "bob123@gmail.com",
   });
 
+  const { userName, propic, cell, city, email } = state;
+
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>{`${state.userName}'s Profile Information`}</h1>
+      <h1 style={{ textAlign: "center" }}>{`${userName}'s Profile Information`}</h1>
       <div
         id="profile"
         style={{
@@ -26,21 +28,21 @@ const Profile = () => {
           margin: "0 auto",
         }}
       >
-        <div className="profileInfo">{`Username: ${state.userName}`}</div>
+        <div className="profileInfo">Username: {userName}</div>
         <br />
-        <div className="profileInfo">{`Email: ${state.email}`}</div>
+        <div className="profileInfo">Email: {email}</div>
         <br />
-        <div className="profileInfo">{`Cell Phone Number: ${state.cell}`}</div>
+        <div className="profileInfo">Cell Phone Number: {cell}</div>
         <br />
-        <div className="profileInfo">{`Hometown: ${state.city}`}</div>
+        <div className="profileInfo">Hometown: {city}</div>
         <br />
       </div>
       <div
         className="profileInfo"
         style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}
       >
-        {"Profile Picture"}
-        <img src={state.propic} />
+        Profile Picture
+        <img src={propic} />
       </div>
       <Link to="/updateProfile">
         <button type="button">Update Profile</button>

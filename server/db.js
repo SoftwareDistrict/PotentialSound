@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const { DB_NAME, DB_USER, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, "", {
+const sequelize = new Sequelize(DB_NAME, DB_USER, " ", {
   host: DB_HOST,
   dialect: "postgres",
 });
@@ -17,8 +17,7 @@ const connect = async () => {
   }
 };
 connect();
-// creating the tables
-//1//
+
 const Users = sequelize.define("Users", {
   userName: Sequelize.STRING,
   city: Sequelize.STRING,
@@ -27,7 +26,7 @@ const Users = sequelize.define("Users", {
   gmail: Sequelize.STRING,
   cell: Sequelize.TEXT,
 });
-//2
+
 const Messages = sequelize.define("Messages", {
   message: Sequelize.STRING,
   userId: {
@@ -44,7 +43,6 @@ const Messages = sequelize.define("Messages", {
       key: "id",
     },
   },
-
   created_at: {
     type: "TIMESTAMP",
     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
@@ -56,11 +54,11 @@ const Messages = sequelize.define("Messages", {
     allowNull: false,
   },
 });
-//3//
+
 const Chats = sequelize.define("Chats", {
   name: Sequelize.STRING,
 });
-//4
+
 const ChatJoin = sequelize.define("ChatJoin", {
   userId: {
     type: Sequelize.INTEGER,
@@ -77,7 +75,7 @@ const ChatJoin = sequelize.define("ChatJoin", {
     },
   },
 });
-//5//
+
 const Posts = sequelize.define("Posts", {
   userId: {
     type: Sequelize.INTEGER,
@@ -98,7 +96,7 @@ const Posts = sequelize.define("Posts", {
     allowNull: false,
   },
 });
-//6//
+
 const Tags = sequelize.define("Tags", {
   postId: {
     type: Sequelize.INTEGER,
@@ -121,4 +119,10 @@ Users.sync({ force: true }).then(() => {
 
 module.exports = {
   sequelize,
+  Users,
+  Posts,
+  Chats,
+  ChatJoin,
+  Messages,
+  Tags,
 };

@@ -10,12 +10,13 @@ const UpdateProfile = ({ userName }) => {
   const [newDescription, setNewDescription] = useState("Previous Description");
 
   const updateProfile = () => {
-    axios.put("/updateProfile", {
-      userName: newUser,
-      city: newCity,
-      cell: newCell,
-      description: newDescription,
-    })
+    axios
+      .put("/updateProfile", {
+        userName: newUser,
+        city: newCity,
+        cell: newCell,
+        description: newDescription,
+      })
       .then(({ data }) => console.info(data))
       .catch((err) => console.warn(err));
   };

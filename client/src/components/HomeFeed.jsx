@@ -8,9 +8,10 @@ const HomeFeed = ({ arrPosts, userName }) => {
   const posts = arrPosts;
 
   const logout = () => {
-    axios.get("/logout")
+    axios
+      .get("/logout")
       .then(() => console.info("successful logout"))
-      .catch(err => console.warn("unsucessful logout: ", err));
+      .catch((err) => console.warn("unsucessful logout: ", err));
   };
 
   return (

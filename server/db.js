@@ -124,5 +124,5 @@ module.exports = {
   Chats,
   ChatJoin,
   Messages,
-  Tags
+  Tags,
 };

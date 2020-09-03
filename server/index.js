@@ -15,19 +15,20 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(CLIENT_PATH));
 
-app.use(cookieSession({
-  name: "session",
-  keys: ["key1", "key2"]
-}));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-app.get("/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res) => res.redirect("/home")
+app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req, res) =>
+  res.redirect("/home")
 );
 
 app.post("/createProfile", (req, res) => {

@@ -45,7 +45,7 @@ const PostFullMessage = ({ arrPosts, id }) => {
             height: "150px",
           }}
         >
-          Profile Pic: 
+          Profile Pic:
           <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
         </div>
         <br />
@@ -54,12 +54,7 @@ const PostFullMessage = ({ arrPosts, id }) => {
         <h3>Reply</h3>
         <label>
           Message{" "}
-          <input
-            size="60"
-            onChange={(event) => onEvent(event)}
-            type="text"
-            placeholder="Message"
-          />
+          <input size="60" onChange={(event) => onEvent(event)} type="text" placeholder="Message" />
         </label>
         <br />
         <br />

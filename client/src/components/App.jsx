@@ -49,8 +49,8 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact={true} path="/" render={() => (<HomeFeed arrPosts={arrPosts} userName={userName} />)} />
-            <Route exact={true} path="/login" render={() => (<Login />)} />
+            <Route exact={true} path="/" render={() => (<Login />)} />
+            <Route exact={true} path="/home" render={() => (<HomeFeed arrPosts={arrPosts} userName={userName} />)} />
             <Route exact={true} path="/profile/:id" render={() => (<Profile userName={userName} />)} />
             <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage makeNewPost={this.makeNewPost} userName={userName} userProfilePic={userProfilePic} />)} />
             <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage arrPosts={arrPosts} match={match} />)} />

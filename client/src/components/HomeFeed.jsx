@@ -1,14 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PostFeedEntry from './PostFeedEntry.jsx';
+import axios from 'axios';
 
 const HomeFeed = (props) => {
 	const { arrPosts, userName } = props;
 
+	const logout = () => {
+		axios.get('/logout')
+		.then(() => console.log('successful logout'))
+		.catch(err => console.error('unsucessful logout: ', err));
+  };
+
 	return (
 		<div>
-			<Link to="/createProfile">CreateProfile</Link><br/>
-			<Link to={`/profile/${userName}`}> Go to Profile Page </Link>
+			<div><Link to="/createProfile"><button>CreateProfile</button></Link></div>
+			<div><Link to={`/profile/${userName}`}><button>Go to Profile Page</button></Link></div>
+			<div><Link to={'/'}><button onClick={logout}>Logout</button></Link></div>
 			<h1>
 				PotentialSound
 				<div style={{ width: "100px", height: "100px", borderRadius: '50%', position: 'relative', overflow: 'hidden' }}>

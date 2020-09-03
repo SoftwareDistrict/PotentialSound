@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "lint": "eslint . --ext .js --ext .jsx --ext .json --ext .md",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "repository": {
     "type": "git",
@@ -32,23 +35,27 @@
     "sequelize": "^6.3.4"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "eslint": "^7.8.0",
+    "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-require": "0.0.1",
+    "husky": "^4.2.5",
+    "prettier": "^2.1.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo \"pre-commit: Pre-commit working...\"",
+      "pre-commit": "npm run lint:fix",
       "pre-push": "echo \"pre-push: Pre-push working...\""
     }
   }

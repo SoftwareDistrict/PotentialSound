@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-
 const PostFeedEntry = ({ post }) => {
-
   const { posterName, message, profilePic, tags } = post;
 
   return (
@@ -88,8 +86,8 @@ PostFeedEntry.propTypes = {
     posterName: PropTypes.string,
     message: PropTypes.string,
     profilePic: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string)
-  })
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default PostFeedEntry;

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 
 const HomeFeed = ({ arrPosts, userName }) => {
-
   const posts = arrPosts;
 
   return (
@@ -76,14 +75,16 @@ const HomeFeed = ({ arrPosts, userName }) => {
 };
 
 HomeFeed.propTypes = {
-  arrPosts: PropTypes.arrayOf(PropTypes.shape({
-    posterName: PropTypes.string,
-    title: PropTypes.string,
-    message: PropTypes.string,
-    profilePic: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string)
-  })),
-  userName: PropTypes.string.isRequired
+  arrPosts: PropTypes.arrayOf(
+    PropTypes.shape({
+      posterName: PropTypes.string,
+      title: PropTypes.string,
+      message: PropTypes.string,
+      profilePic: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  userName: PropTypes.string.isRequired,
 };
 
 export default HomeFeed;

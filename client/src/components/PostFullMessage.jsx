@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PostFullMessage = ({ arrPosts, id }) => {
-
   const name = id;
 
   var found = arrPosts.find(function (element) {
@@ -71,14 +70,16 @@ const PostFullMessage = ({ arrPosts, id }) => {
 };
 
 PostFullMessage.propTypes = {
-  arrPosts: PropTypes.arrayOf(PropTypes.shape({
-    posterName: PropTypes.string,
-    title: PropTypes.string,
-    message: PropTypes.string,
-    profilePic: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string)
-  })),
-  id: PropTypes.string.isRequired
+  arrPosts: PropTypes.arrayOf(
+    PropTypes.shape({
+      posterName: PropTypes.string,
+      title: PropTypes.string,
+      message: PropTypes.string,
+      profilePic: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  id: PropTypes.string.isRequired,
 };
 
 export default PostFullMessage;

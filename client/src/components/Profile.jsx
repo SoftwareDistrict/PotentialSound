@@ -35,7 +35,10 @@ const Profile = () => {
         <div className="profileInfo">{`Hometown: ${state.city}`}</div>
         <br />
       </div>
-      <div className="profileInfo" style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}>
+      <div
+        className="profileInfo"
+        style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}
+      >
         {"Profile Picture"}
         <img src={state.propic} />
       </div>

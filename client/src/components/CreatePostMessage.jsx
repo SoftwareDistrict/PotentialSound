@@ -26,13 +26,25 @@ const CreatePostMessage = ({ makeNewPost, userName, userProfilePic }) => {
         <input className="messageCheckbox" type="checkbox" id="tag3" name="type" value="#metal" />
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label htmlFor="tag4">Vocalist</label>
-        <input className="messageCheckbox" type="checkbox" id="tag4" name="type" value="#vocalist" />
+        <input
+          className="messageCheckbox"
+          type="checkbox"
+          id="tag4"
+          name="type"
+          value="#vocalist"
+        />
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label htmlFor="tag5">{"R&B beats"}</label>
         <input className="messageCheckbox" type="checkbox" id="tag5" name="type" value={"#r&b"} />
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label htmlFor="tag6">Help Wanted</label>
-        <input className="messageCheckbox" type="checkbox" id="tag6" name="type" value="#help-wanted" />
+        <input
+          className="messageCheckbox"
+          type="checkbox"
+          id="tag6"
+          name="type"
+          value="#help-wanted"
+        />
         <br />
         <br />
         <label>
@@ -74,7 +86,7 @@ const CreatePostMessage = ({ makeNewPost, userName, userProfilePic }) => {
 CreatePostMessage.propTypes = {
   makeNewPost: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
-  userProfilePic: PropTypes.string.isRequired
+  userProfilePic: PropTypes.string.isRequired,
 };
 
 export default CreatePostMessage;

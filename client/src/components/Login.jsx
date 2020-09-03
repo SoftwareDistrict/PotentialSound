@@ -1,7 +1,6 @@
 import React from "react";
 
 const Login = () => {
-
   return (
     <div>
       <h1>{"Welcome to Potential Sound"}</h1>

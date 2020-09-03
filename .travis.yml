@@ -15,4 +15,6 @@ install:
 
 script:
   - npm run build
+  - npm run format
+  - npm run lint
   

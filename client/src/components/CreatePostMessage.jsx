@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const CreatePostMessage = ({ makeNewPost, userName, userProfilePic }) => {
+const CreatePostMessage = () => {
   const [message, setMessage] = useState("");
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -66,13 +66,6 @@ const CreatePostMessage = ({ makeNewPost, userName, userProfilePic }) => {
             for (var i = 0; i < checkboxes.length; i++) {
               arrayTags.push(checkboxes[i].value);
             }
-            const post = {
-              posterName: userName,
-              profilePic: userProfilePic,
-              message: message,
-              tags: arrayTags,
-            };
-
           }}
         >
           Submit

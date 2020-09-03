@@ -6,7 +6,7 @@ import CreatePostMessage from "./CreatePostMessage.jsx";
 import PostFullMessage from "./PostFullMessage.jsx";
 import CreateProfile from "./CreateProfile.jsx";
 import UpdateProfile from "./UpdateProfile.jsx";
-import Nav from "./Nav.jsx"
+import Nav from "./Nav.jsx";
 import Messages from "./Messages.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -52,62 +52,58 @@ class App extends Component {
     this.state.arrPosts.push(post);
   }
 
-toggleMenu() {
-  let nav = document.getElementById("mySidenav");
-  let menu = document.getElementById("menu");
-  if (nav.style.display === "none") {
-    nav.style.display = "block";
-    menu.style.display = "none";
-  } else {
-    nav.style.display = "none";
-    menu.style.display = "block";
+  toggleMenu() {
+    let nav = document.getElementById("mySidenav");
+    let menu = document.getElementById("menu");
+    if (nav.style.display === "none") {
+      nav.style.display = "block";
+      menu.style.display = "none";
+    } else {
+      nav.style.display = "none";
+      menu.style.display = "block";
+    }
   }
-}
 
+  render() {
+    const menu = (
+      <div id="menu" style={{ fontSize: "40px", fontWeight: "bold" }} onClick={this.toggleMenu}>
+        Menu
+      </div>
+    );
 
-render() {
-  const menu = <div id='menu' style={{fontSize: '40px', fontWeight: 'bold'}}onClick={this.toggleMenu}>Menu</div>
-    const open = () =>{
-      document.getElementById("mySidenav").style.width = "280px";
-    };
     const { arrPosts, userName, userProfilePic } = this.state;
     return (
-        <Router>
+      <Router>
         {menu}
-            <Nav userName={userName} toggleMenu = {this.toggleMenu}/>
-          <Switch>
-            <Route
-              exact={true}
-              path="/"
-              render={() => <HomeFeed arrPosts={arrPosts} userName={userName} />}
-            />
-            <Route exact={true} path="/login" render={() => <Login />} />
-            <Route
-              exact={true}
-              path="/profile/:id"
-              render={() => <Profile userName={userName} />}
-            />
-            <Route
-              exact={true}
-              path="/createPostMessage"
-              render={() => (
-                <CreatePostMessage
-                  makeNewPost={this.makeNewPost}
-                  userName={userName}
-                  userProfilePic={userProfilePic}
-                />
-              )}
-            />
-            <Route
-              path="/fullMessage/:id"
-              render={(match) => <PostFullMessage arrPosts={arrPosts} id={match.match.params.id} />}
-            />
-            <Route path="/createProfile" render={() => <CreateProfile />} />
-            <Route path="/updateProfile" render={() => <UpdateProfile userName={userName} />} />
-            <Route path="/messages" render={() => <Messages  />} />
-      
-          </Switch>
-        </Router>
+        <Nav userName={userName} toggleMenu={this.toggleMenu} />
+        <Switch>
+          <Route
+            exact={true}
+            path="/"
+            render={() => <HomeFeed arrPosts={arrPosts} userName={userName} />}
+          />
+          <Route exact={true} path="/login" render={() => <Login />} />
+          <Route exact={true} path="/profile/:id" render={() => <Profile userName={userName} />} />
+          <Route
+            exact={true}
+            path="/createPostMessage"
+            render={() => (
+              <CreatePostMessage
+                makeNewPost={this.makeNewPost}
+                userName={userName}
+                userProfilePic={userProfilePic}
+              />
+            )}
+          />
+          <Route
+            path="/fullMessage/:id"
+            render={(match) => <PostFullMessage arrPosts={arrPosts} id={match.match.params.id} />}
+          />
+          <Route path="/createProfile" render={() => <CreateProfile />} />
+          <Route path="/updateProfile" render={() => <UpdateProfile userName={userName} />} />
+          <Route path="/messages" render={() => <Messages />} />
+        </Switch>
+      </Router>
     );
   }
 }

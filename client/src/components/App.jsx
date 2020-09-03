@@ -72,7 +72,7 @@ render() {
                <Route exact={true} path="/profile/:id" render={() => (<Profile open={open} userName={userName}/>)} />
                <Route exact={true} path="/createPostMessage" render={() => (<CreatePostMessage open={open} makeNewPost={this.makeNewPost} userName={userName} userProfilePic={userProfilePic} />)} />
                <Route path="/fullMessage/:id" render={(match) => (<PostFullMessage open={open} arrPosts={arrPosts} match={match}  />)} />
-               {/* <Route path="/fullMessage/:id" component={() => (<PostFullMessage arrPosts={arrPosts}  />)} /> */}
+
             </Switch>
       </div>
             </Router>

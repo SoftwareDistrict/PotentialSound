@@ -13,15 +13,15 @@ app.use(cors());
 app.use(express.static(CLIENT_PATH));
 
 app.post('/createProfile', (req, res) => {
-  console.log("hit", req.body);
-  res.sendStatus(201);
+  const body = req.body;
+  res.send(body).sendStatus(201);
 })
 
 app.put('/updateProfile', (req, res) => {
-  console.log('updateProfile hit', req.body);
-  res.sendStatus(201);
+  const body = req.body;
+  res.send(body).sendStatus(201);
 })
 
 app.listen(PORT, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+  console.info(`App listening at http://localhost:${PORT}`);
 });

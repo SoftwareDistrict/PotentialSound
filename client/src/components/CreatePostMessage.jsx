@@ -35,7 +35,7 @@ const CreatePostMessage = () => {
           message: message,
         })
         .then((item) => {
-          console.info(item, "post was a success");
+          console.info(item, "post was a success!");
         })
         .catch((err) => {
           console.warn(err);

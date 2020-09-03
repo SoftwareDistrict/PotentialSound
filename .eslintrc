@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["import", "require"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:json/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": ["error", {"allow": ["info", "warn"]}],
+    "import/first": "error",
+    "indent": ["error", 2],
+    "eol-last": ["error", "always"],
+    "semi": ["error", "always"],
+    "func-style": ["error", "expression"],
+    "quotes": ["error", "double"]
+  }
+}

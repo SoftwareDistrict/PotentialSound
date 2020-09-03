@@ -1,13 +1,13 @@
-require('dotenv').config();
-const path = require('path');
+require("dotenv").config();
+const path = require("path");
 
 const { PORT } = process.env;
 
 module.exports = {
-  entry: path.join(__dirname, '/client/src/index.jsx'),
+  entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {
-    path: path.join(__dirname, '/client/dist'),
-    filename: 'bundle.js',
+    path: path.join(__dirname, "/client/dist"),
+    filename: "bundle.js",
   },
   devServer: {
     inline: true,
@@ -19,7 +19,7 @@ module.exports = {
         test: /.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
     ],

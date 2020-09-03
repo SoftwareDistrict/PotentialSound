@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
 
     const [message, setMessage] = useState('');
@@ -23,21 +24,42 @@ function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
         if(foundTag) {
             
             let proxyTags = [...tags]
-            console.log(proxyTags, 'im the proxy array')
+            // console.log(proxyTags, 'im the proxy array')
             // then want to remove found tag from proxy array
            proxyTags.splice(proxyTags.indexOf(foundTag),1)
             // then set proxy array with new array
-            console.log(proxyTags, 'removed element from proxyarray')
+            // console.log(proxyTags, 'removed element from proxyarray')
             setTags(proxyTags)
         } else {      
             // if it's not in the state then add it to tag state
-            console.log(selectedTag, 'event')
+            // console.log(selectedTag, 'event')
             setTags([...tags, selectedTag])
         }
         
     }
 
+    const onSubmit = () => {
+        // const messageLength = message.length > 20
+        // check to see that the tags array and message is not empty
+        if(tags.length && messageLength) {
+            // sending the axios request
+            axios.post('/createPostMessage', {
+                "tags": tags,
+                "message": message
+            })
+            .then(item => {
+                console.log(item, 'post was a success')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+       console.log('on submit clicked')
+
+    }
+
     console.log(tags)
+    console.log(message, 'this is the message')
 
     return (
         <div>
@@ -64,19 +86,7 @@ function CreatePostMessage({ makeNewPost, userName, userProfilePic }) {
 
                 <br /><br />
                 <label>Message  <input size="60" onChange={(event) => onEvent(event, setMessage, message)} type="text" placeholder={'Message'} /></label><br /><br />
-                <button onClick={() => {
-                    //-
-                    var arrayTags = []
-                    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-                    console.log(arrayTags, 'arrayTags')
-                    console.log(checkboxes, 'checkboxes')
-                
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        arrayTags.push(checkboxes[i].value)
-                    }
-                    const post = { posterName: userName, profilePic: userProfilePic, message: message, tags: arrayTags }
-                    makeNewPost(post);
-                }}>Submit</button>
+                <button onClick={() => onSubmit()}>Submit</button>
             </div>
             <Link to="/">Back to HomeFeed</Link>
         </div>

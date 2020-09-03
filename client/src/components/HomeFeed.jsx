@@ -4,16 +4,17 @@ import PostFeedEntry from './PostFeedEntry.jsx'
 const HomeFeed = (props) => {
 	console.log(props);
 
-	const { arrPosts, userName } = props
+	const { arrPosts, userName, open } = props
+	console.log(open);
 	return (
 		<div>
-			<Link to={`/profile/${userName}`}> Go to Profile Page </Link>
+
 			<h1>
 				PotentialSound
-				<div style={{ width: "100px", height: "100px", borderRadius: '50%', position: 'relative', overflow: 'hidden' }}>
+				<div style={{ width: "100px", height: "100px", borderRadius: '50%', position: 'relative', overflow: 'hidden', left:860}}>
 					<img src="https://tinyurl.com/y3h5vk9r" alt="Avatar" style={{ width: "auto", height: "100%", display: 'inline', margin: '0 auto', marginLeft: '-25%' }} />
 				</div>
-				<button type="button">MENU</button>
+
 			</h1>
 			<div>
 				<input type="text" placeholder="Search for Post" style={{ width: '500px', height: '30px', fontSize: '14px', paddinLeft: '10px' }}></input>

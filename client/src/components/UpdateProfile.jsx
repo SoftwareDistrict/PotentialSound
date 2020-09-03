@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 
 const UpdateProfile = ({ userName }) => {
   const [newUser, setNewUser] = useState("Previous Username");
@@ -10,12 +10,13 @@ const UpdateProfile = ({ userName }) => {
   const [newDescription, setNewDescription] = useState("Previous Description");
 
   const updateProfile = () => {
-    Axios.put("/updateProfile", {
-      userName: newUser,
-      city: newCity,
-      cell: newCell,
-      description: newDescription,
-    })
+    axios
+      .put("/updateProfile", {
+        userName: newUser,
+        city: newCity,
+        cell: newCell,
+        description: newDescription,
+      })
       .then(({ data }) => console.info(data))
       .catch((err) => console.warn(err));
   };

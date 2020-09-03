@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       arrPosts: [
         {
@@ -56,12 +55,12 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
+            <Route exact={true} path="/" render={() => <Login />} />
             <Route
               exact={true}
-              path="/"
+              path="/home"
               render={() => <HomeFeed arrPosts={arrPosts} userName={userName} />}
             />
-            <Route exact={true} path="/login" render={() => <Login />} />
             <Route
               exact={true}
               path="/profile/:id"

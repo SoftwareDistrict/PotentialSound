@@ -109,7 +109,7 @@ Users.sync({ force: true })
           {
             id_user: 1,
             message:
-          "Hey, looking for a new drummer with some experience for our rock band The Bottom Feeders. If you are interested hit us up.",
+              "Hey, looking for a new drummer with some experience for our rock band The Bottom Feeders. If you are interested hit us up.",
           },
           {
             id_user: 2,
@@ -129,7 +129,7 @@ Users.sync({ force: true })
           },
           {
             name: "Group A",
-          }
+          },
         ]);
       })
       .catch((err) => console.warn("Chatsssssss", err));
@@ -198,7 +198,8 @@ Users.sync({ force: true })
           {
             id_user: 1,
             id_chat: 1,
-            message: "We appreciate that dude. We need a drummer, but we are outsourcing to expand our sound.",
+            message:
+              "We appreciate that dude. We need a drummer, but we are outsourcing to expand our sound.",
           },
           {
             id_user: 1,
@@ -248,7 +249,8 @@ Users.sync({ force: true })
           {
             id_user: 2,
             id_chat: 3,
-            message: "I added Jay to the group, because I'm trying to get some realistic symbol sounds with a human touch.",
+            message:
+              "I added Jay to the group, because I'm trying to get some realistic symbol sounds with a human touch.",
           },
           {
             id_user: 3,
@@ -294,7 +296,7 @@ Users.sync({ force: true })
             id_user: 2,
             id_chat: 3,
             message: "That sounds awesome!",
-          }
+          },
         ]);
       })
       .catch((err) => console.warn("Messagesssssss", err));

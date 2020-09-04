@@ -15,6 +15,16 @@ const HomeFeed = ({ generalFeed, currentUser }) => {
   return (
     <div>
       <div>
+        <Link to={"/chats"}>
+          <button onClick={logout}>Chats</button>
+        </Link>
+      </div>
+      <div>
+        <Link to={`/profile/${currentUser.id}`}>
+          <button onClick={logout}>My Profile</button>
+        </Link>
+      </div>
+      <div>
         <Link to={"/"}>
           <button onClick={logout}>Logout</button>
         </Link>

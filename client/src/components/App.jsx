@@ -32,7 +32,7 @@ class App extends Component {
     axios
       .get("/currentUser")
       .then((user) => {
-        console.info(user);
+        console.info("current User: ", user);
         this.setState({ currentUser: user.data });
       })
       .catch((err) => console.warn("could not get current user.", err));
@@ -41,7 +41,10 @@ class App extends Component {
   getAllPosts() {
     axios
       .get("/feed")
-      .then((feed) => this.setState({ geneeralFeed: feed.data }))
+      .then((feed) => {
+        console.info("feeddd: ", feed);
+        this.setState({ geneeralFeed: feed.data });
+      })
       .catch((err) => console.warn("Could not get all posts", err));
   }
 

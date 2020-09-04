@@ -88,7 +88,8 @@ app.get("/posttags", (req, res) => {
 });
 
 app.get("/currenUser", (req, res) => {
-  const { userId } = req.session.passport.user.id;
+  const { userId } = req.session.passport.user;
+  console.info("uuuuusserrrrIIDD", userId);
   getCurrentUser(userId)
     .then((user) => res.send(user).status(200))
     .catch((err) => console.warn("no currentUser", err));

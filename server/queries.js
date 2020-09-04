@@ -16,6 +16,8 @@ const getPoster = (id) => Users.findOne({ where: { id: id } });
 const getPostTags = (id) => Tags.findAll({ where: { id_post: id } });
 
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
+const addPost = (post) => Posts.create(post);
+const addTags = (postId, tag) => Tags.create({ id_post: postId, tag: tag });
 
 module.exports = {
   getPosts,
@@ -24,4 +26,6 @@ module.exports = {
   getCurrentUser,
   isAccCreated,
   addUser,
+  addPost,
+  addTags,
 };

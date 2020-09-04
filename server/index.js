@@ -13,6 +13,8 @@ const {
   getPosts,
   getPoster,
   getPostTags,
+  addPost,
+  addTags,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -96,6 +98,25 @@ app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
+});
+
+app.post("/createPostMessage", (req, res) => {
+  const { tags, message } = req.body;
+  const postObj = {
+    id_user: req.session.passport.user,
+    message: message,
+  };
+  addPost(postObj)
+    .then((post) => {
+      const postId = post.dataValues.id;
+      tags.map((tag) => {
+        addTags(postId, tag);
+      });
+      res.send("Post was made succesfully");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get("*", (req, res) => {

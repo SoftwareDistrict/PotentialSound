@@ -60,13 +60,7 @@ const Posts = sequelize.define("Posts", {
 });
 
 const Tags = sequelize.define("Tags", {
-  id_post: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Posts",
-      key: "id",
-    },
-  },
+  id_post: Sequelize.INTEGER,
   tag: Sequelize.STRING,
 });
 

@@ -27,7 +27,7 @@ const CreatePostMessage = () => {
   };
 
   const onSubmit = () => {
-    const messageLength = message.length > 20;
+    const messageLength = message.length > 10;
     if (tags.length && messageLength) {
       axios
         .post("/createPostMessage", {

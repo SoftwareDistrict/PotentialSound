@@ -29,8 +29,8 @@ const Nav = ({ userName, toggleMenu }) => {
       <br />
       <br />
       <br />
-      <Link onClick={toggleMenu} style={linkStyle}>
-        Messages
+      <Link to="chats" onClick={toggleMenu} style={linkStyle}>
+        Chats
       </Link>
       <br />
       <br />

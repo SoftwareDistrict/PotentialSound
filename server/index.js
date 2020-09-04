@@ -6,7 +6,14 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./db");
 require("./passport.setup");
-const { isAccCreated, addUser, getCurrentUser, getPosts, getPoster, getPostTags } = require("./queries.js");
+const {
+  isAccCreated,
+  addUser,
+  getCurrentUser,
+  getPosts,
+  getPoster,
+  getPostTags,
+} = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_PATH = path.join(__dirname, "../client/dist");

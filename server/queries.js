@@ -17,7 +17,6 @@ const getPostTags = (id) => Tags.findAll({ where: { id_post: id } });
 
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
 
-
 module.exports = {
   getPosts,
   getPoster,

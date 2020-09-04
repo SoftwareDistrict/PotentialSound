@@ -29,30 +29,14 @@ const Users = sequelize.define("Users", {
 
 const Messages = sequelize.define("Messages", {
   message: Sequelize.STRING,
-  userId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Users",
-      key: "id",
-    },
-  },
-  chatId: {
+  id_user: Sequelize.INTEGER,
+  id_chat: {
     type: Sequelize.INTEGER,
     references: {
       model: "Chats",
       key: "id",
     },
-  },
-  created_at: {
-    type: "TIMESTAMP",
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-    allowNull: false,
-  },
-  updated_at: {
-    type: "TIMESTAMP",
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-    allowNull: false,
-  },
+  }
 });
 
 const Chats = sequelize.define("Chats", {
@@ -60,14 +44,8 @@ const Chats = sequelize.define("Chats", {
 });
 
 const ChatJoin = sequelize.define("ChatJoin", {
-  userId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Users",
-      key: "id",
-    },
-  },
-  chatId: {
+  id_user: Sequelize.INTEGER,
+  id_chat: {
     type: Sequelize.INTEGER,
     references: {
       model: "Chats",
@@ -77,28 +55,12 @@ const ChatJoin = sequelize.define("ChatJoin", {
 });
 
 const Posts = sequelize.define("Posts", {
-  userId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Users",
-      key: "id",
-    },
-  },
-  message: Sequelize.STRING,
-  created_at: {
-    type: "TIMESTAMP",
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-    allowNull: false,
-  },
-  updated_at: {
-    type: "TIMESTAMP",
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-    allowNull: false,
-  },
+  id_user: Sequelize.INTEGER,
+  message: Sequelize.STRING
 });
 
 const Tags = sequelize.define("Tags", {
-  postId: {
+  id_post: {
     type: Sequelize.INTEGER,
     references: {
       model: "Posts",

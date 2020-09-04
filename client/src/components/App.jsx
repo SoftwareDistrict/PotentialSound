@@ -6,8 +6,6 @@ import CreatePostMessage from "./CreatePostMessage.jsx";
 import PostFullMessage from "./PostFullMessage.jsx";
 import CreateProfile from "./CreateProfile.jsx";
 import UpdateProfile from "./UpdateProfile.jsx";
-import Nav from "./Nav.jsx";
-import Messages from "./Chats.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 

@@ -36,7 +36,7 @@ const Messages = sequelize.define("Messages", {
       model: "Chats",
       key: "id",
     },
-  }
+  },
 });
 
 const Chats = sequelize.define("Chats", {
@@ -56,7 +56,7 @@ const ChatJoin = sequelize.define("ChatJoin", {
 
 const Posts = sequelize.define("Posts", {
   id_user: Sequelize.INTEGER,
-  message: Sequelize.STRING
+  message: Sequelize.STRING,
 });
 
 const Tags = sequelize.define("Tags", {

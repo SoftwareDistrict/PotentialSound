@@ -70,23 +70,25 @@ const Tags = sequelize.define("Tags", {
   tag: Sequelize.STRING,
 });
 
-Users.sync({ force: true }).then(() => {
-  Posts.sync({ force: true });
-  Chats.sync({ force: true }).then(() => {
-    ChatJoin.sync({ force: true });
-    Messages.sync({ force: true });
-    Tags.sync({ force: true });
-  });
-})
+Users.sync({ force: true })
+  .then(() => {
+    Posts.sync({ force: true });
+    Chats.sync({ force: true }).then(() => {
+      ChatJoin.sync({ force: true });
+      Messages.sync({ force: true });
+      Tags.sync({ force: true });
+    });
+  })
   .then(() => {
     Users.bulkCreate([
       {
         username: "Eddy Skeleton",
         city: "Los Angeles",
-        description: "Hard Rock group. Shows at The Rabid Rabbit every other Tuesday. Check us out!",
+        description:
+          "Hard Rock group. Shows at The Rabid Rabbit every other Tuesday. Check us out!",
         googleId: "12345567788892736",
         email: "bunnybandits69@gmail.com",
-        cell: "1231231231"
+        cell: "1231231231",
       },
       {
         username: "BlazeOps",
@@ -94,47 +96,48 @@ Users.sync({ force: true }).then(() => {
         description: "Producer. Rap beats. Looking to collab with some young talent.",
         googleId: "4352627181993038262",
         email: "blazeops223@gmail.com",
-        cell: "2222222222"
-      }
+        cell: "2222222222",
+      },
     ]);
   })
   .then(() => {
     Posts.bulkCreate([
       {
         id_user: 1,
-        message: "Hey, looking for a new drummer with some experience for our rock band The Bottom Feeders. If you are interested hit us up."
+        message:
+          "Hey, looking for a new drummer with some experience for our rock band The Bottom Feeders. If you are interested hit us up.",
       },
       {
         id_user: 2,
-        message: "Got some dope beats and looking for someone to jump on. HMU."
-      }
+        message: "Got some dope beats and looking for someone to jump on. HMU.",
+      },
     ]);
   })
   .then(() => {
     Tags.bulkCreate([
       {
         id_post: 1,
-        tag: "#Rock"
+        tag: "#Rock",
       },
       {
         id_post: 1,
-        tag: "#HelpWanted"
+        tag: "#HelpWanted",
       },
       {
         id_post: 1,
-        tag: "#Drummer"
+        tag: "#Drummer",
       },
       {
         id_post: 2,
-        tag: "#Collab"
+        tag: "#Collab",
       },
       {
         id_post: 2,
-        tag: "#Beats"
-      }
+        tag: "#Beats",
+      },
     ]);
   })
-  .catch(err => console.warn("ahhhhhhh", err));
+  .catch((err) => console.warn("ahhhhhhh", err));
 
 module.exports = {
   sequelize,

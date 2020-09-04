@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const PostFeedEntry = ({ post }) => {
-  const { posterName, message, profilePic, tags } = post;
+  const { id, id_user, message } = post;
+
+  const [poster, setPoster] = useState({});
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/poster", { id: id_user })
+      .then((user) => setPoster(user.data))
+      .catch((err) => console.warn("could not get this poster.", err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/posttags", { id: id })
+      .then((tags) => {
+        const allTags = tags.data.map((tagObj) => `#${tagObj.tag}`);
+        setTags(allTags);
+      })
+      .catch((err) => console.warn("could not get tags for post.", err));
+  }, []);
 
   return (
     <div>
-      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${posterName}`}>
+      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${id_user}`}>
         <div
           id="profile"
           style={{
@@ -31,7 +52,9 @@ const PostFeedEntry = ({ post }) => {
               left: "100px",
               fontSize: "14px",
             }}
-          >{`${posterName}`}</div>
+          >
+            {poster.username}
+          </div>
           <div
             style={{
               position: "absolute",
@@ -43,7 +66,7 @@ const PostFeedEntry = ({ post }) => {
               textAlign: "center",
             }}
           >
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
           </div>
           <div
             style={{
@@ -73,7 +96,7 @@ const PostFeedEntry = ({ post }) => {
               left: "100px",
             }}
           >
-            <div>{tags.join("  ")}</div>
+            <div>{tags.join(" ")}</div>
           </div>
         </div>
       </Link>
@@ -83,10 +106,9 @@ const PostFeedEntry = ({ post }) => {
 
 PostFeedEntry.propTypes = {
   post: PropTypes.shape({
-    posterName: PropTypes.string,
+    id: PropTypes.number,
+    id_user: PropTypes.number,
     message: PropTypes.string,
-    profilePic: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 

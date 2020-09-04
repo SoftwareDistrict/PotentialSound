@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ arrPosts, userName }) => {
-  const posts = arrPosts;
-
+const HomeFeed = ({ generalFeed }) => {
   const logout = () => {
     axios
       .get("/logout")
@@ -16,16 +14,6 @@ const HomeFeed = ({ arrPosts, userName }) => {
 
   return (
     <div>
-      <div>
-        <Link to="/createProfile">
-          <button>CreateProfile</button>
-        </Link>
-      </div>
-      <div>
-        <Link to={`/profile/${userName}`}>
-          <button>Go to Profile Page</button>
-        </Link>
-      </div>
       <div>
         <Link to={"/"}>
           <button onClick={logout}>Logout</button>
@@ -54,13 +42,12 @@ const HomeFeed = ({ arrPosts, userName }) => {
             }}
           />
         </div>
-        <button type="button">MENU</button>
       </h1>
       <div>
         <input
           type="text"
           placeholder="Search for Post"
-          style={{ width: "500px", height: "30px", fontSize: "14px", paddinLeft: "10px" }}
+          style={{ width: "500px", height: "30px", fontSize: "14px", paddingLeft: "10px" }}
         ></input>
         <button type="button" style={{ borderRadius: "5px" }}>
           <img src="https://tinyurl.com/y2v9h8rz" style={{ width: "15%", height: "15%" }} />
@@ -83,8 +70,8 @@ const HomeFeed = ({ arrPosts, userName }) => {
         </div>
       </div>
       <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px" }}>
-        {posts.map((post, i) => (
-          <div key={`${i}`}>
+        {generalFeed.map((post, i) => (
+          <div key={i}>
             <PostFeedEntry post={post} />
             <br />
           </div>
@@ -95,16 +82,13 @@ const HomeFeed = ({ arrPosts, userName }) => {
 };
 
 HomeFeed.propTypes = {
-  arrPosts: PropTypes.arrayOf(
+  generalFeed: PropTypes.arrayOf(
     PropTypes.shape({
-      posterName: PropTypes.string,
-      title: PropTypes.string,
+      id: PropTypes.number,
+      id_user: PropTypes.number,
       message: PropTypes.string,
-      profilePic: PropTypes.string,
-      tags: PropTypes.arrayOf(PropTypes.string),
     })
   ),
-  userName: PropTypes.string.isRequired,
 };
 
 export default HomeFeed;

@@ -6,6 +6,7 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 const { Users } = require("./db");
 const { Op } = require("sequelize");
+const { uploadToS3 } = require("./s3");
 require("./passport.setup");
 
 const PORT = process.env.PORT || 3000;
@@ -74,6 +75,12 @@ app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
+});
+
+app.post("/api/uploadImage", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
 });
 
 app.get("*", (req, res) => {

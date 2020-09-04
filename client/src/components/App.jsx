@@ -31,34 +31,28 @@ class App extends Component {
   getCurrentUser() {
     axios
       .get("/currentUser")
-      .then((user) => {
-        console.info("current User: ", user);
-        this.setState({ currentUser: user.data });
-      })
+      .then((user) => this.setState({ currentUser: user.data }))
       .catch((err) => console.warn("could not get current user.", err));
   }
 
   getAllPosts() {
     axios
       .get("/feed")
-      .then((feed) => {
-        console.info("feeddd: ", feed);
-        this.setState({ geneeralFeed: feed.data });
-      })
+      .then((feed) => this.setState({ generalFeed: feed.data }))
       .catch((err) => console.warn("Could not get all posts", err));
   }
 
-  // toggleMenu() {
-  //   let nav = document.getElementById("mySidenav");
-  //   let menu = document.getElementById("menu");
-  //   if (nav.style.display === "none") {
-  //     nav.style.display = "block";
-  //     menu.style.display = "none";
-  //   } else {
-  //     nav.style.display = "none";
-  //     menu.style.display = "block";
-  //   }
-  // }
+  toggleMenu() {
+    let nav = document.getElementById("mySidenav");
+    let menu = document.getElementById("menu");
+    if (nav.style.display === "none") {
+      nav.style.display = "block";
+      menu.style.display = "none";
+    } else {
+      nav.style.display = "none";
+      menu.style.display = "block";
+    }
+  }
 
   render() {
     const menu = (

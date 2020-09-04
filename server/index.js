@@ -58,40 +58,39 @@ app.post("/createProfile", (req, res) => {
   const userInfoObj = req.body;
   const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
-    .then(() => res.sendStatus(201).redirect("/home"))
+    .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });
 
 app.put("/updateProfile", (req, res) => {
   const body = req.body;
-  res.send(body).status(201);
+  res.send(body);
 });
 
 app.get("/feed", (req, res) => {
   getPosts()
-    .then((posts) => res.send(posts).status(200))
+    .then((posts) => res.send(posts))
     .catch((err) => console.warn("could not get all posts", err));
 });
 
 app.get("/poster", (req, res) => {
   const { id } = req.body;
   getPoster(id)
-    .then((user) => res.send(user).status(200))
+    .then((user) => res.send(user))
     .catch((err) => console.warn("no poster", err));
 });
 
 app.get("/posttags", (req, res) => {
   const { id } = req.body;
   getPostTags(id)
-    .then((allTags) => res.send(allTags).status(200))
+    .then((allTags) => res.send(allTags))
     .catch((err) => console.warn("could not get all tags for post.", err));
 });
 
-app.get("/currenUser", (req, res) => {
-  const { userId } = req.session.passport.user;
-  console.info("uuuuusserrrrIIDD", userId);
+app.get("/currentUser", (req, res) => {
+  const userId = req.session.passport.user;
   getCurrentUser(userId)
-    .then((user) => res.send(user).status(200))
+    .then((user) => res.send(user.dataValues))
     .catch((err) => console.warn("no currentUser", err));
 });
 

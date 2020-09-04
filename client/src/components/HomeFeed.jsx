@@ -16,12 +16,12 @@ const HomeFeed = ({ generalFeed, currentUser }) => {
     <div>
       <div>
         <Link to={"/chats"}>
-          <button onClick={logout}>Chats</button>
+          <button>Chats</button>
         </Link>
       </div>
       <div>
         <Link to={`/profile/${currentUser.id}`}>
-          <button onClick={logout}>My Profile</button>
+          <button>My Profile</button>
         </Link>
       </div>
       <div>

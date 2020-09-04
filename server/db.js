@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const { DB_NAME, DB_USER, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, " ", {
+const sequelize = new Sequelize(DB_NAME, DB_USER, "", {
   host: DB_HOST,
   dialect: "postgres",
 });
@@ -19,11 +19,11 @@ const connect = async () => {
 connect();
 
 const Users = sequelize.define("Users", {
-  userName: Sequelize.STRING,
+  username: Sequelize.STRING,
   city: Sequelize.STRING,
   desciption: Sequelize.STRING,
   googleId: Sequelize.STRING,
-  gmail: Sequelize.STRING,
+  email: Sequelize.STRING,
   cell: Sequelize.TEXT,
 });
 
@@ -36,7 +36,7 @@ const Messages = sequelize.define("Messages", {
       model: "Chats",
       key: "id",
     },
-  }
+  },
 });
 
 const Chats = sequelize.define("Chats", {
@@ -56,7 +56,7 @@ const ChatJoin = sequelize.define("ChatJoin", {
 
 const Posts = sequelize.define("Posts", {
   id_user: Sequelize.INTEGER,
-  message: Sequelize.STRING
+  message: Sequelize.STRING,
 });
 
 const Tags = sequelize.define("Tags", {

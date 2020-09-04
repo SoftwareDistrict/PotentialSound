@@ -4,7 +4,8 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-require("./db");
+const { Users } = require("./db");
+const { Op } = require("sequelize");
 require("./passport.setup");
 
 const PORT = process.env.PORT || 3000;
@@ -28,13 +29,40 @@ app.use(passport.session());
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req, res) =>
-  res.redirect("/home")
+const isAccCreated = (googleId) =>
+  Users.findAll({
+    where: {
+      [Op.and]: [{ googleId }, { username: { [Op.not]: null } }],
+    },
+  })
+    .then((list) => !!list.length)
+    .catch((err) => err);
+
+app.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    const { googleId } = req.user;
+    isAccCreated(googleId)
+      .then((acc) => {
+        if (acc) {
+          res.redirect("/home");
+        } else {
+          res.redirect("/createProfile");
+        }
+      })
+      .catch((err) => res.status(500).send(err));
+  }
 );
 
 app.post("/createProfile", (req, res) => {
-  const body = req.body;
-  res.send(body).status(201);
+  const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
+  const userInfoObj = req.body;
+
+  const userId = req.session.passport.user.id;
+  addUser(userId, userInfoObj)
+    .then(() => res.sendStatus(201).redirect("/"))
+    .catch(() => res.sendStatus(500));
 });
 
 app.put("/updateProfile", (req, res) => {

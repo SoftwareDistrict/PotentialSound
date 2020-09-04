@@ -6,7 +6,7 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./db");
 require("./passport.setup");
-const { getPosts, getPoster, getPostTags } = require("./queries.js");
+const { getCurrentUser, getPosts, getPoster, getPostTags } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_PATH = path.join(__dirname, "../client/dist");
@@ -28,9 +28,8 @@ app.use(passport.session());
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req, res) =>
-  res.redirect("/home")
-);
+app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => res.redirect("/home"));
 
 app.post("/createProfile", (req, res) => {
   const body = req.body;
@@ -60,6 +59,13 @@ app.get("/posttags", (req, res) => {
   getPostTags(id)
     .then((allTags) => res.send(allTags).status(200))
     .catch((err) => console.warn("could not get all tags for post.", err));
+});
+
+app.get("/currenUser", (req, res) => {
+  const { userId } = req.session.passport.user.id;
+  getCurrentUser(userId)
+    .then((user) => res.send(user).status(200))
+    .catch((err) => console.warn("no currentUser", err));
 });
 
 app.get("/logout", (req, res) => {

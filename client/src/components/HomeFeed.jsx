@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
 const HomeFeed = ({ generalFeed }) => {
+  const [currentUser, setCurrentUser] = useState("");
+
+  useEffect(() => {
+    axios.get("/currentUser")
+      .then((user) => setCurrentUser(user.data))
+      .catch((err) => console.warn("could not get current user.", err));
+  });
+
   const logout = () => {
     axios
       .get("/logout")
@@ -31,7 +39,7 @@ const HomeFeed = ({ generalFeed }) => {
           }}
         >
           <img
-            src="https://tinyurl.com/y3h5vk9r"
+            src={currentUser.propic}
             alt="Avatar"
             style={{
               width: "auto",

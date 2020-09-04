@@ -4,9 +4,9 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const { Users } = require("./db");
-const { Op } = require("sequelize");
 const { uploadToS3 } = require("./s3");
+const { Users, Tags, Posts } = require("./db");
+const { Op } = require("sequelize");
 require("./passport.setup");
 
 const PORT = process.env.PORT || 3000;
@@ -77,10 +77,32 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+
 app.post("/api/uploadImage", (req, res) => {
   uploadToS3(req, res)
     .then((url) => res.status(201).send(url))
     .catch((err) => console.warn(err));
+});
+
+app.post("/createPostMessage", (req, res) => {
+  const { tags, message } = req.body;
+  const postObj = {
+    id_user: req.session.passport.user,
+    message: message,
+  };
+  const addPost = (post) => Posts.create(post);
+  addPost(postObj)
+    .then((post) => {
+      const postId = post.dataValues.id;
+      tags.map((tag) => {
+        Tags.create({ id_post: postId, tag: tag });
+      });
+      res.send("Post was made succesfully");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+
 });
 
 app.get("*", (req, res) => {

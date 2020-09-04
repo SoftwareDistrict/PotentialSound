@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Login = () => {
+
+  useEffect(() => {
+    let menu = document.getElementById("menu");
+    menu.style.display = "none";
+  }, []);
+
   return (
     <div>
       <h1>Welcome to Potential Sound</h1>

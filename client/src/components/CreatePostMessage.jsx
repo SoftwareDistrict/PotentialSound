@@ -27,7 +27,7 @@ const CreatePostMessage = () => {
   };
 
   const onSubmit = () => {
-    const messageLength = message.length > 20;
+    const messageLength = message.length > 10;
     if (tags.length && messageLength) {
       axios
         .post("/createPostMessage", {
@@ -119,9 +119,10 @@ const CreatePostMessage = () => {
         </label>
         <br />
         <br />
-        <button onClick={() => onSubmit()}>Submit</button>
+        <button onClick={() => onSubmit()}>
+          <Link to="/home">Submit</Link>
+        </button>
       </div>
-      <Link to="/">Back to HomeFeed</Link>
     </div>
   );
 };

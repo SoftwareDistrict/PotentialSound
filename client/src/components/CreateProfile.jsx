@@ -25,7 +25,7 @@ const CreateProfile = () => {
 
     axios
       .post("/createProfile", {
-        userName: username,
+        username: username,
         city: city,
         cell: cell,
         description: description,

@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const { Users } = require("./db");
+const { Users, Tags, Posts } = require("./db");
 const { Op } = require("sequelize");
 require("./passport.setup");
 
@@ -74,6 +74,26 @@ app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
+});
+
+app.post("/createPostMessage", (req, res) => {
+  const { tags, message } = req.body;
+  const postObj = {
+    id_user: req.session.passport.user,
+    message: message,
+  };
+  const addPost = (post) => Posts.create(post);
+  addPost(postObj)
+    .then((post) => {
+      const postId = post.dataValues.id;
+      tags.map((tag) => {
+        Tags.create({ id_post: postId, tag: tag });
+      });
+      res.send("Post was made succesfully");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get("*", (req, res) => {

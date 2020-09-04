@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
 const Login = () => {
-
   useEffect(() => {
     let menu = document.getElementById("menu");
     menu.style.display = "none";

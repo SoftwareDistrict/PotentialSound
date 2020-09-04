@@ -10,17 +10,17 @@ const CreateProfile = () => {
   const [photo, setPhoto] = useState([]);
 
   const uploadImg = () => {
-      let data = new FormData();
-      
-      data.append('image', photo[0], photo[0].name);
+    let data = new FormData();
 
-      axios.post("/api/uploadImage", data)
+    data.append("image", photo[0], photo[0].name);
+
+    axios
+      .post("/api/uploadImage", data)
       .then(({ data }) => console.info(data))
-      .catch(err => console.warn(err));
-  }
-  
-  const createProfile = () => {
+      .catch((err) => console.warn(err));
+  };
 
+  const createProfile = () => {
     uploadImg();
 
     axios
@@ -34,11 +34,9 @@ const CreateProfile = () => {
       .catch((err) => console.warn(err));
   };
 
-
   const onDrop = (picture) => {
-      setPhoto(photo.concat(picture))
-  }
-
+    setPhoto(photo.concat(picture));
+  };
 
   return (
     <div>
@@ -55,13 +53,13 @@ const CreateProfile = () => {
       ></input>
       <br />
       <ImageUploader
-                withIcon={false}
-                withPreview={true}
-                singleImage={true}
-                buttonText='Choose images'
-                onChange={onDrop}
-                imgExtension={['.jpg', '.gif', '.png']}
-                maxFileSize={5242880}
+        withIcon={false}
+        withPreview={true}
+        singleImage={true}
+        buttonText="Choose images"
+        onChange={onDrop}
+        imgExtension={[".jpg", ".gif", ".png"]}
+        maxFileSize={5242880}
       />
       <button onClick={() => createProfile()}>Submit</button>
     </div>

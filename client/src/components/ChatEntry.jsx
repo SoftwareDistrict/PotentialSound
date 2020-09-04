@@ -39,7 +39,9 @@ const ChatEntry = ({ chatMessage }) => {
     </Link>
   );
 };
+
 ChatEntry.propTypes = {
   chatMessage: PropTypes.object.isRequired,
 };
+
 export default ChatEntry;

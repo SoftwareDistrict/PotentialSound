@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const { DB_NAME, DB_USER, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, "", {
+const sequelize = new Sequelize(DB_NAME, DB_USER, " ", {
   host: DB_HOST,
   dialect: "postgres",
 });
@@ -21,7 +21,7 @@ connect();
 const Users = sequelize.define("Users", {
   username: Sequelize.STRING,
   city: Sequelize.STRING,
-  desciption: Sequelize.STRING,
+  description: Sequelize.STRING,
   googleId: Sequelize.STRING,
   email: Sequelize.STRING,
   cell: Sequelize.TEXT,
@@ -60,13 +60,7 @@ const Posts = sequelize.define("Posts", {
 });
 
 const Tags = sequelize.define("Tags", {
-  id_post: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: "Posts",
-      key: "id",
-    },
-  },
+  id_post: Sequelize.INTEGER,
   tag: Sequelize.STRING,
 });
 

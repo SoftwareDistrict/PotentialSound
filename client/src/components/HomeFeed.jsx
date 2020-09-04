@@ -5,7 +5,7 @@ import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
 const HomeFeed = ({ generalFeed }) => {
-  const [currentUser, setCurrentUser] = useState("");
+  const [setCurrentUser] = useState("");
 
   useEffect(() => {
     axios
@@ -40,7 +40,7 @@ const HomeFeed = ({ generalFeed }) => {
           }}
         >
           <img
-            src={currentUser.propic}
+            src="https://tinyurl.com/y3h5vk9r"
             alt="Avatar"
             style={{
               width: "auto",

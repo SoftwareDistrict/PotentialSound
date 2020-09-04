@@ -20,7 +20,7 @@ const PostFeedEntry = ({ post }) => {
     axios
       .get("/posttags", { id: id })
       .then((tags) => {
-        const allTags = tags.data.map((tagObj) => `#${tagObj.tag}`);
+        const allTags = tags.data.map((tagObj) => tagObj.tag);
         setTags(allTags);
       })
       .catch((err) => console.warn("could not get tags for post.", err));

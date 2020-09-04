@@ -54,9 +54,9 @@ app.get(
 
 app.post("/createProfile", (req, res) => {
   const userInfoObj = req.body;
-  const userId = req.session.passport.user.id;
+  const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
-    .then(() => res.sendStatus(201).redirect("/"))
+    .then(() => res.sendStatus(201).redirect("/home"))
     .catch(() => res.sendStatus(500));
 });
 

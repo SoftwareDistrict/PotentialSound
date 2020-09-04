@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ChatEntry from "./ChatEntry.jsx";
 
 const Chats = () => {
-
   const [chatMessage] = useState({
     chatName: "Squad",
     participants: ["Doug", "Evan", "Henny", "Brandon"],

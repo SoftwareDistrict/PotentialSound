@@ -6,6 +6,7 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./db");
 require("./passport.setup");
+const { getPosts, getPoster, getPostTags } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_PATH = path.join(__dirname, "../client/dist");
@@ -39,6 +40,26 @@ app.post("/createProfile", (req, res) => {
 app.put("/updateProfile", (req, res) => {
   const body = req.body;
   res.send(body).status(201);
+});
+
+app.get("/feed", (req, res) => {
+  getPosts()
+    .then((posts) => res.send(posts).status(200))
+    .catch((err) => console.warn("could not get all posts", err));
+});
+
+app.get("/poster", (req, res) => {
+  const { id } = req.body;
+  getPoster(id)
+    .then((user) => res.send(user).status(200))
+    .catch((err) => console.warn("no poster", err));
+});
+
+app.get("/posttags", (req, res) => {
+  const { id } = req.body;
+  getPostTags(id)
+    .then((allTags) => res.send(allTags).status(200))
+    .catch((err) => console.warn("could not get all tags for post.", err));
 });
 
 app.get("/logout", (req, res) => {

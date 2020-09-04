@@ -10,7 +10,7 @@ const CreateProfile = () => {
   const createProfile = () => {
     axios
       .post("/createProfile", {
-        userName: username,
+        username: username,
         city: city,
         cell: cell,
         description: description,

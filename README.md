@@ -2,8 +2,8 @@
 
 # INTRODUCTION
 
-PotentialSound allows musical artists to discover other artist in their respected industry.
-Users will have the ability to make posts, messages, and video chats through the use of this application.
+PotentialSound is a hub for musicians to discover other artists in their respected industry.
+Users will have the ability to make posts and connect through direct messaging and video chatting.
 The end goal is to bring together these artists and through their future collaboration bring out their PotentialSound.
 
 # Tech
@@ -13,16 +13,20 @@ The end goal is to bring together these artists and through their future collabo
 - Express
 - PostgresSQL
 - Sequelize
-- AWS S3
 - Socket.IO
+- AWS S3
+- AWS EC2
 
 # Launch
 
 To launch the application user will need to
 
 1. run npm install after cloning to install dependencies
-2. run npm start to start up the server and database
-3. run npm build to build up client interface on the browser
+2. run npm start to start up the server and create database and tables that are needed
+3. run npm run build to build up client interface on the browser
 
-Starting this Project
-run npm start in the terminal to connect to the NodeJS server
+# Features
+
+1. Create posts containing audio snippets or images and add them to a general feed for all users to view
+2. Direct message multiple users to begin private chats
+3. Discover likeminded artists and get together through a video call to discuss collaboration

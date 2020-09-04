@@ -8,7 +8,8 @@ const HomeFeed = ({ generalFeed }) => {
   const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
-    axios.get("/currentUser")
+    axios
+      .get("/currentUser")
       .then((user) => setCurrentUser(user.data))
       .catch((err) => console.warn("could not get current user.", err));
   });

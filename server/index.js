@@ -28,8 +28,9 @@ app.use(passport.session());
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res) => res.redirect("/home"));
+app.get("/google/callback", passport.authenticate("google", { failureRedirect: "/" }), (req, res) =>
+  res.redirect("/home")
+);
 
 app.post("/createProfile", (req, res) => {
   const body = req.body;

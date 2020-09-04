@@ -119,9 +119,10 @@ const CreatePostMessage = () => {
         </label>
         <br />
         <br />
-        <button onClick={() => onSubmit()}>Submit</button>
+        <button onClick={() => onSubmit()}>
+          <Link to="/home">Submit</Link>
+        </button>
       </div>
-      <Link to="/">Back to HomeFeed</Link>
     </div>
   );
 };

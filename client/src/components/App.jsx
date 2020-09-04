@@ -7,7 +7,8 @@ import PostFullMessage from "./PostFullMessage.jsx";
 import CreateProfile from "./CreateProfile.jsx";
 import UpdateProfile from "./UpdateProfile.jsx";
 import Nav from "./Nav.jsx";
-import Messages from "./Chats.jsx";
+import Chats from "./Chats.jsx";
+import Chat from "./Chat.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -95,13 +96,15 @@ class App extends Component {
               />
             )}
           />
+          <Route exact={true} path="/chats" render={() => <Chats />} />
+
           <Route
             path="/fullMessage/:id"
             render={(match) => <PostFullMessage arrPosts={arrPosts} id={match.match.params.id} />}
           />
           <Route path="/createProfile" render={() => <CreateProfile />} />
           <Route path="/updateProfile" render={() => <UpdateProfile userName={userName} />} />
-          <Route path="/messages" render={() => <Messages />} />
+          <Route path="/chat/:id" render={() => <Chat />} />
         </Switch>
       </Router>
     );

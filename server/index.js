@@ -9,12 +9,14 @@ require("./db");
 require("./passport.setup");
 const {
   isAccCreated,
-  addUser,
   getCurrentUser,
   getPosts,
   getUsers,
   getTags,
+  getMessages,
+  getChats,
   addPost,
+  addUser,
   addTags,
 } = require("./queries.js");
 
@@ -90,6 +92,18 @@ app.get("/currentUser", (req, res) => {
   const userId = req.session.passport.user;
   getCurrentUser(userId)
     .then((user) => res.send(user.dataValues))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/messages", (req, res) => {
+  getMessages()
+    .then((msgs) => res.send(msgs))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/allchats", (req, res) => {
+  getChats()
+    .then((chats) => res.send(chats))
     .catch((err) => res.status(500).send(err));
 });
 

@@ -17,15 +17,22 @@ class App extends Component {
     super(props);
 
     this.state = {
-      generalFeed: [],
       currentUser: {},
+      users: [],
+      generalFeed: [],
+      tags: [],
     };
+
+    this.getUsers = this.getUsers.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
+    this.getTags = this.getTags.bind(this);
   }
 
   componentDidMount() {
-    this.getAllPosts();
     this.getCurrentUser();
+    this.getUsers();
+    this.getAllPosts();
+    this.getTags();
   }
 
   getCurrentUser() {
@@ -42,9 +49,21 @@ class App extends Component {
       .catch((err) => console.warn("Could not get all posts", err));
   }
 
+  getUsers() {
+    axios.get("/users")
+      .then((users) => this.setState({ users: users.data }))
+      .catch((err) => console.warn("Could not get all users", err));
+  }
+
+  getTags() {
+    axios.get("/posttags")
+      .then((tags) => this.setState({ tags: tags.data }))
+      .catch((err) => console.warn("Could not get all tags", err));
+  }
+
   toggleMenu() {
-    let nav = document.getElementById("mySidenav");
-    let menu = document.getElementById("menu");
+    const nav = document.getElementById("mySidenav");
+    const menu = document.getElementById("menu");
     if (nav.style.display === "none") {
       nav.style.display = "block";
       menu.style.display = "none";
@@ -60,7 +79,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { generalFeed, currentUser } = this.state;
+    const { generalFeed, currentUser, tags, users } = this.state;
     return (
       <div>
         <Router>
@@ -71,7 +90,7 @@ class App extends Component {
               exact={true}
               path="/home"
               render={() => (
-                <HomeFeed menu={menu} currentUser={currentUser} generalFeed={generalFeed} />
+                <HomeFeed menu={menu} currentUser={currentUser} generalFeed={generalFeed} users={users} tags={tags} />
               )}
             />
             <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />

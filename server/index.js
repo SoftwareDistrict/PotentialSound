@@ -11,8 +11,8 @@ const {
   addUser,
   getCurrentUser,
   getPosts,
-  getPoster,
-  getPostTags,
+  getUsers,
+  getTags,
   addPost,
   addTags,
 } = require("./queries.js");
@@ -59,7 +59,7 @@ app.post("/createProfile", (req, res) => {
   const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
     .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .catch((err) => res.status(500).send(err));
 });
 
 app.put("/updateProfile", (req, res) => {
@@ -70,28 +70,27 @@ app.put("/updateProfile", (req, res) => {
 app.get("/feed", (req, res) => {
   getPosts()
     .then((posts) => res.send(posts))
-    .catch((err) => console.warn("could not get all posts", err));
+    .catch((err) => res.status(500).send(err));
 });
 
-app.get("/poster", (req, res) => {
-  const { id } = req.body;
-  getPoster(id)
-    .then((user) => res.send(user))
-    .catch((err) => console.warn("no poster", err));
+app.get("/users", (req, res) => {
+  getUsers()
+    .then((users) => res.send(users))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/posttags", (req, res) => {
-  const { id } = req.body;
-  getPostTags(id)
+  getTags()
     .then((allTags) => res.send(allTags))
-    .catch((err) => console.warn("could not get all tags for post.", err));
+    .catch((err) => res.status(500).send(err));
+
 });
 
 app.get("/currentUser", (req, res) => {
   const userId = req.session.passport.user;
   getCurrentUser(userId)
     .then((user) => res.send(user.dataValues))
-    .catch((err) => console.warn("no currentUser", err));
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/logout", (req, res) => {
@@ -112,11 +111,8 @@ app.post("/createPostMessage", (req, res) => {
       tags.map((tag) => {
         addTags(postId, tag);
       });
-      res.send("Post was made succesfully");
     })
-    .catch((err) => {
-      res.send(err);
-    });
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("*", (req, res) => {

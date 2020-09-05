@@ -34,12 +34,8 @@ const CreatePostMessage = () => {
           tags: tags,
           message: message,
         })
-        .then((item) => {
-          console.info(item, "post was a success!");
-        })
-        .catch((err) => {
-          console.warn(err);
-        });
+        .then((item) => console.info(item, "post was a success!"))
+        .catch((err) => console.warn("could not create post", err));
     }
   };
 

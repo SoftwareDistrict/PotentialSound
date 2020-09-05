@@ -99,7 +99,6 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-
 app.post("/api/uploadImage", (req, res) => {
   uploadToS3(req, res)
     .then((url) => res.status(201).send(url))

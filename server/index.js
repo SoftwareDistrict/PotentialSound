@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const { uploadToS3 } = require("./s3");
 require("./db");
 require("./passport.setup");
 const {
@@ -96,6 +97,13 @@ app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
+});
+
+
+app.post("/api/uploadImage", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.post("/createPostMessage", (req, res) => {

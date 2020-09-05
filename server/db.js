@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const { DB_NAME, DB_USER, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, " ", {
+const sequelize = new Sequelize(DB_NAME, DB_USER, "", {
   host: DB_HOST,
   dialect: "postgres",
 });

@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Users, Posts, Tags } = require("./db");
+const { Users, Posts, Tags, ChatJoin, Messages } = require("./db");
 
 const isAccCreated = (googleId) =>
   Users.findAll({
@@ -15,6 +15,8 @@ const getCurrentUser = (userId) => Users.findOne({ where: { id: userId } });
 const getPosts = () => Posts.findAll();
 const getUsers = () => Users.findAll();
 const getTags = () => Tags.findAll();
+const getMessages = () => Messages.findAll();
+const getChats = () => ChatJoin.findAll();
 
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
 const addPost = (post) => Posts.create(post);
@@ -25,6 +27,8 @@ module.exports = {
   getTags,
   getUsers,
   getCurrentUser,
+  getMessages,
+  getChats,
   isAccCreated,
   addUser,
   addPost,

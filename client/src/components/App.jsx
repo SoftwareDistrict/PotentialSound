@@ -83,7 +83,8 @@ class App extends Component {
   }
 
   getMessages() {
-    axios.get("/messages")
+    axios
+      .get("/messages")
       .then((msgs) => {
         console.info("msgs", msgs.data);
         this.setState({ allMsgs: msgs.data });
@@ -92,7 +93,8 @@ class App extends Component {
   }
 
   getAllChats() {
-    axios.get("/allchats")
+    axios
+      .get("/allchats")
       .then((chats) => {
         console.info("chats", chats.data);
         this.setState({ allChats: chats.data });
@@ -138,16 +140,36 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact={true} path="/profile/:id" render={({ match }) => <Profile menu={menu} match={match} users={users} currentUser={currentUser} />} />
+            <Route
+              exact={true}
+              path="/profile/:id"
+              render={({ match }) => (
+                <Profile menu={menu} match={match} users={users} currentUser={currentUser} />
+              )}
+            />
             <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
-            <Route exact={true} path="/chats" render={() => <Chats menu={menu} users={users} allChats={allChats} currentUser={currentUser} />} />
+            <Route
+              exact={true}
+              path="/chats"
+              render={() => (
+                <Chats menu={menu} users={users} allChats={allChats} currentUser={currentUser} />
+              )}
+            />
             <Route
               path="/fullMessage/:id"
-              render={({ match }) => <PostFullMessage users={users} generalFeed={generalFeed} match={match} />}
+              render={({ match }) => (
+                <PostFullMessage users={users} generalFeed={generalFeed} match={match} />
+              )}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
-            <Route path="/updateProfile" render={() => <UpdateProfile currentUser={currentUser} />} />
-            <Route path="/chat/:id" render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />} />
+            <Route
+              path="/updateProfile"
+              render={() => <UpdateProfile currentUser={currentUser} />}
+            />
+            <Route
+              path="/chat/:id"
+              render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />}
+            />
           </Switch>
         </Router>
       </div>

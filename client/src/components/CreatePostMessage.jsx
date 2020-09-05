@@ -1,10 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ImageUploader from "react-images-upload";
 import axios from "axios";
 
 const CreatePostMessage = () => {
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
+  const [photo, setPhoto] = useState([]);
+
+  const onDrop = (picture) => {
+    setPhoto(photo.concat(picture));
+  };
+
+  const uploadImg = () => {
+    let data = new FormData();
+
+    data.append("image", photo[0], photo[0].name);
+
+    axios
+      .post("/api/uploadImagePost", data)
+      .then(({ data }) => console.info(data))
+      .catch((err) => console.warn(err));
+  };
 
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -27,6 +44,8 @@ const CreatePostMessage = () => {
   };
 
   const onSubmit = () => {
+    uploadImg();
+
     const messageLength = message.length > 10;
     if (tags.length && messageLength) {
       axios
@@ -104,6 +123,15 @@ const CreatePostMessage = () => {
         />
         <br />
         <br />
+        <ImageUploader
+          withIcon={false}
+          withPreview={true}
+          singleImage={true}
+          buttonText="Choose Image"
+          onChange={onDrop}
+          imgExtension={[".jpg", ".gif", ".png"]}
+          maxFileSize={5242880}
+        />
         <label>
           Message{" "}
           <input

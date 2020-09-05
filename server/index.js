@@ -99,6 +99,18 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+app.post("/api/uploadImageUpdate", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
+
+app.post("/api/uploadImagePost", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
+
 app.post("/api/uploadImage", (req, res) => {
   uploadToS3(req, res)
     .then((url) => res.status(201).send(url))

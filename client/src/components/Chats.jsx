@@ -1,22 +1,47 @@
 import React, { useState } from "react";
 import ChatEntry from "./ChatEntry.jsx";
+import PropTypes from "prop-types";
 
-const Chats = () => {
-  const [chatMessage] = useState({
-    chatName: "Squad",
-    participants: ["Doug", "Evan", "Henny", "Brandon"],
-    profilePic:
-      "https://media.npr.org/assets/img/2020/02/06/marley-dennislawrence_wide-ff47e360977a27acfb066e56d6a98d3262619e27.jpeg?s=1400",
-  });
+const Chats = ({ currentUser, allChats, menu, users }) => {
+  const [participants, setParticipants] = useState("");
+  const [chatIds] = useState(
+    allChats.map((chat) => {
+      if (chat.id_user === currentUser.id) {
+        return chat.id_chat;
+      }
+    })
+  );
+
+  setParticipants(
+    allChats.map((chat) => {
+      return chatIds.map((id) => {
+        return users.map((user) => {
+          if (id === chat.id_chat) {
+            if (user.id === chat.id_user) {
+              return user.username;
+            }
+          }
+        });
+      });
+    })
+  );
 
   return (
     <div>
+      {menu}
       <h1>Current Messages (Inbox) </h1>
-      <ChatEntry chatMessage={chatMessage} />
-      <ChatEntry chatMessage={chatMessage} />
-      <ChatEntry chatMessage={chatMessage} />
+      {allChats.map(({ id, id_chat }) => (
+        <ChatEntry key={id} id_chat={id_chat} participants={participants} />
+      ))}
     </div>
   );
+};
+
+Chats.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  allChats: PropTypes.object.isRequired,
+  menu: PropTypes.element,
+  users: PropTypes.object.isRequired,
 };
 
 export default Chats;

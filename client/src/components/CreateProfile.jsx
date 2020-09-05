@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import ImageUploader from "react-images-upload";
+import ImageUploader from "react-images-upload";
 import axios from "axios";
 
 const CreateProfile = () => {
@@ -7,21 +7,21 @@ const CreateProfile = () => {
   const [city, setCity] = useState("");
   const [cell, setCell] = useState("");
   const [description, setDescription] = useState("");
-  // const [photo, setPhoto] = useState([]);
+  const [photo, setPhoto] = useState([]);
 
-  // const uploadImg = () => {
-  //   let data = new FormData();
+  const uploadImg = () => {
+    let data = new FormData();
 
-  //   data.append("image", photo[0], photo[0].name);
+    data.append("image", photo[0], photo[0].name);
 
-  //   axios
-  //     .post("/api/uploadImage", data)
-  //     .then(({ data }) => console.info(data))
-  //     .catch((err) => console.warn(err));
-  // };
+    axios
+      .post("/api/uploadImage", data)
+      .then(({ data }) => console.info(data))
+      .catch((err) => console.warn(err));
+  };
 
   const createProfile = () => {
-    // uploadImg();
+    uploadImg();
 
     axios
       .post("/createProfile", {
@@ -34,9 +34,9 @@ const CreateProfile = () => {
       .catch((err) => console.warn(err));
   };
 
-  // const onDrop = (picture) => {
-  //   setPhoto(photo.concat(picture));
-  // };
+  const onDrop = (picture) => {
+    setPhoto(photo.concat(picture));
+  };
 
   return (
     <div>
@@ -52,7 +52,7 @@ const CreateProfile = () => {
         onChange={(e) => setDescription(e.target.value)}
       ></input>
       <br />
-      {/* <ImageUploader
+      <ImageUploader
         withIcon={false}
         withPreview={true}
         singleImage={true}
@@ -60,7 +60,7 @@ const CreateProfile = () => {
         onChange={onDrop}
         imgExtension={[".jpg", ".gif", ".png"]}
         maxFileSize={5242880}
-      /> */}
+      />
       <button onClick={() => createProfile()}>Submit</button>
     </div>
   );

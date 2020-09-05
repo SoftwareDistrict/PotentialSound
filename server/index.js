@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-// const { uploadToS3 } = require("./s3");
+const { uploadToS3 } = require("./s3");
 require("./db");
 require("./passport.setup");
 const {
@@ -99,23 +99,23 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// app.post("/api/uploadImageUpdate", (req, res) => {
-//   uploadToS3(req, res)
-//     .then((url) => res.status(201).send(url))
-//     .catch((err) => console.warn(err));
-// });
+app.post("/api/uploadImageUpdate", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
 
-// app.post("/api/uploadImagePost", (req, res) => {
-//   uploadToS3(req, res)
-//     .then((url) => res.status(201).send(url))
-//     .catch((err) => console.warn(err));
-// });
+app.post("/api/uploadImagePost", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
 
-// app.post("/api/uploadImage", (req, res) => {
-//   uploadToS3(req, res)
-//     .then((url) => res.status(201).send(url))
-//     .catch((err) => res.status(500).send(err));
-// });
+app.post("/api/uploadImage", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => res.status(500).send(err));
+});
 
 app.post("/createPostMessage", (req, res) => {
   const { tags, message } = req.body;

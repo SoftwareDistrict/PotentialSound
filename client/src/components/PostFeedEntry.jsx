@@ -1,22 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const PostFeedEntry = ({ post }) => {
-  const { posterName, message, profilePic, tags } = post;
+const PostFeedEntry = ({ post, users, tags }) => {
+  const [poster, setPoster] = useState("");
+  const [postTags] = useState([]);
+
+  tags.forEach((tag) => {
+    if (tag.id_post === post.id && !postTags.includes(tag.tag)) {
+      postTags.push(tag.tag);
+    }
+  });
+
+  useEffect(() => {
+    users.forEach((user) => {
+      if (user.id === post.id_user) {
+        setPoster(user);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    tags.forEach((tag) => {
+      if (tag.id_post === post.id && !postTags.includes(tag.tag)) {
+        postTags.push(tag.tag);
+      }
+    });
+  }, [tags]);
 
   return (
     <div>
-      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${posterName}`}>
+      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${post.id_user}`}>
         <div
           id="profile"
           style={{
             border: "2px solid black",
-            width: "400px",
             height: "100px",
             margin: "0 auto",
             backgroundColor: "#3F3D3D",
             position: "relative",
+            marginTop: "10px",
+            marginBottom: "10px",
           }}
         >
           <div
@@ -25,25 +49,26 @@ const PostFeedEntry = ({ post }) => {
               top: "0",
               resize: "both",
               overflow: "auto",
-              width: "300px",
               height: "20px",
-              textAlign: "center",
-              left: "100px",
+              textAlign: "left",
+              left: "110px",
               fontSize: "14px",
             }}
-          >{`${posterName}`}</div>
+          >
+            {poster.username}
+          </div>
           <div
             style={{
               position: "absolute",
-              top: "5",
+              top: "5px",
               resize: "both",
               overflow: "auto",
               width: "100px",
-              height: "100px",
-              textAlign: "center",
+              textAlign: "left",
+              paddingLeft: "5px",
             }}
           >
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
+            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
           </div>
           <div
             style={{
@@ -52,14 +77,13 @@ const PostFeedEntry = ({ post }) => {
               backgroundColor: "offwhite",
               resize: "both",
               overflow: "auto",
-              width: "300px",
               height: "60px",
-              textAlign: "center",
-              left: "100px",
+              textAlign: "left",
+              left: "110px",
               fontSize: "12px",
             }}
           >
-            {message}
+            {post.message}
           </div>
           <div
             style={{
@@ -67,13 +91,12 @@ const PostFeedEntry = ({ post }) => {
               bottom: "0",
               resize: "both",
               overflow: "auto",
-              width: "300px",
               height: "20px",
-              textAlign: "center",
-              left: "100px",
+              textAlign: "left",
+              left: "110px",
             }}
           >
-            <div>{tags.join("  ")}</div>
+            <div>{postTags.join("   ")}</div>
           </div>
         </div>
       </Link>
@@ -83,11 +106,29 @@ const PostFeedEntry = ({ post }) => {
 
 PostFeedEntry.propTypes = {
   post: PropTypes.shape({
-    posterName: PropTypes.string,
+    id: PropTypes.number,
+    id_user: PropTypes.number,
     message: PropTypes.string,
-    profilePic: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
   }),
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      propic: PropTypes.string,
+      cell: PropTypes.string,
+      description: PropTypes.string,
+      city: PropTypes.string,
+      googleId: PropTypes.string,
+      email: PropTypes.string,
+    })
+  ),
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_post: PropTypes.number,
+      tag: PropTypes.string,
+    })
+  ),
 };
 
 export default PostFeedEntry;

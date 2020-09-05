@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ChatEntry from "./ChatEntry.jsx";
+import PropTypes from "prop-types";
 
-const Chats = () => {
+const Chats = ({ menu }) => {
   const [chatMessage] = useState({
     chatName: "Squad",
     participants: ["Doug", "Evan", "Henny", "Brandon"],
@@ -11,12 +12,17 @@ const Chats = () => {
 
   return (
     <div>
+      {menu}
       <h1>Current Messages (Inbox) </h1>
       <ChatEntry chatMessage={chatMessage} />
       <ChatEntry chatMessage={chatMessage} />
       <ChatEntry chatMessage={chatMessage} />
     </div>
   );
+};
+
+Chats.propTypes = {
+  menu: PropTypes.element,
 };
 
 export default Chats;

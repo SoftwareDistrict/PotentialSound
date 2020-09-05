@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Profile = () => {
+
+const Profile = ({ menu }) => {
   const [state] = useState({
     username: "Bob",
     propic:
@@ -16,6 +18,7 @@ const Profile = () => {
 
   return (
     <div>
+      {menu}
       <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
       <div
         id="profile"
@@ -49,6 +52,10 @@ const Profile = () => {
       </Link>
     </div>
   );
+};
+
+Profile.propTypes = {
+  menu: PropTypes.element,
 };
 
 export default Profile;

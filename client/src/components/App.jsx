@@ -23,6 +23,7 @@ class App extends Component {
       tags: [],
     };
 
+    this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getTags = this.getTags.bind(this);

@@ -20,7 +20,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags }) => {
         </Link>
       </div>
       <h1>
-          PotentialSound
+        PotentialSound
         <div
           style={{
             width: "100px",
@@ -53,8 +53,12 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags }) => {
             fontSize: "14px",
             paddingLeft: "10px",
             marginRight: "5px",
-          }}></input>
-        <img src="https://tinyurl.com/y2v9h8rz" style={{ width: "10%", height: "10%", paddingTop: "20px" }} />
+          }}
+        ></input>
+        <img
+          src="https://tinyurl.com/y2v9h8rz"
+          style={{ width: "10%", height: "10%", paddingTop: "20px" }}
+        />
         <div>
           <Link to="/createPostMessage">
             <button

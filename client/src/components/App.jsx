@@ -50,13 +50,15 @@ class App extends Component {
   }
 
   getUsers() {
-    axios.get("/users")
+    axios
+      .get("/users")
       .then((users) => this.setState({ users: users.data }))
       .catch((err) => console.warn("Could not get all users", err));
   }
 
   getTags() {
-    axios.get("/posttags")
+    axios
+      .get("/posttags")
       .then((tags) => this.setState({ tags: tags.data }))
       .catch((err) => console.warn("Could not get all tags", err));
   }
@@ -90,7 +92,13 @@ class App extends Component {
               exact={true}
               path="/home"
               render={() => (
-                <HomeFeed menu={menu} currentUser={currentUser} generalFeed={generalFeed} users={users} tags={tags} />
+                <HomeFeed
+                  menu={menu}
+                  currentUser={currentUser}
+                  generalFeed={generalFeed}
+                  users={users}
+                  tags={tags}
+                />
               )}
             />
             <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />

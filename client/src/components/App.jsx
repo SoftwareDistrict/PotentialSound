@@ -38,8 +38,8 @@ class App extends Component {
     this.getAllPosts();
     this.getUsers();
     this.getTags();
-    // this.getMessages();
-    // this.getAllChats();
+    this.getMessages();
+    this.getAllChats();
   }
 
   getCurrentUser() {

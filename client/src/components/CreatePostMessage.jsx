@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import axios from "axios";
 
-const CreatePostMessage = () => {
+const CreatePostMessage = ({ audio, onChangeAudio }) => {
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
+
+  const uploadAudio = () => {
+    let data = new FormData();
+
+    data.append("audio", audio[0], audio[0].name);
+
+    axios
+      .post("/api/uploadAudio", data)
+      .then(({ data }) => console.info(data))
+      .catch((err) => console.warn(err));
+  };
 
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -27,6 +39,8 @@ const CreatePostMessage = () => {
   };
 
   const onSubmit = () => {
+    uploadAudio();
+
     const messageLength = message.length > 10;
     if (tags.length && messageLength) {
       axios
@@ -109,6 +123,10 @@ const CreatePostMessage = () => {
         <br />
         <br />
         <label>
+          Audio: <input type="file" name="file" onChange={(e) => onChangeAudio(e)} />
+        </label>
+        <br />
+        <label>
           Message{" "}
           <input
             size="60"
@@ -125,6 +143,15 @@ const CreatePostMessage = () => {
       </div>
     </div>
   );
+};
+
+CreatePostMessage.propTypes = {
+  audio: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    })
+  ),
+  onChangeAudio: PropTypes.func,
 };
 
 export default CreatePostMessage;

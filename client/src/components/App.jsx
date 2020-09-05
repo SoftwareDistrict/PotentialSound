@@ -9,6 +9,7 @@ import UpdateProfile from "./UpdateProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
+import InsertAudio from "./InsertAudio.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -44,9 +45,17 @@ class App extends Component {
       userName: "Bob",
       userProfilePic:
         "https://mma.prnewswire.com/media/1138309/UMe_Bob_Marley_1973_London.jpg?p=publish",
+      audio: [],
     };
 
     this.makeNewPost = this.makeNewPost.bind(this);
+    this.onChangeAudio = this.onChangeAudio.bind(this);
+  }
+
+  onChangeAudio(event) {
+    this.setState({
+      audio: [event.target.files[0]],
+    });
   }
 
   makeNewPost(post) {
@@ -72,7 +81,7 @@ class App extends Component {
       </div>
     );
 
-    const { arrPosts, userName, userProfilePic } = this.state;
+    const { arrPosts, userName, userProfilePic, audio } = this.state;
     return (
       <Router>
         {menu}
@@ -82,7 +91,7 @@ class App extends Component {
           <Route
             exact={true}
             path="/home"
-            render={() => <HomeFeed arrPosts={arrPosts} userName={userName} />}
+            render={() => <HomeFeed arrPosts={arrPosts} userName={userName} audio={audio} />}
           />
           <Route exact={true} path="/profile/:id" render={() => <Profile userName={userName} />} />
           <Route
@@ -93,6 +102,7 @@ class App extends Component {
                 makeNewPost={this.makeNewPost}
                 userName={userName}
                 userProfilePic={userProfilePic}
+                audio={audio}
               />
             )}
           />
@@ -102,9 +112,20 @@ class App extends Component {
             path="/fullMessage/:id"
             render={(match) => <PostFullMessage arrPosts={arrPosts} id={match.match.params.id} />}
           />
-          <Route path="/createProfile" render={() => <CreateProfile />} />
+          <Route
+            path="/createProfile"
+            render={() => (
+              <CreateProfile onChangeAudio={this.onChangeAudio} audio={this.state.audio} />
+            )}
+          />
           <Route path="/updateProfile" render={() => <UpdateProfile userName={userName} />} />
           <Route path="/chat/:id" render={() => <Chat />} />
+          <Route
+            path="/insertAudio"
+            render={() => (
+              <InsertAudio onChangeAudio={this.onChangeAudio} audio={this.state.audio} />
+            )}
+          />
         </Switch>
       </Router>
     );

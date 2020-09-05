@@ -88,6 +88,11 @@ PostFeedEntry.propTypes = {
     profilePic: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
+  audio: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    })
+  ),
 };
 
 export default PostFeedEntry;

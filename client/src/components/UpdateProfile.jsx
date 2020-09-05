@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
-const UpdateProfile = ({ userName }) => {
+const UpdateProfile = ({ currentUser }) => {
   const [newUser, setNewUser] = useState("Previous Username");
   const [newCity, setNewCity] = useState("Previous City");
   const [newCell, setNewCell] = useState("Previous Cell");
@@ -31,7 +31,7 @@ const UpdateProfile = ({ userName }) => {
 
     axios
       .put("/updateProfile", {
-        userName: newUser,
+        username: newUser,
         city: newCity,
         cell: newCell,
         description: newDescription,
@@ -82,7 +82,7 @@ const UpdateProfile = ({ userName }) => {
       />
       <br />
       <br />
-      <Link to={`/profile/${userName}`}>
+      <Link to={`/profile/${currentUser.id}`}>
         <button type="button" onClick={() => updateProfile()}>
           Submit Change
         </button>
@@ -92,7 +92,7 @@ const UpdateProfile = ({ userName }) => {
 };
 
 UpdateProfile.propTypes = {
-  userName: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default UpdateProfile;

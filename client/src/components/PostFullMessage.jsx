@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const PostFullMessage = ({ arrPosts, id }) => {
-  const name = id;
+const PostFullMessage = ({ generalFeed, users, match }) => {
+  const [poster, setPoster] = useState("");
+  const [currentPost, setCurrentPost] = useState("");
 
-  const found = arrPosts.find(function (element) {
-    return name === element.posterName;
+  generalFeed.forEach((post) => {
+    if (post.id_user === match.params.id) {
+      setCurrentPost(post);
+    }
   });
 
-  const { posterName, message, profilePic } = found;
+  users.forEach((user) => {
+    if (user.id === match.params.id) {
+      setPoster(user);
+    }
+  });
+
+  useEffect(() => {
+    generalFeed.forEach((post) => {
+      if (post.id_user === match.params.id) {
+        setCurrentPost(post);
+      }
+    });
+  }, [generalFeed]);
+
+  useEffect(() => {
+    users.forEach((user) => {
+      if (user.id === match.params.id) {
+        setPoster(user);
+      }
+    });
+  }, [users]);
 
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -31,8 +54,8 @@ const PostFullMessage = ({ arrPosts, id }) => {
           position: "relative",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{`${posterName} posted`}</div>
-        <div>{`Message: ${message}`}</div>
+        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
+        <div>Message: {currentPost.message}</div>
         <br />
         <div
           style={{
@@ -46,7 +69,7 @@ const PostFullMessage = ({ arrPosts, id }) => {
           }}
         >
           Profile Pic:
-          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
+          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
         </div>
         <br />
       </div>
@@ -65,16 +88,9 @@ const PostFullMessage = ({ arrPosts, id }) => {
 };
 
 PostFullMessage.propTypes = {
-  arrPosts: PropTypes.arrayOf(
-    PropTypes.shape({
-      posterName: PropTypes.string,
-      title: PropTypes.string,
-      message: PropTypes.string,
-      profilePic: PropTypes.string,
-      tags: PropTypes.arrayOf(PropTypes.string),
-    })
-  ),
-  id: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
+  generalFeed: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
 };
 
 export default PostFullMessage;

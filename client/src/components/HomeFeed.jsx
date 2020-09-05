@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ generalFeed, currentUser, users, tags }) => {
+const HomeFeed = ({ generalFeed, currentUser, users, tags, menu }) => {
   const logout = () => {
     axios
       .get("/logout")
@@ -14,6 +14,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags }) => {
 
   return (
     <div>
+      {menu}
       <div>
         <Link to={"/"}>
           <button onClick={logout}>Logout</button>
@@ -114,6 +115,7 @@ HomeFeed.propTypes = {
     })
   ),
   currentUser: PropTypes.object.isRequired,
+  menu: PropTypes.element,
 };
 
 export default HomeFeed;

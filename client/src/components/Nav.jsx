@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Nav = ({ userName, toggleMenu }) => {
+const Nav = ({ currentUser, toggleMenu }) => {
   const style = {
     position: "fixed",
     left: 0,
@@ -41,7 +41,7 @@ const Nav = ({ userName, toggleMenu }) => {
         Start Video Chat
       </Link>{" "}
       <br /> <br /> <br /> <br /> <br /> <br />
-      <Link onClick={toggleMenu} style={linkStyle} to={`/profile/${userName}`}>
+      <Link onClick={toggleMenu} style={linkStyle} to={`/profile/${currentUser.id}`}>
         My Profile
       </Link>
       <br /> <br /> <br /> <br />
@@ -53,7 +53,7 @@ const Nav = ({ userName, toggleMenu }) => {
 };
 
 Nav.propTypes = {
-  userName: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired,
   toggleMenu: PropTypes.func.isRequired,
 };
 

@@ -12,13 +12,19 @@ const PostFeedEntry = ({ post, users, tags }) => {
     }
   });
 
+  users.forEach((user) => {
+    if (user.id === post.id_user) {
+      setPoster(user);
+    }
+  });
+
   useEffect(() => {
     users.forEach((user) => {
       if (user.id === post.id_user) {
         setPoster(user);
       }
     });
-  }, []);
+  }, [users]);
 
   useEffect(() => {
     tags.forEach((tag) => {

@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-const Message = ({ messageObj }) => {
-  const { userName, profilePic, message } = messageObj;
+
+const Message = ({ id_user, message, users }) => {
+  const [messenger, setMessenger] = useState("");
+
+  users.forEach((user) => {
+    if (user.id === id_user) {
+      setMessenger(user);
+    }
+  });
+
+  useEffect(() => {
+    users.forEach((user) => {
+      if (user.id === id_user) {
+        setMessenger(user);
+      }
+    });
+  }, [users]);
 
   return (
     <div
@@ -27,7 +42,9 @@ const Message = ({ messageObj }) => {
           left: "100px",
           fontSize: "14px",
         }}
-      >{`${userName}`}</div>
+      >
+        {messenger.username}
+      </div>
       <div
         style={{
           position: "absolute",
@@ -39,7 +56,7 @@ const Message = ({ messageObj }) => {
           textAlign: "center",
         }}
       >
-        <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
+        <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={messenger.propic} />
       </div>
       <div
         style={{
@@ -73,10 +90,8 @@ const Message = ({ messageObj }) => {
   );
 };
 Message.propTypes = {
-  messageObj: PropTypes.shape({
-    userName: PropTypes.string.isRequired,
-    profilePic: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-  }),
+  id_user: PropTypes.number.isRequired,
+  message: PropTypes.string.isRequired,
+  users: PropTypes.object.isRequired,
 };
 export default Message;

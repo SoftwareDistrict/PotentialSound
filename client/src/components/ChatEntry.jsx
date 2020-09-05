@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-const ChatEntry = ({ chatMessage }) => {
-  const { participants } = chatMessage;
 
+const ChatEntry = ({ participants, id_chat }) => {
   return (
-    <Link to="/chat/:id">
+    <Link to={`/chat/${id_chat}`}>
       <div
         className=""
         style={{
@@ -32,7 +31,7 @@ const ChatEntry = ({ chatMessage }) => {
         >
           <div>
             <label>Chat Members:</label>
-            {participants.join(" ")}
+            {participants.join("  ")}
           </div>
         </div>
       </div>
@@ -41,7 +40,12 @@ const ChatEntry = ({ chatMessage }) => {
 };
 
 ChatEntry.propTypes = {
-  chatMessage: PropTypes.object.isRequired,
+  participants: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string,
+    })
+  ),
+  id_chat: PropTypes.number.isRequired,
 };
 
 export default ChatEntry;

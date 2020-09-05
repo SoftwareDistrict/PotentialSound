@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Profile = () => {
-  const [state] = useState({
-    username: "Bob",
-    propic:
-      "https://media.npr.org/assets/img/2020/02/06/marley-dennislawrence_wide-ff47e360977a27acfb066e56d6a98d3262619e27.jpeg?s=1400",
-    cell: "678-920-3121",
-    desc: "All about love and music!",
-    city: "Kingston",
-    email: "bob123@gmail.com",
+const Profile = ({ match, users, menu, currentUser }) => {
+  const [user, setUser] = useState("");
+  const [myProfile, setMyProfile] = useState(false);
+
+  users.forEach((user) => {
+    if (user.id === match.params.id) {
+      setUser(user);
+    }
   });
 
-  const { username, propic, cell, city, email } = state;
+  if (user === currentUser) {
+    setMyProfile(true);
+  }
+
+  useEffect(() => {
+    users.forEach((user) => {
+      if (user.id === match.params.id) {
+        setUser(user);
+        if (user === currentUser) {
+          setMyProfile(true);
+        }
+      }
+    });
+  }, [users]);
+
+  const { username, propic, cell, city, email } = user;
 
   return (
     <div>
+      {menu}
       <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
       <div
         id="profile"
@@ -44,11 +60,22 @@ const Profile = () => {
         Profile Picture
         <img src={propic} />
       </div>
-      <Link to="/updateProfile">
-        <button type="button">Update Profile</button>
-      </Link>
+      {myProfile ? (
+        <Link to="/updateProfile">
+          <button type="button">Update Profile</button>
+        </Link>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
+};
+
+Profile.propTypes = {
+  match: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
+  menu: PropTypes.element,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default Profile;

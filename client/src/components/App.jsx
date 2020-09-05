@@ -21,46 +21,83 @@ class App extends Component {
       users: [],
       generalFeed: [],
       tags: [],
+      allMsgs: [],
+      allChats: [],
     };
-
+    this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getTags = this.getTags.bind(this);
+    this.getMessages = this.getMessages.bind(this);
+    this.getAllChats = this.getAllChats.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
     this.getCurrentUser();
-    this.getUsers();
     this.getAllPosts();
+    this.getUsers();
     this.getTags();
+    // this.getMessages();
+    // this.getAllChats();
   }
 
   getCurrentUser() {
     axios
       .get("/currentUser")
-      .then((user) => this.setState({ currentUser: user.data }))
+      .then((user) => {
+        console.info("currentUser", user.data);
+        this.setState({ currentUser: user.data });
+      })
       .catch((err) => console.warn("could not get current user.", err));
   }
 
   getAllPosts() {
     axios
       .get("/feed")
-      .then((feed) => this.setState({ generalFeed: feed.data }))
+      .then((feed) => {
+        console.info("feed", feed.data);
+        this.setState({ generalFeed: feed.data });
+      })
       .catch((err) => console.warn("Could not get all posts", err));
   }
 
   getUsers() {
     axios
       .get("/users")
-      .then((users) => this.setState({ users: users.data }))
+      .then((users) => {
+        console.info("Users", users.data);
+        this.setState({ users: users.data });
+      })
       .catch((err) => console.warn("Could not get all users", err));
   }
 
   getTags() {
     axios
       .get("/posttags")
-      .then((tags) => this.setState({ tags: tags.data }))
+      .then((tags) => {
+        console.info("tags", tags.data);
+        this.setState({ tags: tags.data });
+      })
       .catch((err) => console.warn("Could not get all tags", err));
+  }
+
+  getMessages() {
+    axios.get("/messages")
+      .then((msgs) => {
+        console.info("msgs", msgs.data);
+        this.setState({ allMsgs: msgs.data });
+      })
+      .catch((err) => console.warn("Could not get all messages", err));
+  }
+
+  getAllChats() {
+    axios.get("/allchats")
+      .then((chats) => {
+        console.info("chats", chats.data);
+        this.setState({ allChats: chats.data });
+      })
+      .catch((err) => console.warn("Could not get all chats", err));
   }
 
   toggleMenu() {
@@ -81,7 +118,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { generalFeed, currentUser, tags, users } = this.state;
+    const { generalFeed, currentUser, tags, users, allMsgs, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -101,16 +138,16 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />
+            <Route exact={true} path="/profile/:id" render={({ match }) => <Profile menu={menu} match={match} users={users} currentUser={currentUser} />} />
             <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
-            <Route exact={true} path="/chats" render={() => <Chats menu={menu} />} />
+            <Route exact={true} path="/chats" render={() => <Chats menu={menu} users={users} allChats={allChats} currentUser={currentUser} />} />
             <Route
               path="/fullMessage/:id"
-              render={(match) => <PostFullMessage id={match.match.params.id} />}
+              render={({ match }) => <PostFullMessage users={users} generalFeed={generalFeed} match={match} />}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
-            <Route path="/updateProfile" render={() => <UpdateProfile />} />
-            <Route path="/chat/:id" render={() => <Chat />} />
+            <Route path="/updateProfile" render={() => <UpdateProfile currentUser={currentUser} />} />
+            <Route path="/chat/:id" render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />} />
           </Switch>
         </Router>
       </div>

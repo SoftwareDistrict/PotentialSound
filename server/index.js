@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const { uploadToS3 } = require("./s3");
+const { uploadToS3, uploadAudioToS3 } = require("./s3");
 const { Users, Tags, Posts } = require("./db");
 const { Op } = require("sequelize");
 require("./passport.setup");
@@ -77,6 +77,11 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+app.post("/api/uploadAudio", (req, res) => {
+  uploadAudioToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
 
 app.post("/api/uploadImage", (req, res) => {
   uploadToS3(req, res)
@@ -102,7 +107,6 @@ app.post("/createPostMessage", (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-
 });
 
 app.get("*", (req, res) => {

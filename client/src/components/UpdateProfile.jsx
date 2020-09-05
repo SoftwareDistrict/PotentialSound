@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ImageUploader from "react-images-upload";
+// import ImageUploader from "react-images-upload";
 import axios from "axios";
 
 const UpdateProfile = ({ userName }) => {
@@ -9,25 +9,25 @@ const UpdateProfile = ({ userName }) => {
   const [newCity, setNewCity] = useState("Previous City");
   const [newCell, setNewCell] = useState("Previous Cell");
   const [newDescription, setNewDescription] = useState("Previous Description");
-  const [photo, setPhoto] = useState([]);
+  // const [photo, setPhoto] = useState([]);
 
-  const onDrop = (picture) => {
-    setPhoto(photo.concat(picture));
-  };
+  // const onDrop = (picture) => {
+  //   setPhoto(photo.concat(picture));
+  // };
 
-  const uploadImg = () => {
-    let data = new FormData();
+  // const uploadImg = () => {
+  //   let data = new FormData();
 
-    data.append("image", photo[0], photo[0].name);
+  //   data.append("image", photo[0], photo[0].name);
 
-    axios
-      .post("/api/uploadImageUpdate", data)
-      .then(({ data }) => console.info(data))
-      .catch((err) => console.warn(err));
-  };
+  //   axios
+  //     .post("/api/uploadImageUpdate", data)
+  //     .then(({ data }) => console.info(data))
+  //     .catch((err) => console.warn(err));
+  // };
 
   const updateProfile = () => {
-    uploadImg();
+    // uploadImg();
 
     axios
       .put("/updateProfile", {
@@ -71,7 +71,7 @@ const UpdateProfile = ({ userName }) => {
         }}
       ></input>
       <br />
-      <ImageUploader
+      {/* <ImageUploader
         withIcon={false}
         withPreview={true}
         singleImage={true}
@@ -79,7 +79,7 @@ const UpdateProfile = ({ userName }) => {
         onChange={onDrop}
         imgExtension={[".jpg", ".gif", ".png"]}
         maxFileSize={5242880}
-      />
+      /> */}
       <br />
       <br />
       <Link to={`/profile/${userName}`}>

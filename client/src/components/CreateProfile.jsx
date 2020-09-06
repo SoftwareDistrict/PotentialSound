@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
+const style = {
+  margin: "10px",
+};
+
 const CreateProfile = () => {
   const [username, setUsername] = useState("");
   const [city, setCity] = useState("");
@@ -41,17 +45,26 @@ const CreateProfile = () => {
   return (
     <div>
       <h1>Create Profile</h1>
-      <input placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}></input>
-      <br />
-      <input placeholder="Enter City" onChange={(e) => setCity(e.target.value)}></input>
-      <br />
-      <input placeholder="Enter Cell" onChange={(e) => setCell(e.target.value)}></input>
-      <br />
       <input
+        style={style}
+        placeholder="Enter Username"
+        onChange={(e) => setUsername(e.target.value)}
+      ></input>
+      <input
+        style={style}
+        placeholder="Enter City"
+        onChange={(e) => setCity(e.target.value)}
+      ></input>
+      <input
+        style={style}
+        placeholder="Enter Cell"
+        onChange={(e) => setCell(e.target.value)}
+      ></input>
+      <input
+        style={style}
         placeholder="Enter Descrition"
         onChange={(e) => setDescription(e.target.value)}
       ></input>
-      <br />
       <ImageUploader
         withIcon={false}
         withPreview={true}

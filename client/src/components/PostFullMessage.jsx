@@ -56,7 +56,6 @@ const PostFullMessage = ({ generalFeed, users, match }) => {
       >
         <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
         <div>Message: {currentPost.message}</div>
-        <br />
         <div
           style={{
             position: "absolute",
@@ -66,12 +65,13 @@ const PostFullMessage = ({ generalFeed, users, match }) => {
             overflow: "auto",
             width: "150px",
             height: "150px",
+            marginTop: "10px",
+            marginBottom: "10px",
           }}
         >
           Profile Pic:
           <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
         </div>
-        <br />
       </div>
       <div>
         <h3>Reply</h3>
@@ -79,9 +79,7 @@ const PostFullMessage = ({ generalFeed, users, match }) => {
           Message{" "}
           <input size="60" onChange={(event) => onEvent(event)} type="text" placeholder="Message" />
         </label>
-        <br />
-        <br />
-        <button>Submit</button>
+        <button style={{ marginLeft: "5px" }}>Submit</button>
       </div>
     </div>
   );

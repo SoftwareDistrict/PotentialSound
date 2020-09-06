@@ -44,33 +44,33 @@ const UpdateProfile = ({ currentUser }) => {
     <div>
       <h1>Update Your Profile</h1>
       <input
+        style={{ marginBottom: "10px" }}
         value={newUser}
         onChange={(e) => {
           setNewUser(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newCity}
         onChange={(e) => {
           setNewCity(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newCell}
         onChange={(e) => {
           setNewCell(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newDescription}
         onChange={(e) => {
           setNewDescription(e.target.value);
         }}
       ></input>
-      <br />
       <ImageUploader
         withIcon={false}
         withPreview={true}
@@ -80,9 +80,7 @@ const UpdateProfile = ({ currentUser }) => {
         imgExtension={[".jpg", ".gif", ".png"]}
         maxFileSize={5242880}
       />
-      <br />
-      <br />
-      <Link to={`/profile/${currentUser.id}`}>
+      <Link to={`/profile/${currentUser.id}`} style={{ marginTop: "30px" }}>
         <button type="button" onClick={() => updateProfile()}>
           Submit Change
         </button>

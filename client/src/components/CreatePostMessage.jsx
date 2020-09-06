@@ -111,6 +111,7 @@ const CreatePostMessage = () => {
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label htmlFor="tag6">Help Wanted</label>
         <input
+          style={{ marginBottom: "10px" }}
           className="messageCheckbox"
           type="checkbox"
           id="tag6"
@@ -118,8 +119,6 @@ const CreatePostMessage = () => {
           value="#help-wanted"
           onChange={(event) => onCheck(event)}
         />
-        <br />
-        <br />
         <ImageUploader
           withIcon={false}
           withPreview={true}
@@ -138,9 +137,7 @@ const CreatePostMessage = () => {
             placeholder={"Message"}
           />
         </label>
-        <br />
-        <br />
-        <button onClick={() => onSubmit()}>
+        <button style={{ marginTop: "10px" }} onClick={() => onSubmit()}>
           <Link to="/home">Submit</Link>
         </button>
       </div>

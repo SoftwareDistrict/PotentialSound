@@ -2,8 +2,9 @@
 // import { Link } from "react-router-dom";
 // import ImageUploader from "react-images-upload";
 // import axios from "axios";
+// import PropTypes from "prop-types";
 
-// const CreatePostMessage = () => {
+// const CreatePostMessage = ({ audio, onChangeAudio }) => {
 //   const [message, setMessage] = useState("");
 //   const [tags, setTags] = useState([]);
 //   const [photo, setPhoto] = useState([]);
@@ -11,6 +12,17 @@
 //   const onDrop = (picture) => {
 //     setPhoto(photo.concat(picture));
 //   };
+
+// const uploadAudio = () => {
+//   let data = new FormData();
+
+//   data.append("audio", audio[0], audio[0].name);
+
+//   axios
+//     .post("/api/uploadAudio", data)
+//     .then(({ data }) => console.info(data))
+//     .catch((err) => console.warn(err));
+// };
 
 //   const uploadImg = () => {
 //     let data = new FormData();
@@ -44,6 +56,7 @@
 //   };
 
 //   const onSubmit = () => {
+//     uploadAudio();
 //     uploadImg();
 
 //     const messageLength = message.length > 10;
@@ -149,6 +162,15 @@
 //       </div>
 //     </div>
 //   );
+// };
+
+// CreatePostMessage.propTypes = {
+//   audio: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string,
+//     })
+//   ),
+//   onChangeAudio: PropTypes.func,
 // };
 
 // export default CreatePostMessage;

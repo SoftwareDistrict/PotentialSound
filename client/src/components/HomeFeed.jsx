@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ generalFeed, currentUser, users, tags, menu }) => {
+const HomeFeed = ({ generalFeed, currentUser, users, tags, menu, audio }) => {
   const logout = () => {
     axios
       .get("/logout")
@@ -80,7 +80,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags, menu }) => {
       </div>
       <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px", padding: "5px" }}>
         {generalFeed.map((post) => (
-          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
+          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio} />
         ))}
       </div>
     </div>
@@ -116,6 +116,7 @@ HomeFeed.propTypes = {
   ),
   currentUser: PropTypes.object.isRequired,
   menu: PropTypes.element,
+  audio: PropTypes.array,
 };
 
 export default HomeFeed;

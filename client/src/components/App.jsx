@@ -9,6 +9,7 @@ import UpdateProfile from "./UpdateProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
+import InsertAudio from "./InsertAudio.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -21,12 +22,14 @@ class App extends Component {
       users: [],
       generalFeed: [],
       tags: [],
+      audio: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getTags = this.getTags.bind(this);
+    this.onChangeAudio = this.onChangeAudio.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +37,12 @@ class App extends Component {
     this.getUsers();
     this.getAllPosts();
     this.getTags();
+  }
+
+  onChangeAudio(event) {
+    this.setState({
+      audio: [event.target.files[0]],
+    });
   }
 
   getCurrentUser() {
@@ -82,7 +91,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { generalFeed, currentUser, tags, users } = this.state;
+    const { generalFeed, currentUser, tags, users, audio } = this.state;
     return (
       <div>
         <Router>
@@ -99,11 +108,16 @@ class App extends Component {
                   generalFeed={generalFeed}
                   users={users}
                   tags={tags}
+                  audio={audio}
                 />
               )}
             />
             <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />
-            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
+            <Route
+              exact={true}
+              path="/createPostMessage"
+              render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio} />}
+            />
             <Route exact={true} path="/chats" render={() => <Chats menu={menu} />} />
             <Route
               path="/fullMessage/:id"
@@ -112,6 +126,10 @@ class App extends Component {
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route path="/updateProfile" render={() => <UpdateProfile />} />
             <Route path="/chat/:id" render={() => <Chat />} />
+            <Route
+              path="/insertAudio"
+              render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}
+            />
           </Switch>
         </Router>
       </div>

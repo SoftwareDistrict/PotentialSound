@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Profile = ({ match, users, menu, currentUser }) => {
-  const [user, setUser] = useState("");
-  const [myProfile, setMyProfile] = useState(false);
-
-  users.forEach((user) => {
-    if (user.id === match.params.id) {
-      setUser(user);
-    }
-  });
-
-  if (user === currentUser) {
-    setMyProfile(true);
-  }
-
-  useEffect(() => {
-    users.forEach((user) => {
-      if (user.id === match.params.id) {
-        setUser(user);
-        if (user === currentUser) {
-          setMyProfile(true);
-        }
-      }
-    });
-  }, [users]);
-
-  const { username, propic, cell, city, email } = user;
+const Profile = ({ menu, currentUser }) => {
+  const { username, propic, cell, city, email } = currentUser;
 
   return (
     <div>
@@ -60,20 +36,14 @@ const Profile = ({ match, users, menu, currentUser }) => {
         Profile Picture
         <img src={propic} />
       </div>
-      {myProfile ? (
-        <Link to="/updateProfile">
-          <button type="button">Update Profile</button>
-        </Link>
-      ) : (
-        <div></div>
-      )}
+      <Link to="/updateProfile">
+        <button type="button">Update Profile</button>
+      </Link>
     </div>
   );
 };
 
 Profile.propTypes = {
-  match: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
   menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };

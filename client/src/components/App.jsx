@@ -135,15 +135,11 @@ class App extends Component {
             <Route
               exact={true}
               path="/chats"
-              render={() => (
-                <Chats menu={menu} allChats={allChats} currentUser={currentUser} />
-              )}
+              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
             />
             <Route
               path="/fullMessage/:id"
-              render={({ match }) => (
-                <PostFullMessage generalFeed={generalFeed} match={match} />
-              )}
+              render={({ match }) => <PostFullMessage generalFeed={generalFeed} match={match} />}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route

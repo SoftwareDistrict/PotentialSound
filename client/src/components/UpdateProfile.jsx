@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
-const UpdateProfile = ({ userName }) => {
+const UpdateProfile = ({ currentUser }) => {
   const [newUser, setNewUser] = useState("Previous Username");
   const [newCity, setNewCity] = useState("Previous City");
   const [newCell, setNewCell] = useState("Previous Cell");
@@ -31,7 +31,7 @@ const UpdateProfile = ({ userName }) => {
 
     axios
       .put("/updateProfile", {
-        userName: newUser,
+        username: newUser,
         city: newCity,
         cell: newCell,
         description: newDescription,
@@ -44,33 +44,33 @@ const UpdateProfile = ({ userName }) => {
     <div>
       <h1>Update Your Profile</h1>
       <input
+        style={{ marginBottom: "10px" }}
         value={newUser}
         onChange={(e) => {
           setNewUser(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newCity}
         onChange={(e) => {
           setNewCity(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newCell}
         onChange={(e) => {
           setNewCell(e.target.value);
         }}
       ></input>
-      <br />
       <input
+        style={{ marginBottom: "10px" }}
         value={newDescription}
         onChange={(e) => {
           setNewDescription(e.target.value);
         }}
       ></input>
-      <br />
       <ImageUploader
         withIcon={false}
         withPreview={true}
@@ -80,9 +80,7 @@ const UpdateProfile = ({ userName }) => {
         imgExtension={[".jpg", ".gif", ".png"]}
         maxFileSize={5242880}
       />
-      <br />
-      <br />
-      <Link to={`/profile/${userName}`}>
+      <Link to={`/profile/${currentUser.id}`} style={{ marginTop: "30px" }}>
         <button type="button" onClick={() => updateProfile()}>
           Submit Change
         </button>
@@ -92,7 +90,7 @@ const UpdateProfile = ({ userName }) => {
 };
 
 UpdateProfile.propTypes = {
-  userName: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default UpdateProfile;

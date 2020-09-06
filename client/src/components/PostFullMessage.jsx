@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ arrPosts, id }) => {
-  const name = id;
+const PostFullMessage = ({ match }) => {
+  const { id } = match.params;
+  const [poster, setPoster] = useState({});
+  const [post, setPost] = useState({});
 
-  const found = arrPosts.find(function (element) {
-    return name === element.posterName;
-  });
+  useEffect(async () => {
+    await axios
+      .get(`/poster/${id[0]}`)
+      .then((poster) => setPoster(poster.data))
+      .catch((err) => console.warn("could not get this poster.", err));
 
-  const { posterName, message, profilePic } = found;
+    axios
+      .get(`/thispost/${id[1]}`)
+      .then((post) => setPost(post.data))
+      .catch((err) => console.warn("could not get this post.", err));
+  }, []);
 
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -31,9 +41,8 @@ const PostFullMessage = ({ arrPosts, id }) => {
           position: "relative",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{`${posterName} posted`}</div>
-        <div>{`Message: ${message}`}</div>
-        <br />
+        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
+        <div>Message: {post.message}</div>
         <div
           style={{
             position: "absolute",
@@ -43,12 +52,13 @@ const PostFullMessage = ({ arrPosts, id }) => {
             overflow: "auto",
             width: "150px",
             height: "150px",
+            marginTop: "10px",
+            marginBottom: "10px",
           }}
         >
           Profile Pic:
-          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={profilePic} />
+          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
         </div>
-        <br />
       </div>
       <div>
         <h3>Reply</h3>
@@ -56,25 +66,14 @@ const PostFullMessage = ({ arrPosts, id }) => {
           Message{" "}
           <input size="60" onChange={(event) => onEvent(event)} type="text" placeholder="Message" />
         </label>
-        <br />
-        <br />
-        <button>Submit</button>
+        <button style={{ marginLeft: "5px" }}>Submit</button>
       </div>
     </div>
   );
 };
 
 PostFullMessage.propTypes = {
-  arrPosts: PropTypes.arrayOf(
-    PropTypes.shape({
-      posterName: PropTypes.string,
-      title: PropTypes.string,
-      message: PropTypes.string,
-      profilePic: PropTypes.string,
-      tags: PropTypes.arrayOf(PropTypes.string),
-    })
-  ),
-  id: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default PostFullMessage;

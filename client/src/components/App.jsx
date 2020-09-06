@@ -19,24 +19,24 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      users: [],
-      generalFeed: [],
       tags: [],
+      allMsgs: [],
+      allChats: [],
       audio: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.getUsers = this.getUsers.bind(this);
-    this.getAllPosts = this.getAllPosts.bind(this);
     this.getTags = this.getTags.bind(this);
+    this.getMessages = this.getMessages.bind(this);
+    this.getAllChats = this.getAllChats.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
     this.onChangeAudio = this.onChangeAudio.bind(this);
   }
 
   componentDidMount() {
-    this.getCurrentUser();
-    this.getUsers();
-    this.getAllPosts();
     this.getTags();
+    this.getMessages();
+    this.getAllChats();
   }
 
   onChangeAudio(event) {
@@ -52,25 +52,25 @@ class App extends Component {
       .catch((err) => console.warn("could not get current user.", err));
   }
 
-  getAllPosts() {
-    axios
-      .get("/feed")
-      .then((feed) => this.setState({ generalFeed: feed.data }))
-      .catch((err) => console.warn("Could not get all posts", err));
-  }
-
-  getUsers() {
-    axios
-      .get("/users")
-      .then((users) => this.setState({ users: users.data }))
-      .catch((err) => console.warn("Could not get all users", err));
-  }
-
   getTags() {
     axios
       .get("/posttags")
       .then((tags) => this.setState({ tags: tags.data }))
       .catch((err) => console.warn("Could not get all tags", err));
+  }
+
+  getMessages() {
+    axios
+      .get("/messages")
+      .then((msgs) => this.setState({ allMsgs: msgs.data }))
+      .catch((err) => console.warn("Could not get all messages", err));
+  }
+
+  getAllChats() {
+    axios
+      .get("/allchats")
+      .then((chats) => this.setState({ allChats: chats.data }))
+      .catch((err) => console.warn("Could not get all chats", err));
   }
 
   toggleMenu() {
@@ -91,7 +91,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { generalFeed, currentUser, tags, users, audio } = this.state;
+    const { currentUser, tags, allMsgs, allChats, audio } = this.state;
     return (
       <div>
         <Router>
@@ -104,28 +104,43 @@ class App extends Component {
               render={() => (
                 <HomeFeed
                   menu={menu}
-                  currentUser={currentUser}
-                  generalFeed={generalFeed}
-                  users={users}
                   tags={tags}
+                  getCurrentUser={this.getCurrentUser}
                   audio={audio}
                 />
               )}
             />
-            <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />
+            <Route
+              exact={true}
+              path="/profile/:id"
+              render={({ match }) => (
+                <Profile menu={menu} match={match} currentUser={currentUser} />
+              )}
+            />
             <Route
               exact={true}
               path="/createPostMessage"
               render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio} />}
             />
-            <Route exact={true} path="/chats" render={() => <Chats menu={menu} />} />
             <Route
+              exact={true}
+              path="/chats"
+              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
+            />
+            <Route
+              exact={true}
               path="/fullMessage/:id"
-              render={(match) => <PostFullMessage id={match.match.params.id} />}
+              render={({ match }) => <PostFullMessage match={match} />}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
-            <Route path="/updateProfile" render={() => <UpdateProfile />} />
-            <Route path="/chat/:id" render={() => <Chat />} />
+            <Route
+              path="/updateProfile"
+              render={() => <UpdateProfile currentUser={currentUser} />}
+            />
+            <Route
+              path="/chat/:id"
+              render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />}
+            />
             <Route
               path="/insertAudio"
               render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}

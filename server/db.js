@@ -147,6 +147,10 @@ Users.sync({ force: true })
             id_chat: 1,
           },
           {
+            id_user: 6,
+            id_chat: 1,
+          },
+          {
             id_user: 2,
             id_chat: 2,
           },
@@ -157,6 +161,14 @@ Users.sync({ force: true })
           {
             id_user: 5,
             id_chat: 2,
+          },
+          {
+            id_user: 6,
+            id_chat: 2,
+          },
+          {
+            id_user: 6,
+            id_chat: 3,
           },
           {
             id_user: 2,

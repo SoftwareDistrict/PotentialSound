@@ -3,14 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const PostFeedEntry = ({ post, users, tags }) => {
-  const [poster, setPoster] = useState("");
+  const [poster, setPoster] = useState({});
   const [postTags] = useState([]);
-
-  tags.forEach((tag) => {
-    if (tag.id_post === post.id && !postTags.includes(tag.tag)) {
-      postTags.push(tag.tag);
-    }
-  });
 
   useEffect(() => {
     users.forEach((user) => {
@@ -18,7 +12,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
         setPoster(user);
       }
     });
-  }, []);
+  }, [users]);
 
   useEffect(() => {
     tags.forEach((tag) => {
@@ -30,7 +24,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
 
   return (
     <div>
-      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${post.id_user}`}>
+      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${post.id_user}${post.id}`}>
         <div
           id="profile"
           style={{
@@ -62,7 +56,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
               position: "absolute",
               top: "5px",
               resize: "both",
-              overflow: "auto",
+              overflow: "hidden",
               width: "100px",
               textAlign: "left",
               paddingLeft: "5px",
@@ -115,11 +109,11 @@ PostFeedEntry.propTypes = {
       id: PropTypes.number,
       username: PropTypes.string,
       propic: PropTypes.string,
-      cell: PropTypes.string,
-      description: PropTypes.string,
       city: PropTypes.string,
+      description: PropTypes.string,
       googleId: PropTypes.string,
       email: PropTypes.string,
+      cell: PropTypes.string,
     })
   ),
   tags: PropTypes.arrayOf(

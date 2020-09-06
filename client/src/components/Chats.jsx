@@ -1,28 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
+import axios from "axios";
+import "regenerator-runtime/runtime";
 
-const Chats = ({ menu }) => {
-  const [chatMessage] = useState({
-    chatName: "Squad",
-    participants: ["Doug", "Evan", "Henny", "Brandon"],
-    profilePic:
-      "https://media.npr.org/assets/img/2020/02/06/marley-dennislawrence_wide-ff47e360977a27acfb066e56d6a98d3262619e27.jpeg?s=1400",
-  });
+const Chats = ({ currentUser, allChats, menu }) => {
+  const [participants, setParticipants] = useState([]);
+  const [chatIds, setChatIds] = useState([]);
+
+  useEffect(() => {
+    const ids = [];
+    allChats.forEach((chat) => {
+      if (chat.id_user === currentUser.id) {
+        ids.push(chat.id_chat);
+      }
+    });
+    setChatIds(ids);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/users")
+      .then((users) => {
+        const members = [];
+        allChats.forEach((chat) => {
+          chatIds.forEach((id) => {
+            users.data.forEach((user) => {
+              if (id === chat.id_chat) {
+                if (user.id === chat.id_user) {
+                  members.push(user.username);
+                }
+              }
+            });
+          });
+        });
+        return members;
+      })
+      .then((members) => setParticipants(members))
+      .catch((err) => console.warn("could not get all users in Chats.", err));
+  }, [chatIds]);
 
   return (
     <div>
       {menu}
       <h1>Current Messages (Inbox) </h1>
-      <ChatEntry chatMessage={chatMessage} />
-      <ChatEntry chatMessage={chatMessage} />
-      <ChatEntry chatMessage={chatMessage} />
+      {allChats.map(({ id, id_chat }) => (
+        <ChatEntry key={id} id_chat={id_chat} participants={participants} />
+      ))}
     </div>
   );
 };
 
 Chats.propTypes = {
+  currentUser: PropTypes.object.isRequired,
   menu: PropTypes.element,
+  allChats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_user: PropTypes.number,
+      id_chat: PropTypes.string,
+    })
+  ),
 };
 
 export default Chats;

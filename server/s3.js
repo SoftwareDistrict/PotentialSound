@@ -25,15 +25,15 @@ const upload = multer({
   }),
 });
 
-const singleImageUpload = upload.single("image");
+const singleFileUpload = upload.single("image");
 const singleAudioUpload = upload.single("audio");
 
 const uploadToS3 = (req, res) => {
-  req.s3Key = uuidv4();
+  req.s3Key = `${uuidv4()}.png`;
   let downloadUrl = `https://s3-${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${req.s3Key}`;
 
   return new Promise((resolve, reject) => {
-    return singleImageUpload(req, res, (err) => {
+    return singleFileUpload(req, res, (err) => {
       if (err) reject(err);
       return resolve(downloadUrl);
     });

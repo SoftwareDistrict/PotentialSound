@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ generalFeed, currentUser, users, tags, menu, audio }) => {
+const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
+  const [users, setUsers] = useState([]);
+  const [generalFeed, setGeneralFeed] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/feed")
+      .then((feed) => setGeneralFeed(feed.data))
+      .catch((err) => console.warn("Could not get all posts", err));
+  }, []);
+
+  useEffect(() => {
+    getCurrentUser();
+    axios
+      .get("/users")
+      .then((response) => setUsers(response.data))
+      .catch((err) => console.warn("Could not get all users", err));
+  }, []);
+
   const logout = () => {
     axios
       .get("/logout")
@@ -32,7 +50,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags, menu, audio }) => {
           }}
         >
           <img
-            src={currentUser.propic}
+            src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
             alt="Avatar"
             style={{
               display: "inline",
@@ -95,18 +113,6 @@ HomeFeed.propTypes = {
       message: PropTypes.string,
     })
   ),
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      username: PropTypes.string,
-      propic: PropTypes.string,
-      cell: PropTypes.string,
-      description: PropTypes.string,
-      city: PropTypes.string,
-      googleId: PropTypes.string,
-      email: PropTypes.string,
-    })
-  ),
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -114,7 +120,7 @@ HomeFeed.propTypes = {
       tag: PropTypes.string,
     })
   ),
-  currentUser: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   menu: PropTypes.element,
   audio: PropTypes.array,
 };

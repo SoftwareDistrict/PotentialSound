@@ -54,22 +54,22 @@ const CreateProfile = () => {
         <div>
           <h1>Create Profile</h1>
           <input
-            style={{ style: style }}
+            style={style}
             placeholder="Enter Username"
             onChange={(e) => setUsername(e.target.value)}
           ></input>
           <input
-            style={{ style: style }}
+            style={style}
             placeholder="Enter City"
             onChange={(e) => setCity(e.target.value)}
           ></input>
           <input
-            style={{ style: style }}
+            style={style}
             placeholder="Enter Cell"
             onChange={(e) => setCell(e.target.value)}
           ></input>
           <input
-            style={{ style: style }}
+            style={style}
             placeholder="Enter Descrition"
             onChange={(e) => setDescription(e.target.value)}
           ></input>

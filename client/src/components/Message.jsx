@@ -1,33 +1,26 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
-const Message = ({ id_user, message, users }) => {
+const Message = ({ id_user, message }) => {
   const [messenger, setMessenger] = useState("");
 
-  users.forEach((user) => {
-    if (user.id === id_user) {
-      setMessenger(user);
-    }
-  });
-
   useEffect(() => {
-    users.forEach((user) => {
-      if (user.id === id_user) {
-        setMessenger(user);
-      }
-    });
-  }, [users]);
+    axios
+      .get(`/poster/${id_user}`)
+      .then((user) => setMessenger(user.data))
+      .catch((err) => console.warn("could not get this messenger.", err));
+  }, []);
 
   return (
     <div
       id="profile"
       style={{
         border: "2px solid black",
-        width: "400px",
         height: "100px",
-        margin: "0 auto",
         backgroundColor: "#3F3D3D",
         position: "relative",
+        width: "330px",
       }}
     >
       <div
@@ -36,11 +29,11 @@ const Message = ({ id_user, message, users }) => {
           top: "0",
           resize: "both",
           overflow: "auto",
-          width: "300px",
+          width: "280px",
           height: "20px",
-          textAlign: "center",
-          left: "100px",
-          fontSize: "14px",
+          textAlign: "left",
+          left: "110px",
+          fontSize: "18px",
         }}
       >
         {messenger.username}
@@ -50,10 +43,9 @@ const Message = ({ id_user, message, users }) => {
           position: "absolute",
           top: "5",
           resize: "both",
-          overflow: "auto",
+          overflow: "hidden",
           width: "100px",
           height: "100px",
-          textAlign: "center",
         }}
       >
         <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={messenger.propic} />
@@ -65,11 +57,11 @@ const Message = ({ id_user, message, users }) => {
           backgroundColor: "offwhite",
           resize: "both",
           overflow: "auto",
-          width: "300px",
+          width: "220px",
           height: "60px",
-          textAlign: "center",
-          left: "100px",
-          fontSize: "12px",
+          textAlign: "left",
+          left: "110px",
+          fontSize: "16px",
         }}
       >
         {message}
@@ -80,7 +72,7 @@ const Message = ({ id_user, message, users }) => {
           bottom: "0",
           resize: "both",
           overflow: "auto",
-          width: "300px",
+          width: "260px",
           height: "20px",
           textAlign: "center",
           left: "100px",
@@ -92,6 +84,5 @@ const Message = ({ id_user, message, users }) => {
 Message.propTypes = {
   id_user: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
-  users: PropTypes.object.isRequired,
 };
 export default Message;

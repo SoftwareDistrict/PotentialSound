@@ -113,7 +113,11 @@ class App extends Component {
               )}
             />
             <Route exact={true} path="/profile/:id" render={() => <Profile menu={menu} />} />
-            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio}/>} />
+            <Route
+              exact={true}
+              path="/createPostMessage"
+              render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio} />}
+            />
             <Route exact={true} path="/chats" render={() => <Chats menu={menu} />} />
             <Route
               path="/fullMessage/:id"
@@ -124,9 +128,7 @@ class App extends Component {
             <Route path="/chat/:id" render={() => <Chat />} />
             <Route
               path="/insertAudio"
-              render={() => (
-                <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />
-              )}
+              render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}
             />
           </Switch>
         </Router>

@@ -80,7 +80,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags, menu, audio }) => {
       </div>
       <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px", padding: "5px" }}>
         {generalFeed.map((post) => (
-          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio}/>
+          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio} />
         ))}
       </div>
     </div>

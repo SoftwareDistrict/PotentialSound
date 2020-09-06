@@ -133,7 +133,7 @@ PostFeedEntry.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
     })
-  )
+  ),
 };
 
 export default PostFeedEntry;

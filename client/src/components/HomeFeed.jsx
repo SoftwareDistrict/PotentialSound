@@ -4,20 +4,24 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ generalFeed, getCurrentUser, tags, menu }) => {
+const HomeFeed = ({ getCurrentUser, tags, menu }) => {
   const [users, setUsers] = useState([]);
+  const [generalFeed, setGeneralFeed] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/feed")
+      .then((feed) => setGeneralFeed(feed.data))
+      .catch((err) => console.warn("Could not get all posts", err));
+  }, []);
 
   useEffect(() => {
     getCurrentUser();
     axios
       .get("/users")
-      .then((response) => {
-        setUsers(response.data);
-      })
+      .then((response) => setUsers(response.data))
       .catch((err) => console.warn("Could not get all users", err));
   }, []);
-
-  useEffect(() => console.info("Users: ", users), [users]);
 
   const logout = () => {
     axios

@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ generalFeed, users, match }) => {
-  const [poster, setPoster] = useState("");
-  const [currentPost, setCurrentPost] = useState("");
+const PostFullMessage = ({ match }) => {
+  const { id } = match.params;
+  const [poster, setPoster] = useState({});
+  const [post, setPost] = useState({});
 
-  generalFeed.forEach((post) => {
-    if (post.id_user === match.params.id) {
-      setCurrentPost(post);
-    }
-  });
+  useEffect(async () => {
+    await axios.get(`/poster/${id[0]}`)
+      .then((poster) => setPoster(poster.data))
+      .catch((err) => console.warn("could not get this poster.", err));
 
-  users.forEach((user) => {
-    if (user.id === match.params.id) {
-      setPoster(user);
-    }
-  });
-
-  useEffect(() => {
-    generalFeed.forEach((post) => {
-      if (post.id_user === match.params.id) {
-        setCurrentPost(post);
-      }
-    });
-  }, [generalFeed]);
-
-  useEffect(() => {
-    users.forEach((user) => {
-      if (user.id === match.params.id) {
-        setPoster(user);
-      }
-    });
-  }, [users]);
+    axios.get(`/thispost/${id[1]}`)
+      .then((post) => setPost(post.data))
+      .catch((err) => console.warn("could not get this post.", err));
+  }, []);
 
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
@@ -55,7 +40,9 @@ const PostFullMessage = ({ generalFeed, users, match }) => {
         }}
       >
         <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
-        <div>Message: {currentPost.message}</div>
+        <div>
+          Message: {post.message}
+        </div>
         <div
           style={{
             position: "absolute",
@@ -87,8 +74,6 @@ const PostFullMessage = ({ generalFeed, users, match }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
-  generalFeed: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
 };
 
 export default PostFullMessage;

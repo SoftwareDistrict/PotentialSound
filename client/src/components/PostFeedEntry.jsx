@@ -24,7 +24,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
 
   return (
     <div>
-      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${post.id_user}`}>
+      <Link style={{ color: "#ff8c00" }} to={`/fullMessage/${post.id_user}${post.id}`}>
         <div
           id="profile"
           style={{

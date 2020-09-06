@@ -13,10 +13,12 @@ const isAccCreated = (googleId) =>
 const getCurrentUser = (userId) => Users.findOne({ where: { id: userId } });
 
 const getPosts = () => Posts.findAll();
+const getThisPost = (id) => Posts.findOne({ where: { id: id } });
 const getUsers = () => Users.findAll();
 const getTags = () => Tags.findAll();
 const getMessages = () => Messages.findAll();
 const getChats = () => ChatJoin.findAll();
+const getPoster = (id) => Users.findOne({ where: { id: id } });
 
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
 const addPost = (post) => Posts.create(post);
@@ -24,11 +26,13 @@ const addTags = (postId, tag) => Tags.create({ id_post: postId, tag: tag });
 
 module.exports = {
   getPosts,
+  getThisPost,
   getTags,
   getUsers,
   getCurrentUser,
   getMessages,
   getChats,
+  getPoster,
   isAccCreated,
   addUser,
   addPost,

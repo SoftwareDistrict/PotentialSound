@@ -11,10 +11,12 @@ const {
   isAccCreated,
   getCurrentUser,
   getPosts,
+  getThisPost,
   getUsers,
   getTags,
   getMessages,
   getChats,
+  getPoster,
   addPost,
   addUser,
   addTags,
@@ -76,6 +78,13 @@ app.get("/feed", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+app.get("/thispost/:id", (req, res) => {
+  const id = req.params.id;
+  getThisPost(id)
+    .then((post) => res.send(post))
+    .catch((err) => res.status(500).send(err));
+});
+
 app.get("/users", (req, res) => {
   getUsers()
     .then((users) => res.send(users))
@@ -93,6 +102,13 @@ app.get("/currentUser", (req, res) => {
   getCurrentUser(userId)
     .then((user) => res.send(user.dataValues))
     .catch((err) => res.status(500).send(err));
+});
+
+app.get("/poster/:id", (req, res) => {
+  const id = req.params.id;
+  getPoster(id)
+    .then((poster) => res.send(poster))
+    .catch((err) => console.warn("POSTER", err));
 });
 
 app.get("/messages", (req, res) => {

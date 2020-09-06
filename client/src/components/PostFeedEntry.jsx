@@ -3,20 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const PostFeedEntry = ({ post, users, tags }) => {
-  const [poster, setPoster] = useState("");
+  const [poster, setPoster] = useState({});
   const [postTags] = useState([]);
-
-  tags.forEach((tag) => {
-    if (tag.id_post === post.id && !postTags.includes(tag.tag)) {
-      postTags.push(tag.tag);
-    }
-  });
-
-  users.forEach((user) => {
-    if (user.id === post.id_user) {
-      setPoster(user);
-    }
-  });
 
   useEffect(() => {
     users.forEach((user) => {
@@ -121,11 +109,11 @@ PostFeedEntry.propTypes = {
       id: PropTypes.number,
       username: PropTypes.string,
       propic: PropTypes.string,
-      cell: PropTypes.string,
-      description: PropTypes.string,
       city: PropTypes.string,
+      description: PropTypes.string,
       googleId: PropTypes.string,
       email: PropTypes.string,
+      cell: PropTypes.string,
     })
   ),
   tags: PropTypes.arrayOf(

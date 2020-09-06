@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ generalFeed, currentUser, users, tags, menu }) => {
+const HomeFeed = ({ generalFeed, getCurrentUser, tags, menu }) => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getCurrentUser();
+    axios
+      .get("/users")
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((err) => console.warn("Could not get all users", err));
+  }, []);
+
+  useEffect(() => console.info("Users: ", users), [users]);
+
   const logout = () => {
     axios
       .get("/logout")
@@ -32,7 +46,7 @@ const HomeFeed = ({ generalFeed, currentUser, users, tags, menu }) => {
           }}
         >
           <img
-            src={currentUser.propic}
+            // src={currentUser.propic}
             alt="Avatar"
             style={{
               display: "inline",
@@ -95,18 +109,6 @@ HomeFeed.propTypes = {
       message: PropTypes.string,
     })
   ),
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      username: PropTypes.string,
-      propic: PropTypes.string,
-      cell: PropTypes.string,
-      description: PropTypes.string,
-      city: PropTypes.string,
-      googleId: PropTypes.string,
-      email: PropTypes.string,
-    })
-  ),
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -114,7 +116,7 @@ HomeFeed.propTypes = {
       tag: PropTypes.string,
     })
   ),
-  currentUser: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   menu: PropTypes.element,
 };
 

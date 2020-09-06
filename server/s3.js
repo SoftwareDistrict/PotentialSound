@@ -16,10 +16,10 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: AWS_BUCKET_NAME,
-    metadata: function (req, file, cb) {
+    metadata: (req, file, cb) => {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function (req, file, cb) {
+    key: (req, file, cb) => {
       cb(null, req.s3Key);
     },
   }),
@@ -28,7 +28,7 @@ const upload = multer({
 const singleFileUpload = upload.single("image");
 
 const uploadToS3 = (req, res) => {
-  req.s3Key = uuidv4();
+  req.s3Key = `${uuidv4()}.png`;
   let downloadUrl = `https://s3-${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${req.s3Key}`;
 
   return new Promise((resolve, reject) => {

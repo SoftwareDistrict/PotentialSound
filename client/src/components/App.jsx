@@ -18,14 +18,13 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      users: [],
       generalFeed: [],
       tags: [],
       allMsgs: [],
       allChats: [],
     };
+
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.getUsers = this.getUsers.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getTags = this.getTags.bind(this);
     this.getMessages = this.getMessages.bind(this);
@@ -34,21 +33,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getCurrentUser();
     this.getAllPosts();
-    this.getUsers();
     this.getTags();
-    this.getMessages();
-    this.getAllChats();
+    // this.getMessages();
+    // this.getAllChats();
   }
 
   getCurrentUser() {
     axios
       .get("/currentUser")
-      .then((user) => {
-        console.info("currentUser", user.data);
-        this.setState({ currentUser: user.data });
-      })
+      .then((user) => this.setState({ currentUser: user.data }))
       .catch((err) => console.warn("could not get current user.", err));
   }
 
@@ -60,16 +54,6 @@ class App extends Component {
         this.setState({ generalFeed: feed.data });
       })
       .catch((err) => console.warn("Could not get all posts", err));
-  }
-
-  getUsers() {
-    axios
-      .get("/users")
-      .then((users) => {
-        console.info("Users", users.data);
-        this.setState({ users: users.data });
-      })
-      .catch((err) => console.warn("Could not get all users", err));
   }
 
   getTags() {
@@ -120,7 +104,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { generalFeed, currentUser, tags, users, allMsgs, allChats } = this.state;
+    const { generalFeed, currentUser, tags, allMsgs, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -135,8 +119,8 @@ class App extends Component {
                   menu={menu}
                   currentUser={currentUser}
                   generalFeed={generalFeed}
-                  users={users}
                   tags={tags}
+                  getCurrentUser={this.getCurrentUser}
                 />
               )}
             />
@@ -144,7 +128,7 @@ class App extends Component {
               exact={true}
               path="/profile/:id"
               render={({ match }) => (
-                <Profile menu={menu} match={match} users={users} currentUser={currentUser} />
+                <Profile menu={menu} match={match} currentUser={currentUser} />
               )}
             />
             <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
@@ -152,13 +136,13 @@ class App extends Component {
               exact={true}
               path="/chats"
               render={() => (
-                <Chats menu={menu} users={users} allChats={allChats} currentUser={currentUser} />
+                <Chats menu={menu} allChats={allChats} currentUser={currentUser} />
               )}
             />
             <Route
               path="/fullMessage/:id"
               render={({ match }) => (
-                <PostFullMessage users={users} generalFeed={generalFeed} match={match} />
+                <PostFullMessage generalFeed={generalFeed} match={match} />
               )}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />

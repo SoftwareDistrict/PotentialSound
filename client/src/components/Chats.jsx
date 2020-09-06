@@ -40,7 +40,9 @@ const Chats = ({ currentUser, allChats, menu }) => {
       .catch((err) => console.warn("could not get all users in Chats.", err));
   }, [chatIds]);
 
-  useEffect(() => console.info("chatIds: ", chatIds, "participants: ", participants), [participants]);
+  useEffect(() => console.info("chatIds: ", chatIds, "participants: ", participants), [
+    participants,
+  ]);
 
   return (
     <div>

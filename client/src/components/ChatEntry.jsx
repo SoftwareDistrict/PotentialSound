@@ -27,9 +27,7 @@ const ChatEntry = ({ participants, id_chat }) => {
           }}
         >
           <label>Chat Members:</label>
-          <div>
-            {participants.join(", ")}
-          </div>
+          <div>{participants.join(", ")}</div>
         </div>
       </div>
     </Link>

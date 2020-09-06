@@ -9,11 +9,13 @@ const PostFullMessage = ({ match }) => {
   const [post, setPost] = useState({});
 
   useEffect(async () => {
-    await axios.get(`/poster/${id[0]}`)
+    await axios
+      .get(`/poster/${id[0]}`)
       .then((poster) => setPoster(poster.data))
       .catch((err) => console.warn("could not get this poster.", err));
 
-    axios.get(`/thispost/${id[1]}`)
+    axios
+      .get(`/thispost/${id[1]}`)
       .then((post) => setPost(post.data))
       .catch((err) => console.warn("could not get this post.", err));
   }, []);
@@ -40,9 +42,7 @@ const PostFullMessage = ({ match }) => {
         }}
       >
         <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
-        <div>
-          Message: {post.message}
-        </div>
+        <div>Message: {post.message}</div>
         <div
           style={{
             position: "absolute",

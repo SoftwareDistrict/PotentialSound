@@ -93,11 +93,7 @@ class App extends Component {
               exact={true}
               path="/home"
               render={() => (
-                <HomeFeed
-                  menu={menu}
-                  tags={tags}
-                  getCurrentUser={this.getCurrentUser}
-                />
+                <HomeFeed menu={menu} tags={tags} getCurrentUser={this.getCurrentUser} />
               )}
             />
             <Route
@@ -111,9 +107,11 @@ class App extends Component {
             <Route
               exact={true}
               path="/chats"
-              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />} />
+              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
+            />
             <Route
-              exact={true} path="/fullMessage/:id"
+              exact={true}
+              path="/fullMessage/:id"
               render={({ match }) => <PostFullMessage match={match} />}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />

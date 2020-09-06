@@ -13,7 +13,14 @@ const Nav = ({ currentUser, toggleMenu }) => {
     borderRadius: "15px",
     display: "none",
   };
-  const linkStyle = { color: "orange", textDecoration: "none", float: "left", fontSize: "30px", marginTop: "10px", marginBottom: "40px" };
+  const linkStyle = {
+    color: "orange",
+    textDecoration: "none",
+    float: "left",
+    fontSize: "30px",
+    marginTop: "10px",
+    marginBottom: "40px",
+  };
   return (
     <div style={style} id="mySidenav" className="navbar">
       <h2 onClick={toggleMenu} style={{ textAlign: "center" }}>

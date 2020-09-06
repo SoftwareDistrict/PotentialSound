@@ -20,10 +20,18 @@ const Profile = ({ menu, currentUser }) => {
           margin: "0 auto",
         }}
       >
-        <div style={{ marginBottom: "10px" }} className="profileInfo">Username: {username}</div>
-        <div style={{ marginBottom: "10px" }} className="profileInfo">Email: {email}</div>
-        <div style={{ marginBottom: "10px" }} className="profileInfo">Cell Phone Number: {cell}</div>
-        <div style={{ marginBottom: "10px" }} className="profileInfo">Hometown: {city}</div>
+        <div style={{ marginBottom: "10px" }} className="profileInfo">
+          Username: {username}
+        </div>
+        <div style={{ marginBottom: "10px" }} className="profileInfo">
+          Email: {email}
+        </div>
+        <div style={{ marginBottom: "10px" }} className="profileInfo">
+          Cell Phone Number: {cell}
+        </div>
+        <div style={{ marginBottom: "10px" }} className="profileInfo">
+          Hometown: {city}
+        </div>
       </div>
       <div
         className="profileInfo"

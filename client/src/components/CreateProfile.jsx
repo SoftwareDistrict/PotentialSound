@@ -10,6 +10,7 @@ const CreateProfile = () => {
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState([]);
   const [endPt, setEndPt] = useState("");
+  const [load, setLoad] = useState(false);
 
   const uploadImg = () => {
     let data = new FormData();
@@ -17,8 +18,6 @@ const CreateProfile = () => {
     data.append("image", photo[0], photo[0].name);
 
     return axios.post("/api/uploadImage", data);
-    // .then(({ data }) => console.info(data))
-    // .catch((err) => console.warn(err));
   };
 
   const sendUserProfile = () => {
@@ -28,15 +27,16 @@ const CreateProfile = () => {
       cell: cell,
       description: description,
     });
-    // .then(({ data }) => console.info(data))
-    // .catch((err) => console.warn(err));
   };
 
   const createProfile = () => {
-    // uploadImg();
+    setLoad(true);
     axios
       .all([sendUserProfile(), uploadImg()])
-      .then((res) => setEndPt(res[0].data.redirectUrl))
+      .then((res) => {
+        setEndPt(res[0].data.redirectUrl);
+        setLoad(false);
+      })
       .catch((err) => console.warn(err));
   };
 
@@ -46,28 +46,36 @@ const CreateProfile = () => {
 
   return (
     <div>
-      <h1>Create Profile</h1>
-      <input placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}></input>
-      <br />
-      <input placeholder="Enter City" onChange={(e) => setCity(e.target.value)}></input>
-      <br />
-      <input placeholder="Enter Cell" onChange={(e) => setCell(e.target.value)}></input>
-      <br />
-      <input
-        placeholder="Enter Descrition"
-        onChange={(e) => setDescription(e.target.value)}
-      ></input>
-      <br />
-      <ImageUploader
-        withIcon={false}
-        withPreview={true}
-        singleImage={true}
-        buttonText="Choose images"
-        onChange={onDrop}
-        imgExtension={[".jpg", ".gif", ".png"]}
-        maxFileSize={5242880}
-      />
-      <button onClick={() => createProfile()}>Submit</button>
+      {load === false ? (
+        <div>
+          <h1>Create Profile</h1>
+          <input placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}></input>
+          <br />
+          <input placeholder="Enter City" onChange={(e) => setCity(e.target.value)}></input>
+          <br />
+          <input placeholder="Enter Cell" onChange={(e) => setCell(e.target.value)}></input>
+          <br />
+          <input
+            placeholder="Enter Descrition"
+            onChange={(e) => setDescription(e.target.value)}
+          ></input>
+          <br />
+          <ImageUploader
+            withIcon={false}
+            withPreview={true}
+            singleImage={true}
+            buttonText="Choose images"
+            onChange={onDrop}
+            imgExtension={[".jpg", ".gif", ".png"]}
+            maxFileSize={5242880}
+          />
+          <button onClick={() => createProfile()}>Submit</button>
+        </div>
+      ) : (
+        <div>
+          <h1>Creating Profile...</h1>
+        </div>
+      )}
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}
     </div>
   );

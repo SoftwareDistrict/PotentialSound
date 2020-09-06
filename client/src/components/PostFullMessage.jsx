@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match }) => {
+const PostFullMessage = ({ match, tags, menu }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
+  const [postTags] = useState([]);
 
   useEffect(async () => {
     await axios
@@ -20,6 +21,14 @@ const PostFullMessage = ({ match }) => {
       .catch((err) => console.warn("could not get this post.", err));
   }, []);
 
+  useEffect(() => {
+    tags.forEach((tag) => {
+      if (tag.id_post == id[1] && !postTags.includes(tag.tag)) {
+        postTags.push(tag.tag);
+      }
+    });
+  }, []);
+
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
       setFunc(val);
@@ -30,43 +39,67 @@ const PostFullMessage = ({ match }) => {
 
   return (
     <div>
+      {menu}
       <div
         id="profile"
         style={{
+          backgroundColor: "#3F3D3D",
           border: "2px solid black",
-          width: "500px",
+          width: "350px",
           height: "300px",
           textAlign: "center",
           margin: "0 auto",
           position: "relative",
+          color: "#E7912D",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
-        <div>Message: {post.message}</div>
+        <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
         <div
           style={{
-            position: "absolute",
-            top: "5",
-            textAlign: "center",
-            resize: "both",
-            overflow: "auto",
             width: "150px",
             height: "150px",
-            marginTop: "10px",
-            marginBottom: "10px",
+            position: "absolute",
+            top: "40px",
+            left: "100px",
+            overflow: "hidden",
+            borderRadius: "50%",
           }}
         >
-          Profile Pic:
-          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
+          <img
+            src={poster.propic}
+            alt="Avatar"
+            style={{
+              display: "inline",
+              margin: "0 auto",
+              marginLeft: "-25%",
+              height: "100%",
+              width: "auto",
+            }}
+          />
+        </div>
+        <div style={{ marginTop: "160px" }}>
+          <div style={{ fontSize: "18px" }}>{post.message}</div>
+          <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join("   ")}</div>
         </div>
       </div>
       <div>
         <h3>Reply</h3>
         <label>
-          Message{" "}
-          <input size="60" onChange={(event) => onEvent(event)} type="text" placeholder="Message" />
+          Message
+          <input
+            style={{
+              width: "250px",
+              height: "80px",
+              fontSize: "16px",
+              marginLeft: "10px",
+              paddingLeft: "10px",
+            }}
+            onChange={(event) => onEvent(event)}
+            type="text"
+            placeholder="Message"
+          />
+          <button style={{ marginLeft: "5px", backgroundColor: "orange" }}>Submit</button>
         </label>
-        <button style={{ marginLeft: "5px" }}>Submit</button>
       </div>
     </div>
   );
@@ -74,6 +107,14 @@ const PostFullMessage = ({ match }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_post: PropTypes.number,
+      tag: PropTypes.string,
+    })
+  ),
+  menu: PropTypes.element,
 };
 
 export default PostFullMessage;

@@ -6,7 +6,7 @@ const ChatEntry = ({ participants, id_chat }) => {
   const members = [];
 
   participants.forEach((member) => {
-    if(member[1] === id_chat) {
+    if (member[1] === id_chat) {
       members.push(member[0]);
     }
   });

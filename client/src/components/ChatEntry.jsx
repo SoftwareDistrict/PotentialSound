@@ -9,29 +9,26 @@ const ChatEntry = ({ participants, id_chat }) => {
         className=""
         style={{
           border: "2px solid black",
-          width: "400px",
+          width: "350px",
           height: "100px",
           margin: "0 auto",
           backgroundColor: "#3F3D3D",
           position: "relative",
+          alignItems: "center",
         }}
       >
         <div
           style={{
-            position: "absolute",
-            top: "0",
             resize: "both",
             overflow: "auto",
-            width: "300px",
-            height: "20px",
+            width: "350px",
             textAlign: "center",
-            left: "100px",
-            fontSize: "14px",
+            fontSize: "16px",
           }}
         >
+          <label>Chat Members:</label>
           <div>
-            <label>Chat Members:</label>
-            {participants.join("  ")}
+            {participants.join(", ")}
           </div>
         </div>
       </div>

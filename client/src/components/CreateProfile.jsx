@@ -62,7 +62,7 @@ const CreateProfile = () => {
       ></input>
       <input
         style={style}
-        placeholder="Enter Descrition"
+        placeholder="Enter Description"
         onChange={(e) => setDescription(e.target.value)}
       ></input>
       <ImageUploader

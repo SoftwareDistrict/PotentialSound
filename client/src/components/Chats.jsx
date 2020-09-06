@@ -1,30 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
+import axios from "axios";
+import "regenerator-runtime/runtime";
 
-const Chats = ({ currentUser, allChats, menu, users }) => {
-  const [participants, setParticipants] = useState("");
-  const [chatIds] = useState(
-    allChats.map((chat) => {
+const Chats = ({ currentUser, allChats, menu }) => {
+  const [participants, setParticipants] = useState([]);
+  const [chatIds, setChatIds] = useState([]);
+
+  useEffect(() => {
+    const ids = [];
+    allChats.forEach((chat) => {
       if (chat.id_user === currentUser.id) {
-        return chat.id_chat;
+        ids.push(chat.id_chat);
       }
-    })
-  );
+    });
+    setChatIds(ids);
+  }, []);
 
-  setParticipants(
-    allChats.map((chat) => {
-      return chatIds.map((id) => {
-        return users.map((user) => {
-          if (id === chat.id_chat) {
-            if (user.id === chat.id_user) {
-              return user.username;
-            }
-          }
+  useEffect(() => {
+    axios
+      .get("/users")
+      .then((users) => {
+        const members = [];
+        allChats.forEach((chat) => {
+          chatIds.forEach((id) => {
+            users.data.forEach((user) => {
+              if (id === chat.id_chat) {
+                if (user.id === chat.id_user) {
+                  members.push(user.username);
+                }
+              }
+            });
+          });
         });
-      });
-    })
-  );
+        return members;
+      })
+      .then((members) => setParticipants(members))
+      .catch((err) => console.warn("could not get all users in Chats.", err));
+  }, [chatIds]);
+
+  useEffect(() => console.info("chatIds: ", chatIds, "participants: ", participants), [participants]);
 
   return (
     <div>
@@ -39,9 +55,14 @@ const Chats = ({ currentUser, allChats, menu, users }) => {
 
 Chats.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  allChats: PropTypes.object.isRequired,
   menu: PropTypes.element,
-  users: PropTypes.object.isRequired,
+  allChats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_user: PropTypes.number,
+      id_chat: PropTypes.string,
+    })
+  ),
 };
 
 export default Chats;

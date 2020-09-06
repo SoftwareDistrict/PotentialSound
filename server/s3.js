@@ -16,10 +16,10 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: AWS_BUCKET_NAME,
-    metadata: function (req, file, cb) {
+    metadata: (req, file, cb) => {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function (req, file, cb) {
+    key: (req, file, cb) => {
       cb(null, req.s3Key);
     },
   }),

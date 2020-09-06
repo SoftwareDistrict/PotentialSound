@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ arrPosts, userName, audio }) => {
-  const posts = arrPosts;
-
+const HomeFeed = ({ generalFeed, currentUser, users, tags, menu, audio }) => {
   const logout = () => {
     axios
       .get("/logout")
@@ -16,16 +14,7 @@ const HomeFeed = ({ arrPosts, userName, audio }) => {
 
   return (
     <div>
-      <div>
-        <Link to="/createProfile">
-          <button>CreateProfile</button>
-        </Link>
-      </div>
-      <div>
-        <Link to={`/profile/${userName}`}>
-          <button>Go to Profile Page</button>
-        </Link>
-      </div>
+      {menu}
       <div>
         <Link to={"/"}>
           <button onClick={logout}>Logout</button>
@@ -37,34 +26,40 @@ const HomeFeed = ({ arrPosts, userName, audio }) => {
           style={{
             width: "100px",
             height: "100px",
-            borderRadius: "50%",
             position: "relative",
             overflow: "hidden",
+            borderRadius: "50%",
           }}
         >
           <img
-            src="https://tinyurl.com/y3h5vk9r"
+            src={currentUser.propic}
             alt="Avatar"
             style={{
-              width: "auto",
-              height: "100%",
               display: "inline",
               margin: "0 auto",
               marginLeft: "-25%",
+              height: "100%",
+              width: "auto",
             }}
           />
         </div>
-        <button type="button">MENU</button>
       </h1>
       <div>
         <input
           type="text"
-          placeholder="Search for Post"
-          style={{ width: "500px", height: "30px", fontSize: "14px", paddinLeft: "10px" }}
+          placeholder="Search"
+          style={{
+            width: "250px",
+            height: "30px",
+            fontSize: "14px",
+            paddingLeft: "10px",
+            marginRight: "5px",
+          }}
         ></input>
-        <button type="button" style={{ borderRadius: "5px" }}>
-          <img src="https://tinyurl.com/y2v9h8rz" style={{ width: "15%", height: "15%" }} />
-        </button>
+        <img
+          src="https://tinyurl.com/y2v9h8rz"
+          style={{ width: "10%", height: "10%", paddingTop: "20px" }}
+        />
         <div>
           <Link to="/createPostMessage">
             <button
@@ -75,6 +70,7 @@ const HomeFeed = ({ arrPosts, userName, audio }) => {
                 paddingLeft: "10px",
                 paddingRight: "10px",
                 borderRadius: "5px",
+                margin: "10px",
               }}
             >
               Create A Post
@@ -82,12 +78,9 @@ const HomeFeed = ({ arrPosts, userName, audio }) => {
           </Link>
         </div>
       </div>
-      <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px" }}>
-        {posts.map((post, i) => (
-          <div key={`${i}`}>
-            <PostFeedEntry post={post} audio={audio} />
-            <br />
-          </div>
+      <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px", padding: "5px" }}>
+        {generalFeed.map((post) => (
+          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio}/>
         ))}
       </div>
     </div>
@@ -95,16 +88,34 @@ const HomeFeed = ({ arrPosts, userName, audio }) => {
 };
 
 HomeFeed.propTypes = {
-  arrPosts: PropTypes.arrayOf(
+  generalFeed: PropTypes.arrayOf(
     PropTypes.shape({
-      posterName: PropTypes.string,
-      title: PropTypes.string,
+      id: PropTypes.number,
+      id_user: PropTypes.number,
       message: PropTypes.string,
-      profilePic: PropTypes.string,
-      tags: PropTypes.arrayOf(PropTypes.string),
     })
   ),
-  userName: PropTypes.string.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      propic: PropTypes.string,
+      cell: PropTypes.string,
+      description: PropTypes.string,
+      city: PropTypes.string,
+      googleId: PropTypes.string,
+      email: PropTypes.string,
+    })
+  ),
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_post: PropTypes.number,
+      tag: PropTypes.string,
+    })
+  ),
+  currentUser: PropTypes.object.isRequired,
+  menu: PropTypes.element,
   audio: PropTypes.array,
 };
 

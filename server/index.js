@@ -5,13 +5,21 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const { uploadToS3, uploadAudioToS3 } = require("./s3");
-const { Users, Tags, Posts } = require("./db");
-const { Op } = require("sequelize");
+require("./db");
 require("./passport.setup");
+const {
+  isAccCreated,
+  addUser,
+  getCurrentUser,
+  getPosts,
+  getUsers,
+  getTags,
+  addPost,
+  addTags,
+} = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_PATH = path.join(__dirname, "../client/dist");
-const INDEX_PATH = path.join(__dirname, "../client/dist/index.html");
 
 const app = express();
 app.use(express.json());
@@ -29,15 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-
-const isAccCreated = (googleId) =>
-  Users.findAll({
-    where: {
-      [Op.and]: [{ googleId }, { username: { [Op.not]: null } }],
-    },
-  })
-    .then((list) => !!list.length)
-    .catch((err) => err);
 
 app.get(
   "/google/callback",
@@ -57,24 +56,59 @@ app.get(
 );
 
 app.post("/createProfile", (req, res) => {
-  const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
   const userInfoObj = req.body;
-
-  const userId = req.session.passport.user.id;
+  const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
-    .then(() => res.sendStatus(201).redirect("/"))
-    .catch(() => res.sendStatus(500));
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.put("/updateProfile", (req, res) => {
   const body = req.body;
-  res.send(body).status(201);
+  res.send(body);
+});
+
+app.get("/feed", (req, res) => {
+  getPosts()
+    .then((posts) => res.send(posts))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/users", (req, res) => {
+  getUsers()
+    .then((users) => res.send(users))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/posttags", (req, res) => {
+  getTags()
+    .then((allTags) => res.send(allTags))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/currentUser", (req, res) => {
+  const userId = req.session.passport.user;
+  getCurrentUser(userId)
+    .then((user) => res.send(user.dataValues))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
+});
+
+app.post("/api/uploadImageUpdate", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
+
+app.post("/api/uploadImagePost", (req, res) => {
+  uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
 });
 
 app.post("/api/uploadAudio", (req, res) => {
@@ -86,7 +120,7 @@ app.post("/api/uploadAudio", (req, res) => {
 app.post("/api/uploadImage", (req, res) => {
   uploadToS3(req, res)
     .then((url) => res.status(201).send(url))
-    .catch((err) => console.warn(err));
+    .catch((err) => res.status(500).send(err));
 });
 
 app.post("/createPostMessage", (req, res) => {
@@ -95,30 +129,18 @@ app.post("/createPostMessage", (req, res) => {
     id_user: req.session.passport.user,
     message: message,
   };
-  const addPost = (post) => Posts.create(post);
   addPost(postObj)
     .then((post) => {
       const postId = post.dataValues.id;
       tags.map((tag) => {
-        Tags.create({ id_post: postId, tag: tag });
+        addTags(postId, tag);
       });
-      res.send("Post was made succesfully");
     })
-    .catch((err) => {
-      res.send(err);
-    });
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("*", (req, res) => {
   res.sendFile(`${CLIENT_PATH}/index.html`);
-});
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(INDEX_PATH), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
 });
 
 app.listen(PORT, () => {

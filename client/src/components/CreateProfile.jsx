@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ImageUploader from "react-images-upload";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 const CreateProfile = () => {
@@ -8,29 +9,34 @@ const CreateProfile = () => {
   const [cell, setCell] = useState("");
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState([]);
+  const [endPt, setEndPt] = useState("");
 
   const uploadImg = () => {
     let data = new FormData();
 
     data.append("image", photo[0], photo[0].name);
 
-    axios
-      .post("/api/uploadImage", data)
-      .then(({ data }) => console.info(data))
-      .catch((err) => console.warn(err));
+    return axios.post("/api/uploadImage", data);
+    // .then(({ data }) => console.info(data))
+    // .catch((err) => console.warn(err));
+  };
+
+  const sendUserProfile = () => {
+    return axios.post("/createProfile", {
+      username: username,
+      city: city,
+      cell: cell,
+      description: description,
+    });
+    // .then(({ data }) => console.info(data))
+    // .catch((err) => console.warn(err));
   };
 
   const createProfile = () => {
-    uploadImg();
-
+    // uploadImg();
     axios
-      .post("/createProfile", {
-        username: username,
-        city: city,
-        cell: cell,
-        description: description,
-      })
-      .then(({ data }) => console.info(data))
+      .all([sendUserProfile(), uploadImg()])
+      .then((res) => setEndPt(res[0].data.redirectUrl))
       .catch((err) => console.warn(err));
   };
 
@@ -62,6 +68,7 @@ const CreateProfile = () => {
         maxFileSize={5242880}
       />
       <button onClick={() => createProfile()}>Submit</button>
+      {!endPt.length ? null : <Redirect to={`${endPt}`} />}
     </div>
   );
 };

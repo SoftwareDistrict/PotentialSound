@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ getCurrentUser, tags, menu }) => {
+const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
   const [users, setUsers] = useState([]);
   const [generalFeed, setGeneralFeed] = useState([]);
 
@@ -50,7 +50,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
           }}
         >
           <img
-            // src={currentUser.propic}
+            src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
             alt="Avatar"
             style={{
               display: "inline",
@@ -98,7 +98,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
       </div>
       <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px", padding: "5px" }}>
         {generalFeed.map((post) => (
-          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
+          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio} />
         ))}
       </div>
     </div>
@@ -122,6 +122,7 @@ HomeFeed.propTypes = {
   ),
   getCurrentUser: PropTypes.func.isRequired,
   menu: PropTypes.element,
+  audio: PropTypes.array,
 };
 
 export default HomeFeed;

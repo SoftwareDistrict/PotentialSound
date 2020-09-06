@@ -26,6 +26,7 @@ const upload = multer({
 });
 
 const singleFileUpload = upload.single("image");
+const singleAudioUpload = upload.single("audio");
 
 const uploadToS3 = (req, res) => {
   req.s3Key = `${uuidv4()}.png`;
@@ -39,4 +40,16 @@ const uploadToS3 = (req, res) => {
   });
 };
 
-module.exports = { uploadToS3 };
+const uploadAudioToS3 = (req, res) => {
+  req.s3Key = `${uuidv4()}.mp3`;
+  let downloadUrl = `https://s3-${AWS_REGION}.amazonaws.com/${AWS_BUCKET_NAME}/${req.s3Key}`;
+
+  return new Promise((resolve, reject) => {
+    return singleAudioUpload(req, res, (err) => {
+      if (err) reject(err);
+      return resolve(downloadUrl);
+    });
+  });
+};
+
+module.exports = { uploadToS3, uploadAudioToS3 };

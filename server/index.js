@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const { uploadToS3 } = require("./s3");
+const { uploadToS3, uploadAudioToS3 } = require("./s3");
 require("./db");
 require("./passport.setup");
 const {
@@ -63,7 +63,7 @@ app.post("/createProfile", (req, res) => {
   const userInfoObj = req.body;
   const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
-    .then(() => res.sendStatus(201))
+    .then(() => res.status(200).json({ redirectUrl: "/home" }))
     .catch((err) => res.status(500).send(err));
 });
 
@@ -137,6 +137,12 @@ app.post("/api/uploadImageUpdate", (req, res) => {
 
 app.post("/api/uploadImagePost", (req, res) => {
   uploadToS3(req, res)
+    .then((url) => res.status(201).send(url))
+    .catch((err) => console.warn(err));
+});
+
+app.post("/api/uploadAudio", (req, res) => {
+  uploadAudioToS3(req, res)
     .then((url) => res.status(201).send(url))
     .catch((err) => console.warn(err));
 });

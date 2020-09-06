@@ -123,6 +123,11 @@ PostFeedEntry.propTypes = {
       tag: PropTypes.string,
     })
   ),
+  audio: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    })
+  ),
 };
 
 export default PostFeedEntry;

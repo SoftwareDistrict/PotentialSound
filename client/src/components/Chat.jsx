@@ -6,13 +6,15 @@ const Chat = ({ menu, match, allMsgs }) => {
   return (
     <div>
       {menu}
-      <h1 style={{ textAlign: "center" }}>Chat</h1>
-      <div>
-        {allMsgs.map((msg) => {
-          if (match.params.id === msg.id_chat) {
-            return <Message id_user={msg.id_user} message={msg.message} key={msg.id} />;
-          }
-        })}
+      <div style={{ width: "350px", overflow: "hidden" }}>
+        <h1 style={{ textAlign: "center" }}>Chat</h1>
+        <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>
+          {allMsgs.map((msg) => {
+            if (match.params.id == msg.id_chat) {
+              return <Message id_user={msg.id_user} message={msg.message} key={msg.id} />;
+            }
+          })}
+        </div>
       </div>
     </div>
   );

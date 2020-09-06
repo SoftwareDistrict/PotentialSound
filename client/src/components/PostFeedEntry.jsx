@@ -56,7 +56,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
               position: "absolute",
               top: "5px",
               resize: "both",
-              overflow: "auto",
+              overflow: "hidden",
               width: "100px",
               textAlign: "left",
               paddingLeft: "5px",

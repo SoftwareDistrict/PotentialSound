@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match }) => {
+const PostFullMessage = ({ match, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
-
+  const [userMessage, setMessage] = useState("");
   useEffect(async () => {
     await axios
       .get(`/poster/${id[0]}`)
@@ -20,6 +20,20 @@ const PostFullMessage = ({ match }) => {
       .catch((err) => console.warn("could not get this post.", err));
   }, []);
 
+  const sendMessage = () => {
+    const messageObj = {
+      message: userMessage,
+      id_user: currentUser.id,
+      id_chat: id,
+    };
+
+    axios.post("/sendMessage", messageObj).then((data) => {
+      console.info(data, "sent successful message through axios request");
+      setMessage("");
+      alert("Message was sent!");
+      document.getElementById("input-message").value = "";
+    });
+  };
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
       setFunc(val);
@@ -61,12 +75,17 @@ const PostFullMessage = ({ match }) => {
         </div>
       </div>
       <div>
-        <h3>Reply</h3>
-        <label>
-          Message{" "}
-          <input size="60" onChange={(event) => onEvent(event)} type="text" placeholder="Message" />
-        </label>
-        <button style={{ marginLeft: "5px" }}>Submit</button>
+        <h3>{`Send a message to ${poster.username}`}</h3>
+        <input
+          id="input-message"
+          size="60"
+          onChange={(event) => onEvent(event, setMessage)}
+          type="text"
+          placeholder="Message"
+        />
+        <button onClick={sendMessage} style={{ marginLeft: "5px" }}>
+          Submit
+        </button>
       </div>
     </div>
   );
@@ -74,6 +93,7 @@ const PostFullMessage = ({ match }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default PostFullMessage;

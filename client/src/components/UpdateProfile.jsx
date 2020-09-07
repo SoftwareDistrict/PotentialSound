@@ -29,16 +29,16 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
       description: newDescription,
     };
 
-    if(newUser === "Previous Username") {
+    if (newUser === "Previous Username") {
       data["username"] = currentUser.username;
     }
-    if(newCity === "Previous City") {
+    if (newCity === "Previous City") {
       data["city"] = currentUser.city;
     }
-    if(newCell === "Previous Cell") {
+    if (newCell === "Previous Cell") {
       data["cell"] = currentUser.cell;
     }
-    if(newDescription === "Previous Description") {
+    if (newDescription === "Previous Description") {
       data["description"] = currentUser.description;
     }
 
@@ -104,7 +104,11 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
             imgExtension={[".jpg", ".gif", ".png"]}
             maxFileSize={5242880}
           />
-          <button style={{ backgroundColor: "#eb8c34", marginTop: "30px" }} type="button" onClick={() => updateProfile()}>
+          <button
+            style={{ backgroundColor: "#eb8c34", marginTop: "30px" }}
+            type="button"
+            onClick={() => updateProfile()}
+          >
             Submit Change
           </button>
         </div>

@@ -30,7 +30,7 @@ const Profile = ({ menu, currentUser }) => {
           }}
         />
       </div>
-      <h1 style={{ textAlign: "right", marginTop: "80px"  }}>{username}</h1>
+      <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       <div
         id="profile"
         style={{

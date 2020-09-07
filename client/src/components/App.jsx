@@ -121,7 +121,9 @@ class App extends Component {
             />
             <Route
               path="/chat/:id"
-              render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />}
+              render={({ match }) => (
+                <Chat match={match} currentUser={currentUser} menu={menu} allMsgs={allMsgs} />
+              )}
             />
           </Switch>
         </Router>

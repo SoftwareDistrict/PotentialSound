@@ -101,9 +101,12 @@ app.post("/createProfile", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.put("/updateProfile", (req, res) => {
-  const body = req.body;
-  res.send(body);
+app.post("/profileUpdate", (req, res) => {
+  const userInfoObj = req.body;
+  const userId = req.session.passport.user;
+  addUser(userId, userInfoObj)
+    .then(() => res.status(200).json({ redirectUrl: `/profile/${userId}` }))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/feed", (req, res) => {

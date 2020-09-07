@@ -5,6 +5,7 @@ import axios from "axios";
 
 const style = {
   margin: "10px",
+  display: "block",
 };
 
 const CreateProfile = () => {
@@ -82,7 +83,7 @@ const CreateProfile = () => {
             imgExtension={[".jpg", ".gif", ".png"]}
             maxFileSize={5242880}
           />
-          <button style={{ backgroundColor: "orange" }} onClick={() => createProfile()}>
+          <button style={{ backgroundColor: "#eb8c34" }} onClick={() => createProfile()}>
             Submit
           </button>
         </div>

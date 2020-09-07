@@ -3,7 +3,7 @@ import React from "react";
 const Login = () => {
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Welcome to Potential Sound</h1>
+      <h1 style={{ textAlign: "center" }}>Welcome to PotentialSound</h1>
       <div className="Googlelogin">
         <a href="/google">
           <button

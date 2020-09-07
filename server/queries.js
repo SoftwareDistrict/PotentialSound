@@ -14,6 +14,7 @@ const getCurrentUser = (userId) => Users.findOne({ where: { id: userId } });
 
 const getPosts = () => Posts.findAll();
 const getThisPost = (id) => Posts.findOne({ where: { id: id } });
+const getUsername = (username) => Users.findOne({where: {username: username}});
 const getUsers = () => Users.findAll();
 const getTags = () => Tags.findAll();
 const getMessages = () => Messages.findAll();
@@ -25,6 +26,7 @@ const addPost = (post) => Posts.create(post);
 const addTags = (postId, tag) => Tags.create({ id_post: postId, tag: tag });
 
 module.exports = {
+  getUsername,
   getPosts,
   getThisPost,
   getTags,

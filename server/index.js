@@ -9,6 +9,7 @@ require("./db");
 require("./passport.setup");
 const {
   isAccCreated,
+  getUsername,
   getCurrentUser,
   getPosts,
   getThisPost,
@@ -167,6 +168,22 @@ app.post("/createPostMessage", (req, res) => {
       });
     })
     .catch((err) => res.status(500).send(err));
+});
+
+app.get("/viewProfile/:id", (req, res) => {
+  console.info(req.params.id);
+  const user = req.params.id;
+  getUsername(user)
+    .then(data => {
+      console.info(data.dataValues);
+      const { propic, city, description, cell, email } = data.dataValues;
+      const userInfo = { city, description, cell, email, propic };
+      res.send(userInfo);
+    })
+    .catch(err => {
+      console.info(err);
+      res.send(err);
+    });
 });
 
 app.get("*", (req, res) => {

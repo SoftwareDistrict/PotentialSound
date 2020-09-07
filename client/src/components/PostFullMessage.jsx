@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
@@ -41,7 +42,7 @@ const PostFullMessage = ({ match }) => {
           position: "relative",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
+        <div style={{ fontSize: "125%" }}><Link to={`/${poster.username}`} >{`${poster.username}`}</Link> posted</div>
         <div>Message: {post.message}</div>
         <div
           style={{

@@ -9,7 +9,6 @@ import UpdateProfile from "./UpdateProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
-import InsertAudio from "./InsertAudio.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -170,16 +169,6 @@ class App extends Component {
             <Route
               path="/chat/:id"
               render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />}
-            />
-            <Route
-              path="/insertAudio"
-              render={() => (
-                <InsertAudio
-                  onChangeAudio={this.onChangeAudio}
-                  audio={audio}
-                  audioName={audioName}
-                />
-              )}
             />
           </Switch>
         </Router>

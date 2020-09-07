@@ -34,7 +34,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
     const messageObj = {
       message: userMessage,
       id_user: currentUser.id,
-      id_chat: id,
+      postUserId: id,
     };
 
     axios.post("/sendMessage", messageObj).then((data) => {
@@ -61,7 +61,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
           backgroundColor: "#3F3D3D",
           border: "2px solid black",
           width: "350px",
-          height: "300px",
+          height: "450px",
           textAlign: "center",
           margin: "0 auto",
           position: "relative",
@@ -69,11 +69,6 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
         }}
       >
         <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
-        <div>
-          Message: {post.message}
-          {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
-          {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
-        </div>
         <div
           style={{
             width: "150px",
@@ -100,6 +95,8 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
         <div style={{ marginTop: "160px" }}>
           <div style={{ fontSize: "18px" }}>{post.message}</div>
           <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join("   ")}</div>
+          {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
+          {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
         </div>
       </div>
       <div>
@@ -107,6 +104,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
         <label>
           <h3>Send a message to {poster.username}</h3>
           <input
+            id="input-message"
             style={{
               width: "250px",
               height: "80px",
@@ -114,8 +112,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
               marginLeft: "10px",
               paddingLeft: "10px",
             }}
-            onChange={(event) => onEvent(event)}
-            // onChange={(event) => onEvent(event, setMessage)}
+            onChange={(event) => onEvent(event, setMessage)}
             type="text"
             placeholder="Message"
           />

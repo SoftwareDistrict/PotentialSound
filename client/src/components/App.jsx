@@ -19,20 +19,18 @@ class App extends Component {
     this.state = {
       currentUser: {},
       tags: [],
-      allMsgs: [],
       allChats: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getTags = this.getTags.bind(this);
-    this.getMessages = this.getMessages.bind(this);
     this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
+    this.getCurrentUser();
     this.getTags();
-    this.getMessages();
     this.getAllChats();
   }
 
@@ -48,13 +46,6 @@ class App extends Component {
       .get("/posttags")
       .then((tags) => this.setState({ tags: tags.data }))
       .catch((err) => console.warn("Could not get all tags", err));
-  }
-
-  getMessages() {
-    axios
-      .get("/messages")
-      .then((msgs) => this.setState({ allMsgs: msgs.data }))
-      .catch((err) => console.warn("Could not get all messages", err));
   }
 
   getAllChats() {
@@ -82,7 +73,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, tags, allMsgs, allChats } = this.state;
+    const { currentUser, tags, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -91,9 +82,7 @@ class App extends Component {
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
               path="/home"
-              render={() => (
-                <HomeFeed menu={menu} tags={tags} getCurrentUser={this.getCurrentUser} />
-              )}
+              render={() => <HomeFeed menu={menu} tags={tags} currentUser={currentUser} />}
             />
             <Route
               exact={true}
@@ -114,7 +103,10 @@ class App extends Component {
                 <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
               )}
             />
-            <Route path="/createProfile" render={() => <CreateProfile />} />
+            <Route
+              path="/createProfile"
+              render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
+            />
             <Route
               path="/updateProfile"
               render={() => (
@@ -127,9 +119,7 @@ class App extends Component {
             />
             <Route
               path="/chat/:id"
-              render={({ match }) => (
-                <Chat match={match} currentUser={currentUser} menu={menu} allMsgs={allMsgs} />
-              )}
+              render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
           </Switch>
         </Router>

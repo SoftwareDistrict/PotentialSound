@@ -194,17 +194,16 @@ app.post("/api/uploadImage", (req, res) => {
 });
 
 app.post("/createPostMessage", (req, res) => {
-  const { tags, message } = req.body;
-  const postObj = {
-    id_user: req.session.passport.user,
-    message: message,
-  };
-  addPost(postObj)
+  const { tags, bodyMsg } = req.body;
+  bodyMsg["id_user"] = req.session.passport.user;
+
+  addPost(bodyMsg)
     .then((post) => {
       const postId = post.dataValues.id;
       tags.map((tag) => {
         addTags(postId, tag);
       });
+      res.status(201).json({ redirectUrl: "/home" });
     })
     .catch((err) => res.status(500).send(err));
 });

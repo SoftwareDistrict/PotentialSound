@@ -21,10 +21,6 @@ class App extends Component {
       tags: [],
       allMsgs: [],
       allChats: [],
-      audio: [],
-      audioName: "",
-      image: [],
-      imageName: "",
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
@@ -32,42 +28,12 @@ class App extends Component {
     this.getMessages = this.getMessages.bind(this);
     this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.onChangeAudio = this.onChangeAudio.bind(this);
-    this.onChangeImage = this.onChangeImage.bind(this);
   }
 
   componentDidMount() {
     this.getTags();
     this.getMessages();
     this.getAllChats();
-  }
-
-  onChangeImage(picture) {
-    if (!picture.length) {
-      this.setState({
-        image: [],
-        imageName: "",
-      });
-    } else {
-      this.setState({
-        image: picture,
-        imageName: picture[0].name,
-      });
-    }
-  }
-
-  onChangeAudio(event) {
-    if (!event.target.files.length) {
-      this.setState({
-        audio: [],
-        audioName: "",
-      });
-    } else {
-      this.setState({
-        audio: [event.target.files[0]],
-        audioName: event.target.files[0].name,
-      });
-    }
   }
 
   getCurrentUser() {
@@ -116,7 +82,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, tags, allMsgs, allChats, audio, audioName, image, imageName } = this.state;
+    const { currentUser, tags, allMsgs, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -136,20 +102,7 @@ class App extends Component {
                 <Profile menu={menu} match={match} currentUser={currentUser} />
               )}
             />
-            <Route
-              exact={true}
-              path="/createPostMessage"
-              render={() => (
-                <CreatePostMessage
-                  audio={audio}
-                  onChangeAudio={this.onChangeAudio}
-                  audioName={audioName}
-                  onChangeImage={this.onChangeImage}
-                  image={image}
-                  imageName={imageName}
-                />
-              )}
-            />
+            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
             <Route
               exact={true}
               path="/chats"

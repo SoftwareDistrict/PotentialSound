@@ -2,20 +2,36 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
-import PropTypes from "prop-types";
 
-const CreatePostMessage = ({
-  audio,
-  onChangeAudio,
-  onChangeImage,
-  audioName,
-  imageName,
-  image,
-}) => {
+const CreatePostMessage = () => {
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
   const [redirect, setRedirect] = useState("");
   const [loading, setLoading] = useState(false);
+  const [audio, setAudio] = useState([]);
+  const [audioName, setAudioName] = useState("");
+  const [image, setImage] = useState([]);
+  const [imageName, setImageName] = useState("");
+
+  const onChangeAudio = (event) => {
+    if (!event.target.files.length) {
+      setAudio([]);
+      setAudioName("");
+    } else {
+      setAudio([event.target.files[0]]);
+      setAudioName(event.target.files[0].name);
+    }
+  };
+
+  const onChangeImage = (picture) => {
+    if (!picture.length) {
+      setImage([]);
+      setImageName("");
+    } else {
+      setImage(picture);
+      setImageName(picture[0].name);
+    }
+  };
 
   const uploadAudio = () => {
     setLoading(true);
@@ -115,6 +131,8 @@ const CreatePostMessage = ({
           return postMessageImage(imageName, data);
         })
         .then(({ data }) => {
+          setImage([]);
+          setImageName("");
           setRedirect(data.redirectUrl);
           setLoading(false);
         })
@@ -125,6 +143,8 @@ const CreatePostMessage = ({
           return postMessageAudio(audioName, data);
         })
         .then(({ data }) => {
+          setAudio([]);
+          setAudioName([]);
           setRedirect(data.redirectUrl);
           setLoading(false);
         })
@@ -141,6 +161,10 @@ const CreatePostMessage = ({
           });
         })
         .then(({ data }) => {
+          setImage([]);
+          setImageName("");
+          setAudio([]);
+          setAudioName([]);
           setRedirect(data.redirectUrl);
           setLoading(false);
         })
@@ -256,15 +280,6 @@ const CreatePostMessage = ({
       {!redirect.length ? null : <Redirect to={redirect} />}
     </div>
   );
-};
-
-CreatePostMessage.propTypes = {
-  audio: PropTypes.array,
-  audioName: PropTypes.string,
-  onChangeAudio: PropTypes.func,
-  image: PropTypes.array,
-  imageName: PropTypes.string,
-  onChangeImage: PropTypes.func,
 };
 
 export default CreatePostMessage;

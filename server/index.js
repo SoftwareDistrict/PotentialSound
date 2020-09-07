@@ -16,7 +16,6 @@ const {
   getThisPost,
   getUsers,
   getTags,
-  getMessages,
   getChats,
   getPoster,
   addPost,
@@ -152,12 +151,6 @@ app.get("/poster/:id", (req, res) => {
   getPoster(id)
     .then((poster) => res.send(poster))
     .catch((err) => console.warn("POSTER", err));
-});
-
-app.get("/messages", (req, res) => {
-  getMessages()
-    .then((msgs) => res.send(msgs))
-    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/allchats", (req, res) => {

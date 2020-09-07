@@ -56,14 +56,6 @@ const Chat = ({ menu, match, currentUser }) => {
 };
 
 Chat.propTypes = {
-  allMsgs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      id_user: PropTypes.mumber,
-      id_chat: PropTypes.number,
-      message: PropTypes.string,
-    })
-  ),
   menu: PropTypes.element,
   match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,

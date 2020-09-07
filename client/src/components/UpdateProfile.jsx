@@ -5,10 +5,10 @@ import ImageUploader from "react-images-upload";
 import axios from "axios";
 
 const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
-  const [newUser, setNewUser] = useState("Previous Username");
-  const [newCity, setNewCity] = useState("Previous City");
-  const [newCell, setNewCell] = useState("Previous Cell");
-  const [newDescription, setNewDescription] = useState("Previous Description");
+  const [newUser, setNewUser] = useState(currentUser.username);
+  const [newCity, setNewCity] = useState(currentUser.city);
+  const [newCell, setNewCell] = useState(currentUser.cell);
+  const [newDescription, setNewDescription] = useState(currentUser.description);
   const [photo, setPhoto] = useState([]);
   const [endPt, setEndPt] = useState("");
   const [load, setLoad] = useState(false);
@@ -21,40 +21,46 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
     return axios.post("/api/uploadImageUpdate", data);
   };
 
-  const sendUpdates = () => {
-    const data = {
-      username: newUser,
-      city: newCity,
-      cell: newCell,
-      description: newDescription,
-    };
-
-    if (newUser === "Previous Username") {
-      data["username"] = currentUser.username;
+  const sendUpdates = (url) => {
+    if(url) {
+      return axios.post("/profileUpdate", {
+        username: newUser,
+        propic: url,
+        city: newCity,
+        cell: newCell,
+        description: newDescription,
+      });
+    } else {
+      return axios.post("/profileUpdate", {
+        username: newUser,
+        propic: currentUser.propic,
+        city: newCity,
+        cell: newCell,
+        description: newDescription,
+      });
     }
-    if (newCity === "Previous City") {
-      data["city"] = currentUser.city;
-    }
-    if (newCell === "Previous Cell") {
-      data["cell"] = currentUser.cell;
-    }
-    if (newDescription === "Previous Description") {
-      data["description"] = currentUser.description;
-    }
-
-    return axios.post("/profileUpdate", data);
   };
 
   const updateProfile = () => {
     setLoad(true);
-    axios
-      .all([sendUpdates(), uploadImg()])
-      .then((res) => {
-        setEndPt(res[0].data.redirectUrl);
-        setLoad(false);
-      })
-      .then(() => getCurrentUser())
-      .catch((err) => console.warn(err));
+    if(!photo.length) {
+      sendUpdates()
+        .then(({ data }) => {
+          setEndPt(data.redirectUrl);
+          setLoad(false);
+        })
+        .then(() => getCurrentUser())
+        .catch((err) => console.warn(err));
+    } else{
+      uploadImg()
+        .then(({ data }) => sendUpdates(data))
+        .then(({ data }) => {
+          setEndPt(data.redirectUrl);
+          setLoad(false);
+        })
+        .then(() => getCurrentUser())
+        .catch((err) => console.warn(err));
+    }
   };
 
   const onDrop = (picture) => {

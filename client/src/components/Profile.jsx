@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Profile = ({ menu, currentUser }) => {
-  const { username, cell, city, email, description } = currentUser;
+  const { username, propic, cell, city, email, description } = currentUser;
 
   return (
     <div>
@@ -20,7 +20,8 @@ const Profile = ({ menu, currentUser }) => {
         }}
       >
         <img
-          src="https://tinyurl.com/y3mgbqoa"
+          // src="https://tinyurl.com/y3mgbqoa"
+          src={propic}
           alt="Avatar"
           style={{
             display: "inline-flex",

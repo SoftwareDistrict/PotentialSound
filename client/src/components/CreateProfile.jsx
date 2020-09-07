@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ImageUploader from "react-images-upload";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +9,7 @@ const style = {
   display: "block",
 };
 
-const CreateProfile = () => {
+const CreateProfile = ({ getCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [city, setCity] = useState("");
   const [cell, setCell] = useState("");
@@ -25,9 +26,10 @@ const CreateProfile = () => {
     return axios.post("/api/uploadImage", data);
   };
 
-  const sendUserProfile = () => {
+  const sendUserProfile = (url) => {
     return axios.post("/createProfile", {
       username: username,
+      propic: url,
       city: city,
       cell: cell,
       description: description,
@@ -36,10 +38,11 @@ const CreateProfile = () => {
 
   const createProfile = () => {
     setLoad(true);
-    axios
-      .all([sendUserProfile(), uploadImg()])
-      .then((res) => {
-        setEndPt(res[0].data.redirectUrl);
+    uploadImg()
+      .then(({ data }) => sendUserProfile(data))
+      .then(({ data }) => {
+        getCurrentUser();
+        setEndPt(data.redirectUrl);
         setLoad(false);
       })
       .catch((err) => console.warn(err));
@@ -95,6 +98,9 @@ const CreateProfile = () => {
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}
     </div>
   );
+};
+CreateProfile.propTypes = {
+  getCurrentUser: PropTypes.func.isRequired,
 };
 
 export default CreateProfile;

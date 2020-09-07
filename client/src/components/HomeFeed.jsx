@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ getCurrentUser, tags, menu }) => {
+const HomeFeed = ({ currentUser, tags, menu }) => {
   const [users, setUsers] = useState([]);
   const [generalFeed, setGeneralFeed] = useState([]);
 
@@ -16,7 +16,6 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
   }, []);
 
   useEffect(() => {
-    getCurrentUser();
     axios
       .get("/users")
       .then((response) => setUsers(response.data))
@@ -55,7 +54,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
             }}
           >
             <img
-              src="https://tinyurl.com/y3mgbqoa"
+              src={currentUser.propic}
               alt="Avatar"
               style={{
                 display: "inline-flex",
@@ -126,9 +125,9 @@ HomeFeed.propTypes = {
       tag: PropTypes.string,
     })
   ),
-  getCurrentUser: PropTypes.func.isRequired,
   menu: PropTypes.element,
   audio: PropTypes.array,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default HomeFeed;

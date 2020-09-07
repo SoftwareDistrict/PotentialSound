@@ -19,6 +19,7 @@ const Message = ({ id_user, message }) => {
         border: "2px solid black",
         height: "100px",
         backgroundColor: "#3F3D3D",
+        color: "orange",
         position: "relative",
         width: "330px",
       }}

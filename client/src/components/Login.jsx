@@ -3,7 +3,7 @@ import React from "react";
 const Login = () => {
   return (
     <div>
-      <h1>Welcome to Potential Sound</h1>
+      <h1 style={{ textAlign: "center" }}>Welcome to Potential Sound</h1>
       <div className="Googlelogin">
         <a href="/google">
           <button
@@ -16,6 +16,7 @@ const Login = () => {
               height: "60px",
               textAlign: "right",
               padding: "10px",
+              marginBottom: "600px",
             }}
           >
             <img

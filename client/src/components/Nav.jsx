@@ -9,6 +9,7 @@ const Nav = ({ currentUser, toggleMenu }) => {
     width: "180px",
     height: "100%",
     backgroundColor: "#3F3D3D",
+    borderColor: "black",
     zIndex: 20,
     borderRadius: "15px",
     display: "none",

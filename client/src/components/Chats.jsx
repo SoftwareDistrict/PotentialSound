@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "regenerator-runtime/runtime";
 
 const Chats = ({ currentUser, allChats, menu }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
+
+  const ids = [];
+  allChats.forEach((chat) => {
+    if (chat.id_user === currentUser.id) {
+      ids.push(chat.id_chat);
+    }
+  });
 
   useEffect(() => {
     const ids = [];
@@ -28,7 +34,7 @@ const Chats = ({ currentUser, allChats, menu }) => {
             users.data.forEach((user) => {
               if (id === chat.id_chat) {
                 if (user.id === chat.id_user) {
-                  members.push(user.username);
+                  members.push([user.username, id]);
                 }
               }
             });
@@ -44,8 +50,8 @@ const Chats = ({ currentUser, allChats, menu }) => {
     <div>
       {menu}
       <h1>Current Messages (Inbox) </h1>
-      {allChats.map(({ id, id_chat }) => (
-        <ChatEntry key={id} id_chat={id_chat} participants={participants} />
+      {ids.map((id) => (
+        <ChatEntry key={id} id_chat={id} participants={participants} />
       ))}
     </div>
   );

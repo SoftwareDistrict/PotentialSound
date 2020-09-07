@@ -5,6 +5,8 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const { uploadToS3, uploadAudioToS3 } = require("./s3");
+const socketIo = require("socket.io");
+const http = require("http");
 require("./db");
 const { ChatJoin, Messages, Chats } = require("./db");
 
@@ -41,6 +43,25 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Socket.io==============================================================
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+io.on("connection", (socket) => {
+  console.info("io is conneceted");
+  socket.on("sending", function (data) {
+    console.info(data);
+    Messages.findAll({ where: { id_chat: data.chatId } }).then((data) => {
+      socket.emit("receive", data);
+    });
+
+    if (data == "exit") {
+      socket.disconnect(console.info("sender disconnected"));
+    }
+  });
+});
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
@@ -197,6 +218,6 @@ app.get("*", (req, res) => {
   res.sendFile(`${CLIENT_PATH}/index.html`);
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.info(`App listening at http://localhost:${PORT}`);
 });

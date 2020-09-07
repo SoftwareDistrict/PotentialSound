@@ -78,6 +78,8 @@ const PostFeedEntry = ({ post, users, tags }) => {
             }}
           >
             {post.message}
+            {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
+            {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
           </div>
           <div
             style={{
@@ -103,6 +105,10 @@ PostFeedEntry.propTypes = {
     id: PropTypes.number,
     id_user: PropTypes.number,
     message: PropTypes.string,
+    audioUrl: PropTypes.string,
+    audioName: PropTypes.string,
+    imageUrl: PropTypes.string,
+    imageName: PropTypes.string,
   }),
   users: PropTypes.arrayOf(
     PropTypes.shape({

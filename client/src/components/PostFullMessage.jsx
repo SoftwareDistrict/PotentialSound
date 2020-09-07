@@ -42,7 +42,11 @@ const PostFullMessage = ({ match }) => {
         }}
       >
         <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
-        <div>Message: {post.message}</div>
+        <div>
+          Message: {post.message}
+          {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
+          {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
+        </div>
         <div
           style={{
             position: "absolute",

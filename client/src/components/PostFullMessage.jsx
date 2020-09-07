@@ -34,7 +34,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
     const messageObj = {
       message: userMessage,
       id_user: currentUser.id,
-      id_chat: id,
+      postUserId: id,
     };
 
     axios.post("/sendMessage", messageObj).then((data) => {
@@ -104,6 +104,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
         <label>
           <h3>Send a message to {poster.username}</h3>
           <input
+            id="input-message"
             style={{
               width: "250px",
               height: "80px",
@@ -111,8 +112,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
               marginLeft: "10px",
               paddingLeft: "10px",
             }}
-            onChange={(event) => onEvent(event)}
-            // onChange={(event) => onEvent(event, setMessage)}
+            onChange={(event) => onEvent(event, setMessage)}
             type="text"
             placeholder="Message"
           />

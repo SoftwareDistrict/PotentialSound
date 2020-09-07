@@ -128,7 +128,9 @@ class App extends Component {
             />
             <Route
               path="/fullMessage/:id"
-              render={({ match }) => <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />}
+              render={({ match }) => (
+                <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
+              )}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route

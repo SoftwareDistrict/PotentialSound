@@ -9,7 +9,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
   const [post, setPost] = useState({});
   const [postTags] = useState([]);
   const [userMessage, setMessage] = useState("");
-  
+
   useEffect(async () => {
     await axios
       .get(`/poster/${id[0]}`)
@@ -114,7 +114,9 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
             type="text"
             placeholder="Message"
           />
-          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "orange" }}>Submit</button>
+          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "orange" }}>
+            Submit
+          </button>
         </label>
       </div>
     </div>

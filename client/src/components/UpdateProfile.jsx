@@ -22,7 +22,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
   };
 
   const sendUpdates = (url) => {
-    if(url) {
+    if (url) {
       return axios.post("/profileUpdate", {
         username: newUser,
         propic: url,
@@ -43,7 +43,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
 
   const updateProfile = () => {
     setLoad(true);
-    if(!photo.length) {
+    if (!photo.length) {
       sendUpdates()
         .then(({ data }) => {
           setEndPt(data.redirectUrl);
@@ -51,7 +51,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
         })
         .then(() => getCurrentUser())
         .catch((err) => console.warn(err));
-    } else{
+    } else {
       uploadImg()
         .then(({ data }) => sendUpdates(data))
         .then(({ data }) => {

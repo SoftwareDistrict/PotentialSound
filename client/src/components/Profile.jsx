@@ -20,7 +20,6 @@ const Profile = ({ menu, currentUser }) => {
         }}
       >
         <img
-          // src="https://tinyurl.com/y3mgbqoa"
           src={propic}
           alt="Avatar"
           style={{

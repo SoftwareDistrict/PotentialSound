@@ -82,9 +82,7 @@ class App extends Component {
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
               path="/home"
-              render={() => (
-                <HomeFeed menu={menu} tags={tags} currentUser={currentUser} />
-              )}
+              render={() => <HomeFeed menu={menu} tags={tags} currentUser={currentUser} />}
             />
             <Route
               exact={true}
@@ -105,7 +103,10 @@ class App extends Component {
                 <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
               )}
             />
-            <Route path="/createProfile" render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />} />
+            <Route
+              path="/createProfile"
+              render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
+            />
             <Route
               path="/updateProfile"
               render={() => (
@@ -118,9 +119,7 @@ class App extends Component {
             />
             <Route
               path="/chat/:id"
-              render={({ match }) => (
-                <Chat match={match} currentUser={currentUser} menu={menu} />
-              )}
+              render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
           </Switch>
         </Router>

@@ -5,16 +5,20 @@ import io from "socket.io-client";
 let socket = io("localhost:8080");
 
 const Chat = ({ menu, match, currentUser }) => {
+  const idChat = match.params.id;
   socket.on("receive", (data) => {
-    setallMsgs(data);
+    let { array, id_chat } = data.data;
+    if (idChat == id_chat) {
+      setallMsgs(array);
+    }
   });
 
   const [userMessage, setMessage] = useState("");
   const [allMsgs, setallMsgs] = useState([]);
-  const id_chat = match.params.id;
+
   const id_user = currentUser.id;
   useEffect(() => {
-    socket.emit("getMessages", id_user);
+    socket.emit("getMessages", idChat);
   }, []);
   return (
     <div>
@@ -40,7 +44,7 @@ const Chat = ({ menu, match, currentUser }) => {
             <button
               onClick={() => {
                 socket.emit("sending", {
-                  id_chat: id_chat,
+                  id_chat: idChat,
                   id_user: id_user,
                   message: userMessage,
                 });

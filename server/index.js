@@ -50,24 +50,26 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 io.on("connection", (socket) => {
+  let chatid = null;
   console.info("io is conneceted");
   socket.on("sending", function (data) {
     console.info(data);
     addMessage(data).then(() => {
+      chatid = data.id_chat;
       getMessagesForChat(data.id_chat).then((data) => {
-        socket.emit("receive", data);
+        socket.emit("receive", { data: { array: data, id_chat: chatid } });
       });
     });
-
     if (data == "exit") {
       socket.disconnect(console.info("sender disconnected"));
     }
   });
 
   socket.on("getMessages", function (data) {
+    let chatid = data;
     console.info(data, "get messages");
-    getMessagesForChat(1).then((data) => {
-      socket.emit("receive", data);
+    getMessagesForChat(data).then((data) => {
+      socket.emit("receive", { data: { array: data, id_chat: chatid } });
     });
   });
 });

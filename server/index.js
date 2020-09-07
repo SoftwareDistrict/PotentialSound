@@ -23,6 +23,8 @@ const {
   addUser,
   addTags,
   startChat,
+  addMessage,
+  getMessagesForChat,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -52,13 +54,22 @@ io.on("connection", (socket) => {
   console.info("io is conneceted");
   socket.on("sending", function (data) {
     console.info(data);
-    Messages.findAll({ where: { id_chat: data.chatId } }).then((data) => {
-      socket.emit("receive", data);
+    addMessage(data).then(() => {
+      getMessagesForChat(data.id_chat).then((data) => {
+        socket.emit("receive", data);
+      });
     });
 
     if (data == "exit") {
       socket.disconnect(console.info("sender disconnected"));
     }
+  });
+
+  socket.on("getMessages", function (data) {
+    console.info(data, "get messages");
+    getMessagesForChat(1).then((data) => {
+      socket.emit("receive", data);
+    });
   });
 });
 

@@ -23,6 +23,9 @@ class App extends Component {
       allMsgs: [],
       allChats: [],
       audio: [],
+      audioName: "",
+      image: [],
+      imageName: "",
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
@@ -31,6 +34,7 @@ class App extends Component {
     this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
     this.onChangeAudio = this.onChangeAudio.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
   }
 
   componentDidMount() {
@@ -39,10 +43,32 @@ class App extends Component {
     this.getAllChats();
   }
 
+  onChangeImage(picture) {
+    if (!picture.length) {
+      this.setState({
+        image: [],
+        imageName: "",
+      });
+    } else {
+      this.setState({
+        image: picture,
+        imageName: picture[0].name,
+      });
+    }
+  }
+
   onChangeAudio(event) {
-    this.setState({
-      audio: [event.target.files[0]],
-    });
+    if (!event.target.files.length) {
+      this.setState({
+        audio: [],
+        audioName: "",
+      });
+    } else {
+      this.setState({
+        audio: [event.target.files[0]],
+        audioName: event.target.files[0].name,
+      });
+    }
   }
 
   getCurrentUser() {
@@ -91,7 +117,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, tags, allMsgs, allChats, audio } = this.state;
+    const { currentUser, tags, allMsgs, allChats, audio, audioName, image, imageName } = this.state;
     return (
       <div>
         <Router>
@@ -102,12 +128,7 @@ class App extends Component {
               exact={true}
               path="/home"
               render={() => (
-                <HomeFeed
-                  menu={menu}
-                  tags={tags}
-                  getCurrentUser={this.getCurrentUser}
-                  audio={audio}
-                />
+                <HomeFeed menu={menu} tags={tags} getCurrentUser={this.getCurrentUser} />
               )}
             />
             <Route
@@ -120,7 +141,16 @@ class App extends Component {
             <Route
               exact={true}
               path="/createPostMessage"
-              render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio} />}
+              render={() => (
+                <CreatePostMessage
+                  audio={audio}
+                  onChangeAudio={this.onChangeAudio}
+                  audioName={audioName}
+                  onChangeImage={this.onChangeImage}
+                  image={image}
+                  imageName={imageName}
+                />
+              )}
             />
             <Route
               exact={true}
@@ -143,7 +173,13 @@ class App extends Component {
             />
             <Route
               path="/insertAudio"
-              render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}
+              render={() => (
+                <InsertAudio
+                  onChangeAudio={this.onChangeAudio}
+                  audio={audio}
+                  audioName={audioName}
+                />
+              )}
             />
           </Switch>
         </Router>

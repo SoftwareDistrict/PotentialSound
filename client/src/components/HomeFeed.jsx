@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 
-const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
+const HomeFeed = ({ getCurrentUser, tags, menu }) => {
   const [users, setUsers] = useState([]);
   const [generalFeed, setGeneralFeed] = useState([]);
 
@@ -104,7 +104,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
       </div>
       <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
         {generalFeed.map((post) => (
-          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio} />
+          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
         ))}
       </div>
     </div>

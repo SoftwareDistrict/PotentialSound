@@ -267,7 +267,10 @@ const CreatePostMessage = () => {
                 placeholder={"Message"}
               />
             </label>
-            <button style={{ marginTop: "10px", backgroundColor: "#eb8c34" }} onClick={() => onSubmit()}>
+            <button
+              style={{ marginTop: "10px", backgroundColor: "#eb8c34" }}
+              onClick={() => onSubmit()}
+            >
               Submit
             </button>
           </div>

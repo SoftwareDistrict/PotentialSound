@@ -68,7 +68,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
           color: "#E7912D",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
+        <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
         <div>
           Message: {post.message}
           {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}

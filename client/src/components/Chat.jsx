@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Message from "./Message.jsx";
 import PropTypes from "prop-types";
 import io from "socket.io-client";
 let socket = io("localhost:8080");
 
-socket.on("receive", (data) => {
-  console.info(data);
-});
-const Chat = ({ menu, match, allMsgs }) => {
+const Chat = ({ menu, match, currentUser }) => {
+  socket.on("receive", (data) => {
+    setallMsgs(data);
+  });
+
   const [userMessage, setMessage] = useState("");
+  const [allMsgs, setallMsgs] = useState([]);
+  const id_chat = match.params.id;
+  const id_user = currentUser.id;
+  useEffect(() => {
+    socket.emit("getMessages", id_user);
+  }, []);
   return (
     <div>
       {menu}
@@ -32,7 +39,11 @@ const Chat = ({ menu, match, allMsgs }) => {
             />
             <button
               onClick={() => {
-                socket.emit("sending", { chatId: 1, userID: 1, userMessage: userMessage });
+                socket.emit("sending", {
+                  id_chat: id_chat,
+                  id_user: id_user,
+                  message: userMessage,
+                });
               }}
             >
               Submit
@@ -55,6 +66,7 @@ Chat.propTypes = {
   ),
   menu: PropTypes.element,
   match: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default Chat;

@@ -3,62 +3,61 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Profile = ({ menu, currentUser }) => {
-  const { username, cell, city, email } = currentUser;
+  const { username, cell, city, email, description } = currentUser;
 
   return (
     <div>
       {menu}
-      <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
+      <div
+        style={{
+          width: "120px",
+          height: "120px",
+          position: "absolute",
+          top: "50px",
+          left: "25px",
+          overflow: "hidden",
+          borderRadius: "50%",
+        }}
+      >
+        <img
+          src="https://tinyurl.com/y3mgbqoa"
+          alt="Avatar"
+          style={{
+            display: "inline-flex",
+            margin: "0 auto",
+            height: "100%",
+            width: "auto",
+          }}
+        />
+      </div>
+      <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       <div
         id="profile"
         style={{
           border: "2px solid black",
           width: "350px",
           height: "300px",
-          textAlign: "center",
+          textAlign: "left",
           fontSize: "20px",
           margin: "0 auto",
           color: "orange",
         }}
       >
-        <div
-          style={{
-            width: "150px",
-            height: "150px",
-            position: "absolute",
-            top: "165px",
-            left: "120px",
-            overflow: "hidden",
-            borderRadius: "50%",
-          }}
-        >
-          <img
-            src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
-            alt="Avatar"
-            style={{
-              display: "inline",
-              margin: "0 auto",
-              marginLeft: "-25%",
-              height: "100%",
-              width: "auto",
-            }}
-          />
-        </div>
-        <div style={{ marginBottom: "10px", marginTop: "175px" }} className="profileInfo">
-          Username: {username}
-        </div>
-        <div style={{ marginBottom: "10px" }} className="profileInfo">
+        <div style={{ marginBottom: "10px", marginTop: "25px" }} className="profileInfo">
           Email: {email}
         </div>
         <div style={{ marginBottom: "10px" }} className="profileInfo">
           Cell Phone Number: {cell}
         </div>
         <div style={{ marginBottom: "10px" }} className="profileInfo">
-          Based Our Of: {city}
+          Based Out Of: {city}
+        </div>
+        <div style={{ marginBottom: "10px" }} className="profileInfo">
+          Description: {description}
         </div>
       </div>
       <Link to="/updateProfile">
-        <button style={{ backgroundColor: "orange" }} type="button">
+        <button style={{ backgroundColor: "#eb8c34", marginTop: "10px" }} type="button">
           Update Profile
         </button>
       </Link>

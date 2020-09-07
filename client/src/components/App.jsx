@@ -117,7 +117,13 @@ class App extends Component {
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route
               path="/updateProfile"
-              render={() => <UpdateProfile currentUser={currentUser} menu={menu} />}
+              render={() => (
+                <UpdateProfile
+                  currentUser={currentUser}
+                  menu={menu}
+                  getCurrentUser={this.getCurrentUser}
+                />
+              )}
             />
             <Route
               path="/chat/:id"

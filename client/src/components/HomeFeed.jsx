@@ -32,11 +32,11 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
 
   return (
     <div>
-      <div style={{ backgroundColor: "#orange" }}>
+      <div style={{ backgroundColor: "#eb8c34" }}>
         {menu}
         <div>
           <Link to={"/"}>
-            <button style={{ backgroundColor: "orange" }} onClick={logout}>
+            <button style={{ backgroundColor: "#3F3D3D", color: "#eb8c34" }} onClick={logout}>
               Logout
             </button>
           </Link>
@@ -45,20 +45,21 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
           PotentialSound
           <div
             style={{
-              width: "100px",
-              height: "100px",
-              position: "relative",
+              width: "90px",
+              height: "90px",
+              position: "absolute",
+              top: "10px",
+              right: "25px",
               overflow: "hidden",
               borderRadius: "50%",
             }}
           >
             <img
-              src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
+              src="https://tinyurl.com/y3mgbqoa"
               alt="Avatar"
               style={{
-                display: "inline",
+                display: "inline-flex",
                 margin: "0 auto",
-                marginLeft: "-25%",
                 height: "100%",
                 width: "auto",
               }}
@@ -93,7 +94,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu }) => {
                 paddingRight: "10px",
                 borderRadius: "5px",
                 margin: "10px",
-                backgroundColor: "orange",
+                backgroundColor: "#eb8c34",
               }}
             >
               Create A Post

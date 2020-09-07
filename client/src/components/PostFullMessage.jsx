@@ -42,7 +42,9 @@ const PostFullMessage = ({ match }) => {
           position: "relative",
         }}
       >
-        <div style={{ fontSize: "125%" }}><Link to={`/${poster.username}`} >{`${poster.username}`}</Link> posted</div>
+        <div style={{ fontSize: "125%" }}>
+          <Link to={`/${poster.username}`}>{`${poster.username}`}</Link> posted
+        </div>
         <div>Message: {post.message}</div>
         <div
           style={{

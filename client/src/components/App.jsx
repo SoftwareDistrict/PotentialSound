@@ -146,7 +146,8 @@ class App extends Component {
               path="/insertAudio"
               render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}
             />
-            <Route exact={true}
+            <Route
+              exact={true}
               path="/:id"
               render={(match) => <ViewProfile username={match.match.params.id} menu={menu} />}
             />

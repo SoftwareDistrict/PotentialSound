@@ -13,9 +13,8 @@ const ViewProfile = ({ username, menu }) => {
     const { city, email, description, cell, propic } = data.data;
     setInfo([city, email, description, cell, propic]);
     console.info(proInfo, "seeing if info got updated");
-
   }, []);
-  
+
   return (
     <div>
       {menu}
@@ -60,7 +59,7 @@ const ViewProfile = ({ username, menu }) => {
 
 ViewProfile.propTypes = {
   menu: PropTypes.element,
-  username: PropTypes.string.isRequired
+  username: PropTypes.string.isRequired,
 };
 
 export default ViewProfile;

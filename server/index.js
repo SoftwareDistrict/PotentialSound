@@ -8,8 +8,6 @@ const { uploadToS3, uploadAudioToS3 } = require("./s3");
 const socketIo = require("socket.io");
 const http = require("http");
 require("./db");
-const { ChatJoin, Messages, Chats } = require("./db");
-
 require("./passport.setup");
 const {
   isAccCreated,
@@ -24,6 +22,7 @@ const {
   addPost,
   addUser,
   addTags,
+  startChat,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -129,26 +128,11 @@ app.get("/currentUser", (req, res) => {
 
 app.post("/sendMessage", (req, res) => {
   let data = req.body;
-  Chats.create().then((chatData) => {
-    const id_chat = chatData.dataValues.id;
-    ChatJoin.create({ id_user: data.id_user, id_chat: id_chat }).then(() => {
-      ChatJoin.create({ id_user: data.postUserId, id_chat: id_chat }).then(() => {
-        Messages.create({
-          message: data.message,
-          id_user: data.id_user,
-          id_chat: Number(id_chat),
-        })
-          .then((data) => {
-            console.info("sucessful message", data);
-            res.send("sucessful posted message");
-          })
-          .catch((err) => {
-            console.info(err);
-          });
-      });
-    });
-  });
+  startChat(data)
+    .then(() => res.send("Chat created."))
+    .catch((err) => res.status(500).send(err));
 });
+
 app.get("/poster/:id", (req, res) => {
   const id = req.params.id;
   getPoster(id)

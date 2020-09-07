@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ChatEntry = ({ participants, id_chat }) => {
+  const members = [];
+
+  participants.forEach((member) => {
+    if (member[1] === id_chat) {
+      members.push(member[0]);
+    }
+  });
+
   return (
-    <Link to={`/chat/${id_chat}`}>
+    <Link to={`/chat/${id_chat}`} style={{ textDecoration: "none", color: "orange" }}>
       <div
-        className=""
+        className="inbox"
         style={{
           border: "2px solid black",
           width: "350px",
@@ -23,11 +31,11 @@ const ChatEntry = ({ participants, id_chat }) => {
             overflow: "auto",
             width: "350px",
             textAlign: "center",
-            fontSize: "16px",
+            fontSize: "20px",
           }}
         >
           <label>Chat Members:</label>
-          <div>{participants.join(", ")}</div>
+          <div>{members.join(", ")}</div>
         </div>
       </div>
     </Link>

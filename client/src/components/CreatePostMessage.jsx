@@ -148,13 +148,13 @@ const CreatePostMessage = ({ audio, onChangeAudio }) => {
         <label>
           Message{" "}
           <input
-            size="60"
+            style={{ width: "250px", paddingLeft: "10px", fontSize: "16px", height: "30px" }}
             onChange={(event) => onEvent(event, setMessage, message)}
             type="text"
             placeholder={"Message"}
           />
         </label>
-        <button style={{ marginTop: "10px" }} onClick={() => onSubmit()}>
+        <button style={{ marginTop: "10px", backgroundColor: "orange" }} onClick={() => onSubmit()}>
           <Link to="/home">Submit</Link>
         </button>
       </div>

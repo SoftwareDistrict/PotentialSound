@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match, currentUser }) => {
+const PostFullMessage = ({ match, tags, menu, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
+  const [postTags] = useState([]);
   const [userMessage, setMessage] = useState("");
+
   useEffect(async () => {
     await axios
       .get(`/poster/${id[0]}`)
@@ -18,6 +20,14 @@ const PostFullMessage = ({ match, currentUser }) => {
       .get(`/thispost/${id[1]}`)
       .then((post) => setPost(post.data))
       .catch((err) => console.warn("could not get this post.", err));
+  }, []);
+
+  useEffect(() => {
+    tags.forEach((tag) => {
+      if (tag.id_post == id[1] && !postTags.includes(tag.tag)) {
+        postTags.push(tag.tag);
+      }
+    });
   }, []);
 
   const sendMessage = () => {
@@ -44,48 +54,70 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   return (
     <div>
+      {menu}
       <div
         id="profile"
         style={{
+          backgroundColor: "#3F3D3D",
           border: "2px solid black",
-          width: "500px",
+          width: "350px",
           height: "300px",
           textAlign: "center",
           margin: "0 auto",
           position: "relative",
+          color: "#E7912D",
         }}
       >
-        <div style={{ fontSize: "125%" }}>{poster.username} posted</div>
-        <div>Message: {post.message}</div>
+        <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
         <div
           style={{
-            position: "absolute",
-            top: "5",
-            textAlign: "center",
-            resize: "both",
-            overflow: "auto",
             width: "150px",
             height: "150px",
-            marginTop: "10px",
-            marginBottom: "10px",
+            position: "absolute",
+            top: "40px",
+            left: "100px",
+            overflow: "hidden",
+            borderRadius: "50%",
           }}
         >
-          Profile Pic:
-          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
+          <img
+            src={poster.propic}
+            alt="Avatar"
+            style={{
+              display: "inline",
+              margin: "0 auto",
+              marginLeft: "-25%",
+              height: "100%",
+              width: "auto",
+            }}
+          />
+        </div>
+        <div style={{ marginTop: "160px" }}>
+          <div style={{ fontSize: "18px" }}>{post.message}</div>
+          <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join("   ")}</div>
         </div>
       </div>
       <div>
-        <h3>{`Send a message to ${poster.username}`}</h3>
-        <input
-          id="input-message"
-          size="60"
-          onChange={(event) => onEvent(event, setMessage)}
-          type="text"
-          placeholder="Message"
-        />
-        <button onClick={sendMessage} style={{ marginLeft: "5px" }}>
-          Submit
-        </button>
+        <h3>Reply</h3>
+        <label>
+          <h3>Send a message to {poster.username}</h3>
+          <input
+            style={{
+              width: "250px",
+              height: "80px",
+              fontSize: "16px",
+              marginLeft: "10px",
+              paddingLeft: "10px",
+            }}
+            onChange={(event) => onEvent(event)}
+            // onChange={(event) => onEvent(event, setMessage)}
+            type="text"
+            placeholder="Message"
+          />
+          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "orange" }}>
+            Submit
+          </button>
+        </label>
       </div>
     </div>
   );
@@ -93,6 +125,14 @@ const PostFullMessage = ({ match, currentUser }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      id_post: PropTypes.number,
+      tag: PropTypes.string,
+    })
+  ),
+  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

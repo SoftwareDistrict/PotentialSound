@@ -87,7 +87,7 @@ class App extends Component {
 
   render() {
     const menu = (
-      <div id="menu" style={{ fontSize: "40px", fontWeight: "bold" }} onClick={this.toggleMenu}>
+      <div id="menu" style={{ fontSize: "28px", fontWeight: "bold" }} onClick={this.toggleMenu}>
         Menu
       </div>
     );
@@ -127,14 +127,15 @@ class App extends Component {
               render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
             />
             <Route
-              exact={true}
               path="/fullMessage/:id"
-              render={({ match }) => <PostFullMessage currentUser={currentUser} match={match} />}
+              render={({ match }) => (
+                <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
+              )}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route
               path="/updateProfile"
-              render={() => <UpdateProfile currentUser={currentUser} />}
+              render={() => <UpdateProfile currentUser={currentUser} menu={menu} />}
             />
             <Route
               path="/chat/:id"

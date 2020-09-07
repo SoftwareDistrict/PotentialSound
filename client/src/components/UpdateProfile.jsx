@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
-const UpdateProfile = ({ currentUser }) => {
+const UpdateProfile = ({ currentUser, menu }) => {
   const [newUser, setNewUser] = useState("Previous Username");
   const [newCity, setNewCity] = useState("Previous City");
   const [newCell, setNewCell] = useState("Previous Cell");
@@ -42,6 +42,7 @@ const UpdateProfile = ({ currentUser }) => {
 
   return (
     <div>
+      {menu}
       <h1>Update Your Profile</h1>
       <input
         style={{ marginBottom: "10px" }}
@@ -81,7 +82,7 @@ const UpdateProfile = ({ currentUser }) => {
         maxFileSize={5242880}
       />
       <Link to={`/profile/${currentUser.id}`} style={{ marginTop: "30px" }}>
-        <button type="button" onClick={() => updateProfile()}>
+        <button style={{ backgroundColor: "orange" }} type="button" onClick={() => updateProfile()}>
           Submit Change
         </button>
       </Link>
@@ -91,6 +92,7 @@ const UpdateProfile = ({ currentUser }) => {
 
 UpdateProfile.propTypes = {
   currentUser: PropTypes.object.isRequired,
+  menu: PropTypes.element,
 };
 
 export default UpdateProfile;

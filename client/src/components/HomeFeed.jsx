@@ -32,36 +32,40 @@ const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
 
   return (
     <div>
-      {menu}
-      <div>
-        <Link to={"/"}>
-          <button onClick={logout}>Logout</button>
-        </Link>
-      </div>
-      <h1>
-        PotentialSound
-        <div
-          style={{
-            width: "100px",
-            height: "100px",
-            position: "relative",
-            overflow: "hidden",
-            borderRadius: "50%",
-          }}
-        >
-          <img
-            src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
-            alt="Avatar"
-            style={{
-              display: "inline",
-              margin: "0 auto",
-              marginLeft: "-25%",
-              height: "100%",
-              width: "auto",
-            }}
-          />
+      <div style={{ backgroundColor: "#orange" }}>
+        {menu}
+        <div>
+          <Link to={"/"}>
+            <button style={{ backgroundColor: "orange" }} onClick={logout}>
+              Logout
+            </button>
+          </Link>
         </div>
-      </h1>
+        <h1>
+          PotentialSound
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "50%",
+            }}
+          >
+            <img
+              src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
+              alt="Avatar"
+              style={{
+                display: "inline",
+                margin: "0 auto",
+                marginLeft: "-25%",
+                height: "100%",
+                width: "auto",
+              }}
+            />
+          </div>
+        </h1>
+      </div>
       <div>
         <input
           type="text"
@@ -89,6 +93,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
                 paddingRight: "10px",
                 borderRadius: "5px",
                 margin: "10px",
+                backgroundColor: "orange",
               }}
             >
               Create A Post
@@ -96,7 +101,7 @@ const HomeFeed = ({ getCurrentUser, tags, menu, audio }) => {
           </Link>
         </div>
       </div>
-      <div style={{ backgroundColor: "rgb(200,200,200)", height: "500px", padding: "5px" }}>
+      <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
         {generalFeed.map((post) => (
           <PostFeedEntry key={post.id} post={post} users={users} tags={tags} audio={audio} />
         ))}

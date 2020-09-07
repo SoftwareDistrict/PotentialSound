@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match, tags, menu }) => {
+const PostFullMessage = ({ match, tags, menu, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
   const [postTags] = useState([]);
-
+  const [userMessage, setMessage] = useState("");
+  
   useEffect(async () => {
     await axios
       .get(`/poster/${id[0]}`)
@@ -29,6 +30,20 @@ const PostFullMessage = ({ match, tags, menu }) => {
     });
   }, []);
 
+  const sendMessage = () => {
+    const messageObj = {
+      message: userMessage,
+      id_user: currentUser.id,
+      id_chat: id,
+    };
+
+    axios.post("/sendMessage", messageObj).then((data) => {
+      console.info(data, "sent successful message through axios request");
+      setMessage("");
+      alert("Message was sent!");
+      document.getElementById("input-message").value = "";
+    });
+  };
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
       setFunc(val);
@@ -85,7 +100,7 @@ const PostFullMessage = ({ match, tags, menu }) => {
       <div>
         <h3>Reply</h3>
         <label>
-          Message
+          <h3>Send a message to {poster.username}</h3>
           <input
             style={{
               width: "250px",
@@ -95,10 +110,11 @@ const PostFullMessage = ({ match, tags, menu }) => {
               paddingLeft: "10px",
             }}
             onChange={(event) => onEvent(event)}
+            // onChange={(event) => onEvent(event, setMessage)}
             type="text"
             placeholder="Message"
           />
-          <button style={{ marginLeft: "5px", backgroundColor: "orange" }}>Submit</button>
+          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "orange" }}>Submit</button>
         </label>
       </div>
     </div>
@@ -115,6 +131,7 @@ PostFullMessage.propTypes = {
     })
   ),
   menu: PropTypes.element,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default PostFullMessage;

@@ -99,7 +99,6 @@ class App extends Component {
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
-              exact={true}
               path="/home"
               render={() => (
                 <HomeFeed
@@ -129,7 +128,7 @@ class App extends Component {
             />
             <Route
               path="/fullMessage/:id"
-              render={({ match }) => <PostFullMessage match={match} tags={tags} menu={menu} />}
+              render={({ match }) => <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />}
             />
             <Route path="/createProfile" render={() => <CreateProfile />} />
             <Route

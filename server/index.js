@@ -5,6 +5,8 @@ const cors = require("cors");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const { uploadToS3, uploadAudioToS3 } = require("./s3");
+const socketIo = require("socket.io");
+const http = require("http");
 require("./db");
 require("./passport.setup");
 const {
@@ -22,6 +24,8 @@ const {
   addUser,
   addTags,
   startChat,
+  addMessage,
+  getMessagesForChat,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -41,6 +45,34 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Socket.io==============================================================
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+io.on("connection", (socket) => {
+  console.info("io is conneceted");
+  socket.on("sending", function (data) {
+    console.info(data);
+    addMessage(data).then(() => {
+      getMessagesForChat(data.id_chat).then((data) => {
+        socket.emit("receive", data);
+      });
+    });
+
+    if (data == "exit") {
+      socket.disconnect(console.info("sender disconnected"));
+    }
+  });
+
+  socket.on("getMessages", function (data) {
+    console.info(data, "get messages");
+    getMessagesForChat(1).then((data) => {
+      socket.emit("receive", data);
+    });
+  });
+});
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
@@ -163,17 +195,16 @@ app.post("/api/uploadImage", (req, res) => {
 });
 
 app.post("/createPostMessage", (req, res) => {
-  const { tags, message } = req.body;
-  const postObj = {
-    id_user: req.session.passport.user,
-    message: message,
-  };
-  addPost(postObj)
+  const { tags, bodyMsg } = req.body;
+  bodyMsg["id_user"] = req.session.passport.user;
+
+  addPost(bodyMsg)
     .then((post) => {
       const postId = post.dataValues.id;
       tags.map((tag) => {
         addTags(postId, tag);
       });
+      res.status(201).json({ redirectUrl: "/home" });
     })
     .catch((err) => res.status(500).send(err));
 });
@@ -198,6 +229,6 @@ app.get("*", (req, res) => {
   res.sendFile(`${CLIENT_PATH}/index.html`);
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.info(`App listening at http://localhost:${PORT}`);
 });

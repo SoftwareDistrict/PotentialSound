@@ -10,7 +10,6 @@ import ViewProfile from "./ViewProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
-import InsertAudio from "./InsertAudio.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -23,7 +22,6 @@ class App extends Component {
       tags: [],
       allMsgs: [],
       allChats: [],
-      audio: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
@@ -31,19 +29,12 @@ class App extends Component {
     this.getMessages = this.getMessages.bind(this);
     this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.onChangeAudio = this.onChangeAudio.bind(this);
   }
 
   componentDidMount() {
     this.getTags();
     this.getMessages();
     this.getAllChats();
-  }
-
-  onChangeAudio(event) {
-    this.setState({
-      audio: [event.target.files[0]],
-    });
   }
 
   getCurrentUser() {
@@ -92,7 +83,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, tags, allMsgs, allChats, audio } = this.state;
+    const { currentUser, tags, allMsgs, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -102,12 +93,7 @@ class App extends Component {
             <Route
               path="/home"
               render={() => (
-                <HomeFeed
-                  menu={menu}
-                  tags={tags}
-                  getCurrentUser={this.getCurrentUser}
-                  audio={audio}
-                />
+                <HomeFeed menu={menu} tags={tags} getCurrentUser={this.getCurrentUser} />
               )}
             />
             <Route
@@ -117,11 +103,7 @@ class App extends Component {
                 <Profile menu={menu} match={match} currentUser={currentUser} />
               )}
             />
-            <Route
-              exact={true}
-              path="/createPostMessage"
-              render={() => <CreatePostMessage audio={audio} onChangeAudio={this.onChangeAudio} />}
-            />
+            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
             <Route
               exact={true}
               path="/chats"
@@ -140,11 +122,9 @@ class App extends Component {
             />
             <Route
               path="/chat/:id"
-              render={({ match }) => <Chat match={match} menu={menu} allMsgs={allMsgs} />}
-            />
-            <Route
-              path="/insertAudio"
-              render={() => <InsertAudio onChangeAudio={this.onChangeAudio} audio={audio} />}
+              render={({ match }) => (
+                <Chat match={match} currentUser={currentUser} menu={menu} allMsgs={allMsgs} />
+              )}
             />
             <Route
               exact={true}

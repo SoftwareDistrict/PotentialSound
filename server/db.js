@@ -46,6 +46,10 @@ const ChatJoin = sequelize.define("ChatJoin", {
 const Posts = sequelize.define("Posts", {
   id_user: Sequelize.INTEGER,
   message: Sequelize.TEXT,
+  audioName: Sequelize.TEXT,
+  audioUrl: Sequelize.TEXT,
+  imageName: Sequelize.TEXT,
+  imageUrl: Sequelize.TEXT,
 });
 
 const Tags = sequelize.define("Tags", {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Profile = ({ menu, currentUser }) => {
-  const { username, propic, cell, city, email } = currentUser;
+  const { username, cell, city, email } = currentUser;
 
   return (
     <div>
@@ -13,14 +13,38 @@ const Profile = ({ menu, currentUser }) => {
         id="profile"
         style={{
           border: "2px solid black",
-          width: "500px",
-          height: "200px",
+          width: "350px",
+          height: "300px",
           textAlign: "center",
-          fontSize: "125%",
+          fontSize: "20px",
           margin: "0 auto",
+          color: "orange",
         }}
       >
-        <div style={{ marginBottom: "10px" }} className="profileInfo">
+        <div
+          style={{
+            width: "150px",
+            height: "150px",
+            position: "absolute",
+            top: "165px",
+            left: "120px",
+            overflow: "hidden",
+            borderRadius: "50%",
+          }}
+        >
+          <img
+            src="https://ca.slack-edge.com/T02P3HQD6-UQ9RMQ67J-8c62ecbaf341-512"
+            alt="Avatar"
+            style={{
+              display: "inline",
+              margin: "0 auto",
+              marginLeft: "-25%",
+              height: "100%",
+              width: "auto",
+            }}
+          />
+        </div>
+        <div style={{ marginBottom: "10px", marginTop: "175px" }} className="profileInfo">
           Username: {username}
         </div>
         <div style={{ marginBottom: "10px" }} className="profileInfo">
@@ -30,18 +54,13 @@ const Profile = ({ menu, currentUser }) => {
           Cell Phone Number: {cell}
         </div>
         <div style={{ marginBottom: "10px" }} className="profileInfo">
-          Hometown: {city}
+          Based Our Of: {city}
         </div>
       </div>
-      <div
-        className="profileInfo"
-        style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}
-      >
-        Profile Picture
-        <img src={propic} />
-      </div>
       <Link to="/updateProfile">
-        <button type="button">Update Profile</button>
+        <button style={{ backgroundColor: "orange" }} type="button">
+          Update Profile
+        </button>
       </Link>
     </div>
   );

@@ -20,6 +20,7 @@ const {
   addPost,
   addUser,
   addTags,
+  startChat,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -101,6 +102,13 @@ app.get("/currentUser", (req, res) => {
   const userId = req.session.passport.user;
   getCurrentUser(userId)
     .then((user) => res.send(user.dataValues))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.post("/sendMessage", (req, res) => {
+  let data = req.body;
+  startChat(data)
+    .then(() => res.send("Chat created."))
     .catch((err) => res.status(500).send(err));
 });
 

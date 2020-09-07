@@ -82,7 +82,9 @@ const CreateProfile = () => {
             imgExtension={[".jpg", ".gif", ".png"]}
             maxFileSize={5242880}
           />
-          <button onClick={() => createProfile()}>Submit</button>
+          <button style={{ backgroundColor: "orange" }} onClick={() => createProfile()}>
+            Submit
+          </button>
         </div>
       ) : (
         <div>

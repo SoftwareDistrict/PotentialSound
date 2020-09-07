@@ -31,7 +31,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
             border: "2px solid black",
             height: "100px",
             margin: "0 auto",
-            backgroundColor: "#3F3D3D",
+            // backgroundColor: "#3F3D3D",
             position: "relative",
             marginTop: "10px",
             marginBottom: "10px",

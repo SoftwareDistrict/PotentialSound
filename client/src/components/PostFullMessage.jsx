@@ -84,7 +84,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
             src={poster.propic}
             alt="Avatar"
             style={{
-              display: "inline",
+              display: "inline-flex",
               margin: "0 auto",
               marginLeft: "-25%",
               height: "100%",
@@ -114,7 +114,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
             type="text"
             placeholder="Message"
           />
-          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "orange" }}>
+          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
             Submit
           </button>
         </label>

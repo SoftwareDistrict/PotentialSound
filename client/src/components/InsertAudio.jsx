@@ -17,10 +17,10 @@ const InsertAudio = ({ audio, onChangeAudio }) => {
   return (
     <div>
       <input type="file" name="file" onChange={(e) => onChangeAudio(e)} />
-      <button style={{ backgroundColor: "orange" }} onClick={() => console.info(audio)}>
+      <button style={{ backgroundColor: "#eb8c34" }} onClick={() => console.info(audio)}>
         Checking audio
       </button>
-      <button style={{ backgroundColor: "orange" }} onClick={() => uploadAudio()}>
+      <button style={{ backgroundColor: "#eb8c34" }} onClick={() => uploadAudio()}>
         Upload Audio
       </button>
     </div>

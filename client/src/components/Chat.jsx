@@ -79,6 +79,7 @@ const Chat = ({ menu, match, currentUser }) => {
             id_chat: idChat,
             id_user: id_user,
             message: userMessage,
+            name_audio: audio[0].name,
             url_audio: data,
           });
           setMessage("");
@@ -96,6 +97,7 @@ const Chat = ({ menu, match, currentUser }) => {
             id_user: id_user,
             message: userMessage,
             url_audio: res[1].data,
+            name_audio: audio[0].name,
             url_image: res[0].data,
           });
           setMessage("");
@@ -135,6 +137,7 @@ const Chat = ({ menu, match, currentUser }) => {
                   key={msg.id}
                   img={msg.url_image}
                   audio={msg.url_audio}
+                  audioName={msg.name_audio}
                 />
               );
             }

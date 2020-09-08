@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const Message = ({ id_user, message }) => {
+const Message = ({ id_user, message, img, audio }) => {
   const [messenger, setMessenger] = useState("");
 
   useEffect(() => {
@@ -66,6 +66,14 @@ const Message = ({ id_user, message }) => {
         }}
       >
         {message}
+        {img ? <img src={img} /> : null}
+        {audio ? (
+          <div>
+            <form action={audio}>
+              <input type="submit" value="Download" />
+            </form>
+          </div>
+        ) : null}
       </div>
       <div
         style={{
@@ -85,5 +93,7 @@ const Message = ({ id_user, message }) => {
 Message.propTypes = {
   id_user: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
+  img: PropTypes.string,
+  audio: PropTypes.string,
 };
 export default Message;

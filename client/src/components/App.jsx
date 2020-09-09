@@ -124,7 +124,7 @@ class App extends Component {
             />
             <Route
               exact={true}
-              path="/viewProfile/:id"
+              path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
           </Switch>

@@ -9,11 +9,9 @@ const ViewProfile = ({ match, menu }) => {
   }, []);
   const [proInfo, setInfo] = useState({});
   const getUser = async () => {
-    const data = await axios.get(`/viewProfile/${username}`);
-    console.info(data.data, " data from axios request");
+    const data = await axios.get(`/viewprofile/${username}`);
     setInfo(data.data);
   };
-  console.info(username, "this is the proppppssss");
 
   return (
     <div>

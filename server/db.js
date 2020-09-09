@@ -29,6 +29,9 @@ const Users = sequelize.define("Users", {
 });
 
 const Messages = sequelize.define("Messages", {
+  url_image: Sequelize.TEXT,
+  url_audio: Sequelize.TEXT,
+  name_audio: Sequelize.TEXT,
   message: Sequelize.TEXT,
   id_user: Sequelize.INTEGER,
   id_chat: Sequelize.INTEGER,

@@ -21,6 +21,7 @@ const getPoster = (id) => Users.findOne({ where: { id: id } });
 const getMessagesForChat = (id_chat) => Messages.findAll({ where: { id_chat: id_chat } });
 const addMessage = (message) => Messages.create(message);
 const search = (id) => Posts.findAll({ where: { id: id } });
+const getUsername = (username) => Users.findOne({ where: { username: username } });
 
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
 const addPost = (post) => Posts.create(post);
@@ -53,6 +54,7 @@ const startChat = (data) => {
 
 module.exports = {
   getPosts,
+  getUsername,
   getThisPost,
   getTags,
   getUsers,

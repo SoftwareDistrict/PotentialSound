@@ -11,6 +11,7 @@ import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
+import CreateChat from "./CreateChat.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -101,6 +102,18 @@ class App extends Component {
               path="/fullMessage/:id"
               render={({ match }) => (
                 <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
+              )}
+            />
+            <Route
+              path="/createChat/:id"
+              render={({ match }) => (
+                <CreateChat
+                  currentUser={currentUser}
+                  match={match}
+                  menu={menu}
+                  allChats={allChats}
+                  getAllChats={this.getAllChats}
+                />
               )}
             />
             <Route

@@ -143,52 +143,48 @@ Users.sync({ force: true })
       .then(() => {
         ChatJoin.bulkCreate([
           {
-            id_user: 1,
-            id_chat: 1,
+            id_user: 11,
+            id_chat: 11,
           },
           {
-            id_user: 2,
-            id_chat: 1,
+            id_user: 12,
+            id_chat: 11,
           },
           {
-            id_user: 6,
-            id_chat: 1,
+            id_user: 16,
+            id_chat: 11,
           },
           {
-            id_user: 2,
-            id_chat: 2,
+            id_user: 12,
+            id_chat: 12,
           },
           {
-            id_user: 3,
-            id_chat: 2,
+            id_user: 13,
+            id_chat: 21,
           },
           {
-            id_user: 5,
-            id_chat: 2,
+            id_user: 51,
+            id_chat: 21,
           },
           {
-            id_user: 6,
-            id_chat: 2,
+            id_user: 61,
+            id_chat: 12,
           },
           {
-            id_user: 6,
-            id_chat: 3,
+            id_user: 21,
+            id_chat: 13,
           },
           {
-            id_user: 2,
-            id_chat: 3,
+            id_user: 31,
+            id_chat: 31,
           },
           {
-            id_user: 3,
-            id_chat: 3,
+            id_user: 41,
+            id_chat: 31,
           },
           {
-            id_user: 4,
-            id_chat: 3,
-          },
-          {
-            id_user: 5,
-            id_chat: 3,
+            id_user: 15,
+            id_chat: 31,
           },
         ]);
       })

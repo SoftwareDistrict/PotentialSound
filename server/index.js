@@ -9,8 +9,10 @@ const socketIo = require("socket.io");
 const http = require("http");
 require("./db");
 const { Chats, ChatJoin, Messages } = require("./db");
+const { Op } = require("sequelize");
 require("./passport.setup");
 const {
+  // getChatIds,
   isAccCreated,
   getCurrentUser,
   getPosts,
@@ -229,6 +231,145 @@ app.post("/createPostMessage", (req, res) => {
     })
     .catch((err) => res.status(500).send(err));
 });
+
+app.get("/getallchats", (req, res) => {
+  getChats()
+    .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.post("/sendChatMessage", (req, res) => {
+  let data = req.body;
+  //ARRAYS OF CHAT ROWS  FOR USER AND SENDEE
+  //IF A USER CONTAINS THE SAME CHAT ID AS SEND ID SET FLAG TO TRUE AND SET CHAT ID TO CHAT ID
+  let userArr = [];
+  let sendeeArr = [];
+  let flag = false;
+  let chatId;
+  // let counter = 0;
+
+  console.info(data);
+
+  ChatJoin.findAll({
+    where: {
+      id_user: {
+        [Op.eq]: data.id_user,
+      },
+    },
+  })
+    .then((data) => {
+      data.forEach((e) => userArr.push(e.dataValues));
+    })
+    .then(() => {
+      ChatJoin.findAll({
+        where: {
+          id_user: {
+            [Op.eq]: data.postUserId,
+          },
+        },
+      })
+        .then((data) => {
+          data.forEach((e) => sendeeArr.push(e.dataValues));
+          console.info(269, userArr);
+          console.info(270, sendeeArr);
+          userArr.forEach((userObj) => {
+            sendeeArr.forEach((sendeeObj) => {
+              // console.log(userObj.id_chat);
+              // console.log(sendeeObj.id_chat);
+              ChatJoin.findAll().then((data) => {
+  
+                let count = data.filter((e) => e.dataValues.id_chat === userObj.id_chat).length;
+                console.info("count", count);
+              });
+
+              if (userObj.id_chat === sendeeObj.id_chat) {
+                console.info(userObj.id_chat);
+                console.info(sendeeObj.id_chat);
+                console.info("MATCH FOUND BETWEEN USER AND SENDEE CHAT ID");
+                flag = true;
+                chatId = userObj.id_chat;
+              }
+            });
+          });
+        })
+        .then(() => {
+          if (!flag) {
+            console.info("create a new chat");
+            Chats.create().then((chatData) => {
+              const id_chat = chatData.dataValues.id;
+              ChatJoin.create({ id_user: data.id_user, id_chat: id_chat }).then(() => {
+                ChatJoin.create({ id_user: data.postUserId, id_chat: id_chat }).then(() => {
+                  Messages.create({
+                    message: data.message,
+                    id_user: data.id_user,
+                    id_chat: Number(id_chat),
+                  })
+                    .then(() => {
+                      // console.info("sucessful message", data);
+                      res.send("sucessful posted message");
+                    })
+                    .catch((err) => {
+                      console.info(err);
+                    });
+                });
+              });
+            });
+          } else {
+            console.info("ELSE WAS HIT");
+            Messages.create({
+              message: data.message,
+              id_user: data.id_user,
+              id_chat: Number(chatId),
+            })
+              .then(() => {
+                // console.info("sucessful message", data);
+                res.send("sucessful posted message");
+              })
+              .catch((err) => {
+                console.info(err);
+              });
+          }
+        });
+    });
+});
+
+// if (!flag) {
+//   Chats.create().then((chatData) => {
+//     const id_chat = chatData.dataValues.id;
+//     ChatJoin.create({ id_user: data.id_user, id_chat: id_chat }).then(() => {
+//       ChatJoin.create({ id_user: data.postUserId, id_chat: id_chat }).then(() => {
+//         Messages.create({
+//           message: data.message,
+//           id_user: data.id_user,
+//           id_chat: Number(id_chat),
+//         })
+//           .then((data) => {
+//             // console.info("sucessful message", data);
+//             res.send("sucessful posted message");
+//           })
+//           .catch((err) => {
+//             console.info(err);
+//           });
+//       });
+//     });
+//   });
+// } else {
+//   console.log('298 it worked');
+//   Messages.create({
+//     message: data.message,
+//     id_user: data.id_user,
+//     id_chat: Number(chatId),
+//   })
+//     .then((data) => {
+//       // console.info("sucessful message", data);
+//       res.send("sucessful posted message");
+//     })
+//     .catch((err) => {
+//       console.info(err);
+//     });
+
+// }
+// });
 
 app.get("*", (req, res) => {
   res.sendFile(`${CLIENT_PATH}/index.html`);

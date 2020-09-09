@@ -302,7 +302,6 @@ app.post("/sendChatMessage", (req, res) => {
               // console.log(userObj.id_chat);
               // console.log(sendeeObj.id_chat);
               ChatJoin.findAll().then((data) => {
-  
                 let count = data.filter((e) => e.dataValues.id_chat === userObj.id_chat).length;
                 console.info("count", count);
               });

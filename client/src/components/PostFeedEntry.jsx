@@ -49,7 +49,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
               fontSize: "14px",
             }}
           >
-            {poster.username}
+            <Link to={`/viewProfile/${poster.username}`}>{poster.username}</Link>
           </div>
           <div
             style={{

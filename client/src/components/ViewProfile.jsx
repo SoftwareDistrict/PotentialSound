@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-const ViewProfile = ({ username, menu }) => {
-  console.info(username, "this is the propppp");
-  const [proInfo, setInfo] = useState([]);
-  useEffect(async () => {
+const ViewProfile = ({ match, menu }) => {
+  const username = match.params.id;
+  useEffect(() => {
+    getUser();
+  }, []);
+  const [proInfo, setInfo] = useState({});
+  const getUser = async () => {
     const data = await axios.get(`/viewProfile/${username}`);
     console.info(data.data, " data from axios request");
-    const { city, email, description, cell, propic } = data.data;
-    setInfo([city, email, description, cell, propic]);
-    console.info(proInfo, "seeing if info got updated");
-  }, []);
+    setInfo(data.data);
+  };
+  console.info(username, "this is the proppppssss");
+
   return (
     <div>
       {menu}
@@ -31,16 +34,16 @@ const ViewProfile = ({ username, menu }) => {
           Username: {username}
         </div>
         <div style={{ marginBottom: "10px" }} className="ViewProfile">
-          Email: {proInfo[1]}
+          Email: {proInfo.email}
         </div>
         <div style={{ marginBottom: "10px" }} className="ViewProfile">
-          Cell Phone Number: {proInfo[3]}
+          Cell Phone Number: {proInfo.cell}
         </div>
         <div style={{ marginBottom: "10px" }} className="ViewProfile">
-          Hometown: {proInfo[0]}
+          Hometown: {proInfo.city}
         </div>
         <div style={{ marginBottom: "10px" }} className="ViewProfile">
-          Description: {proInfo[2]}
+          Description: {proInfo.description}
         </div>
       </div>
       <div
@@ -48,13 +51,13 @@ const ViewProfile = ({ username, menu }) => {
         style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}
       >
         Profile Picture
-        <img src={proInfo[4]} />
+        <img src={proInfo.propic} />
       </div>
     </div>
   );
 };
 ViewProfile.propTypes = {
   menu: PropTypes.element,
-  username: PropTypes.string.isRequired,
+  match: PropTypes.string.isRequired,
 };
 export default ViewProfile;

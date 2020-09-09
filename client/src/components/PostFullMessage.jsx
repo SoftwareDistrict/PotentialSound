@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
@@ -69,9 +68,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
           color: "#E7912D",
         }}
       >
-        <div style={{ fontSize: "125%", marginTop: "10px" }}>
-          <Link to={`/${poster.username}`}>{poster.username}</Link>
-        </div>
+        <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
         <div
           style={{
             width: "150px",

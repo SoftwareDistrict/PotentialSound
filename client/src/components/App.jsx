@@ -123,8 +123,9 @@ class App extends Component {
               render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
             <Route
-              path="/:id"
-              render={(match) => <ViewProfile username={match.match.params.id} menu={menu} />}
+              exact={true}
+              path="/viewProfile/:id"
+              render={(props) => <ViewProfile menu={menu} {...props} />}
             />
           </Switch>
         </Router>

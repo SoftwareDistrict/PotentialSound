@@ -12,16 +12,21 @@ const Search = ({ tags, setFeed }) => {
   };
 
   const onSearch = async () => {
-    const searchTags = queries.map((q) => {
-      return tags.filter((tag) => tag.tag === q);
-    }).flat();
+    const searchTags = queries
+      .map((q) => {
+        return tags.filter((tag) => tag.tag === q);
+      })
+      .flat();
     const ids = searchTags.map((tag) => tag.id_post);
     const finalSearch = Array.from(new Set(ids));
-    const allPosts = await Promise.all(finalSearch.map(async (id) => {
-      return await axios.get(`/searchfeed/${id}`)
-        .then((posts) => posts.data)
-        .catch((err) => console.warn("Could not get posts that match your search", err));
-    }));
+    const allPosts = await Promise.all(
+      finalSearch.map(async (id) => {
+        return await axios
+          .get(`/searchfeed/${id}`)
+          .then((posts) => posts.data)
+          .catch((err) => console.warn("Could not get posts that match your search", err));
+      })
+    );
     setFeed(allPosts.flat());
   };
 
@@ -39,7 +44,7 @@ const Search = ({ tags, setFeed }) => {
         }}
         onChange={(e) => onChange(e)}
       />
-      <IconButton onClick={() => onSearch()} >
+      <IconButton onClick={() => onSearch()}>
         <SearchOutlinedIcon />
       </IconButton>
     </div>

@@ -66,5 +66,5 @@ module.exports = {
   startChat,
   addMessage,
   getMessagesForChat,
-  search
+  search,
 };

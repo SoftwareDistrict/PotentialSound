@@ -121,9 +121,11 @@ Users.sync({ force: true })
           },
           {
             id_user: 4,
-            message: "Looking to get rid of this guitar and amp. Just put new strings on it but I just don't paly it anymore. $250 for the set OBO.",
+            message:
+              "Looking to get rid of this guitar and amp. Just put new strings on it but I just don't paly it anymore. $250 for the set OBO.",
             imageName: "guitar.jpg",
-            imageUrl: "https://s3-us-east-2.amazonaws.com/potentialsound/5f967613-e7f6-41fb-9ae2-33c8e81ea394.png",
+            imageUrl:
+              "https://s3-us-east-2.amazonaws.com/potentialsound/5f967613-e7f6-41fb-9ae2-33c8e81ea394.png",
           },
         ]);
       })

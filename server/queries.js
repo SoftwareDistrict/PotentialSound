@@ -17,6 +17,7 @@ const getThisPost = (id) => Posts.findOne({ where: { id: id } });
 const getUsers = () => Users.findAll();
 const getTags = () => Tags.findAll();
 const getChats = () => ChatJoin.findAll();
+const getChatIds = (id) => ChatJoin.findAll({ where: { id_user: id } });
 const getPoster = (id) => Users.findOne({ where: { id: id } });
 const getMessagesForChat = (id_chat) => Messages.findAll({ where: { id_chat: id_chat } });
 const addMessage = (message) => Messages.create(message);
@@ -69,4 +70,5 @@ module.exports = {
   addMessage,
   getMessagesForChat,
   search,
+  getChatIds,
 };

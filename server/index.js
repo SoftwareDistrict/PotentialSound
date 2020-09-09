@@ -25,6 +25,7 @@ const {
   // startChat,
   addMessage,
   getMessagesForChat,
+  search,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -155,6 +156,13 @@ app.post("/sendMessage", (req, res) => {
 app.get("/posttags", (req, res) => {
   getTags()
     .then((allTags) => res.send(allTags))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/searchfeed/:id", (req, res) => {
+  const id = req.params.id;
+  search(id)
+    .then((posts) => res.send(posts))
     .catch((err) => res.status(500).send(err));
 });
 

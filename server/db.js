@@ -61,7 +61,7 @@ Users.sync({ force: true })
   .then(() => {
     Users.bulkCreate([
       {
-        username: "Eddy Skeleton",
+        username: "EddySkeleton",
         propic: "https://tinyurl.com/y2o8d4uv",
         city: "Los Angeles",
         description:
@@ -80,7 +80,7 @@ Users.sync({ force: true })
         cell: "2222222222",
       },
       {
-        username: "Smally Bigs",
+        username: "SmallyBigz",
         propic: "https://tinyurl.com/y5j9q9sg",
         city: "New York",
         description: "Rapper. Got bars forever. Looking for some sound to accompany them.",
@@ -98,7 +98,7 @@ Users.sync({ force: true })
         cell: "4444444444",
       },
       {
-        username: "Blahtah Baby",
+        username: "BlahtahBaby",
         propic: "https://tinyurl.com/yxg46gcq",
         city: "Chicago",
         description: "Female R&B vocalist.",
@@ -118,6 +118,12 @@ Users.sync({ force: true })
           {
             id_user: 2,
             message: "Got some dope beats and looking for someone to jump on. HMU.",
+          },
+          {
+            id_user: 4,
+            message: "Looking to get rid of this guitar and amp. Just put new strings on it but I just don't paly it anymore. $250 for the set OBO.",
+            imageName: "guitar.jpg",
+            imageUrl: "https://s3-us-east-2.amazonaws.com/potentialsound/5f967613-e7f6-41fb-9ae2-33c8e81ea394.png",
           },
         ]);
       })
@@ -321,23 +327,39 @@ Users.sync({ force: true })
         Tags.bulkCreate([
           {
             id_post: 1,
-            tag: "#Rock",
+            tag: "#rock",
           },
           {
             id_post: 1,
-            tag: "#HelpWanted",
+            tag: "#help-wanted",
           },
           {
             id_post: 1,
-            tag: "#Drummer",
+            tag: "#band",
           },
           {
             id_post: 2,
-            tag: "#Collab",
+            tag: "#collab",
           },
           {
             id_post: 2,
-            tag: "#Beats",
+            tag: "#beats",
+          },
+          {
+            id_post: 2,
+            tag: "#rapper",
+          },
+          {
+            id_post: 3,
+            tag: "#sale",
+          },
+          {
+            id_post: 3,
+            tag: "#instrument",
+          },
+          {
+            id_post: 3,
+            tag: "#rock",
           },
         ]);
       })

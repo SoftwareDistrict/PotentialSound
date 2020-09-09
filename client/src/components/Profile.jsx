@@ -13,8 +13,8 @@ const Profile = ({ menu, currentUser }) => {
       position: "absolute",
       top: "50px",
       left: "25px",
-      variant: "circle"
-    }
+      variant: "circle",
+    },
   });
   const classes = useStyles();
 

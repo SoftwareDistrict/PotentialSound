@@ -18,8 +18,8 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
       position: "absolute",
       top: "10px",
       right: "25px",
-      variant: "circle"
-    }
+      variant: "circle",
+    },
   });
   const classes = useStyles();
 
@@ -61,7 +61,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
         </h1>
       </div>
       <div>
-        <Search />
+        <Search feed={feed} setFeed={setFeed} tags={tags} />
         <div>
           <Link to="/createPostMessage">
             <button

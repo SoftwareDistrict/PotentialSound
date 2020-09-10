@@ -6,6 +6,7 @@ import CreatePostMessage from "./CreatePostMessage.jsx";
 import PostFullMessage from "./PostFullMessage.jsx";
 import CreateProfile from "./CreateProfile.jsx";
 import UpdateProfile from "./UpdateProfile.jsx";
+import ViewProfile from "./ViewProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
@@ -133,6 +134,11 @@ class App extends Component {
             <Route
               path="/chat/:id"
               render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
+            />
+            <Route
+              exact={true}
+              path="/viewprofile/:id"
+              render={(props) => <ViewProfile menu={menu} {...props} />}
             />
           </Switch>
         </Router>

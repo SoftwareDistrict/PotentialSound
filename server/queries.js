@@ -21,10 +21,14 @@ const getChatIds = (id) => ChatJoin.findAll({ where: { id_user: id } });
 const getPoster = (id) => Users.findOne({ where: { id: id } });
 const getMessagesForChat = (id_chat) => Messages.findAll({ where: { id_chat: id_chat } });
 const addMessage = (message) => Messages.create(message);
-
+const getUsername = (username) => Users.findOne({ where: { username: username } });
 const addUser = (userId, userInfoObj) => Users.update(userInfoObj, { where: { id: userId } });
 const addPost = (post) => Posts.create(post);
 const addTags = (postId, tag) => Tags.create({ id_post: postId, tag: tag });
+
+const createChat = () => Chats.create();
+const createJoin = (obj) => ChatJoin.create(obj);
+const sendMessage = (obj) => Messages.create(obj);
 
 const startChat = (data) => {
   Chats.create()
@@ -53,6 +57,7 @@ const startChat = (data) => {
 
 module.exports = {
   getPosts,
+  getUsername,
   getThisPost,
   getTags,
   getUsers,
@@ -67,4 +72,7 @@ module.exports = {
   addMessage,
   getMessagesForChat,
   getChatIds,
+  createChat,
+  createJoin,
+  sendMessage,
 };

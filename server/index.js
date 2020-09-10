@@ -50,12 +50,12 @@ app.use(passport.session());
 
 const server = http.createServer(app);
 const io = socketIo(server);
+const rooms = {};
 
 io.on("connection", (socket) => {
   let chatid = null;
   console.info("io is conneceted");
   socket.on("sending", function (data) {
-    console.info(data);
     addMessage(data).then(() => {
       chatid = data.id_chat;
       getMessagesForChat(data.id_chat).then((data) => {
@@ -74,6 +74,26 @@ io.on("connection", (socket) => {
       socket.emit("receive", { data: { array: data, id_chat: chatid } });
     });
   });
+
+  socket.on("joinCall", (roomId) => {
+    if (rooms[roomId]) {
+      rooms[roomId].push(socket.id);
+    } else {
+      rooms[roomId] = [socket.id];
+    }
+    const otherUser = rooms[roomId].find((id) => id !== socket.id);
+
+    if (otherUser) {
+      socket.emit("otherUser", otherUser);
+      socket.to(otherUser).emit("userJoined", socket.id);
+    }
+  });
+
+  socket.on("offer", (payload) => io.to(payload.target).emit("offer", payload));
+
+  socket.on("answer", (payload) => io.to(payload.target).emit("answer", payload));
+
+  socket.on("ice-candidate", (incoming) => io.to(incoming.target).emit("ice-candidate", incoming));
 });
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));

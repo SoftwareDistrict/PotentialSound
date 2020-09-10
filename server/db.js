@@ -53,6 +53,7 @@ const Posts = sequelize.define("Posts", {
   audioUrl: Sequelize.TEXT,
   imageName: Sequelize.TEXT,
   imageUrl: Sequelize.TEXT,
+  youTubeUrl: Sequelize.TEXT,
 });
 
 const Tags = sequelize.define("Tags", {

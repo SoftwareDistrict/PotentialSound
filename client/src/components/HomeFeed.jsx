@@ -38,10 +38,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
   }, []);
 
   const logout = () => {
-    axios
-      .get("/logout")
-      .then(() => console.info("successful logout"))
-      .catch((err) => console.warn("unsucessful logout: ", err));
+    axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
   };
 
   return (

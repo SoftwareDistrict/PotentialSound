@@ -106,16 +106,8 @@ class App extends Component {
               )}
             />
             <Route
-              path="/createChat/:id"
-              render={({ match }) => (
-                <CreateChat
-                  currentUser={currentUser}
-                  match={match}
-                  menu={menu}
-                  allChats={allChats}
-                  getAllChats={this.getAllChats}
-                />
-              )}
+              path="/createChat"
+              render={() => <CreateChat currentUser={currentUser} menu={menu} />}
             />
             <Route
               path="/createProfile"

@@ -2,43 +2,55 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const CreateChat = ({ match, menu, currentUser }) => {
+const CreateChat = ({ menu, currentUser }) => {
   const inputBox = useRef();
-
-  const { id } = match.params;
-  console.info(id);
   const [message, setMessage] = useState("");
-  const [users, setUsers] = useState("");
-  const [usersObj, setUsersObj] = useState("");
-  const [suggestions, setSuggestions] = useState("");
+  const [users, setUsers] = useState([]);
+  const [usersObj, setUsersObj] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [text, setText] = useState("");
-  // const [allChats, setAllChats] = useState("");
+  const [allChats, setAllChats] = useState([]);
+  const [members, setMembers] = useState([]);
+  const [chatId, setChatId] = useState(0);
 
-  // const [usersChats, setUserChats] = useState("");
-
-  useEffect(() => {
+  useEffect(async () => {
     getUsers();
-
+    await axios
+      .get("/users")
+      .then(({ data }) => setUsersObj(data))
+      .catch((err) => console.warn("could not grab all usrs: ", err));
     axios
       .get("/allchats")
-      .then(({ data }) => {
-        console.info("getuserchats", data);
-        // setAllChats(data);
-      })
-      .catch((err) => console.warn(err));
+      .then(({ data }) => setAllChats(data))
+      .catch((err) => console.warn("could not grab ChatJoi: ", err));
+    setMembers([]);
   }, []);
+
+  const currentUsersChats = allChats.filter((chat) => currentUser.id === chat.id_user);
+  const allChatsWithId = currentUsersChats.map((userChat) =>
+    allChats.filter((chat) => chat.id_chat === userChat.id_chat)
+  );
+
+  const memberIds = members
+    .map((member) => usersObj.filter((user) => user.username === member))
+    .flat();
+
+  const ids = memberIds.map((m) => m.id).concat(currentUser.id);
+
+  const filterChatWithIds = allChatsWithId
+    .filter((arr) => arr.filter((obj) => ids.includes(obj.id_user)).length === arr.length)
+    .flat();
 
   const suggestionSelected = (value) => {
     setText(value);
+    setMembers([...members, value]);
     setSuggestions([]);
   };
 
   const renderSuggestions = () => {
-    console.info("redner suggestions");
     if (suggestions.length === 0) {
       return null;
     }
-
     return (
       <ul>
         {suggestions.map((user, i) => (
@@ -49,38 +61,50 @@ const CreateChat = ({ match, menu, currentUser }) => {
       </ul>
     );
   };
+
   const getUsers = () => {
     axios
       .get("/users")
       .then((users) => {
         setUsersObj(users.data);
-        let usersArr = users.data.map((obj) => obj.username);
+
+        const usersArr = users.data
+          .map((obj) => obj.username)
+          .filter((username) => username !== currentUser.username);
+
         setUsers(usersArr);
       })
-      .catch((err) => console.info(err));
+      .catch((err) => console.warn("could not get all suernames: ", err));
   };
-  const sendMessage = () => {
-    let sendeeObj = usersObj.find((user) => user.username === text);
-    if (!sendeeObj) {
-      alert("Not a valid Username!");
-      return;
-    }
-    let sendeeId = sendeeObj.id;
-    const messageObj = {
-      message: message,
-      id_user: currentUser.id,
-      postUserId: sendeeId,
-    };
 
-    axios.post("/sendChatMessage", messageObj).then((data) => {
-      console.info(data, "sent successful message through axios request");
-      // setUserChats(data);
-      setMessage("");
-      alert("Message was sent!");
-      inputBox.current.value = "";
-      // ("input-message").value = "";
-    });
+  const sendMessage = (message, userId, chatId) => {
+    let messageObj = { message: message, id_user: userId, id_chat: chatId };
+    axios.post("/sendMessage", messageObj).catch((err) => console.warn("sendMessage: ", err));
   };
+
+  const createChat = () => {
+    axios
+      .post("/createChat")
+      .then((chatId) => setChatId(chatId.data.id))
+      .catch((err) => console.warn("error in create chat: ", err));
+  };
+
+  const createJoin = (userId, chatId) => {
+    let obj = { id_user: userId, id_chat: chatId };
+    axios.post("/createJoin", obj).catch((err) => console.warn("error in create Join: ", err));
+  };
+
+  const onSubmit = async () => {
+    if (filterChatWithIds.length === ids.length) {
+      sendMessage(message, currentUser.id, filterChatWithIds[0].id_chat);
+    } else {
+      await createChat();
+      await ids.forEach((id) => createJoin(id, chatId));
+      sendMessage(message, currentUser.id, chatId);
+    }
+    setMembers([]);
+  };
+
   const onTextChange = (event) => {
     const value = event.target.value;
     let sortedSuggestions = [];
@@ -108,6 +132,7 @@ const CreateChat = ({ match, menu, currentUser }) => {
                 boxShadow: "2px 2px 1px rgba(50, 50, 50, 0.75)",
               }}
             >
+              <div>{members.join(", ")}</div>
               <input
                 style={{ width: "100%" }}
                 value={text}
@@ -133,7 +158,7 @@ const CreateChat = ({ match, menu, currentUser }) => {
             placeholder="Message"
           />
           <br />
-          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
+          <button onClick={onSubmit} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
             Submit
           </button>
         </label>
@@ -143,7 +168,6 @@ const CreateChat = ({ match, menu, currentUser }) => {
 };
 
 CreateChat.propTypes = {
-  match: PropTypes.object.isRequired,
   menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };

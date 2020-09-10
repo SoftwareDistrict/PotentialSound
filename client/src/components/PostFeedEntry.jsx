@@ -88,6 +88,25 @@ const PostFeedEntry = ({ post, users, tags }) => {
           <div
             style={{
               position: "absolute",
+              resize: "both",
+              overflow: "hidden",
+              right: "0",
+            }}
+          >
+            {post.youTubeUrl ? (
+              <iframe
+                width="160"
+                height="95"
+                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullscreen
+              ></iframe>
+            ) : null}
+          </div>
+          <div
+            style={{
+              position: "absolute",
               bottom: "0",
               resize: "both",
               overflow: "auto",
@@ -113,6 +132,7 @@ PostFeedEntry.propTypes = {
     audioName: PropTypes.string,
     imageUrl: PropTypes.string,
     imageName: PropTypes.string,
+    youTubeUrl: PropTypes.string,
   }),
   users: PropTypes.arrayOf(
     PropTypes.shape({

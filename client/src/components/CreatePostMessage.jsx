@@ -12,6 +12,7 @@ const CreatePostMessage = () => {
   const [audioName, setAudioName] = useState("");
   const [image, setImage] = useState([]);
   const [imageName, setImageName] = useState("");
+  const [youTubeUrl, setYouTubeUrl] = useState("");
 
   const onChangeAudio = (event) => {
     if (!event.target.files.length) {
@@ -57,6 +58,22 @@ const CreatePostMessage = () => {
     }
   };
 
+  const onYoutubeUrl = (event) => {
+    const yTUrl = event.target.value;
+    let youtubeID = youtube_parser(yTUrl);
+    if (youtubeID) {
+      setYouTubeUrl(youtubeID);
+    } else {
+      console.info("please input a valid youtube url");
+    }
+  };
+
+  const youtube_parser = (url) => {
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length == 11 ? match[7] : false;
+  };
+
   const onCheck = (event) => {
     let selectedTag = event.target.value;
     let foundTag = tags.find((tag) => tag === selectedTag);
@@ -75,7 +92,7 @@ const CreatePostMessage = () => {
     if (tags.length && messageLength) {
       return axios.post("/createPostMessage", {
         tags: tags,
-        bodyMsg: { message: message },
+        bodyMsg: { message: message, youTubeUrl: youTubeUrl },
       });
     }
   };
@@ -399,6 +416,15 @@ const CreatePostMessage = () => {
             <label>
               Audio:
               <input type="file" name="file" onChange={(e) => onChangeAudio(e)} />
+            </label>
+            <label>
+              Share your YouTube video{" "}
+              <input
+                style={{ width: "250px", paddingLeft: "10px", fontSize: "16px", height: "30px" }}
+                onChange={(event) => onYoutubeUrl(event)}
+                type="text"
+                placeholder={"Youtube Url"}
+              />
             </label>
             <label>
               Message{" "}

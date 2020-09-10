@@ -10,6 +10,7 @@ import ViewProfile from "./ViewProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
+import VCRoom from "./VCRoom.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -127,6 +128,7 @@ class App extends Component {
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
+            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
           </Switch>
         </Router>
       </div>

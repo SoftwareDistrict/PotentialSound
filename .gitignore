@@ -3,6 +3,7 @@ node_modules
 bower_componenets
 dist
 PotentialSound.pem
+ngrok
 
 # misc
 .DS_Store

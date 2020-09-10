@@ -81,11 +81,18 @@ const PostFeedEntry = ({ post, users, tags }) => {
             {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
             {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
           </div>
-          <div>
+          <div
+            style={{
+              position: "absolute",
+              resize: "both",
+              overflow: "hidden",
+              right: "0",
+            }}
+          >
             {post.youTubeUrl ? (
               <iframe
-                width="360"
-                height="215"
+                width="160"
+                height="95"
                 src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

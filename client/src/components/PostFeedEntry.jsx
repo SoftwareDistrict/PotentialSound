@@ -81,6 +81,18 @@ const PostFeedEntry = ({ post, users, tags }) => {
             {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
             {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
           </div>
+          <div>
+            {post.youTubeUrl ? (
+              <iframe
+                width="360"
+                height="215"
+                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullscreen
+              ></iframe>
+            ) : null}
+          </div>
           <div
             style={{
               position: "absolute",
@@ -109,6 +121,7 @@ PostFeedEntry.propTypes = {
     audioName: PropTypes.string,
     imageUrl: PropTypes.string,
     imageName: PropTypes.string,
+    youTubeUrl: PropTypes.string,
   }),
   users: PropTypes.arrayOf(
     PropTypes.shape({

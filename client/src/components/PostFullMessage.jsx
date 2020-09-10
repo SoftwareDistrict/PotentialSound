@@ -37,8 +37,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
       postUserId: id,
     };
 
-    axios.post("/sendMessage", messageObj).then((data) => {
-      console.info(data, "sent successful message through axios request");
+    axios.post("/sendMessage", messageObj).then(() => {
       setMessage("");
       alert("Message was sent!");
       document.getElementById("input-message").value = "";

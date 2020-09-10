@@ -29,9 +29,8 @@ const PostFeedEntry = ({ post, users, tags }) => {
           id="profile"
           style={{
             border: "2px solid black",
-            height: "100px",
+            height: "110px",
             margin: "0 auto",
-            // backgroundColor: "#3F3D3D",
             position: "relative",
             marginTop: "10px",
             marginBottom: "10px",
@@ -46,10 +45,15 @@ const PostFeedEntry = ({ post, users, tags }) => {
               height: "20px",
               textAlign: "left",
               left: "110px",
-              fontSize: "14px",
+              fontSize: "16px",
             }}
           >
-            <Link to={`/viewprofile/${poster.username}`}>{poster.username}</Link>
+            <Link
+              to={`/viewprofile/${poster.username}`}
+              style={{ color: "orange", textDecoration: "none", fontSize: "20px" }}
+            >
+              {poster.username}
+            </Link>
           </div>
           <div
             style={{
@@ -74,7 +78,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
               height: "60px",
               textAlign: "left",
               left: "110px",
-              fontSize: "12px",
+              fontSize: "14px",
             }}
           >
             {post.message}

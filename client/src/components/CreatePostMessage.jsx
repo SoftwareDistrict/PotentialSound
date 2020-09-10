@@ -202,64 +202,206 @@ const CreatePostMessage = () => {
         <div>
           <h1>Make a Post</h1>
           <div>
-            <label htmlFor="tag1">Collab</label>
+            {/* // Genres */}
+            <label htmlFor="tag1">Rap</label>
             <input
               className="messageCheckbox"
               type="checkbox"
               id="tag1"
               name="type"
-              value="#collab"
+              value="#rap"
               onChange={(event) => onCheck(event)}
             />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag2">Rock</label>
+            <label htmlFor="tag2">{"R&B"}</label>
             <input
               className="messageCheckbox"
               type="checkbox"
               id="tag2"
               name="type"
-              value="#rock"
+              value={"#r&b"}
               onChange={(event) => onCheck(event)}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag3">Metal</label>
+            <label htmlFor="tag3">Hip-Hop</label>
             <input
               className="messageCheckbox"
               type="checkbox"
               id="tag3"
               name="type"
-              value="#metal"
+              value="#hip-hop"
               onChange={(event) => onCheck(event)}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag4">Vocalist</label>
+            <label htmlFor="tag4">Country</label>
             <input
               className="messageCheckbox"
               type="checkbox"
               id="tag4"
               name="type"
-              value="#vocalist"
+              value="#country"
               onChange={(event) => onCheck(event)}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag5">{"R&B beats"}</label>
+            <label htmlFor="tag5">Jazz</label>
             <input
               className="messageCheckbox"
               type="checkbox"
               id="tag5"
               name="type"
-              value={"#r&b"}
+              value="#jazz"
               onChange={(event) => onCheck(event)}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag6">Help Wanted</label>
+            <label htmlFor="tag6">Rock</label>
             <input
-              style={{ marginBottom: "10px" }}
               className="messageCheckbox"
               type="checkbox"
               id="tag6"
               name="type"
+              value="#rock"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag7">Metal</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag7"
+              name="type"
+              value="#metal"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag8">Electronic</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag8"
+              name="type"
+              value="#electronic"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag9">Instrumental</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag9"
+              name="type"
+              value="#instrumental"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {/* // Talent Type */}
+            <label htmlFor="tag10">Vocalist</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag10"
+              name="type"
+              value="#vocalist"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag11">Beats</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag11"
+              name="type"
+              value="#beats"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag12">Rapper</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag12"
+              name="type"
+              value="#rapper"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag13">Song Writer</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag13"
+              name="type"
+              value="#song-writer"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag14">Studio</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag14"
+              name="type"
+              value="#studio"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag15">Management</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag15"
+              name="type"
+              value="#management"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag16">Band</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag16"
+              name="type"
+              value="#band"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {/* // Other */}
+            <label htmlFor="tag17">Help Wanted</label>
+            <input
+              style={{ marginBottom: "10px" }}
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag17"
+              name="type"
               value="#help-wanted"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag18">Collab</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag18"
+              name="type"
+              value="#collab"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag19">Sale</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag19"
+              name="type"
+              value="#sale"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag20">Instrument</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag20"
+              name="type"
+              value="#instrument"
               onChange={(event) => onCheck(event)}
             />
             <ImageUploader

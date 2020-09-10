@@ -100,6 +100,18 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
         </div>
       </div>
       <div>
+        {post.youTubeUrl ? (
+          <iframe
+            width="360"
+            height="215"
+            src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullscreen
+          ></iframe>
+        ) : null}
+      </div>
+      <div>
         <h3>Reply</h3>
         <label>
           <h3>Send a message to {poster.username}</h3>

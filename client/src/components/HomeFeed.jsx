@@ -58,7 +58,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
         </h1>
       </div>
       <div>
-        <Search feed={feed} setFeed={setFeed} tags={tags} />
+        <Search setFeed={setFeed} tags={tags} currentUser={currentUser} users={users} />
         <div>
           <Link to="/createPostMessage">
             <button
@@ -88,13 +88,6 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
 };
 
 HomeFeed.propTypes = {
-  // generalFeed: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.number,
-  //     id_user: PropTypes.number,
-  //     message: PropTypes.string,
-  //   })
-  // ),
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

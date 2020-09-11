@@ -21,19 +21,16 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      tags: [],
       allChats: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.getTags = this.getTags.bind(this);
     this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
     this.getCurrentUser();
-    this.getTags();
     this.getAllChats();
   }
 
@@ -42,13 +39,6 @@ class App extends Component {
       .get("/currentUser")
       .then((user) => this.setState({ currentUser: user.data }))
       .catch((err) => console.warn("could not get current user.", err));
-  }
-
-  getTags() {
-    axios
-      .get("/posttags")
-      .then((tags) => this.setState({ tags: tags.data }))
-      .catch((err) => console.warn("Could not get all tags", err));
   }
 
   getAllChats() {
@@ -70,13 +60,14 @@ class App extends Component {
     }
   }
 
+  
   render() {
     const menu = (
       <div id="menu" style={{ fontSize: "28px", fontWeight: "bold" }} onClick={this.toggleMenu}>
         Menu
       </div>
     );
-    const { currentUser, tags, allChats } = this.state;
+    const { currentUser, allChats } = this.state;
     return (
       <div>
         <Router>
@@ -84,8 +75,9 @@ class App extends Component {
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
+              exact={true}
               path="/home"
-              render={() => <HomeFeed menu={menu} tags={tags} currentUser={currentUser} />}
+              render={() => <HomeFeed menu={menu} currentUser={currentUser} />}
             />
             <Route
               exact={true}
@@ -101,20 +93,24 @@ class App extends Component {
               render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
             />
             <Route
+              exact={true}
               path="/fullMessage/:id"
               render={({ match }) => (
-                <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
+                <PostFullMessage currentUser={currentUser} match={match} menu={menu} />
               )}
             />
             <Route
+              exact={true}
               path="/createChat"
               render={() => <CreateChat currentUser={currentUser} menu={menu} />}
             />
             <Route
+              exact={true}
               path="/createProfile"
               render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
             />
             <Route
+              exact={true}
               path="/updateProfile"
               render={() => (
                 <UpdateProfile
@@ -125,6 +121,7 @@ class App extends Component {
               )}
             />
             <Route
+              exact={true}
               path="/chat/:id"
               render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
@@ -133,7 +130,7 @@ class App extends Component {
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
-            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+            <Route exact={true} path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
           </Switch>
         </Router>
       </div>

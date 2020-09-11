@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { IconButton } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
-const Search = ({ tags, setFeed, currentUser }) => {
+const Search = ({ tags, setFeed }) => {
   const val = useRef();
   const [users, setUsers] = useState([]);
   const [usernames, setUsernames] = useState([]);
@@ -16,14 +16,13 @@ const Search = ({ tags, setFeed, currentUser }) => {
   useEffect(() => {
     axios
       .get("/users")
-      .then(({ data }) => data.filter((user) => user !== currentUser))
-      .then((users) => {
-        setUsers(users.map((user) => user.id === currentUser.id));
-        setUsernames(users.map((user) => user.username));
+      .then(({ data }) => {
+        setUsers(data);
+        setUsernames(data.map((user) => user.username));
       })
       .catch((err) => console.warn("could not get users: ", err));
     setTagNames(tags.map((tag) => tag.tag));
-  }, []);
+  }, [tags]);
 
   const suggestionSelected = (value) => {
     queries.push(value);
@@ -101,12 +100,27 @@ const Search = ({ tags, setFeed, currentUser }) => {
           .catch((err) => console.warn("Could not get posts that match your search user", err));
       })
     );
+    
     const allPosts = [allTagPosts.flat(), allUserPosts.flat()].flat();
-    setFeed(allPosts);
+    const postIds = allPosts.map((post) => post.id);
+    const uniquePostIds = Array.from(new Set(postIds));
+    const finalSearch = await Promise.all(
+      uniquePostIds.map(async (id) => {
+        return await axios
+          .get(`/searchfeed/${id}`)
+          .then((posts) => posts.data)
+          .catch((err) => console.warn("Could not get posts that match your search tag", err));
+      })
+    );
+    
+    setFeed(finalSearch.flat());
   };
 
   return (
     <div>
+      <div>
+        {queries.join(", ")}
+      </div>
       <input
         ref={val}
         type="text"
@@ -130,7 +144,6 @@ const Search = ({ tags, setFeed, currentUser }) => {
 };
 
 Search.propTypes = {
-  currentUser: PropTypes.object.isRequired,
   setFeed: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(
     PropTypes.shape({

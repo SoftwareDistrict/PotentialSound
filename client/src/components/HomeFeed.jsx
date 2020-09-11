@@ -7,9 +7,10 @@ import axios from "axios";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const HomeFeed = ({ currentUser, tags, menu }) => {
+const HomeFeed = ({ currentUser, menu }) => {
   const [users, setUsers] = useState([]);
   const [feed, setFeed] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const useStyles = makeStyles({
     avatar: {
@@ -37,6 +38,13 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
       .catch((err) => console.warn("Could not get all users", err));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get("/posttags")
+      .then((tags) => setTags(tags.data))
+      .catch((err) => console.warn("Could not get all tags", err));
+  }, []);
+
   const logout = () => {
     axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
   };
@@ -58,7 +66,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
         </h1>
       </div>
       <div>
-        <Search setFeed={setFeed} tags={tags} currentUser={currentUser} users={users} />
+        <Search setFeed={setFeed} tags={tags} users={users} />
         <div>
           <Link to="/createPostMessage">
             <button
@@ -88,13 +96,6 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
 };
 
 HomeFeed.propTypes = {
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      id_post: PropTypes.number,
-      tag: PropTypes.string,
-    })
-  ),
   menu: PropTypes.element,
   audio: PropTypes.array,
   currentUser: PropTypes.object.isRequired,

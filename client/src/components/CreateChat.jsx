@@ -4,6 +4,7 @@ import axios from "axios";
 
 const CreateChat = ({ menu, currentUser }) => {
   const inputBox = useRef();
+  const memeberInputBox = useRef();
   const [message, setMessage] = useState("");
   const [users, setUsers] = useState([]);
   const [usersObj, setUsersObj] = useState([]);
@@ -97,12 +98,15 @@ const CreateChat = ({ menu, currentUser }) => {
   const onSubmit = async () => {
     if (filterChatWithIds.length === ids.length) {
       sendMessage(message, currentUser.id, filterChatWithIds[0].id_chat);
+      setMembers([]);
+      memeberInputBox.current.value = "";
     } else {
       await createChat();
       await ids.forEach((id) => createJoin(id, chatId));
       sendMessage(message, currentUser.id, chatId);
+      setMembers([]);
+      memeberInputBox.current.value = "";
     }
-    setMembers([]);
   };
 
   const onTextChange = (event) => {
@@ -134,6 +138,7 @@ const CreateChat = ({ menu, currentUser }) => {
             >
               <div>{members.join(", ")}</div>
               <input
+                ref={memeberInputBox}
                 style={{ width: "100%" }}
                 value={text}
                 onChange={onTextChange}

@@ -60,6 +60,12 @@ const Tags = sequelize.define("Tags", {
   tag: Sequelize.STRING,
 });
 
+const LiveStreams = sequelize.define("LiveStreams", {
+  name: Sequelize.STRING,
+  desc: Sequelize.STRING,
+  id_user: Sequelize.INTEGER,
+});
+
 Users.sync({ force: true })
   .then(() => {
     Users.bulkCreate([
@@ -110,6 +116,29 @@ Users.sync({ force: true })
         cell: "5555555555",
       },
     ]);
+    LiveStreams.sync({ force: true })
+      .then(() => {
+        LiveStreams.bulkCreate([
+          {
+            name: "Talent Show",
+            desc: "Talent show! Come join the live and listen to users play insurments",
+            id_user: 1,
+          },
+
+          {
+            name: "Need help, have writers block smh",
+            desc: "Anyone want to help me comeup with a hook I have for this song",
+            id_user: 2,
+          },
+          {
+            name: "Freestyling",
+            desc: "Who wants to freestyle with me!",
+            id_user: 6,
+          },
+        ]);
+      })
+      .catch((err) => console.warn("LiveStreams", err));
+
     Posts.sync({ force: true })
       .then(() => {
         Posts.bulkCreate([
@@ -376,4 +405,5 @@ module.exports = {
   ChatJoin,
   Messages,
   Tags,
+  LiveStreams,
 };

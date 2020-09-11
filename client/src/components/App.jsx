@@ -10,6 +10,10 @@ import ViewProfile from "./ViewProfile.jsx";
 import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
+import LiveStreams from "./LiveStreams.jsx";
+import LiveStream from "./LiveStream.jsx";
+import CreateLiveStream from "./CreateLiveStream.jsx";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import CreateChat from "./CreateChat.jsx";
@@ -83,6 +87,7 @@ class App extends Component {
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
+              exact={true}
               path="/home"
               render={() => <HomeFeed menu={menu} tags={tags} currentUser={currentUser} />}
             />
@@ -99,6 +104,14 @@ class App extends Component {
               path="/chats"
               render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
             />
+
+            <Route
+              exact={true}
+              path="/liveStreams"
+              render={() => (
+                <LiveStreams menu={menu} allChats={allChats} currentUser={currentUser} />
+              )}
+            />
             <Route
               path="/fullMessage/:id"
               render={({ match }) => (
@@ -106,8 +119,21 @@ class App extends Component {
               )}
             />
             <Route
+              exact={true}
               path="/createChat"
               render={() => <CreateChat currentUser={currentUser} menu={menu} />}
+            />
+            <Route
+              exact={true}
+              path="/createLiveStream"
+              render={() => <CreateLiveStream currentUser={currentUser} menu={menu} />}
+            />
+            <Route
+              exact={true}
+              path="/liveStream/:id"
+              render={({ match }) => (
+                <LiveStream match={match} currentUser={currentUser} menu={menu} />
+              )}
             />
             <Route
               path="/createProfile"

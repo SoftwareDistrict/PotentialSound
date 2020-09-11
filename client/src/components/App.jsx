@@ -60,7 +60,6 @@ class App extends Component {
     }
   }
 
-  
   render() {
     const menu = (
       <div id="menu" style={{ fontSize: "28px", fontWeight: "bold" }} onClick={this.toggleMenu}>
@@ -130,7 +129,11 @@ class App extends Component {
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
-            <Route exact={true} path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+            <Route
+              exact={true}
+              path="/room/:roomId"
+              render={({ match }) => <VCRoom match={match} />}
+            />
           </Switch>
         </Router>
       </div>

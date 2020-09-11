@@ -100,7 +100,7 @@ const Search = ({ tags, setFeed }) => {
           .catch((err) => console.warn("Could not get posts that match your search user", err));
       })
     );
-    
+
     const allPosts = [allTagPosts.flat(), allUserPosts.flat()].flat();
     const postIds = allPosts.map((post) => post.id);
     const uniquePostIds = Array.from(new Set(postIds));
@@ -112,15 +112,13 @@ const Search = ({ tags, setFeed }) => {
           .catch((err) => console.warn("Could not get posts that match your search tag", err));
       })
     );
-    
+
     setFeed(finalSearch.flat());
   };
 
   return (
     <div>
-      <div>
-        {queries.join(", ")}
-      </div>
+      <div>{queries.join(", ")}</div>
       <input
         ref={val}
         type="text"

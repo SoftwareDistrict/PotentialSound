@@ -15,7 +15,8 @@ const Search = ({ tags, currentUser }) => {
   const [queries] = useState([]);
 
   useEffect(() => {
-    axios.get("/users")
+    axios
+      .get("/users")
       .then(({ data }) => data.filter((user) => user !== currentUser))
       .then((users) => {
         setUsers(users);
@@ -40,7 +41,11 @@ const Search = ({ tags, currentUser }) => {
     return (
       <ul>
         Users:
-        {suggestedUsers.map((user, i) => <li key={i} onClick={() => suggestionSelected(user)}>{user}</li>)}
+        {suggestedUsers.map((user, i) => (
+          <li key={i} onClick={() => suggestionSelected(user)}>
+            {user}
+          </li>
+        ))}
       </ul>
     );
   };
@@ -52,7 +57,11 @@ const Search = ({ tags, currentUser }) => {
     return (
       <ul>
         Tags:
-        {suggestedTags.map((tag, i) => <li key={i} onClick={() => suggestionSelected(tag)}>{tag}</li>)}
+        {suggestedTags.map((tag, i) => (
+          <li key={i} onClick={() => suggestionSelected(tag)}>
+            {tag}
+          </li>
+        ))}
       </ul>
     );
   };
@@ -60,7 +69,7 @@ const Search = ({ tags, currentUser }) => {
   const onTextChange = (event) => {
     const value = event.target.value;
     let sortedUserSuggestions = [];
-    let sortedTagSuggestions =[];
+    let sortedTagSuggestions = [];
     if (value.length > 0 || value[value.length - 1] === " ") {
       const regex = new RegExp(`${value}`, "i");
       sortedUserSuggestions = usernames.sort().filter((v) => regex.test(v));
@@ -84,18 +93,16 @@ const Search = ({ tags, currentUser }) => {
   //       .catch((err) => console.warn("Could not get posts that match your search", err));
   //   })
   // );
-    
+
   // const searchUsers = queries.map((q) => users.filter((user) => user.username === q)).flat();
   // const userIds = searchUsers.map((user) => user.id);
-  // const 
+  // const
   // const allUserPosts = await Promise.all(
   //   userIds.map(async (id) => {
   //     return await axios.get("/")
   //   })
   // );
-    
-    
-    
+
   // setFeed([allTagPosts.flat(), allUserPosts.flat()].flat());
   // };
 

@@ -21,17 +21,14 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      allChats: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
     this.getCurrentUser();
-    this.getAllChats();
   }
 
   getCurrentUser() {
@@ -39,13 +36,6 @@ class App extends Component {
       .get("/currentUser")
       .then((user) => this.setState({ currentUser: user.data }))
       .catch((err) => console.warn("could not get current user.", err));
-  }
-
-  getAllChats() {
-    axios
-      .get("/allchats")
-      .then((chats) => this.setState({ allChats: chats.data }))
-      .catch((err) => console.warn("Could not get all chats", err));
   }
 
   toggleMenu() {
@@ -66,7 +56,7 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, allChats } = this.state;
+    const { currentUser } = this.state;
     return (
       <div>
         <Router>
@@ -89,7 +79,7 @@ class App extends Component {
             <Route
               exact={true}
               path="/chats"
-              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
+              render={() => <Chats menu={menu} currentUser={currentUser} />}
             />
             <Route
               exact={true}

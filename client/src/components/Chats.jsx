@@ -3,16 +3,17 @@ import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const Chats = ({ currentUser, allChats, menu }) => {
+const Chats = ({ currentUser, menu }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
+  const [allChats, setAllChats] = useState([]);
 
-  const ids = [];
-  allChats.forEach((chat) => {
-    if (chat.id_user === currentUser.id) {
-      ids.push(chat.id_chat);
-    }
-  });
+  useEffect(async () => {
+    await axios
+      .get("/allchats")
+      .then((chats) => setAllChats(chats.data))
+      .catch((err) => console.warn("Could not get all chats", err));
+  }, []);
 
   useEffect(() => {
     const ids = [];
@@ -22,7 +23,7 @@ const Chats = ({ currentUser, allChats, menu }) => {
       }
     });
     setChatIds(ids);
-  }, []);
+  }, [allChats]);
 
   useEffect(() => {
     axios
@@ -50,7 +51,7 @@ const Chats = ({ currentUser, allChats, menu }) => {
     <div>
       {menu}
       <h1>Current Messages (Inbox) </h1>
-      {ids.map((id) => (
+      {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />
       ))}
     </div>
@@ -60,13 +61,7 @@ const Chats = ({ currentUser, allChats, menu }) => {
 Chats.propTypes = {
   currentUser: PropTypes.object.isRequired,
   menu: PropTypes.element,
-  allChats: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      id_user: PropTypes.number,
-      id_chat: PropTypes.string,
-    })
-  ),
+ 
 };
 
 export default Chats;

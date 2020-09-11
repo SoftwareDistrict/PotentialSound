@@ -30,7 +30,7 @@ const Nav = ({ currentUser, toggleMenu }) => {
       <Link onClick={toggleMenu} style={linkStyle} to="/home">
         General
       </Link>
-      <Link onClick={toggleMenu} style={linkStyle} to={`/createChat/${currentUser.id}`}>
+      <Link onClick={toggleMenu} style={linkStyle} to={"/createChat"}>
         Create Chat
       </Link>
       <Link to="chats" onClick={toggleMenu} style={linkStyle}>

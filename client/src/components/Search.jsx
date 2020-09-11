@@ -1,38 +1,114 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { IconButton } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
-const Search = ({ tags, setFeed }) => {
-  const [queries, setQueries] = useState([]);
+const Search = ({ tags, setFeed, currentUser }) => {
+  const val = useRef();
+  const [users, setUsers] = useState([]);
+  const [usernames, setUsernames] = useState([]);
+  const [tagNames, setTagNames] = useState([]);
+  const [suggestedUsers, setSuggestedUsers] = useState([]);
+  const [suggestedTags, setSuggestedTags] = useState([]);
+  const [queries] = useState([]);
 
-  const onChange = (e) => {
-    setQueries(e.target.value.split(" "));
+  useEffect(() => {
+    axios
+      .get("/users")
+      .then(({ data }) => data.filter((user) => user !== currentUser))
+      .then((users) => {
+        setUsers(users.map((user) => user.id === currentUser.id));
+        setUsernames(users.map((user) => user.username));
+      })
+      .catch((err) => console.warn("could not get users: ", err));
+    setTagNames(tags.map((tag) => tag.tag));
+  }, []);
+
+  const suggestionSelected = (value) => {
+    queries.push(value);
+    val.current.value = "";
+    setSuggestedUsers([]);
+    setSuggestedTags([]);
+  };
+
+  const renderSuggestedUsers = () => {
+    if (suggestedUsers.length === 0) {
+      return null;
+    }
+    return (
+      <ul>
+        Users:
+        {suggestedUsers.map((user, i) => (
+          <li key={i} onClick={() => suggestionSelected(user)}>
+            {user}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  const renderSuggestedTags = () => {
+    if (suggestedTags.length === 0) {
+      return null;
+    }
+    return (
+      <ul>
+        Tags:
+        {suggestedTags.map((tag, i) => (
+          <li key={i} onClick={() => suggestionSelected(tag)}>
+            {tag}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  const onTextChange = (event) => {
+    let value = event.target.value;
+    let sortedUserSuggestions = [];
+    let sortedTagSuggestions = [];
+    if (value.length > 0) {
+      const regex = new RegExp(`${value}`, "i");
+      sortedUserSuggestions = usernames.sort().filter((v) => regex.test(v));
+      sortedTagSuggestions = tagNames.sort().filter((v) => regex.test(v));
+    }
+    setSuggestedUsers(sortedUserSuggestions);
+    setSuggestedTags(sortedTagSuggestions);
   };
 
   const onSearch = async () => {
-    const searchTags = queries
-      .map((q) => {
-        return tags.filter((tag) => tag.tag === q);
-      })
-      .flat();
-    const ids = searchTags.map((tag) => tag.id_post);
-    const finalSearch = Array.from(new Set(ids));
-    const allPosts = await Promise.all(
-      finalSearch.map(async (id) => {
+    const searchTags = queries.map((q) => tags.filter((tag) => tag.tag === q)).flat();
+    const tagIds = searchTags.map((tag) => tag.id_post);
+    const uniqueTagIds = Array.from(new Set(tagIds));
+    const allTagPosts = await Promise.all(
+      uniqueTagIds.map(async (id) => {
         return await axios
           .get(`/searchfeed/${id}`)
           .then((posts) => posts.data)
-          .catch((err) => console.warn("Could not get posts that match your search", err));
+          .catch((err) => console.warn("Could not get posts that match your search tag", err));
       })
     );
-    setFeed(allPosts.flat());
+
+    const searchUsers = queries.map((q) => users.filter((user) => user.username === q)).flat();
+    const userIds = searchUsers.map((user) => user.id);
+    const uniqueUserIds = Array.from(new Set(userIds));
+    const allUserPosts = await Promise.all(
+      uniqueUserIds.map(async (id) => {
+        return await axios
+          .get(`/searchfeedbyuser/${id}`)
+          .then((posts) => posts.data)
+          .catch((err) => console.warn("Could not get posts that match your search user", err));
+      })
+    );
+    const allPosts = [allTagPosts.flat(), allUserPosts.flat()].flat();
+    setFeed(allPosts);
   };
 
   return (
     <div>
       <input
+        ref={val}
         type="text"
         placeholder="Search"
         style={{
@@ -42,17 +118,19 @@ const Search = ({ tags, setFeed }) => {
           paddingLeft: "10px",
           marginRight: "5px",
         }}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => onTextChange(e)}
       />
-      <IconButton onClick={() => onSearch()}>
+      <IconButton onClick={onSearch}>
         <SearchOutlinedIcon />
       </IconButton>
+      {renderSuggestedUsers()}
+      {renderSuggestedTags()}
     </div>
   );
 };
 
 Search.propTypes = {
-  feed: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
   setFeed: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(
     PropTypes.shape({

@@ -27,6 +27,8 @@ const {
   createJoin,
   createChat,
   sendMessage,
+  search,
+  searchPostByUser,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -142,6 +144,20 @@ app.post("/createProfile", (req, res) => {
   const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
     .then(() => res.status(200).json({ redirectUrl: "/home" }))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/searchfeed/:id", (req, res) => {
+  const id = req.params.id;
+  search(id)
+    .then((posts) => res.send(posts))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/searchfeedbyuser/:id", (req, res) => {
+  const id = req.params.id;
+  searchPostByUser(id)
+    .then((posts) => res.send(posts))
     .catch((err) => res.status(500).send(err));
 });
 

@@ -11,6 +11,13 @@ const Chat = ({ menu, match, currentUser, history }) => {
   const audioRef = useRef();
   const imageRef = useRef();
   const idChat = match.params.id;
+  const id_user = currentUser.id;
+  const [userMessage, setMessage] = useState("");
+  const [allMsgs, setallMsgs] = useState([]);
+  const [photo, setPhoto] = useState([]);
+  const [audio, setAudio] = useState([]);
+  const [load, setLoading] = useState(false);
+
   socket.on("receive", (data) => {
     let { array, id_chat } = data.data;
     if (idChat == id_chat) {
@@ -18,11 +25,9 @@ const Chat = ({ menu, match, currentUser, history }) => {
     }
   });
 
-  const [userMessage, setMessage] = useState("");
-  const [allMsgs, setallMsgs] = useState([]);
-  const [photo, setPhoto] = useState([]);
-  const [audio, setAudio] = useState([]);
-  const [load, setLoading] = useState(false);
+  useEffect(() => {
+    socket.emit("getMessages", idChat);
+  }, [allMsgs]);
 
   const createVCRoom = () => {
     const id = uuid();
@@ -125,10 +130,6 @@ const Chat = ({ menu, match, currentUser, history }) => {
     }
   };
 
-  const id_user = currentUser.id;
-  useEffect(() => {
-    socket.emit("getMessages", idChat);
-  }, []);
   return (
     <div>
       {menu}

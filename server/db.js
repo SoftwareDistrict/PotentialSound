@@ -61,7 +61,7 @@ const Tags = sequelize.define("Tags", {
   tag: Sequelize.STRING,
 });
 
-// Users.sync()
+// Users.sync({ force: true })
 //   .then(() => {
 //     Users.bulkCreate([
 //       {
@@ -111,7 +111,7 @@ const Tags = sequelize.define("Tags", {
 //         cell: "5555555555",
 //       },
 //     ]);
-//     Posts.sync()
+//     Posts.sync({ force: true })
 //       .then(() => {
 //         Posts.bulkCreate([
 //           {
@@ -134,7 +134,7 @@ const Tags = sequelize.define("Tags", {
 //         ]);
 //       })
 //       .catch((err) => console.warn("Postsssssssss", err));
-//     Chats.sync()
+//     Chats.sync({ force: true })
 //       .then(() => {
 //         Chats.bulkCreate([
 //           {
@@ -151,7 +151,7 @@ const Tags = sequelize.define("Tags", {
 //       .catch((err) => console.warn("Chatsssssss", err));
 //   })
 //   .then(() => {
-//     ChatJoin.sync()
+//     ChatJoin.sync({ force: true })
 //       .then(() => {
 //         ChatJoin.bulkCreate([
 //           {
@@ -201,7 +201,7 @@ const Tags = sequelize.define("Tags", {
 //         ]);
 //       })
 //       .catch((err) => console.warn("ChatJoinnnnnnnn", err));
-//     Messages.sync()
+//     Messages.sync({ force: true })
 //       .then(() => {
 //         Messages.bulkCreate([
 //           {
@@ -324,7 +324,7 @@ const Tags = sequelize.define("Tags", {
 //         ]);
 //       })
 //       .catch((err) => console.warn("Messagesssssss", err));
-//     Tags.sync()
+//     Tags.sync({ force: true })
 //       .then(() => {
 //         Tags.bulkCreate([
 //           {

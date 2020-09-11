@@ -21,17 +21,14 @@ class App extends Component {
 
     this.state = {
       currentUser: {},
-      allChats: [],
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.getAllChats = this.getAllChats.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
     this.getCurrentUser();
-    this.getAllChats();
   }
 
   getCurrentUser() {
@@ -39,13 +36,6 @@ class App extends Component {
       .get("/currentUser")
       .then((user) => this.setState({ currentUser: user.data }))
       .catch((err) => console.warn("could not get current user.", err));
-  }
-
-  getAllChats() {
-    axios
-      .get("/allchats")
-      .then((chats) => this.setState({ allChats: chats.data }))
-      .catch((err) => console.warn("Could not get all chats", err));
   }
 
   toggleMenu() {
@@ -66,50 +56,37 @@ class App extends Component {
         Menu
       </div>
     );
-    const { currentUser, allChats } = this.state;
+    const { currentUser } = this.state;
     return (
       <div>
         <Router>
           <Nav currentUser={currentUser} toggleMenu={this.toggleMenu} />
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
+            <Route path="/home" render={() => <HomeFeed menu={menu} currentUser={currentUser} />} />
             <Route
-              exact={true}
-              path="/home"
-              render={() => <HomeFeed menu={menu} currentUser={currentUser} />}
-            />
-            <Route
-              exact={true}
               path="/profile/:id"
               render={({ match }) => (
                 <Profile menu={menu} match={match} currentUser={currentUser} />
               )}
             />
-            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
+            <Route path="/createPostMessage" render={() => <CreatePostMessage />} />
+            <Route path="/chats" render={() => <Chats menu={menu} currentUser={currentUser} />} />
             <Route
-              exact={true}
-              path="/chats"
-              render={() => <Chats menu={menu} allChats={allChats} currentUser={currentUser} />}
-            />
-            <Route
-              exact={true}
               path="/fullMessage/:id"
               render={({ match }) => (
                 <PostFullMessage currentUser={currentUser} match={match} menu={menu} />
               )}
             />
             <Route
-              exact={true}
               path="/createChat"
               render={() => <CreateChat currentUser={currentUser} menu={menu} />}
             />
             <Route
-              exact={true}
               path="/createProfile"
               render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
             />
             <Route
-              exact={true}
               path="/updateProfile"
               render={() => (
                 <UpdateProfile
@@ -120,20 +97,14 @@ class App extends Component {
               )}
             />
             <Route
-              exact={true}
               path="/chat/:id"
               render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
             <Route
-              exact={true}
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
-            <Route
-              exact={true}
-              path="/room/:roomId"
-              render={({ match }) => <VCRoom match={match} />}
-            />
+            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
           </Switch>
         </Router>
       </div>

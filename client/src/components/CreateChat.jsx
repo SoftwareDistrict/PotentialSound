@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
+import "regenerator-runtime/runtime";
 
 const CreateChat = ({ menu, currentUser }) => {
   const inputBox = useRef();
+  const hist = useHistory();
   const [message, setMessage] = useState("");
   const [users, setUsers] = useState([]);
   const [usersObj, setUsersObj] = useState([]);
@@ -11,7 +14,6 @@ const CreateChat = ({ menu, currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
-  const [chatId, setChatId] = useState(0);
 
   useEffect(async () => {
     getUsers();
@@ -79,13 +81,19 @@ const CreateChat = ({ menu, currentUser }) => {
 
   const sendMessage = (message, userId, chatId) => {
     let messageObj = { message: message, id_user: userId, id_chat: chatId };
-    axios.post("/sendMessage", messageObj).catch((err) => console.warn("sendMessage: ", err));
+    axios
+      .post("/sendMessage", messageObj)
+      .then(() => hist.push(`/chat/${chatId}`))
+      .catch((err) => console.warn("sendMessage: ", err));
   };
 
   const createChat = () => {
     axios
       .post("/createChat")
-      .then((chatId) => setChatId(chatId.data.id))
+      .then(async (chatId) => {
+        await ids.forEach((id) => createJoin(id, chatId.data.id));
+        sendMessage(message, currentUser.id, chatId.data.id);
+      })
       .catch((err) => console.warn("error in create chat: ", err));
   };
 
@@ -99,8 +107,6 @@ const CreateChat = ({ menu, currentUser }) => {
       sendMessage(message, currentUser.id, filterChatWithIds[0].id_chat);
     } else {
       await createChat();
-      await ids.forEach((id) => createJoin(id, chatId));
-      sendMessage(message, currentUser.id, chatId);
     }
     setMembers([]);
   };

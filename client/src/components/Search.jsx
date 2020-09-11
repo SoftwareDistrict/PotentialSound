@@ -3,8 +3,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { IconButton } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import "regenerator-runtime/runtime";
 
-const Search = ({ tags, setFeed }) => {
+const Search = ({ tags, setSearchFeed, setSearched }) => {
   const val = useRef();
   const [users, setUsers] = useState([]);
   const [usernames, setUsernames] = useState([]);
@@ -113,7 +114,8 @@ const Search = ({ tags, setFeed }) => {
       })
     );
 
-    setFeed(finalSearch.flat());
+    setSearchFeed(finalSearch.flat());
+    setSearched(true);
   };
 
   return (
@@ -142,7 +144,8 @@ const Search = ({ tags, setFeed }) => {
 };
 
 Search.propTypes = {
-  setFeed: PropTypes.func.isRequired,
+  setSearchFeed: PropTypes.func.isRequired,
+  setSearched: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

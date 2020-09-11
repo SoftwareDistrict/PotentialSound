@@ -209,12 +209,16 @@ app.post("/createChat", (req, res) => {
 
 app.post("/sendMessage", (req, res) => {
   const body = req.body;
-  sendMessage(body).catch((err) => res.status(500).send(err));
+  sendMessage(body)
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.post("/createJoin", (req, res) => {
   const body = req.body;
-  createJoin(body).catch((err) => res.status(500).send(err));
+  createJoin(body)
+    .then(() => res.sendStatus(201))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("/poster/:id", (req, res) => {

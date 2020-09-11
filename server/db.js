@@ -370,12 +370,11 @@ const Tags = sequelize.define("Tags", {
 Users.sync()
   .then(() => {
     Posts.sync();
-    Chats.sync()
-      .then(() => {
-        ChatJoin.sync();
-        Messages.sync();
-        Tags.sync();
-      });
+    Chats.sync().then(() => {
+      ChatJoin.sync();
+      Messages.sync();
+      Tags.sync();
+    });
   })
   .catch((err) => console.warn("ahhhhhhh", err));
 

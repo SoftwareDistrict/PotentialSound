@@ -81,7 +81,8 @@ const CreateChat = ({ menu, currentUser }) => {
 
   const sendMessage = (message, userId, chatId) => {
     let messageObj = { message: message, id_user: userId, id_chat: chatId };
-    axios.post("/sendMessage", messageObj)
+    axios
+      .post("/sendMessage", messageObj)
       .then(() => hist.push(`/chat/${chatId}`))
       .catch((err) => console.warn("sendMessage: ", err));
   };
@@ -107,7 +108,7 @@ const CreateChat = ({ menu, currentUser }) => {
     } else {
       await createChat();
     }
-    setMembers([]); 
+    setMembers([]);
   };
 
   const onTextChange = (event) => {

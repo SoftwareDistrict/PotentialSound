@@ -129,7 +129,7 @@ const Chat = ({ menu, match, currentUser, history }) => {
       setMessage("");
     }
   };
-  
+
   return (
     <div>
       {menu}

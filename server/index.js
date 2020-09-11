@@ -50,7 +50,8 @@ app.use(passport.session());
 
 const server = http.createServer(app);
 const io = socketIo(server);
-const rooms = {};
+const users = {};
+const socketToRoom = {};
 
 io.on("connection", (socket) => {
   let chatid = null;
@@ -75,25 +76,45 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("joinCall", (roomId) => {
-    if (rooms[roomId]) {
-      rooms[roomId].push(socket.id);
+  socket.on("join room", (roomID) => {
+    if (users[roomID]) {
+      const length = users[roomID].length;
+      if (length === 4) {
+        socket.emit("room full");
+        return;
+      }
+      users[roomID].push(socket.id);
     } else {
-      rooms[roomId] = [socket.id];
+      users[roomID] = [socket.id];
     }
-    const otherUser = rooms[roomId].find((id) => id !== socket.id);
+    socketToRoom[socket.id] = roomID;
+    const usersInThisRoom = users[roomID].filter((id) => id !== socket.id);
 
-    if (otherUser) {
-      socket.emit("otherUser", otherUser);
-      socket.to(otherUser).emit("userJoined", socket.id);
-    }
+    socket.emit("all users", usersInThisRoom);
   });
 
-  socket.on("offer", (payload) => io.to(payload.target).emit("offer", payload));
+  socket.on("sending signal", (payload) => {
+    io.to(payload.userToSignal).emit("user joined", {
+      signal: payload.signal,
+      callerID: payload.callerID,
+    });
+  });
 
-  socket.on("answer", (payload) => io.to(payload.target).emit("answer", payload));
+  socket.on("returning signal", (payload) => {
+    io.to(payload.callerID).emit("receiving returned signal", {
+      signal: payload.signal,
+      id: socket.id,
+    });
+  });
 
-  socket.on("ice-candidate", (incoming) => io.to(incoming.target).emit("ice-candidate", incoming));
+  socket.on("disconnect", () => {
+    const roomID = socketToRoom[socket.id];
+    let room = users[roomID];
+    if (room) {
+      room = room.filter((id) => id !== socket.id);
+      users[roomID] = room;
+    }
+  });
 });
 
 app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));

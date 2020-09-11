@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { withRouter } from "react-router-dom";
 import Message from "./Message.jsx";
 import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
+import { v4 as uuid } from "uuid";
 let socket = io("localhost:8080");
 
-const Chat = ({ menu, match, currentUser }) => {
+const Chat = ({ menu, match, currentUser, history }) => {
   const audioRef = useRef();
   const imageRef = useRef();
   const idChat = match.params.id;
@@ -21,6 +23,11 @@ const Chat = ({ menu, match, currentUser }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
+
+  const createVCRoom = () => {
+    const id = uuid();
+    history.push(`/room/${id}`);
+  };
 
   const onChangePhoto = (e) => {
     if (!e.target.files[0]) {
@@ -183,6 +190,7 @@ const Chat = ({ menu, match, currentUser }) => {
             >
               Submit
             </button>
+            <button onClick={() => createVCRoom()}>Call</button>
           </div>
         </div>
       </div>
@@ -194,6 +202,7 @@ Chat.propTypes = {
   menu: PropTypes.element,
   match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
+  history: PropTypes.array,
 };
 
-export default Chat;
+export default withRouter(Chat);

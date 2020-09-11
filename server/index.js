@@ -8,7 +8,6 @@ const { uploadToS3, uploadAudioToS3 } = require("./s3");
 const socketIo = require("socket.io");
 const http = require("http");
 require("./db");
-const { Chats, ChatJoin, Messages } = require("./db");
 require("./passport.setup");
 const {
   isAccCreated,
@@ -23,9 +22,11 @@ const {
   addUser,
   addTags,
   getUsername,
-  // startChat,
   addMessage,
   getMessagesForChat,
+  createJoin,
+  createChat,
+  sendMessage,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -171,29 +172,6 @@ app.get("/users", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.post("/sendMessage", (req, res) => {
-  let data = req.body;
-  Chats.create().then((chatData) => {
-    const id_chat = chatData.dataValues.id;
-    ChatJoin.create({ id_user: data.id_user, id_chat: id_chat }).then(() => {
-      ChatJoin.create({ id_user: data.postUserId, id_chat: id_chat }).then(() => {
-        Messages.create({
-          message: data.message,
-          id_user: data.id_user,
-          id_chat: Number(id_chat),
-        })
-          .then((data) => {
-            console.info("sucessful message", data);
-            res.send("sucessful posted message");
-          })
-          .catch((err) => {
-            console.info(err);
-          });
-      });
-    });
-  });
-});
-
 app.get("/posttags", (req, res) => {
   getTags()
     .then((allTags) => res.send(allTags))
@@ -207,12 +185,21 @@ app.get("/currentUser", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-// app.post("/sendMessage", (req, res) => {
-//   let data = req.body;
-//   startChat(data)
-//     .then(() => res.send("Chat created."))
-//     .catch((err) => res.status(500).send(err));
-// });
+app.post("/createChat", (req, res) => {
+  createChat()
+    .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.post("/sendMessage", (req, res) => {
+  const body = req.body;
+  sendMessage(body).catch((err) => res.status(500).send(err));
+});
+
+app.post("/createJoin", (req, res) => {
+  const body = req.body;
+  createJoin(body).catch((err) => res.status(500).send(err));
+});
 
 app.get("/poster/:id", (req, res) => {
   const id = req.params.id;
@@ -260,7 +247,6 @@ app.post("/api/uploadImage", (req, res) => {
 app.post("/createPostMessage", (req, res) => {
   const { tags, bodyMsg } = req.body;
   bodyMsg["id_user"] = req.session.passport.user;
-
   addPost(bodyMsg)
     .then((post) => {
       const postId = post.dataValues.id;
@@ -269,6 +255,12 @@ app.post("/createPostMessage", (req, res) => {
       });
       res.status(201).json({ redirectUrl: "/home" });
     })
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/getallchats", (req, res) => {
+  getChats()
+    .then((data) => res.send(data))
     .catch((err) => res.status(500).send(err));
 });
 

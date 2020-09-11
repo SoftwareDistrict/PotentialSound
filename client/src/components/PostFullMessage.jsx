@@ -37,8 +37,7 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
       postUserId: id,
     };
 
-    axios.post("/sendMessage", messageObj).then((data) => {
-      console.info(data, "sent successful message through axios request");
+    axios.post("/sendMessage", messageObj).then(() => {
       setMessage("");
       alert("Message was sent!");
       document.getElementById("input-message").value = "";
@@ -98,6 +97,18 @@ const PostFullMessage = ({ match, tags, menu, currentUser }) => {
           {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
           {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
         </div>
+      </div>
+      <div>
+        {post.youTubeUrl ? (
+          <iframe
+            width="360"
+            height="215"
+            src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullscreen
+          ></iframe>
+        ) : null}
       </div>
       <div>
         <h3>Reply</h3>

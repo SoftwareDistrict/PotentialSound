@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Search from "./Search.jsx";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
+import { Avatar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const HomeFeed = ({ currentUser, tags, menu }) => {
   const [users, setUsers] = useState([]);
-  const [generalFeed, setGeneralFeed] = useState([]);
+  const [feed, setFeed] = useState([]);
+
+  const useStyles = makeStyles({
+    avatar: {
+      height: 90,
+      width: 90,
+      position: "absolute",
+      top: "10px",
+      right: "25px",
+      variant: "circle",
+    },
+  });
+  const classes = useStyles();
 
   useEffect(() => {
     axios
       .get("/feed")
-      .then((feed) => setGeneralFeed(feed.data))
+      .then((feed) => setFeed(feed.data))
       .catch((err) => console.warn("Could not get all posts", err));
   }, []);
 
@@ -23,10 +38,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
   }, []);
 
   const logout = () => {
-    axios
-      .get("/logout")
-      .then(() => console.info("successful logout"))
-      .catch((err) => console.warn("unsucessful logout: ", err));
+    axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
   };
 
   return (
@@ -42,46 +54,11 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
         </div>
         <h1>
           PotentialSound
-          <div
-            style={{
-              width: "90px",
-              height: "90px",
-              position: "absolute",
-              top: "10px",
-              right: "25px",
-              overflow: "hidden",
-              borderRadius: "50%",
-            }}
-          >
-            <img
-              src={currentUser.propic}
-              alt="Avatar"
-              style={{
-                display: "inline-flex",
-                margin: "0 auto",
-                height: "100%",
-                width: "auto",
-              }}
-            />
-          </div>
+          <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
         </h1>
       </div>
       <div>
-        <input
-          type="text"
-          placeholder="Search"
-          style={{
-            width: "250px",
-            height: "30px",
-            fontSize: "14px",
-            paddingLeft: "10px",
-            marginRight: "5px",
-          }}
-        ></input>
-        <img
-          src="https://tinyurl.com/y2v9h8rz"
-          style={{ width: "10%", height: "10%", paddingTop: "20px" }}
-        />
+        <Search feed={feed} setFeed={setFeed} tags={tags} />
         <div>
           <Link to="/createPostMessage">
             <button
@@ -102,7 +79,7 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
         </div>
       </div>
       <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
-        {generalFeed.map((post) => (
+        {feed.map((post) => (
           <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
         ))}
       </div>
@@ -111,13 +88,13 @@ const HomeFeed = ({ currentUser, tags, menu }) => {
 };
 
 HomeFeed.propTypes = {
-  generalFeed: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      id_user: PropTypes.number,
-      message: PropTypes.string,
-    })
-  ),
+  // generalFeed: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     id: PropTypes.number,
+  //     id_user: PropTypes.number,
+  //     message: PropTypes.string,
+  //   })
+  // ),
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

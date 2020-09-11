@@ -13,6 +13,7 @@ import Chat from "./Chat.jsx";
 import VCRoom from "./VCRoom.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
+import CreateChat from "./CreateChat.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -104,6 +105,10 @@ class App extends Component {
               render={({ match }) => (
                 <PostFullMessage currentUser={currentUser} match={match} tags={tags} menu={menu} />
               )}
+            />
+            <Route
+              path="/createChat"
+              render={() => <CreateChat currentUser={currentUser} menu={menu} />}
             />
             <Route
               path="/createProfile"

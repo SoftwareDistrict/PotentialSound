@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/SoftwareDistrict/PotentialSound#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
+    "@material-ui/system": "^4.9.14",
     "aws-sdk": "^2.746.0",
     "axios": "^0.20.0",
     "cookie-session": "^1.4.0",

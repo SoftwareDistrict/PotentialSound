@@ -1,35 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Avatar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Profile = ({ menu, currentUser }) => {
   const { username, propic, cell, city, email, description } = currentUser;
+  const useStyles = makeStyles({
+    avatar: {
+      width: "120px",
+      height: "120px",
+      position: "absolute",
+      top: "50px",
+      left: "25px",
+      variant: "circle",
+    },
+  });
+  const classes = useStyles();
 
   return (
     <div>
       {menu}
-      <div
-        style={{
-          width: "120px",
-          height: "120px",
-          position: "absolute",
-          top: "50px",
-          left: "25px",
-          overflow: "hidden",
-          borderRadius: "50%",
-        }}
-      >
-        <img
-          src={propic}
-          alt="Avatar"
-          style={{
-            display: "inline-flex",
-            margin: "0 auto",
-            height: "100%",
-            width: "auto",
-          }}
-        />
-      </div>
+      <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       <div
         id="profile"

@@ -29,9 +29,8 @@ const PostFeedEntry = ({ post, users, tags }) => {
           id="profile"
           style={{
             border: "2px solid black",
-            height: "100px",
+            height: "110px",
             margin: "0 auto",
-            // backgroundColor: "#3F3D3D",
             position: "relative",
             marginTop: "10px",
             marginBottom: "10px",
@@ -46,10 +45,15 @@ const PostFeedEntry = ({ post, users, tags }) => {
               height: "20px",
               textAlign: "left",
               left: "110px",
-              fontSize: "14px",
+              fontSize: "16px",
             }}
           >
-            <Link to={`/viewprofile/${poster.username}`}>{poster.username}</Link>
+            <Link
+              to={`/viewprofile/${poster.username}`}
+              style={{ color: "orange", textDecoration: "none", fontSize: "20px" }}
+            >
+              {poster.username}
+            </Link>
           </div>
           <div
             style={{
@@ -74,12 +78,31 @@ const PostFeedEntry = ({ post, users, tags }) => {
               height: "60px",
               textAlign: "left",
               left: "110px",
-              fontSize: "12px",
+              fontSize: "14px",
             }}
           >
             {post.message}
             {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
             {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              resize: "both",
+              overflow: "hidden",
+              right: "0",
+            }}
+          >
+            {post.youTubeUrl ? (
+              <iframe
+                width="160"
+                height="95"
+                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullscreen
+              ></iframe>
+            ) : null}
           </div>
           <div
             style={{
@@ -109,6 +132,7 @@ PostFeedEntry.propTypes = {
     audioName: PropTypes.string,
     imageUrl: PropTypes.string,
     imageName: PropTypes.string,
+    youTubeUrl: PropTypes.string,
   }),
   users: PropTypes.arrayOf(
     PropTypes.shape({

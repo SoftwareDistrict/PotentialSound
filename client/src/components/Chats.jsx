@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
+import "regenerator-runtime/runtime";
 
 const Chats = ({ currentUser, menu }) => {
   const [participants, setParticipants] = useState([]);
@@ -61,7 +62,6 @@ const Chats = ({ currentUser, menu }) => {
 Chats.propTypes = {
   currentUser: PropTypes.object.isRequired,
   menu: PropTypes.element,
- 
 };
 
 export default Chats;

@@ -11,6 +11,8 @@ const HomeFeed = ({ currentUser, menu }) => {
   const [users, setUsers] = useState([]);
   const [feed, setFeed] = useState([]);
   const [tags, setTags] = useState([]);
+  const [searched, setSearched] = useState(false);
+  const [searchFeed, setSearchFeed] = useState([]);
 
   const useStyles = makeStyles({
     avatar: {
@@ -29,7 +31,7 @@ const HomeFeed = ({ currentUser, menu }) => {
       .get("/feed")
       .then((feed) => setFeed(feed.data))
       .catch((err) => console.warn("Could not get all posts", err));
-  }, []);
+  }, [feed]);
 
   useEffect(() => {
     axios
@@ -43,7 +45,7 @@ const HomeFeed = ({ currentUser, menu }) => {
       .get("/posttags")
       .then((tags) => setTags(tags.data))
       .catch((err) => console.warn("Could not get all tags", err));
-  }, []);
+  }, [tags]);
 
   const logout = () => {
     axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
@@ -66,7 +68,7 @@ const HomeFeed = ({ currentUser, menu }) => {
         </h1>
       </div>
       <div>
-        <Search setFeed={setFeed} tags={tags} users={users} />
+        <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
         <div>
           <Link to="/createPostMessage">
             <button
@@ -86,11 +88,22 @@ const HomeFeed = ({ currentUser, menu }) => {
           </Link>
         </div>
       </div>
-      <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
-        {feed.map((post) => (
-          <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
-        ))}
-      </div>
+      {!searched ? (
+        <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
+          {feed.map((post) => (
+            <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <button onClick={() => setSearched(false)}>Back To General</button>
+          <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
+            {searchFeed.map((post) => (
+              <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

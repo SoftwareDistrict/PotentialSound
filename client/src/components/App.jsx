@@ -64,42 +64,42 @@ class App extends Component {
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
-              exact={true}
+              
               path="/home"
               render={() => <HomeFeed menu={menu} currentUser={currentUser} />}
             />
             <Route
-              exact={true}
+              
               path="/profile/:id"
               render={({ match }) => (
                 <Profile menu={menu} match={match} currentUser={currentUser} />
               )}
             />
-            <Route exact={true} path="/createPostMessage" render={() => <CreatePostMessage />} />
+            <Route  path="/createPostMessage" render={() => <CreatePostMessage />} />
             <Route
-              exact={true}
+              
               path="/chats"
               render={() => <Chats menu={menu} currentUser={currentUser} />}
             />
             <Route
-              exact={true}
+              
               path="/fullMessage/:id"
               render={({ match }) => (
                 <PostFullMessage currentUser={currentUser} match={match} menu={menu} />
               )}
             />
             <Route
-              exact={true}
+              
               path="/createChat"
               render={() => <CreateChat currentUser={currentUser} menu={menu} />}
             />
             <Route
-              exact={true}
+              
               path="/createProfile"
               render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
             />
             <Route
-              exact={true}
+              
               path="/updateProfile"
               render={() => (
                 <UpdateProfile
@@ -110,17 +110,17 @@ class App extends Component {
               )}
             />
             <Route
-              exact={true}
+              
               path="/chat/:id"
               render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
             />
             <Route
-              exact={true}
+              
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
             <Route
-              exact={true}
+              
               path="/room/:roomId"
               render={({ match }) => <VCRoom match={match} />}
             />

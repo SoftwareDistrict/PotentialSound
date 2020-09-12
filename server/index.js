@@ -289,7 +289,7 @@ app.get("/getallchats", (req, res) => {
 app.post("/createLiveStream", (req, res) => {
   const obj = req.body;
   addLiveStream(obj)
-    .then(() => res.status(200).json({ redirectUrl: "/home" }))
+    .then((data) => res.status(200).json({"id": data.id}))
     .catch((err) => res.status(500).send(err));
 });
 

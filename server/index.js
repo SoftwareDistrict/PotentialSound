@@ -73,6 +73,10 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("send", function (data) {
+    io.emit("receiveChats", { message: data.message, live_id: data.live_id, name: data.name });
+  });
+
   socket.on("getMessages", function (data) {
     let chatid = data;
     console.info(data, "get messages");

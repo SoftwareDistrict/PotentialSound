@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import styled from "styled-components";
 import Peer from "simple-peer";
 import PropTypes from "prop-types";
-
+import LiveMessage from "./LiveMessage.jsx";
 const Container = styled.div`
   padding: 20px;
   display: flex;
@@ -35,15 +35,18 @@ const videoConstraints = {
   width: window.innerWidth / 2,
 };
 
-const LSRoom = ({ match }) => {
+const LSRoom = ({ match, currentUser }) => {
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
   const roomID = match.params.roomID;
+  const [messages, setMessage] = useState([]);
+  const [messageBox, setMessageBox] = useState("");
+  const onEventChange = (event) => setMessageBox(event.target.value);
+  socketRef.current = io.connect("/");
 
   useEffect(() => {
-    socketRef.current = io.connect("/");
     navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then((stream) => {
       userVideo.current.srcObject = stream;
       socketRef.current.emit("join room", roomID);
@@ -59,6 +62,7 @@ const LSRoom = ({ match }) => {
         });
         setPeers(peers);
       });
+      console.info(peers);
 
       socketRef.current.on("user joined", (payload) => {
         const item = peersRef.current.find((p) => p.peerID === payload.callerID);
@@ -77,7 +81,16 @@ const LSRoom = ({ match }) => {
         item.peer.signal(payload.signal);
       });
     });
+
   }, []);
+
+
+  socketRef.current.on("receiveChats", (data) => {
+    if (data.live_id == roomID) {
+      setMessage([...messages, data]);
+    }
+  });
+
 
   const createPeer = (userToSignal, callerID, stream) => {
     const peer = new Peer({
@@ -110,19 +123,26 @@ const LSRoom = ({ match }) => {
   };
 
   return (
-    <Container>
-      <StyledVideo muted ref={userVideo} autoPlay playsInline />
-      {peers.map((peer, index) => {
-        // return <Video key={index} peer={peer} />;
-        console.info(peer);
-        return <p key={index}>Connected {`${peer}`}</p>;
-      })}
-    </Container>
+    <div>
+      <Container>
+        <StyledVideo muted ref={userVideo} autoPlay playsInline />
+      </Container>
+      <div>
+        {messages.map((messageObj, index) => {
+          return <LiveMessage name={messageObj.name} message={messageObj.message} key={index} />;
+        })}
+      </div>
+      <input onChange={onEventChange} />
+      <button onClick={() => {
+        socketRef.current.emit("send", { name: currentUser.username, message: messageBox, live_id: roomID });
+      }}>Submit</button>
+    </div>
   );
 };
 
 LSRoom.propTypes = {
   match: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
 
 Video.propTypes = {

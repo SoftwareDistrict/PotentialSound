@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const LiveEntry = ({ name, id }) => {
+const LiveEntry = ({ name, id, desc }) => {
   return (
     <Link to={`/liveStream/${id}`} style={{ textDecoration: "none", color: "orange" }}>
       <div
@@ -28,6 +28,7 @@ const LiveEntry = ({ name, id }) => {
         >
           <label>Name of live:</label>
           <div>{name}</div>
+          <div>{desc}</div>
         </div>
       </div>
     </Link>
@@ -37,6 +38,7 @@ const LiveEntry = ({ name, id }) => {
 LiveEntry.propTypes = {
   name: PropTypes.string,
   id: PropTypes.number,
+  desc: PropTypes.string,
 };
 
 export default LiveEntry;

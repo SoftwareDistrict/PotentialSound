@@ -11,6 +11,7 @@ import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
 import VCRoom from "./VCRoom.jsx";
+import LSRoom from "./LSRoom.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import CreateChat from "./CreateChat.jsx";
@@ -63,7 +64,12 @@ class App extends Component {
           <Nav currentUser={currentUser} toggleMenu={this.toggleMenu} />
           <Switch>
             <Route exact={true} path="/" render={() => <Login />} />
-            <Route path="/home" render={() => <HomeFeed menu={menu} currentUser={currentUser} />} />
+            <Route
+              path="/home"
+              render={({ history }) => (
+                <HomeFeed history={history} menu={menu} currentUser={currentUser} />
+              )}
+            />
             <Route
               path="/profile/:id"
               render={({ match }) => (
@@ -98,13 +104,16 @@ class App extends Component {
             />
             <Route
               path="/chat/:id"
-              render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
+              render={({ match, history }) => (
+                <Chat history={history} match={match} currentUser={currentUser} menu={menu} />
+              )}
             />
             <Route
               path="/viewprofile/:id"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
             <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+            <Route path="/livestream/:roomId" render={({ match }) => <LSRoom match={match} />} />
           </Switch>
         </Router>
       </div>

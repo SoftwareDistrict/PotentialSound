@@ -12,7 +12,7 @@ const ChatEntry = ({ participants, id_chat }) => {
   });
 
   return (
-    <Link to={`/chat/${id_chat}`} style={{ textDecoration: "none", color: "orange" }}>
+    <Link to={`/chats/${id_chat}`} style={{ textDecoration: "none", color: "orange" }}>
       <div
         className="inbox"
         style={{

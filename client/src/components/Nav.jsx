@@ -33,12 +33,9 @@ const Nav = ({ currentUser, toggleMenu }) => {
       <Link onClick={toggleMenu} style={linkStyle} to={"/createChat"}>
         Create Chat
       </Link>
-      <Link to="chats" onClick={toggleMenu} style={linkStyle}>
+      <Link to="/chats" onClick={toggleMenu} style={linkStyle}>
         Chats
       </Link>
-      <Link onClick={toggleMenu} style={linkStyle}>
-        Start Video Chat
-      </Link>{" "}
       <Link onClick={toggleMenu} style={linkStyle} to={`/profile/${currentUser.id}`}>
         My Profile
       </Link>

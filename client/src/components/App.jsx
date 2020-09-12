@@ -62,49 +62,18 @@ class App extends Component {
         <Router>
           <Nav currentUser={currentUser} toggleMenu={this.toggleMenu} />
           <Switch>
-            <Route exact={true} path="/" render={() => <Login />} />
-            <Route path="/home" render={() => <HomeFeed menu={menu} currentUser={currentUser} />} />
-            <Route
-              path="/profile/:id"
-              render={({ match }) => (
-                <Profile menu={menu} match={match} currentUser={currentUser} />
-              )}
-            />
-            <Route path="/createPostMessage" render={() => <CreatePostMessage />} />
-            <Route path="/chats" render={() => <Chats menu={menu} currentUser={currentUser} />} />
-            <Route
-              path="/fullMessage/:id"
-              render={({ match }) => (
-                <PostFullMessage currentUser={currentUser} match={match} menu={menu} />
-              )}
-            />
-            <Route
-              path="/createChat"
-              render={() => <CreateChat currentUser={currentUser} menu={menu} />}
-            />
-            <Route
-              path="/createProfile"
-              render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
-            />
-            <Route
-              path="/updateProfile"
-              render={() => (
-                <UpdateProfile
-                  currentUser={currentUser}
-                  menu={menu}
-                  getCurrentUser={this.getCurrentUser}
-                />
-              )}
-            />
-            <Route
-              path="/chat/:id"
-              render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
-            />
-            <Route
-              path="/viewprofile/:id"
-              render={(props) => <ViewProfile menu={menu} {...props} />}
-            />
-            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+            <Route path="/chats/:id" render={({ match }) => (<Chat match={match} currentUser={currentUser} menu={menu} />)} />
+            <Route path="/chats" render={() => (<Chats menu={menu} currentUser={currentUser} />)} />
+            <Route path="/home/:id" render={({ match }) => (<PostFullMessage currentUser={currentUser} match={match} menu={menu} />)} />
+            <Route path="/home" render={() => (<HomeFeed menu={menu} currentUser={currentUser} />)} />
+            <Route exact={true} path="/" render={() => (<Login />)} />
+            <Route path="/profile/:id" render={({ match }) => (<Profile menu={menu} match={match} currentUser={currentUser} />)} />
+            <Route path="/viewprofile/:id" render={(props) => (<ViewProfile menu={menu} {...props} />)} />
+            <Route path="/updateProfile" render={() => (<UpdateProfile currentUser={currentUser} menu={menu} getCurrentUser={this.getCurrentUser} />)} />
+            <Route path="/createPostMessage" render={() => (<CreatePostMessage />)} />
+            <Route path="/createChat" render={() => (<CreateChat currentUser={currentUser} menu={menu} />)} />
+            <Route path="/createProfile" render={() => (<CreateProfile getCurrentUser={this.getCurrentUser} />)} />
+            <Route path="/room/:roomId" render={({ match }) => (<VCRoom match={match} />)} />
           </Switch>
         </Router>
       </div>

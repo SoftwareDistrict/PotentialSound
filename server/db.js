@@ -71,8 +71,6 @@ const LiveStreams = sequelize.define("LiveStreams", {
   id_user: Sequelize.INTEGER,
 });
 
-
-
 Users.sync({ force: true })
   .then(() => {
     Users.bulkCreate([
@@ -420,5 +418,5 @@ module.exports = {
   ChatJoin,
   Messages,
   Tags,
-  LiveStreams
+  LiveStreams,
 };

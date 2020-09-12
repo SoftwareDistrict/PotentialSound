@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const CreateLiveStream = ({ menu, currentUser }) => {
+const CreateLiveStream = ({ menu, currentUser, history }) => {
   const nameBox = useRef();
   const descriptionBox = useRef();
 
@@ -13,7 +13,7 @@ const CreateLiveStream = ({ menu, currentUser }) => {
     let obj = { name: name, desc: desc, id_user: currentUser.id };
     axios
       .post("/createLiveStream", obj)
-      .then(() => console.info("sucessful post of livestream"))
+      .then(({ data }) => history.push(`/livestream/${data.id}`))
       .catch((err) => console.info(err));
   };
 
@@ -55,6 +55,7 @@ const CreateLiveStream = ({ menu, currentUser }) => {
 CreateLiveStream.propTypes = {
   menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
+  history: PropTypes.array,
 };
 
 export default CreateLiveStream;

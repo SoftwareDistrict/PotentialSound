@@ -115,7 +115,10 @@ class App extends Component {
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
             <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
-            <Route path="/livestream/:roomId" render={({ match }) => <LSRoom match={match} />} />
+            <Route
+              path="/livestream/:roomId"
+              render={({ match }) => <LSRoom match={match} currentUser={currentUser} />}
+            />
 
             <Route
               exact={true}

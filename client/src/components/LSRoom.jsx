@@ -113,7 +113,9 @@ const LSRoom = ({ match }) => {
     <Container>
       <StyledVideo muted ref={userVideo} autoPlay playsInline />
       {peers.map((peer, index) => {
-        return <Video key={index} peer={peer} />;
+        // return <Video key={index} peer={peer} />;
+        console.info(peer);
+        return <p key={index}>Connected {`${peer}`}</p>;
       })}
     </Container>
   );

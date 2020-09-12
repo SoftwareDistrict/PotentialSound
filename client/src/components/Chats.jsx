@@ -9,7 +9,7 @@ const Chats = ({ currentUser, menu }) => {
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
 
-  const getChats = async() => {
+  const getChats = async () => {
     await axios
       .get("/allchats")
       .then((chats) => setAllChats(chats.data))

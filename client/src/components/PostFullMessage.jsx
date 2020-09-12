@@ -18,7 +18,7 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
       .catch((err) => console.warn("could not get this poster.", err));
   };
 
-  const getTags = async () => {     
+  const getTags = async () => {
     await axios
       .get("/posttags")
       .then((tags) => setTags(tags.data))

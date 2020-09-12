@@ -14,13 +14,16 @@ const CreateChat = ({ menu, currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
-
-  useEffect(async () => {
-    getUsers();
+  const getAllUsers = async () => {
     await axios
       .get("/users")
       .then(({ data }) => setUsersObj(data))
       .catch((err) => console.warn("could not grab all usrs: ", err));
+  };
+
+  useEffect(() => {
+    getUsers();
+    getAllUsers();
     axios
       .get("/allchats")
       .then(({ data }) => setAllChats(data))

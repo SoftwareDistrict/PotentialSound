@@ -4,6 +4,11 @@ import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
+const style = {
+  margin: "10px",
+  display: "block",
+};
+
 const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
   const [newUser, setNewUser] = useState(currentUser.username);
   const [newCity, setNewCity] = useState(currentUser.city);
@@ -12,6 +17,10 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
   const [photo, setPhoto] = useState([]);
   const [endPt, setEndPt] = useState("");
   const [load, setLoad] = useState(false);
+  const [soundCloud, setSoundCloud] = useState(currentUser.soundCloud);
+  const [youTube, setYouTube] = useState(currentUser.youTube);
+  const [instagram, setInstagram] = useState(currentUser.instagram);
+  const [faceBook, setFaceBook] = useState(currentUser.facebook);
 
   const uploadImg = () => {
     let data = new FormData();
@@ -29,6 +38,10 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
         city: newCity,
         cell: newCell,
         description: newDescription,
+        youTube: youTube,
+        facebook: faceBook,
+        instagram: instagram,
+        soundCloud: soundCloud,
       });
     } else {
       return axios.post("/profileUpdate", {
@@ -37,6 +50,10 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
         city: newCity,
         cell: newCell,
         description: newDescription,
+        youTube: youTube,
+        facebook: faceBook,
+        instagram: instagram,
+        soundCloud: soundCloud,
       });
     }
   };
@@ -100,6 +117,23 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
             onChange={(e) => {
               setNewDescription(e.target.value);
             }}
+          ></input>
+          <h3>Update your social media profile urls</h3>
+          <input
+            style={style}
+            value={faceBook}
+            onChange={(e) => setFaceBook(e.target.value)}
+          ></input>
+          <input
+            style={style}
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+          ></input>
+          <input style={style} value={youTube} onChange={(e) => setYouTube(e.target.value)}></input>
+          <input
+            style={style}
+            value={soundCloud}
+            onChange={(e) => setSoundCloud(e.target.value)}
           ></input>
           <ImageUploader
             withIcon={false}

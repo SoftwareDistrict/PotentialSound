@@ -26,6 +26,10 @@ const Users = sequelize.define("Users", {
   googleId: Sequelize.STRING,
   email: Sequelize.STRING,
   cell: Sequelize.TEXT,
+  youTube: Sequelize.STRING,
+  facebook: Sequelize.STRING,
+  instagram: Sequelize.STRING,
+  soundCloud: Sequelize.STRING,
 });
 
 const Messages = sequelize.define("Messages", {

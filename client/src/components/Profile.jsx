@@ -3,9 +3,27 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faFacebook,
+  faSoundcloud,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Profile = ({ menu, currentUser }) => {
-  const { username, propic, cell, city, email, description } = currentUser;
+  const {
+    username,
+    propic,
+    cell,
+    city,
+    email,
+    description,
+    youTube,
+    instagram,
+    soundCloud,
+    facebook,
+  } = currentUser;
   const useStyles = makeStyles({
     avatar: {
       width: "120px",
@@ -23,6 +41,26 @@ const Profile = ({ menu, currentUser }) => {
       {menu}
       <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
+      {youTube ? (
+        <a href={youTube}>
+          <FontAwesomeIcon icon={faYoutube} />
+        </a>
+      ) : null}
+      {instagram ? (
+        <a href={instagram}>
+          <FontAwesomeIcon icon={faInstagram} />
+        </a>
+      ) : null}
+      {soundCloud ? (
+        <a href={soundCloud}>
+          <FontAwesomeIcon icon={faSoundcloud} />
+        </a>
+      ) : null}
+      {facebook ? (
+        <a href={facebook}>
+          <FontAwesomeIcon icon={faFacebook} />
+        </a>
+      ) : null}
       <div
         id="profile"
         style={{

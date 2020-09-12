@@ -3,19 +3,31 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match, tags, menu, currentUser }) => {
+const PostFullMessage = ({ match, menu, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
   const [postTags] = useState([]);
   const [userMessage, setMessage] = useState("");
+  const [tags, setTags] = useState([]);
 
-  useEffect(async () => {
+  const getPoster = async () => {
     await axios
       .get(`/poster/${id[0]}`)
       .then((poster) => setPoster(poster.data))
       .catch((err) => console.warn("could not get this poster.", err));
+  };
 
+  const getTags = async () => {
+    await axios
+      .get("/posttags")
+      .then((tags) => setTags(tags.data))
+      .catch((err) => console.warn("Could not get all tags", err));
+  };
+
+  useEffect(() => {
+    getPoster();
+    getTags();
     axios
       .get(`/thispost/${id[1]}`)
       .then((post) => setPost(post.data))

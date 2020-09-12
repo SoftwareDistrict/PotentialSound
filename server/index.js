@@ -29,6 +29,8 @@ const {
   sendMessage,
   search,
   searchPostByUser,
+  getLiveStreams,
+  addLiveStream,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -281,6 +283,21 @@ app.post("/createPostMessage", (req, res) => {
 app.get("/getallchats", (req, res) => {
   getChats()
     .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.post("/createLiveStream", (req, res) => {
+  const obj = req.body;
+  addLiveStream(obj)
+    .then(() => res.status(200).json({ redirectUrl: "/home" }))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/getAllLives", (req, res) => {
+  getLiveStreams()
+    .then((data) => {
+      res.send(data);
+    })
     .catch((err) => res.status(500).send(err));
 });
 

@@ -114,19 +114,17 @@ class App extends Component {
               path="/createLiveStream"
               render={() => <CreateLiveStream currentUser={currentUser} menu={menu} />}
             />
-             <Route
+            <Route
               exact={true}
               path="/liveStream/:id"
               render={({ match }) => (
                 <LiveStream match={match} currentUser={currentUser} menu={menu} />
               )}
             />
-              <Route
+            <Route
               exact={true}
               path="/liveStreams"
-              render={() => (
-                <LiveStreams menu={menu} allChats={allChats} currentUser={currentUser} />
-              )}
+              render={() => <LiveStreams menu={menu} currentUser={currentUser} />}
             />
           </Switch>
         </Router>

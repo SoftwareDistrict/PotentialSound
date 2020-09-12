@@ -36,6 +36,9 @@ const Nav = ({ currentUser, toggleMenu }) => {
       <Link to="chats" onClick={toggleMenu} style={linkStyle}>
         Chats
       </Link>
+      <Link to="/liveStreams" onClick={toggleMenu} style={linkStyle}>
+        Live Streams
+      </Link>
       <Link onClick={toggleMenu} style={linkStyle}>
         Start Video Chat
       </Link>{" "}

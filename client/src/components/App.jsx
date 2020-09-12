@@ -14,6 +14,9 @@ import VCRoom from "./VCRoom.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import CreateChat from "./CreateChat.jsx";
+import LiveStreams from "./LiveStreams.jsx";
+import LiveStream from "./LiveStream.jsx";
+import CreateLiveStream from "./CreateLiveStream.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -105,6 +108,26 @@ class App extends Component {
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
             <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+
+            <Route
+              exact={true}
+              path="/createLiveStream"
+              render={() => <CreateLiveStream currentUser={currentUser} menu={menu} />}
+            />
+             <Route
+              exact={true}
+              path="/liveStream/:id"
+              render={({ match }) => (
+                <LiveStream match={match} currentUser={currentUser} menu={menu} />
+              )}
+            />
+              <Route
+              exact={true}
+              path="/liveStreams"
+              render={() => (
+                <LiveStreams menu={menu} allChats={allChats} currentUser={currentUser} />
+              )}
+            />
           </Switch>
         </Router>
       </div>

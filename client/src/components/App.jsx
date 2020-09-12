@@ -16,7 +16,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import CreateChat from "./CreateChat.jsx";
 import LiveStreams from "./LiveStreams.jsx";
-import LiveStream from "./LiveStream.jsx";
 import CreateLiveStream from "./CreateLiveStream.jsx";
 
 class App extends Component {
@@ -121,13 +120,8 @@ class App extends Component {
             <Route
               exact={true}
               path="/createLiveStream"
-              render={() => <CreateLiveStream currentUser={currentUser} menu={menu} />}
-            />
-            <Route
-              exact={true}
-              path="/liveStream/:id"
-              render={({ match }) => (
-                <LiveStream match={match} currentUser={currentUser} menu={menu} />
+              render={({ history }) => (
+                <CreateLiveStream currentUser={currentUser} menu={menu} history={history} />
               )}
             />
             <Route

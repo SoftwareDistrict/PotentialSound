@@ -17,6 +17,10 @@ const CreateProfile = ({ getCurrentUser }) => {
   const [photo, setPhoto] = useState([]);
   const [endPt, setEndPt] = useState("");
   const [load, setLoad] = useState(false);
+  const [soundCloud, setSoundCloud] = useState("");
+  const [youTube, setYouTube] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [faceBook, setFaceBook] = useState("");
 
   const uploadImg = () => {
     let data = new FormData();
@@ -33,6 +37,10 @@ const CreateProfile = ({ getCurrentUser }) => {
       city: city,
       cell: cell,
       description: description,
+      youTube: youTube,
+      facebook: faceBook,
+      instagram: instagram,
+      soundCloud: soundCloud,
     });
   };
 
@@ -77,6 +85,29 @@ const CreateProfile = ({ getCurrentUser }) => {
             placeholder="Enter Descrition"
             onChange={(e) => setDescription(e.target.value)}
           ></input>
+          <div>
+            <h3>Add your social media profile urls</h3>
+            <input
+              style={style}
+              placeholder="Facebook"
+              onChange={(e) => setFaceBook(e.target.value)}
+            ></input>
+            <input
+              style={style}
+              placeholder="Instagram"
+              onChange={(e) => setInstagram(e.target.value)}
+            ></input>
+            <input
+              style={style}
+              placeholder="Youtube"
+              onChange={(e) => setYouTube(e.target.value)}
+            ></input>
+            <input
+              style={style}
+              placeholder="SoundCloud"
+              onChange={(e) => setSoundCloud(e.target.value)}
+            ></input>
+          </div>
           <ImageUploader
             withIcon={false}
             withPreview={true}

@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faFacebook,
+  faSoundcloud,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 import "regenerator-runtime/runtime";
+
 const ViewProfile = ({ match, menu }) => {
   const username = match.params.id;
   useEffect(() => {
@@ -10,6 +18,7 @@ const ViewProfile = ({ match, menu }) => {
   const [proInfo, setInfo] = useState({});
   const getUser = async () => {
     const data = await axios.get(`/viewprofile/${username}`);
+    console.info(data.data, "data for profile");
     setInfo(data.data);
   };
 
@@ -42,6 +51,28 @@ const ViewProfile = ({ match, menu }) => {
         </div>
         <div style={{ marginBottom: "10px" }} className="ViewProfile">
           Description: {proInfo.description}
+        </div>
+        <div>
+          {proInfo.youTube ? (
+            <a href={proInfo.youTube}>
+              <FontAwesomeIcon icon={faYoutube} />
+            </a>
+          ) : null}
+          {proInfo.instagram ? (
+            <a href={proInfo.instagram}>
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          ) : null}
+          {proInfo.soundCloud ? (
+            <a href={proInfo.soundCloud}>
+              <FontAwesomeIcon icon={faSoundcloud} />
+            </a>
+          ) : null}
+          {proInfo.facebook ? (
+            <a href={proInfo.facebook}>
+              <FontAwesomeIcon icon={faFacebook} />
+            </a>
+          ) : null}
         </div>
       </div>
       <div

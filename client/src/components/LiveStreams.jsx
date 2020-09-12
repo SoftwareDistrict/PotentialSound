@@ -28,7 +28,13 @@ const LiveStreams = ({ menu }) => {
         </Link>
         <h1 style={{ textAlign: "center" }}>Lives</h1>
         {lives.map((live) => (
-          <LiveEntry key={live.id} id={live.id} id_chat={live.id_user} name={live.name} />
+          <LiveEntry
+            key={live.id}
+            id={live.id}
+            id_chat={live.id_user}
+            name={live.name}
+            desc={live.desc}
+          />
         ))}
       </div>
     </div>

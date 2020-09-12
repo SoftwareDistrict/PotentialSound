@@ -9,14 +9,15 @@ const Chats = ({ currentUser, menu }) => {
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
 
-  useEffect(async () => {
+  const getChats = async() => {
     await axios
       .get("/allchats")
       .then((chats) => setAllChats(chats.data))
       .catch((err) => console.warn("Could not get all chats", err));
-  }, []);
+  };
 
   useEffect(() => {
+    getChats();
     const ids = [];
     allChats.forEach((chat) => {
       if (chat.id_user === currentUser.id) {

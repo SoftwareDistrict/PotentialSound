@@ -286,8 +286,28 @@ app.get("/viewProfile/:id", (req, res) => {
   getUsername(user)
     .then((data) => {
       console.info(data.dataValues);
-      const { propic, city, description, cell, email } = data.dataValues;
-      const userInfo = { city, description, cell, email, propic };
+      const {
+        propic,
+        city,
+        description,
+        cell,
+        email,
+        youTube,
+        instagram,
+        soundCloud,
+        facebook,
+      } = data.dataValues;
+      const userInfo = {
+        city,
+        description,
+        cell,
+        email,
+        propic,
+        youTube,
+        instagram,
+        soundCloud,
+        facebook,
+      };
       res.send(userInfo);
     })
     .catch((err) => {

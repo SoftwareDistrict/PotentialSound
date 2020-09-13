@@ -55,7 +55,11 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
         }}
       >
         {message}
-        {img ? <div><img src={img} /></div> : null}
+        {img ? (
+          <div>
+            <img src={img} />
+          </div>
+        ) : null}
         {audio ? (
           <div>
             <form action={audio}>

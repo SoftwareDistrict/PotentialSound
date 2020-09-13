@@ -150,11 +150,13 @@ const CreateChat = ({ menu, currentUser }) => {
             >
               {members.map((mem, i) => (
                 <div key={i}>
-                  <div id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>{mem}</div>
+                  <div id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
+                    {mem}
+                  </div>
                 </div>
               ))}
               <input
-                style={{ width: "100%" }}
+                style={{ width: "250px" }}
                 value={text}
                 onChange={onTextChange}
                 placeholder="Username"
@@ -167,7 +169,7 @@ const CreateChat = ({ menu, currentUser }) => {
             ref={inputBox}
             style={{
               width: "250px",
-              height: "80px",
+              height: "60px",
               fontSize: "16px",
               marginLeft: "10px",
               paddingLeft: "10px",

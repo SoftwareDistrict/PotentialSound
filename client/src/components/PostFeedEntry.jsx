@@ -24,7 +24,10 @@ const PostFeedEntry = ({ post, users, tags }) => {
 
   return (
     <div>
-      <Link style={{ color: "#ff8c00", textDecoration: "none" }} to={`/home/${post.id_user}${post.id}`}>
+      <Link
+        style={{ color: "#ff8c00", textDecoration: "none" }}
+        to={`/home/${post.id_user}${post.id}`}
+      >
         <div
           id="profile"
           style={{
@@ -69,11 +72,17 @@ const PostFeedEntry = ({ post, users, tags }) => {
               marginLeft: "110px",
             }}
           >
-            <div>
-              {post.message}
-            </div>
-            {post.audioName ? <div><a href={post.audioUrl}>{post.audioName}</a></div> : null}
-            {post.imageName ? <div><a href={post.imageUrl}>{post.imageName}</a></div> : null}
+            <div>{post.message}</div>
+            {post.audioName ? (
+              <div>
+                <a href={post.audioUrl}>{post.audioName}</a>
+              </div>
+            ) : null}
+            {post.imageName ? (
+              <div>
+                <a href={post.imageUrl}>{post.imageName}</a>
+              </div>
+            ) : null}
           </div>
           <div
             style={{
@@ -91,14 +100,16 @@ const PostFeedEntry = ({ post, users, tags }) => {
               ></iframe>
             ) : null}
           </div>
-          <div 
+          <div
             style={{
               height: "20px",
               textAlign: "left",
               marginLeft: "110px",
               marginTop: "10px",
             }}
-          >{postTags.join(" ")}</div>
+          >
+            {postTags.join(" ")}
+          </div>
         </div>
       </Link>
     </div>

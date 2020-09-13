@@ -82,7 +82,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/viewprofile/:id"
+              path="/viewprofile/:name"
               render={(props) => <ViewProfile menu={menu} {...props} />}
             />
             <Route

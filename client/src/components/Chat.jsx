@@ -28,7 +28,6 @@ const Chat = ({ menu, match, currentUser, history }) => {
   useEffect(() => {
     socket.emit("getMessages", idChat);
   }, [allMsgs]);
-
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
@@ -52,17 +51,13 @@ const Chat = ({ menu, match, currentUser, history }) => {
 
   const uploadImg = () => {
     const data = new FormData();
-
     data.append("image", photo[0], photo[0].name);
-
     return Axios.post("/api/uploadImage", data);
   };
 
   const uploadAudio = () => {
     const data = new FormData();
-
     data.append("audio", audio[0], audio[0].name);
-
     return Axios.post("/api/uploadAudio", data);
   };
 
@@ -142,6 +137,7 @@ const Chat = ({ menu, match, currentUser, history }) => {
                 <Message
                   id_user={msg.id_user}
                   message={msg.message}
+                  createdAt={msg.createdAt}
                   key={msg.id}
                   img={msg.url_image}
                   audio={msg.url_audio}
@@ -203,7 +199,7 @@ Chat.propTypes = {
   menu: PropTypes.element,
   match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
-  history: PropTypes.array,
+  history: PropTypes.object.isRequired,
 };
 
 export default withRouter(Chat);

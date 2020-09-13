@@ -18,56 +18,44 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
       id="profile"
       style={{
         border: "2px solid black",
-        height: "100px",
         backgroundColor: "#3F3D3D",
         color: "orange",
-        position: "relative",
-        width: "330px",
+        width: "337px",
+        marginTop: "5px",
       }}
     >
       <div
         style={{
-          position: "absolute",
-          top: "0",
-          resize: "both",
-          overflow: "auto",
-          width: "280px",
-          height: "20px",
-          textAlign: "left",
-          left: "110px",
-          fontSize: "18px",
-        }}
-      >
-        {messenger.username}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "5",
-          resize: "both",
-          overflow: "hidden",
           width: "100px",
           height: "100px",
+          float: "left",
         }}
       >
         <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={messenger.propic} />
       </div>
       <div
         style={{
-          position: "absolute",
-          top: "20px",
+          width: "280px",
+          height: "20px",
+          textAlign: "left",
+          fontSize: "18px",
+          marginLeft: "110px",
+        }}
+      >
+        {messenger.username}
+      </div>
+      <div
+        style={{
           backgroundColor: "offwhite",
-          resize: "both",
-          overflow: "auto",
           width: "220px",
           height: "60px",
           textAlign: "left",
-          left: "110px",
           fontSize: "16px",
+          marginLeft: "110px",
         }}
       >
         {message}
-        {img ? <img src={img} /> : null}
+        {img ? <div><img src={img} /></div> : null}
         {audio ? (
           <div>
             <form action={audio}>
@@ -75,18 +63,15 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
             </form>
           </div>
         ) : null}
-        
       </div>
       <div
         style={{
-          position: "absolute",
-          bottom: "5px",
-          resize: "both",
-          overflow: "auto",
           width: "260px",
           height: "20px",
           textAlign: "left",
-          left: "110px",
+          marginLeft: "110px",
+          marginTop: "10px",
+          marginBottom: "5px",
         }}
       >
         <Moment fromNow>{createdAt}</Moment>

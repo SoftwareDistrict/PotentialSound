@@ -128,7 +128,7 @@ const Chat = ({ menu, match, currentUser, history }) => {
   return (
     <div>
       {menu}
-      <div style={{ width: "350px", overflow: "hidden" }}>
+      <div style={{ width: "355px", overflow: "hidden" }}>
         <h1 style={{ textAlign: "center" }}>Chat</h1>
         <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>
           {allMsgs.map((msg) => {
@@ -174,7 +174,15 @@ const Chat = ({ menu, match, currentUser, history }) => {
             </label>
             <input
               id="msg"
+              style={{
+                width: "200px",
+                height: "40px",
+                fontSize: "16px",
+                marginLeft: "10px",
+                paddingLeft: "10px",
+              }}
               value={userMessage}
+              placeholder="Message"
               onChange={(event) => {
                 setMessage(event.target.value);
               }}

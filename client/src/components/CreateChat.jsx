@@ -14,6 +14,7 @@ const CreateChat = ({ menu, currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
+
   const getAllUsers = async () => {
     await axios
       .get("/users")
@@ -83,7 +84,7 @@ const CreateChat = ({ menu, currentUser }) => {
   };
 
   const sendMessage = (message, userId, chatId) => {
-    let messageObj = { message: message, id_user: userId, id_chat: chatId };
+    const messageObj = { message: message, id_user: userId, id_chat: chatId };
     axios
       .post("/sendMessage", messageObj)
       .then(() => hist.push(`/chat/${chatId}`))
@@ -101,15 +102,15 @@ const CreateChat = ({ menu, currentUser }) => {
   };
 
   const createJoin = (userId, chatId) => {
-    let obj = { id_user: userId, id_chat: chatId };
+    const obj = { id_user: userId, id_chat: chatId };
     axios.post("/createJoin", obj).catch((err) => console.warn("error in create Join: ", err));
   };
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     if (filterChatWithIds.length === ids.length) {
       sendMessage(message, currentUser.id, filterChatWithIds[0].id_chat);
     } else {
-      await createChat();
+      createChat();
     }
     setMembers([]);
   };
@@ -152,9 +153,7 @@ const CreateChat = ({ menu, currentUser }) => {
             </div>
           </label>
           <input
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
+            onChange={(event) => setMessage(event.target.value)}
             ref={inputBox}
             style={{
               width: "250px",

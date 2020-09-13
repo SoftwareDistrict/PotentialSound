@@ -7,9 +7,13 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
-  const [postTags] = useState([]);
+  const [postTags, setPostTags] = useState([]);
   const [userMessage, setMessage] = useState("");
-  const [tags, setTags] = useState([]);
+  const [allChats, setAllChats] = useState([]);
+  const [sent, setSent] = useState(false);
+  const ids = [currentUser.id, id[0]];
+
+  setInterval(() => setSent(false), 7000);
 
   const getPoster = async () => {
     await axios
@@ -18,43 +22,88 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
       .catch((err) => console.warn("could not get this poster.", err));
   };
 
-  const getTags = async () => {
-    await axios
+  const getTags = () => {
+    axios
       .get("/posttags")
-      .then((tags) => setTags(tags.data))
+      .then(({ data }) => {
+        const tagsForPost = data.map((tag) => {
+          if (tag.id_post == id[1]) {
+            return tag.tag;
+          }
+        });
+        setPostTags(tagsForPost);
+      })
       .catch((err) => console.warn("Could not get all tags", err));
+  };
+
+  const currentPost = () => {
+    axios
+      .get(`/thispost/${id[1]}`)
+      .then((post) => setPost(post.data))
+      .catch((err) => console.warn("could not get this post.", err));
+  };
+
+  const getChats = () => {
+    axios
+      .get("/allchats")
+      .then(({ data }) => setAllChats(data))
+      .catch((err) => console.warn("could not grab ChatJoin: ", err));
   };
 
   useEffect(() => {
     getPoster();
     getTags();
-    axios
-      .get(`/thispost/${id[1]}`)
-      .then((post) => setPost(post.data))
-      .catch((err) => console.warn("could not get this post.", err));
+    getChats();
+    currentPost();
   }, []);
 
-  useEffect(() => {
-    tags.forEach((tag) => {
-      if (tag.id_post == id[1] && !postTags.includes(tag.tag)) {
-        postTags.push(tag.tag);
+  const currentUsersChats = allChats.filter((chat) => currentUser.id === chat.id_user);
+  const posterChats = allChats.filter((chat) => poster.id === chat.id_user);
+  const commonChats = currentUsersChats
+    .map((userChat) => posterChats.filter((postChat) => userChat.id_chat === postChat.id_chat))
+    .flat();
+  const uniqueChats = commonChats.map((comChat) =>
+    allChats.filter((chat) => chat.id_chat === comChat.id_chat)
+  );
+  const onlyChat = uniqueChats.filter((chatArr) => chatArr.length === 2).flat();
+
+  const onSubmit = () => {
+    if (commonChats.length) {
+      if (onlyChat.length) {
+        sendMessage(userMessage, currentUser.id, onlyChat[0].id_chat);
+      } else {
+        createChat();
       }
-    });
-  }, []);
-
-  const sendMessage = () => {
-    const messageObj = {
-      message: userMessage,
-      id_user: currentUser.id,
-      postUserId: id,
-    };
-
-    axios.post("/sendMessage", messageObj).then(() => {
-      setMessage("");
-      alert("Message was sent!");
-      document.getElementById("input-message").value = "";
-    });
+    } else {
+      createChat();
+    }
+    setMessage("");
+    document.getElementById("input-message").value = "";
   };
+
+  const sendMessage = (message, userId, chatId) => {
+    const messageObj = { message, id_user: userId, id_chat: chatId };
+    axios
+      .post("/sendMessage", messageObj)
+      .then(() => setSent(true))
+      .catch((err) => console.warn("sendMessage: ", err));
+  };
+
+  const createChat = () => {
+    axios
+      .post("/createChat")
+      .then(async ({ data }) => {
+        await ids.forEach((id) => createJoin(id, data.id));
+        sendMessage(userMessage, currentUser.id, data.id);
+      })
+      .catch((err) => console.warn("error in create chat: ", err));
+  };
+
+  const createJoin = (userId, chatId) => {
+    const obj = { id_user: userId, id_chat: chatId };
+    axios.post("/createJoin", obj).catch((err) => console.warn("error in create Join: ", err));
+  };
+
   const onEvent = (event, setFunc, val) => {
     if (event.target.value === "" || event.target.value === undefined) {
       setFunc(val);
@@ -105,7 +154,7 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
         </div>
         <div style={{ marginTop: "160px" }}>
           <div style={{ fontSize: "18px" }}>{post.message}</div>
-          <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join("   ")}</div>
+          <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join(" ")}</div>
           {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
           {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
         </div>
@@ -123,9 +172,9 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
         ) : null}
       </div>
       <div>
-        <h3>Reply</h3>
+        <h3>Send {poster.username} a message</h3>
+        {sent ? <div>...Sent</div> : <div></div>}
         <label>
-          <h3>Send a message to {poster.username}</h3>
           <input
             id="input-message"
             style={{
@@ -139,7 +188,7 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
             type="text"
             placeholder="Message"
           />
-          <button onClick={sendMessage} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
+          <button onClick={onSubmit} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
             Submit
           </button>
         </label>
@@ -150,13 +199,6 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      id_post: PropTypes.number,
-      tag: PropTypes.string,
-    })
-  ),
   menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };

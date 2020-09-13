@@ -87,7 +87,7 @@ const CreateChat = ({ menu, currentUser }) => {
     const messageObj = { message: message, id_user: userId, id_chat: chatId };
     axios
       .post("/sendMessage", messageObj)
-      .then(() => hist.push(`/chat/${chatId}`))
+      .then(() => hist.push(`/chats/${chatId}`))
       .catch((err) => console.warn("sendMessage: ", err));
   };
 

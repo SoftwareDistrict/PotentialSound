@@ -81,16 +81,13 @@ const LSRoom = ({ match, currentUser }) => {
         item.peer.signal(payload.signal);
       });
     });
-
   }, []);
-
 
   socketRef.current.on("receiveChats", (data) => {
     if (data.live_id == roomID) {
       setMessage([...messages, data]);
     }
   });
-
 
   const createPeer = (userToSignal, callerID, stream) => {
     const peer = new Peer({
@@ -133,16 +130,24 @@ const LSRoom = ({ match, currentUser }) => {
         })}
       </div>
       <input onChange={onEventChange} />
-      <button onClick={() => {
-        socketRef.current.emit("send", { name: currentUser.username, message: messageBox, live_id: roomID });
-      }}>Submit</button>
+      <button
+        onClick={() => {
+          socketRef.current.emit("send", {
+            name: currentUser.username,
+            message: messageBox,
+            live_id: roomID,
+          });
+        }}
+      >
+        Submit
+      </button>
     </div>
   );
 };
 
 LSRoom.propTypes = {
   match: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
 };
 
 Video.propTypes = {

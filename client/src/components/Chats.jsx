@@ -37,7 +37,7 @@ const Chats = ({ currentUser, menu }) => {
             users.data.forEach((user) => {
               if (id === chat.id_chat) {
                 if (user.id === chat.id_user) {
-                  members.push([user.username, id]);
+                  members.push({ usename: user.username, chatId: id, pic: user.propic });
                 }
               }
             });

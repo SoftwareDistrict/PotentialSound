@@ -46,9 +46,7 @@ const Profile = ({ menu, currentUser }) => {
   const getInstaPosts = async () => {
     if (instaHandle) {
       const posts = await axios.get(`/instagram/${instaHandle}`);
-      console.info(posts.data, "post 4 insta");
       setInstaPosts(posts.data);
-      console.info(InstaPosts);
     }
   };
 

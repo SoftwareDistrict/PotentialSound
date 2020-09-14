@@ -277,9 +277,7 @@ app.post("/createPostMessage", (req, res) => {
   addPost(bodyMsg)
     .then((post) => {
       const postId = post.dataValues.id;
-      tags.map((tag) => {
-        addTags(postId, tag);
-      });
+      tags.map((tag) => addTags(postId, tag));
       res.status(201).json({ redirectUrl: "/home" });
     })
     .catch((err) => res.status(500).send(err));
@@ -292,11 +290,9 @@ app.get("/getallchats", (req, res) => {
 });
 
 app.get("/viewProfile/:id", (req, res) => {
-  console.info(req.params.id);
   const user = req.params.id;
   getUsername(user)
     .then((data) => {
-      console.info(data.dataValues);
       const {
         propic,
         city,
@@ -321,10 +317,7 @@ app.get("/viewProfile/:id", (req, res) => {
       };
       res.send(userInfo);
     })
-    .catch((err) => {
-      console.info(err);
-      res.send(err);
-    });
+    .catch((err) => res.status(500).send(err));
 });
 
 app.get("*", (req, res) => {

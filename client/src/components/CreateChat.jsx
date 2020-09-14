@@ -14,6 +14,7 @@ const CreateChat = ({ menu, currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
+
   const getAllUsers = async () => {
     await axios
       .get("/users")
@@ -83,10 +84,10 @@ const CreateChat = ({ menu, currentUser }) => {
   };
 
   const sendMessage = (message, userId, chatId) => {
-    let messageObj = { message: message, id_user: userId, id_chat: chatId };
+    const messageObj = { message: message, id_user: userId, id_chat: chatId };
     axios
       .post("/sendMessage", messageObj)
-      .then(() => hist.push(`/chat/${chatId}`))
+      .then(() => hist.push(`/chats/${chatId}`))
       .catch((err) => console.warn("sendMessage: ", err));
   };
 
@@ -101,15 +102,15 @@ const CreateChat = ({ menu, currentUser }) => {
   };
 
   const createJoin = (userId, chatId) => {
-    let obj = { id_user: userId, id_chat: chatId };
+    const obj = { id_user: userId, id_chat: chatId };
     axios.post("/createJoin", obj).catch((err) => console.warn("error in create Join: ", err));
   };
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     if (filterChatWithIds.length === ids.length) {
       sendMessage(message, currentUser.id, filterChatWithIds[0].id_chat);
     } else {
-      await createChat();
+      createChat();
     }
     setMembers([]);
   };
@@ -123,6 +124,12 @@ const CreateChat = ({ menu, currentUser }) => {
     }
     setSuggestions(sortedSuggestions);
     setText(value);
+  };
+
+  const removeMem = (child) => {
+    const childValue = document.getElementById(child).getAttribute("value");
+    const newMems = members.filter((mem) => mem !== childValue);
+    setMembers(newMems);
   };
 
   return (
@@ -141,9 +148,15 @@ const CreateChat = ({ menu, currentUser }) => {
                 boxShadow: "2px 2px 1px rgba(50, 50, 50, 0.75)",
               }}
             >
-              <div>{members.join(", ")}</div>
+              {members.map((mem, i) => (
+                <div key={i}>
+                  <div id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
+                    {mem}
+                  </div>
+                </div>
+              ))}
               <input
-                style={{ width: "100%" }}
+                style={{ width: "250px" }}
                 value={text}
                 onChange={onTextChange}
                 placeholder="Username"
@@ -152,13 +165,11 @@ const CreateChat = ({ menu, currentUser }) => {
             </div>
           </label>
           <input
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
+            onChange={(event) => setMessage(event.target.value)}
             ref={inputBox}
             style={{
               width: "250px",
-              height: "80px",
+              height: "60px",
               fontSize: "16px",
               marginLeft: "10px",
               paddingLeft: "10px",

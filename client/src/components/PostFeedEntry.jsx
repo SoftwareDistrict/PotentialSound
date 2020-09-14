@@ -24,94 +24,93 @@ const PostFeedEntry = ({ post, users, tags }) => {
 
   return (
     <div>
-      <Link
-        style={{ color: "#ff8c00", textDecoration: "none" }}
-        to={`/home/${post.id_user}${post.id}`}
+      <div
+        id="profile"
+        style={{
+          border: "2px solid black",
+          margin: "0 auto",
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
       >
         <div
-          id="profile"
           style={{
-            border: "2px solid black",
-            margin: "0 auto",
-            marginTop: "10px",
-            marginBottom: "10px",
+            width: "100px",
+            height: "100px",
+            textAlign: "left",
+            paddingLeft: "5px",
+            float: "left",
           }}
         >
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              textAlign: "left",
-              paddingLeft: "5px",
-              float: "left",
-            }}
+          <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
+        </div>
+        <div
+          style={{
+            height: "20px",
+            textAlign: "left",
+            fontSize: "16px",
+            marginLeft: "110px",
+          }}
+        >
+          <Link
+            to={`/viewprofile/${poster.username}`}
+            style={{ color: "orange", textDecoration: "none", fontSize: "20px" }}
           >
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
-          </div>
-          <div
-            style={{
-              height: "20px",
-              textAlign: "left",
-              fontSize: "16px",
-              marginLeft: "110px",
-            }}
-          >
-            <Link
-              to={`/viewprofile/${poster.username}`}
-              style={{ color: "orange", textDecoration: "none", fontSize: "20px" }}
-            >
-              {poster.username}
-            </Link>
-          </div>
-          <div
-            style={{
-              backgroundColor: "offwhite",
-              height: "60px",
-              textAlign: "left",
-              fontSize: "14px",
-              marginLeft: "110px",
-            }}
+            {poster.username}
+          </Link>
+        </div>
+        <div
+          style={{
+            backgroundColor: "offwhite",
+            height: "60px",
+            textAlign: "left",
+            fontSize: "14px",
+            marginLeft: "110px",
+          }}
+        > <Link
+            style={{ color: "#ff8c00", textDecoration: "none" }}
+            to={`/home/${post.id_user}${post.id}`}
           >
             <div>{post.message}</div>
-            {post.audioName ? (
-              <div>
-                <a href={post.audioUrl}>{post.audioName}</a>
-              </div>
-            ) : null}
-            {post.imageName ? (
-              <div>
-                <a href={post.imageUrl}>{post.imageName}</a>
-              </div>
-            ) : null}
-          </div>
-          <div
-            style={{
-              marginLeft: "180px",
-            }}
-          >
-            {post.youTubeUrl ? (
-              <iframe
-                width="160"
-                height="95"
-                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullscreen
-              ></iframe>
-            ) : null}
-          </div>
-          <div
-            style={{
-              height: "20px",
-              textAlign: "left",
-              marginLeft: "110px",
-              marginTop: "10px",
-            }}
-          >
-            {postTags.join(" ")}
-          </div>
+          </Link>
+          {post.audioName ? (
+            <div>
+              <a href={post.audioUrl}>{post.audioName}</a>
+            </div>
+          ) : null}
+          {post.imageName ? (
+            <div>
+              <a href={post.imageUrl}>{post.imageName}</a>
+            </div>
+          ) : null}
         </div>
-      </Link>
+        <div
+          style={{
+            marginLeft: "180px",
+          }}
+        >
+          {post.youTubeUrl ? (
+            <iframe
+              width="160"
+              height="95"
+              src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullscreen
+            ></iframe>
+          ) : null}
+        </div>
+        <div
+          style={{
+            height: "20px",
+            textAlign: "left",
+            marginLeft: "110px",
+            marginTop: "10px",
+          }}
+        >
+          {postTags.join(" ")}
+        </div>
+      </div>
     </div>
   );
 };

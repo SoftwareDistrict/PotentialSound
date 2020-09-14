@@ -52,7 +52,11 @@ class App extends Component {
 
   render() {
     const menu = (
-      <div id="menu" style={{ fontSize: "28px", fontWeight: "bold" }} onClick={this.toggleMenu}>
+      <div
+        id="menu"
+        style={{ fontSize: "28px", fontWeight: "bold", color: "black" }}
+        onClick={this.toggleMenu}
+      >
         Menu
       </div>
     );

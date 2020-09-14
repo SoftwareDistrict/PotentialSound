@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import Search from "./Search.jsx";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
-import { Avatar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Avatar, Button, Grid, Typography } from "@material-ui/core";
+import { feedStyles } from "../styles/styles.js";
 
 const HomeFeed = ({ currentUser, menu }) => {
   const [users, setUsers] = useState([]);
@@ -13,18 +13,7 @@ const HomeFeed = ({ currentUser, menu }) => {
   const [tags, setTags] = useState([]);
   const [searched, setSearched] = useState(false);
   const [searchFeed, setSearchFeed] = useState([]);
-
-  const useStyles = makeStyles({
-    avatar: {
-      height: 90,
-      width: 90,
-      position: "absolute",
-      top: "10px",
-      right: "25px",
-      variant: "circle",
-    },
-  });
-  const classes = useStyles();
+  const classes = feedStyles();
 
   useEffect(() => {
     axios
@@ -47,61 +36,49 @@ const HomeFeed = ({ currentUser, menu }) => {
       .catch((err) => console.warn("Could not get all tags", err));
   }, [tags]);
 
-  const logout = () => {
-    axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
-  };
-
   return (
     <div>
-      <div style={{ backgroundColor: "#eb8c34" }}>
-        {menu}
-        <div>
-          <Link to={"/"}>
-            <button style={{ backgroundColor: "#3F3D3D", color: "#eb8c34" }} onClick={logout}>
-              Logout
-            </button>
-          </Link>
-        </div>
-        <h1>
+      <div style={{ backgroundColor: "black" }}>
+        <Typography variant="h4" className={classes.header}>
           PotentialSound
-          <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
-        </h1>
+        </Typography>
+        <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
       </div>
-      <div>
+      {menu}
+      <Link to="/createPostMessage" className={classes.link}>
+        <Button className={classes.button}>Create A Post</Button>
+      </Link>
+      <Grid container justify="center" alignItems="center" direction="row">
         <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
-        <div>
-          <Link to="/createPostMessage">
-            <button
-              type="button"
-              style={{
-                fontSize: "20px",
-                padding: "5px",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                borderRadius: "5px",
-                margin: "10px",
-                backgroundColor: "#eb8c34",
-              }}
-            >
-              Create A Post
-            </button>
-          </Link>
-        </div>
-      </div>
+      </Grid>
       {!searched ? (
-        <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
+        <Grid
+          container
+          className={classes.feed}
+          justify="flex-start"
+          alignItems="center"
+          direction="column"
+        >
           {feed.map((post) => (
             <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
           ))}
-        </div>
+        </Grid>
       ) : (
         <div>
-          <button onClick={() => setSearched(false)}>Back To General</button>
-          <div style={{ backgroundColor: "#3F3D3D", height: "500px", padding: "5px" }}>
+          <Button onClick={() => setSearched(false)} className={classes.button}>
+            Back To General
+          </Button>
+          <Grid
+            container
+            className={classes.feed}
+            justify="center"
+            alignItems="center"
+            direction="column"
+          >
             {searchFeed.map((post) => (
               <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
             ))}
-          </div>
+          </Grid>
         </div>
       )}
     </div>

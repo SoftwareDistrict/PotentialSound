@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --watch",
     "build-dev": "webpack -d --mode development",
     "lint": "eslint . --ext .js --ext .jsx --ext .json",
     "lint:fix": "eslint --fix .",
@@ -39,6 +39,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "html-webpack-plugin": "^4.4.1",
     "http": "0.0.1-security",
     "moment": "^2.28.0",
     "multer": "^1.4.2",

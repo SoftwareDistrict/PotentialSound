@@ -8,7 +8,7 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.join(__dirname, "/client/dist/index.html"),
-      favicon: path.join(__dirname, "/client/dist/favicon.gif"),
+      favicon: path.join(__dirname, "/client/dist/favicon.png"),
     }),
   ],
   entry: path.join(__dirname, "/client/src/index.jsx"),

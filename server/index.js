@@ -295,35 +295,22 @@ app.get("/getallchats", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.get("/viewProfile/:id", (req, res) => {
+app.get("/viewOtherProfiles/:id", (req, res) => {
   const user = req.params.id;
   getUsername(user)
     .then((data) => {
-      const {
-        propic,
-        city,
-        description,
-        cell,
-        email,
-        youTube,
-        instagram,
-        soundCloud,
-        facebook,
-        instaHandle,
-      } = data.dataValues;
-      const userInfo = {
-        city,
-        description,
-        cell,
-        email,
-        propic,
-        youTube,
-        instagram,
-        soundCloud,
-        facebook,
-        instaHandle,
-      };
-      res.send(userInfo);
+      const { instaHandle } = data.dataValues;
+      console.info(instaHandle);
+      if (instaHandle) {
+        userInstagram(instaHandle)
+          .then((insta) => {
+            console.info(insta.posts.slice(0, 6), instaHandle);
+            res.send([data.dataValues, insta.posts.slice(0, 6)]);
+          })
+          .catch((err) => res.send(err));
+      } else {
+        res.send(data.dataValues);
+      }
     })
     .catch((err) => res.status(500).send(err));
 });

@@ -11,14 +11,13 @@ import {
 import "regenerator-runtime/runtime";
 
 const ViewProfile = ({ match, menu }) => {
-  const username = match.params.id;
+  const username = match.params.name;
   useEffect(() => {
     getUser();
   }, []);
   const [proInfo, setInfo] = useState({});
   const getUser = async () => {
     const data = await axios.get(`/viewprofile/${username}`);
-    console.info(data.data, "data for profile");
     setInfo(data.data);
   };
 

@@ -300,11 +300,9 @@ app.get("/viewOtherProfiles/:id", (req, res) => {
   getUsername(user)
     .then((data) => {
       const { instaHandle } = data.dataValues;
-      console.info(instaHandle);
       if (instaHandle) {
         userInstagram(instaHandle)
           .then((insta) => {
-            console.info(insta.posts.slice(0, 6), instaHandle);
             res.send([data.dataValues, insta.posts.slice(0, 6)]);
           })
           .catch((err) => res.send(err));

@@ -1,9 +1,16 @@
 require("dotenv").config();
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const { PORT } = process.env;
 
 module.exports = {
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: path.join(__dirname, "/client/dist/index.html"),
+      favicon: path.join(__dirname, "/client/dist/favicon.gif"),
+    }),
+  ],
   entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {
     path: path.join(__dirname, "/client/dist"),

@@ -21,6 +21,7 @@ const CreateProfile = ({ getCurrentUser }) => {
   const [youTube, setYouTube] = useState("");
   const [instagram, setInstagram] = useState("");
   const [faceBook, setFaceBook] = useState("");
+  const [instaHandle, setInstaHandle] = useState("");
 
   const uploadImg = () => {
     let data = new FormData();
@@ -41,6 +42,7 @@ const CreateProfile = ({ getCurrentUser }) => {
       facebook: faceBook,
       instagram: instagram,
       soundCloud: soundCloud,
+      instaHandle: instaHandle,
     });
   };
 
@@ -106,6 +108,12 @@ const CreateProfile = ({ getCurrentUser }) => {
               style={style}
               placeholder="SoundCloud"
               onChange={(e) => setSoundCloud(e.target.value)}
+            ></input>
+            <h3>Add Instagram Handle to display your profile Uploads (must be public)</h3>
+            <input
+              style={style}
+              placeholder="Instagram Handle"
+              onChange={(e) => setInstaHandle(e.target.value)}
             ></input>
           </div>
           <ImageUploader

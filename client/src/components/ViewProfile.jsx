@@ -16,9 +16,15 @@ const ViewProfile = ({ match, menu }) => {
     getUser();
   }, []);
   const [proInfo, setInfo] = useState({});
+  const [instaPic, setInstaPic] = useState([]);
   const getUser = async () => {
-    const data = await axios.get(`/viewprofile/${username}`);
-    setInfo(data.data);
+    const data = await axios.get(`/viewOtherProfiles/${username}`);
+    if (data.data[0]) {
+      setInfo(data.data[0]);
+      setInstaPic(data.data[1]);
+    } else {
+      setInfo(data.data);
+    }
   };
 
   return (
@@ -80,6 +86,18 @@ const ViewProfile = ({ match, menu }) => {
       >
         Profile Picture
         <img src={proInfo.propic} />
+      </div>
+      <div>
+        {instaPic[0] ? (
+          <div>
+            <img src={instaPic[0].imageUrl} />
+            <img src={instaPic[1].imageUrl} />
+            <img src={instaPic[2].imageUrl} />
+            <img src={instaPic[3].imageUrl} />
+            <img src={instaPic[4].imageUrl} />
+            <img src={instaPic[5].imageUrl} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

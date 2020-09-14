@@ -21,6 +21,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
   const [youTube, setYouTube] = useState(currentUser.youTube);
   const [instagram, setInstagram] = useState(currentUser.instagram);
   const [faceBook, setFaceBook] = useState(currentUser.facebook);
+  const [instaHandle, setInstaHandle] = useState(currentUser.instaHandle);
 
   const uploadImg = () => {
     let data = new FormData();
@@ -42,6 +43,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
+        instaHandle: instaHandle,
       });
     } else {
       return axios.post("/profileUpdate", {
@@ -54,6 +56,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
+        instaHandle: instaHandle,
       });
     }
   };
@@ -122,18 +125,35 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
           <input
             style={style}
             value={faceBook}
+            placeholder="Facebook"
             onChange={(e) => setFaceBook(e.target.value)}
           ></input>
           <input
             style={style}
             value={instagram}
+            placeholder="Instagram"
             onChange={(e) => setInstagram(e.target.value)}
           ></input>
-          <input style={style} value={youTube} onChange={(e) => setYouTube(e.target.value)}></input>
+          <input
+            style={style}
+            value={youTube}
+            placeholder="Youtube"
+            onChange={(e) => setYouTube(e.target.value)}
+          ></input>
           <input
             style={style}
             value={soundCloud}
+            placeholder="soundCloud"
             onChange={(e) => setSoundCloud(e.target.value)}
+          ></input>
+          <h3>Update your Instagram handle</h3>
+          <input
+            style={{ marginBottom: "10px", display: "block" }}
+            value={instaHandle}
+            placeholder="Instagram Handle"
+            onChange={(e) => {
+              setInstaHandle(e.target.value);
+            }}
           ></input>
           <ImageUploader
             withIcon={false}

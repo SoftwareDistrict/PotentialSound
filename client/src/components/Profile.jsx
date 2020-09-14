@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+// import { InstaPosts } from "./Instagram.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
@@ -10,8 +12,10 @@ import {
   faSoundcloud,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import "regenerator-runtime/runtime";
 
 const Profile = ({ menu, currentUser }) => {
+  console.info(currentUser, "this is the current user");
   const {
     username,
     propic,
@@ -23,6 +27,7 @@ const Profile = ({ menu, currentUser }) => {
     instagram,
     soundCloud,
     facebook,
+    instaHandle,
   } = currentUser;
   const useStyles = makeStyles({
     avatar: {
@@ -34,6 +39,17 @@ const Profile = ({ menu, currentUser }) => {
       variant: "circle",
     },
   });
+  useEffect(() => {
+    getInstaPosts();
+  }, [instaHandle]);
+  const [InstaPosts, setInstaPosts] = useState([]);
+  const getInstaPosts = async () => {
+    if (instaHandle) {
+      const posts = await axios.get(`/instagram/${instaHandle}`);
+      setInstaPosts(posts.data);
+    }
+  };
+
   const classes = useStyles();
 
   return (
@@ -91,6 +107,18 @@ const Profile = ({ menu, currentUser }) => {
           Update Profile
         </button>
       </Link>
+      <div>
+        {InstaPosts[0] ? (
+          <div>
+            <img src={InstaPosts[0].imageUrl} />
+            <img src={InstaPosts[1].imageUrl} />
+            <img src={InstaPosts[2].imageUrl} />
+            <img src={InstaPosts[3].imageUrl} />
+            <img src={InstaPosts[4].imageUrl} />
+            <img src={InstaPosts[5].imageUrl} />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };

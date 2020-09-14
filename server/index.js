@@ -7,6 +7,7 @@ const cookieSession = require("cookie-session");
 const { uploadToS3, uploadAudioToS3 } = require("./s3");
 const socketIo = require("socket.io");
 const http = require("http");
+const userInstagram = require("user-instagram");
 require("./db");
 require("./passport.setup");
 const {
@@ -194,6 +195,18 @@ app.get("/posttags", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+app.get("/instagram/:id", (req, res) => {
+  const userHandle = req.params.id;
+  if (userHandle) {
+    userInstagram(userHandle)
+      .then((data) => {
+        console.info(data.posts.slice(0, 6), userHandle);
+        res.send(data.posts.slice(0, 6));
+      })
+      .catch((err) => res.send(err));
+  }
+});
+
 app.get("/currentUser", (req, res) => {
   const userId = req.session.passport.user;
   getCurrentUser(userId)
@@ -282,33 +295,20 @@ app.get("/getallchats", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.get("/viewProfile/:id", (req, res) => {
+app.get("/viewOtherProfiles/:id", (req, res) => {
   const user = req.params.id;
   getUsername(user)
     .then((data) => {
-      const {
-        propic,
-        city,
-        description,
-        cell,
-        email,
-        youTube,
-        instagram,
-        soundCloud,
-        facebook,
-      } = data.dataValues;
-      const userInfo = {
-        city,
-        description,
-        cell,
-        email,
-        propic,
-        youTube,
-        instagram,
-        soundCloud,
-        facebook,
-      };
-      res.send(userInfo);
+      const { instaHandle } = data.dataValues;
+      if (instaHandle) {
+        userInstagram(instaHandle)
+          .then((insta) => {
+            res.send([data.dataValues, insta.posts.slice(0, 6)]);
+          })
+          .catch((err) => res.send(err));
+      } else {
+        res.send(data.dataValues);
+      }
     })
     .catch((err) => res.status(500).send(err));
 });

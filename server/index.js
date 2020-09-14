@@ -195,10 +195,16 @@ app.get("/posttags", (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.get("/instainfo", (req, res) => {
-  userInstagram("bsbrioness")
-    .then(data => res.send(data.posts))
-    .catch(err => res.send(err));
+app.get("/instagram/:id", (req, res) => {
+  const userHandle = req.params.id;
+  if (userHandle) {
+    userInstagram(userHandle)
+      .then((data) => {
+        console.info(data.posts.slice(0, 6), userHandle);
+        res.send(data.posts.slice(0, 6));
+      })
+      .catch((err) => res.send(err));
+  }
 });
 
 app.get("/currentUser", (req, res) => {
@@ -303,6 +309,7 @@ app.get("/viewProfile/:id", (req, res) => {
         instagram,
         soundCloud,
         facebook,
+        instaHandle,
       } = data.dataValues;
       const userInfo = {
         city,
@@ -314,6 +321,7 @@ app.get("/viewProfile/:id", (req, res) => {
         instagram,
         soundCloud,
         facebook,
+        instaHandle,
       };
       res.send(userInfo);
     })

@@ -20,7 +20,6 @@ const ViewProfile = ({ match, menu }) => {
   const getUser = async () => {
     const data = await axios.get(`/viewOtherProfiles/${username}`);
     if (data.data[0]) {
-      console.info(data.data);
       setInfo(data.data[0]);
       setInstaPic(data.data[1]);
     } else {

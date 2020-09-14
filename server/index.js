@@ -7,6 +7,7 @@ const cookieSession = require("cookie-session");
 const { uploadToS3, uploadAudioToS3 } = require("./s3");
 const socketIo = require("socket.io");
 const http = require("http");
+const userInstagram = require("user-instagram");
 require("./db");
 require("./passport.setup");
 const {
@@ -192,6 +193,12 @@ app.get("/posttags", (req, res) => {
   getTags()
     .then((allTags) => res.send(allTags))
     .catch((err) => res.status(500).send(err));
+});
+
+app.get("/instainfo", (req, res) => {
+  userInstagram("bsbrioness")
+    .then(data => res.send(data.posts))
+    .catch(err => res.send(err));
 });
 
 app.get("/currentUser", (req, res) => {

@@ -14,7 +14,7 @@ const Nav = ({ currentUser, toggleMenu }) => {
 
   return (
     <div className={classes.style} id="mySidenav">
-      <Typography onClick={toggleMenu} variant="h3" style={{ textAlign: "center" }}>
+      <Typography onClick={toggleMenu} variant="h5" style={{ color: "white", textAlign: "center" }}>
         Menu
       </Typography>
       <Link onClick={toggleMenu} className={classes.link} to="/home">
@@ -29,7 +29,14 @@ const Nav = ({ currentUser, toggleMenu }) => {
       <Link onClick={toggleMenu} className={classes.link} to={`/profile/${currentUser.id}`}>
         My Profile
       </Link>
-      <Link to={"/"} className={classes.link} onClick={logout}>
+      <Link
+        to={"/"}
+        className={classes.link}
+        onClick={() => {
+          logout();
+          toggleMenu();
+        }}
+      >
         Logout
       </Link>
     </div>

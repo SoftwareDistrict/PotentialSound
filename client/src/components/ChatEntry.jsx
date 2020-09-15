@@ -53,8 +53,8 @@ const ChatEntry = ({ participants, id_chat }) => {
         >
           <label>Chat Members:</label>
           <AvatarGroup max={4} className={classes.avatarGroup}>
-            {members.map(({ username, chatId, pic }) => (
-              <Avatar key={chatId} alt={username} src={pic} className={classes.avatar} />
+            {members.map(({ username, chatId, pic }, i) => (
+              <Avatar key={i} id={chatId} alt={username} src={pic} className={classes.avatar} />
             ))}
           </AvatarGroup>
         </div>

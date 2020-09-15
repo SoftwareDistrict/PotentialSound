@@ -34,6 +34,7 @@ const Login = () => {
         <IconButton className={classes.button} href="/google">
           <img
             id="google"
+            alt="PS"
             src="https://tinyurl.com/y6kf4vx4"
             style={{ height: "70px", width: "70px", marginRight: "10px" }}
           />

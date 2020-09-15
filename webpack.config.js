@@ -16,7 +16,7 @@ module.exports = {
     port: PORT,
     historyApiFallback: true,
   },
-  plugins: [new FaviconsWebpackPlugin(path.join(__dirname, "/client/dist/favicon.png"))],
+  plugins: [new FaviconsWebpackPlugin(path.join(__dirname, "/img/favicon.png"))],
   module: {
     rules: [
       {

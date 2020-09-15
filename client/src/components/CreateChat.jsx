@@ -3,6 +3,10 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const CreateChat = ({ menu, currentUser }) => {
   const inputBox = useRef();
@@ -14,6 +18,31 @@ const CreateChat = ({ menu, currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
+
+  const useStyles = makeStyles({
+    pDiv: {
+      height: "100vh",
+      backgroundColor: "#2B2D42",
+    },
+    avatarGroup: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    parentGrid: {
+      backgroundColor: "#2B2D42",
+    },
+    username: {
+      backgroundColor: "#EDF2F4",
+    },
+    text: {
+      backgroundColor: "#EDF2F4",
+    },
+    button: {
+      backgroundColor: "white",
+    },
+  });
+  const classes = useStyles();
 
   const getAllUsers = async () => {
     await axios
@@ -48,7 +77,7 @@ const CreateChat = ({ menu, currentUser }) => {
     .flat();
 
   const suggestionSelected = (value) => {
-    setText(value);
+    setText("");
     setMembers([...members, value]);
     setSuggestions([]);
   };
@@ -133,56 +162,90 @@ const CreateChat = ({ menu, currentUser }) => {
   };
 
   return (
-    <div>
-      {menu}
-      <div>
-        <label>
-          <h3>Send a message</h3>
-          <label>
-            {" "}
-            To:
+    <div className={classes.pDiv}>
+      <Grid
+        className={classes.parentGrid}
+        container
+        spacing={3}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid container spacing={3} item xs={12}>
+          <Grid item xs={4}>
+            {menu}
+          </Grid>
+          <Grid item xs={8} />
+        </Grid>
+
+        <Grid spacing={3} container item xs={12}>
+          <Grid align="center" item xs={12}>
+            <h3>Start a new message</h3>
+          </Grid>
+        </Grid>
+        <Grid justify="center" container spacing={1} item xs={12}>
+          <Grid align="center" justify="center" container item xs={12}>
+            {members.length > 0 ? (
+              <h3>Sending to </h3>
+            ) : (
+              <h3>Who are you looking to send a message to?</h3>
+            )}
             <div
               style={{
+                backgroundColor: "#EDF2F4",
                 width: "100%",
-                border: "1px solid grey",
                 boxShadow: "2px 2px 1px rgba(50, 50, 50, 0.75)",
               }}
             >
               {members.map((mem, i) => (
-                <div key={i}>
-                  <div id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
-                    {mem}
-                  </div>
-                </div>
+                <span key={i}>
+                  <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
+                    {`${mem}   `}
+                  </span>
+                </span>
               ))}
-              <input
-                style={{ width: "250px" }}
-                value={text}
-                onChange={onTextChange}
-                placeholder="Username"
-              />
-              {renderSuggestions()}
             </div>
-          </label>
-          <input
-            onChange={(event) => setMessage(event.target.value)}
-            ref={inputBox}
-            style={{
-              width: "250px",
-              height: "60px",
-              fontSize: "16px",
-              marginLeft: "10px",
-              paddingLeft: "10px",
-            }}
-            type="text"
-            placeholder="Message"
-          />
-          <br />
-          <button onClick={onSubmit} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} item xs={12}>
+          <Grid align="center" container item xs={12}>
+            <TextField
+              align="center"
+              rows={2}
+              rowsMax={4}
+              value={text}
+              onChange={onTextChange}
+              placeholder="Username"
+              className={classes.username}
+              borderRadius="50%"
+            />
+          </Grid>
+          <Grid align="center" container item xs={12}>
+            {renderSuggestions()}
+          </Grid>
+          <Grid align="center" container spacing={1} item xs={12}>
+            <TextField
+              align="center"
+              className={classes.text}
+              multiline
+              rows={5}
+              onChange={(event) => setMessage(event.target.value)}
+              ref={inputBox}
+              type="text"
+              placeholder="Message"
+              rowsMax={5}
+              size="medium"
+              fullWidth
+              borderRadius="50%"
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} align="center" item xs={12}>
+          <Button onClick={onSubmit} className={classes.button}>
             Submit
-          </button>
-        </label>
-      </div>
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

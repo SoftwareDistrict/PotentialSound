@@ -51,37 +51,23 @@ class App extends Component {
             <Route path="/chats" render={() => <Chats currentUser={currentUser} />} />
             <Route
               path="/home/:id"
-              render={({ match }) => (
-                <PostFullMessage currentUser={currentUser} match={match} />
-              )}
+              render={({ match }) => <PostFullMessage currentUser={currentUser} match={match} />}
             />
             <Route path="/home" render={() => <HomeFeed currentUser={currentUser} />} />
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
               path="/profile/:id"
-              render={({ match }) => (
-                <Profile match={match} currentUser={currentUser} />
-              )}
+              render={({ match }) => <Profile match={match} currentUser={currentUser} />}
             />
-            <Route
-              path="/viewprofile/:name"
-              render={(props) => <ViewProfile {...props} />}
-            />
+            <Route path="/viewprofile/:name" render={(props) => <ViewProfile {...props} />} />
             <Route
               path="/updateProfile"
               render={() => (
-                <UpdateProfile
-                  currentUser={currentUser}
-                 
-                  getCurrentUser={this.getCurrentUser}
-                />
+                <UpdateProfile currentUser={currentUser} getCurrentUser={this.getCurrentUser} />
               )}
             />
             <Route path="/createPostMessage" render={() => <CreatePostMessage />} />
-            <Route
-              path="/createChat"
-              render={() => <CreateChat currentUser={currentUser} />}
-            />
+            <Route path="/createChat" render={() => <CreateChat currentUser={currentUser} />} />
             <Route
               path="/createProfile"
               render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}

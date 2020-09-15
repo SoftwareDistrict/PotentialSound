@@ -1,6 +1,6 @@
 import React from "react";
-import Menu from "./Menu.jsx";
 import { Link } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,7 +39,7 @@ const Profile = ({ currentUser }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       {youTube ? (

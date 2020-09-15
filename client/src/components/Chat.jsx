@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Message from "./Message.jsx";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
@@ -128,7 +128,7 @@ const Chat = ({ match, currentUser, history }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <div style={{ width: "355px", overflow: "hidden" }}>
         <h1 style={{ textAlign: "center" }}>Chat</h1>
         <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>

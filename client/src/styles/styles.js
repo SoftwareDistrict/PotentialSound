@@ -110,7 +110,7 @@ const feedStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     align: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   link: {
     textDecoration: "none",

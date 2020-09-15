@@ -2,13 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { navStyles, menuStyles } from "../styles/styles.js";
-import { IconButton } from "@material-ui/core";
-import { MenuOpenOutlinedIcon } from "@material-ui/icons";
+import { menuStyles } from "../styles/styles.js";
+import { IconButton, Grid } from "@material-ui/core";
+import MenuOpenOutlinedIcon from "@material-ui/icons/MenuOpenOutlined";
 
 const Nav = ({ currentUser }) => {
-  const classes = navStyles();
-  const cl = menuStyles();
+  const classes = menuStyles();
 
   const toggleMenu = () => {
     const nav = document.getElementById("mySidenav");
@@ -28,9 +27,11 @@ const Nav = ({ currentUser }) => {
 
   return (
     <div className={classes.style} id="mySidenav">
-      <IconButton id="mySidenav" onClick={toggleMenu} className={cl.button}>
-        <MenuOpenOutlinedIcon className={cl.icon} />
-      </IconButton>
+      <Grid container justify="flex-end" alignItems="flex-start" direction="row">
+        <IconButton id="mySidenav" onClick={toggleMenu} className={classes.button}>
+          <MenuOpenOutlinedIcon className={classes.iconClose} />
+        </IconButton>
+      </Grid>
       <Link onClick={toggleMenu} className={classes.link} to="/home">
         General
       </Link>
@@ -59,7 +60,6 @@ const Nav = ({ currentUser }) => {
 
 Nav.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
 };
 
 export default Nav;

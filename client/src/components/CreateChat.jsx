@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
@@ -135,7 +135,7 @@ const CreateChat = ({ currentUser }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <div>
         <label>
           <h3>Send a message</h3>

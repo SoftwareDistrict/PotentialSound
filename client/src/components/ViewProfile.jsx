@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,7 +24,7 @@ const ViewProfile = ({ match }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
       <div
         id="profile"

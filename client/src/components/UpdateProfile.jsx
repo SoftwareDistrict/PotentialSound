@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
@@ -89,7 +89,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
     <div>
       {load === false ? (
         <div>
-          <Menu />
+          <Appbar />
           <h1>Update Your Profile</h1>
           <input
             style={{ marginBottom: "10px", display: "block" }}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
@@ -200,6 +201,7 @@ const CreatePostMessage = () => {
     <div>
       {loading === false ? (
         <div>
+          <Appbar />
           <h1>Make a Post</h1>
           <div>
             {/* // Genres */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
@@ -115,7 +115,7 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <div
         id="profile"
         style={{

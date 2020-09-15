@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
@@ -52,7 +52,7 @@ const Chats = ({ currentUser }) => {
 
   return (
     <div>
-      <Menu />
+      <Appbar />
       <h1>Current Messages (Inbox) </h1>
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />

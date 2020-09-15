@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Search from "./Search.jsx";
-import Menu from "./Menu.jsx";
+import Appbar from "./Appbar.jsx";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
-import { Avatar, Button, Grid, Typography } from "@material-ui/core";
-import { feedStyles, dark } from "../styles/styles.js";
+import { Button, Grid } from "@material-ui/core";
+import { feedStyles } from "../styles/styles.js";
 
 const HomeFeed = ({ currentUser }) => {
   const [users, setUsers] = useState([]);
@@ -39,18 +39,12 @@ const HomeFeed = ({ currentUser }) => {
 
   return (
     <div>
-      <Grid container direction="row" style={{ backgroundColor: dark }}>
-        <Typography variant="h4" className={classes.header}>
-          PotentialSound
-          <Menu />
-        </Typography>
-        <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
-      </Grid>
+      <Appbar currentUser={currentUser} />
+      <Link to="/createPostMessage" className={classes.link}>
+        <Button className={classes.button}>Create A Post</Button>
+      </Link>
+      <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
       <div className={classes.feed}>
-        <Link to="/createPostMessage" className={classes.link}>
-          <Button className={classes.button}>Create A Post</Button>
-        </Link>
-        <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
         {!searched ? (
           <Grid container justify="flex-start" alignItems="center" direction="column">
             {feed.map((post) => (

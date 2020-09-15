@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { IconButton, Grid } from "@material-ui/core";
+import { IconButton, Grid, TextField } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { searchStyles } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
@@ -125,7 +125,7 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
     <div>
       <div style={{ textAlign: "center" }}>{queries.join(", ")}</div>
       <Grid container justify="center" alignItems="center" direction="row">
-        <input
+        <TextField
           ref={val}
           type="text"
           placeholder="Search"

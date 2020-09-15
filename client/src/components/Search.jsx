@@ -13,7 +13,7 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
   const [tagNames, setTagNames] = useState([]);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [suggestedTags, setSuggestedTags] = useState([]);
-  const [queries] = useState([]);
+  const [queries, setQueries] = useState([]);
   const classes = searchStyles();
 
   useEffect(() => {
@@ -117,25 +117,30 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
     );
 
     setSearchFeed(finalSearch.flat());
+    setQueries([]);
     setSearched(true);
   };
 
   return (
-    <Grid item align="center">
-      <div>{queries.join(", ")}</div>
-      <input
-        ref={val}
-        type="text"
-        placeholder="Search"
-        className={classes.input}
-        onChange={(e) => onTextChange(e)}
-      />
-      <IconButton onClick={onSearch} className={classes.icon}>
-        <SearchOutlinedIcon />
-      </IconButton>
-      {renderSuggestedUsers()}
-      {renderSuggestedTags()}
-    </Grid>
+    <div>
+      <div style={{ textAlign: "center" }}>{queries.join(", ")}</div>
+      <Grid container justify="center" alignItems="center" direction="row">
+        <input
+          ref={val}
+          type="text"
+          placeholder="Search"
+          className={classes.input}
+          onChange={(e) => onTextChange(e)}
+        />
+        <IconButton onClick={onSearch} className={classes.button}>
+          <SearchOutlinedIcon className={classes.icon} />
+        </IconButton>
+      </Grid>
+      <Grid container justify="flex-start" alignItems="flex-start" direction="row">
+        {renderSuggestedUsers()}
+        {renderSuggestedTags()}
+      </Grid>
+    </div>
   );
 };
 

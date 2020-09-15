@@ -5,7 +5,7 @@ import Search from "./Search.jsx";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
-import { feedStyles } from "../styles/styles.js";
+import { feedStyles, dark } from "../styles/styles.js";
 
 const HomeFeed = ({ currentUser, menu }) => {
   const [users, setUsers] = useState([]);
@@ -38,49 +38,37 @@ const HomeFeed = ({ currentUser, menu }) => {
 
   return (
     <div>
-      <div style={{ backgroundColor: "black" }}>
+      <Grid container direction="row" style={{ backgroundColor: dark }}>
         <Typography variant="h4" className={classes.header}>
           PotentialSound
+          {menu}
         </Typography>
         <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
-      </div>
-      {menu}
-      <Link to="/createPostMessage" className={classes.link}>
-        <Button className={classes.button}>Create A Post</Button>
-      </Link>
-      <Grid container justify="center" alignItems="center" direction="row">
-        <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
       </Grid>
-      {!searched ? (
-        <Grid
-          container
-          className={classes.feed}
-          justify="flex-start"
-          alignItems="center"
-          direction="column"
-        >
-          {feed.map((post) => (
-            <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
-          ))}
-        </Grid>
-      ) : (
-        <div>
-          <Button onClick={() => setSearched(false)} className={classes.button}>
-            Back To General
-          </Button>
-          <Grid
-            container
-            className={classes.feed}
-            justify="center"
-            alignItems="center"
-            direction="column"
-          >
-            {searchFeed.map((post) => (
+      <div className={classes.feed}>
+        <Link to="/createPostMessage" className={classes.link}>
+          <Button className={classes.button}>Create A Post</Button>
+        </Link>
+        <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
+        {!searched ? (
+          <Grid container justify="flex-start" alignItems="center" direction="column">
+            {feed.map((post) => (
               <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
             ))}
           </Grid>
-        </div>
-      )}
+        ) : (
+          <div>
+            <Button onClick={() => setSearched(false)} className={classes.button}>
+              Back To General
+            </Button>
+            <Grid container justify="center" alignItems="center" direction="column">
+              {searchFeed.map((post) => (
+                <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
+              ))}
+            </Grid>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

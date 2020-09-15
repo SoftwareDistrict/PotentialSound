@@ -30,6 +30,7 @@ const Users = sequelize.define("Users", {
   facebook: Sequelize.STRING,
   instagram: Sequelize.STRING,
   soundCloud: Sequelize.STRING,
+  instaHandle: Sequelize.STRING,
 });
 
 const Messages = sequelize.define("Messages", {

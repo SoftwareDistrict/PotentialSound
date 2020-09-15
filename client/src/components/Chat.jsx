@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import Message from "./Message.jsx";
+import Menu from "./Menu.jsx";
 import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
 let socket = io("localhost:8080");
 
-const Chat = ({ menu, match, currentUser, history }) => {
+const Chat = ({ match, currentUser, history }) => {
   const audioRef = useRef();
   const imageRef = useRef();
   const idChat = match.params.id;
@@ -127,7 +128,7 @@ const Chat = ({ menu, match, currentUser, history }) => {
 
   return (
     <div>
-      {menu}
+      <Menu />
       <div style={{ width: "355px", overflow: "hidden" }}>
         <h1 style={{ textAlign: "center" }}>Chat</h1>
         <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>
@@ -204,7 +205,6 @@ const Chat = ({ menu, match, currentUser, history }) => {
 };
 
 Chat.propTypes = {
-  menu: PropTypes.element,
   match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,

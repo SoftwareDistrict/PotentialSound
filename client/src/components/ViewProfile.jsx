@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Menu from "./Menu.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "regenerator-runtime/runtime";
 
-const ViewProfile = ({ match, menu }) => {
+const ViewProfile = ({ match }) => {
   const username = match.params.name;
   useEffect(() => {
     getUser();
@@ -23,7 +24,7 @@ const ViewProfile = ({ match, menu }) => {
 
   return (
     <div>
-      {menu}
+      <Menu />
       <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
       <div
         id="profile"
@@ -85,7 +86,6 @@ const ViewProfile = ({ match, menu }) => {
   );
 };
 ViewProfile.propTypes = {
-  menu: PropTypes.element,
   match: PropTypes.string.isRequired,
 };
 export default ViewProfile;

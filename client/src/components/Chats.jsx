@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
+import Menu from "./Menu.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const Chats = ({ currentUser, menu }) => {
+const Chats = ({ currentUser }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
@@ -51,7 +52,7 @@ const Chats = ({ currentUser, menu }) => {
 
   return (
     <div>
-      {menu}
+      <Menu />
       <h1>Current Messages (Inbox) </h1>
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />
@@ -62,7 +63,6 @@ const Chats = ({ currentUser, menu }) => {
 
 Chats.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  menu: PropTypes.element,
 };
 
 export default Chats;

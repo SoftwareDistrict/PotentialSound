@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Menu from "./Menu.jsx";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
@@ -9,7 +10,7 @@ const style = {
   display: "block",
 };
 
-const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
+const UpdateProfile = ({ currentUser, getCurrentUser }) => {
   const [newUser, setNewUser] = useState(currentUser.username);
   const [newCity, setNewCity] = useState(currentUser.city);
   const [newCell, setNewCell] = useState(currentUser.cell);
@@ -88,7 +89,7 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
     <div>
       {load === false ? (
         <div>
-          {menu}
+          <Menu />
           <h1>Update Your Profile</h1>
           <input
             style={{ marginBottom: "10px", display: "block" }}
@@ -164,7 +165,6 @@ const UpdateProfile = ({ currentUser, menu, getCurrentUser }) => {
 
 UpdateProfile.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  menu: PropTypes.element,
   getCurrentUser: PropTypes.func.isRequired,
 };
 

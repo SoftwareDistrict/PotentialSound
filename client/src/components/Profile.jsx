@@ -1,4 +1,5 @@
 import React from "react";
+import Menu from "./Menu.jsx";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Avatar } from "@material-ui/core";
@@ -11,7 +12,7 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 
-const Profile = ({ menu, currentUser }) => {
+const Profile = ({ currentUser }) => {
   const {
     username,
     propic,
@@ -38,7 +39,7 @@ const Profile = ({ menu, currentUser }) => {
 
   return (
     <div>
-      {menu}
+      <Menu />
       <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       {youTube ? (
@@ -96,7 +97,6 @@ const Profile = ({ menu, currentUser }) => {
 };
 
 Profile.propTypes = {
-  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

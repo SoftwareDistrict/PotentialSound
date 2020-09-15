@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Search from "./Search.jsx";
+import Menu from "./Menu.jsx";
 import PostFeedEntry from "./PostFeedEntry.jsx";
 import axios from "axios";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import { feedStyles, dark } from "../styles/styles.js";
 
-const HomeFeed = ({ currentUser, menu }) => {
+const HomeFeed = ({ currentUser }) => {
   const [users, setUsers] = useState([]);
   const [feed, setFeed] = useState([]);
   const [tags, setTags] = useState([]);
@@ -41,7 +42,7 @@ const HomeFeed = ({ currentUser, menu }) => {
       <Grid container direction="row" style={{ backgroundColor: dark }}>
         <Typography variant="h4" className={classes.header}>
           PotentialSound
-          {menu}
+          <Menu />
         </Typography>
         <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />
       </Grid>
@@ -74,7 +75,6 @@ const HomeFeed = ({ currentUser, menu }) => {
 };
 
 HomeFeed.propTypes = {
-  menu: PropTypes.element,
   audio: PropTypes.array,
   currentUser: PropTypes.object.isRequired,
 };

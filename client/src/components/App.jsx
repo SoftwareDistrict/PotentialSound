@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import axios from "axios";
 import Login from "./Login.jsx";
 import HomeFeed from "./HomeFeed.jsx";
 import Profile from "./Profile.jsx";
@@ -11,8 +13,6 @@ import Nav from "./Nav.jsx";
 import Chats from "./Chats.jsx";
 import Chat from "./Chat.jsx";
 import VCRoom from "./VCRoom.jsx";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
 import CreateChat from "./CreateChat.jsx";
 
 class App extends Component {
@@ -24,7 +24,6 @@ class App extends Component {
     };
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
@@ -38,63 +37,42 @@ class App extends Component {
       .catch((err) => console.warn("could not get current user.", err));
   }
 
-  toggleMenu() {
-    const nav = document.getElementById("mySidenav");
-    const menu = document.getElementById("menu");
-    if (nav.style.display === "none") {
-      nav.style.display = "block";
-      menu.style.display = "none";
-    } else {
-      nav.style.display = "none";
-      menu.style.display = "block";
-    }
-  }
-
   render() {
-    const menu = (
-      <div
-        id="menu"
-        style={{ fontSize: "20px", fontWeight: "bold", color: "white", display: "block" }}
-        onClick={this.toggleMenu}
-      >
-        Menu
-      </div>
-    );
     const { currentUser } = this.state;
     return (
       <div>
         <Router>
-          <Nav currentUser={currentUser} toggleMenu={this.toggleMenu} />
+          <Nav currentUser={currentUser} />
           <Switch>
             <Route
               path="/chats/:id"
-              render={({ match }) => <Chat match={match} currentUser={currentUser} menu={menu} />}
+              render={({ match }) => <Chat match={match} currentUser={currentUser} />}
             />
-            <Route path="/chats" render={() => <Chats menu={menu} currentUser={currentUser} />} />
+            <Route path="/chats" render={() => <Chats currentUser={currentUser} />} />
             <Route
               path="/home/:id"
               render={({ match }) => (
-                <PostFullMessage currentUser={currentUser} match={match} menu={menu} />
+                <PostFullMessage currentUser={currentUser} match={match} />
               )}
             />
-            <Route path="/home" render={() => <HomeFeed menu={menu} currentUser={currentUser} />} />
+            <Route path="/home" render={() => <HomeFeed currentUser={currentUser} />} />
             <Route exact={true} path="/" render={() => <Login />} />
             <Route
               path="/profile/:id"
               render={({ match }) => (
-                <Profile menu={menu} match={match} currentUser={currentUser} />
+                <Profile match={match} currentUser={currentUser} />
               )}
             />
             <Route
               path="/viewprofile/:name"
-              render={(props) => <ViewProfile menu={menu} {...props} />}
+              render={(props) => <ViewProfile {...props} />}
             />
             <Route
               path="/updateProfile"
               render={() => (
                 <UpdateProfile
                   currentUser={currentUser}
-                  menu={menu}
+                 
                   getCurrentUser={this.getCurrentUser}
                 />
               )}
@@ -102,7 +80,7 @@ class App extends Component {
             <Route path="/createPostMessage" render={() => <CreatePostMessage />} />
             <Route
               path="/createChat"
-              render={() => <CreateChat currentUser={currentUser} menu={menu} />}
+              render={() => <CreateChat currentUser={currentUser} />}
             />
             <Route
               path="/createProfile"

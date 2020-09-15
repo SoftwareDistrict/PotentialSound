@@ -169,6 +169,21 @@ const searchStyles = makeStyles({
   },
 });
 
+const menuStyles = makeStyles({
+  icon: {
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "white",
+    display: "block",
+  },
+  button: {
+    borderRadius: 0,
+    // border: "2px solid black",
+    // background: light,
+    // padding: 4,
+  },
+});
+
 module.exports = {
   dark,
   light,
@@ -178,4 +193,5 @@ module.exports = {
   postStyles,
   feedStyles,
   searchStyles,
+  menuStyles,
 };

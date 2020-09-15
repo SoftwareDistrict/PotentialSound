@@ -1,6 +1,6 @@
 import React from "react";
 import { IconButton } from "@material-ui/core";
-import { MenuOutlinedIcon } from "@material-ui/icons";
+import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
 import { menuStyles } from "../styles/styles.js";
 
 const Menu = () => {

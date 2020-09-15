@@ -40,32 +40,10 @@ const loginStyles = makeStyles({
   },
 });
 
-const navStyles = makeStyles({
-  style: {
-    position: "fixed",
-    left: 0,
-    width: 180,
-    height: "60%",
-    backgroundColor: light,
-    border: "4px solid black",
-    zIndex: 20,
-    borderRadius: 0,
-    display: "none",
-  },
-  link: {
-    color: white,
-    textDecoration: "none",
-    float: "left",
-    fontSize: "30px",
-    marginTop: "10px",
-    marginBottom: "40px",
-  },
-});
-
 const postStyles = makeStyles({
   avatar: {
     width: 80,
-    height: 90,
+    height: 70,
     margin: 5,
     maxWidth: "100%",
     maxHeight: "100%",
@@ -83,12 +61,12 @@ const postStyles = makeStyles({
     width: "70%",
   },
   username: {
-    fontSize: 18,
+    fontSize: 16,
     textDecoration: "none",
     color: white,
   },
   tags: {
-    fontSize: 16,
+    fontSize: 14,
     textDecoration: "none",
     color: white,
     marginTop: 5,
@@ -97,23 +75,15 @@ const postStyles = makeStyles({
     textDecoration: "none",
     textAlign: "left",
     marginTop: 5,
-    fontSize: 18,
+    fontSize: 16,
     color: "#037bfc",
-  },
-  iframe: {
-    width: "100%",
-    height: 120,
-    frameBorder: 0,
   },
 });
 
 const feedStyles = makeStyles({
   avatar: {
-    position: "absolute",
-    right: 10,
-    top: 10,
-    height: 80,
-    width: 80,
+    height: 60,
+    width: 60,
   },
   feed: {
     backgroundColor: light,
@@ -121,12 +91,16 @@ const feedStyles = makeStyles({
     marginLeft: 10,
     marginRight: 10,
   },
+  app: {
+    backgroundColor: light,
+    padding: 10,
+  },
   button: {
     variant: "contained",
     disableFocusRipple: true,
     disableRipple: true,
-    background: dark,
-    color: white,
+    background: light,
+    color: dark,
     fontSize: 14,
     padding: 5,
     paddingLeft: 10,
@@ -136,13 +110,14 @@ const feedStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     align: "center",
+    fontWeight: "bold"
   },
   link: {
     textDecoration: "none",
   },
   header: {
-    color: light,
-    padding: "0 0 60px 10px",
+    color: dark,
+    fontWeight: "bold",
   },
 });
 
@@ -153,34 +128,57 @@ const searchStyles = makeStyles({
     height: 30,
     fontSize: 14,
     paddingLeft: 10,
-    marginBottom: 10,
+    marginBottom: 20,
     marginTop: 10,
+    backgroundColor: white,
   },
   button: {
     borderRadius: 0,
     border: "2px solid black",
     background: light,
     padding: 4,
+    marginBottom: 10,
   },
   icon: {
     fontSize: 25,
     fontWeight: "bold",
-    color: white,
+    color: dark,
   },
 });
 
 const menuStyles = makeStyles({
   icon: {
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: "bold",
     color: "white",
-    display: "block",
   },
   button: {
     borderRadius: 0,
-    // border: "2px solid black",
-    // background: light,
-    // padding: 4,
+    padding: 0,
+  },
+  iconClose: {
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "white",
+  },
+  style: {
+    position: "fixed",
+    padding: 10,
+    left: 0,
+    width: 180,
+    height: "60%",
+    backgroundColor: light,
+    border: "4px solid black",
+    zIndex: 20,
+    borderRadius: 0,
+    display: "none",
+  },
+  link: {
+    color: white,
+    textDecoration: "none",
+    float: "left",
+    fontSize: 30,
+    marginTop: 40,
   },
 });
 
@@ -189,7 +187,6 @@ module.exports = {
   light,
   white,
   loginStyles,
-  navStyles,
   postStyles,
   feedStyles,
   searchStyles,

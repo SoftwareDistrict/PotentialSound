@@ -1,4 +1,6 @@
 require("dotenv").config();
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const path = require("path");
 
 const { PORT } = process.env;
@@ -15,6 +17,9 @@ module.exports = {
     port: PORT,
     historyApiFallback: true,
   },
+  plugins: [
+    new FaviconsWebpackPlugin(path.join(__dirname, "/client/dist/favicon.png"))
+  ],
   module: {
     rules: [
       {

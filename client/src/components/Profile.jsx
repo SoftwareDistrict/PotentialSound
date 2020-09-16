@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
-import { Avatar, Grid } from "@material-ui/core";
+import { Avatar, Grid, GridList, GridListTile } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { profileStyle } from "../styles/styles.js";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +16,8 @@ import {
 import "regenerator-runtime/runtime";
 
 const Profile = ({ currentUser }) => {
+
+
   const {
     username,
     propic,
@@ -49,17 +52,12 @@ const Profile = ({ currentUser }) => {
     }
   };
 
-  const classes = useStyles();
+  const classes = profileStyle();
 
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
+      <Grid container direction="row" justify="center" alignItems="center">
         <Avatar alt={username} src={propic} className={classes.avatar} />
         <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
         {youTube ? (
@@ -114,13 +112,27 @@ const Profile = ({ currentUser }) => {
         </Link>
         <div>
           {InstaPosts[0] ? (
-            <div>
-              <img src={InstaPosts[0].imageUrl} />
-              <img src={InstaPosts[1].imageUrl} />
-              <img src={InstaPosts[2].imageUrl} />
-              <img src={InstaPosts[3].imageUrl} />
-              <img src={InstaPosts[4].imageUrl} />
-              <img src={InstaPosts[5].imageUrl} />
+            <div className={classes.root}>
+              <GridList cols={2}>
+                <GridListTile>
+                  <img src={InstaPosts[0].imageUrl} />
+                </GridListTile>
+                <GridListTile>
+                  <img src={InstaPosts[1].imageUrl} />
+                </GridListTile>
+                <GridListTile>
+                  <img src={InstaPosts[2].imageUrl} />
+                </GridListTile>
+                <GridListTile>
+                  <img src={InstaPosts[3].imageUrl} />
+                </GridListTile>
+                <GridListTile>
+                  <img src={InstaPosts[4].imageUrl} />
+                </GridListTile> 
+                <GridListTile>
+                  <img src={InstaPosts[5].imageUrl} />
+                </GridListTile>
+              </GridList>
             </div>
           ) : null}
         </div>

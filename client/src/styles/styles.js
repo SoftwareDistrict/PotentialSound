@@ -201,12 +201,18 @@ const profileStyle = makeStyles({
     fontWeight: "bold",
   },
   avatar: {
-    width: "120px",
-    height: "120px",
-    position: "absolute",
-    top: "50px",
-    left: "25px",
+    width: "100px",
+    height: "100px",
+    position: "relative",
+    marginLeft: "34%",
     variant: "circle",
+  },
+  container: {
+    maxWidth: "sm",
+  },
+  username: {
+    align: "center",
+    variant: "h1",
   },
 });
 

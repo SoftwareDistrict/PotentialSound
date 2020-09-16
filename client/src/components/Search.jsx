@@ -72,8 +72,14 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
     let sortedTagSuggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i");
-      sortedUserSuggestions = usernames.sort().filter((v) => regex.test(v)).filter((username) => !queries.includes(username));
-      sortedTagSuggestions = tagNames.sort().filter((v) => regex.test(v)).filter((tag) => !queries.includes(tag));
+      sortedUserSuggestions = usernames
+        .sort()
+        .filter((v) => regex.test(v))
+        .filter((username) => !queries.includes(username));
+      sortedTagSuggestions = tagNames
+        .sort()
+        .filter((v) => regex.test(v))
+        .filter((tag) => !queries.includes(tag));
     }
     setSuggestedUsers(sortedUserSuggestions);
     setSuggestedTags(sortedTagSuggestions);
@@ -136,7 +142,13 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
           <SearchOutlinedIcon className={classes.icon} />
         </IconButton>
       </Grid>
-      <Grid container justify="flex-start" alignItems="flex-start" direction="row" style={{ color: white }}>
+      <Grid
+        container
+        justify="flex-start"
+        alignItems="flex-start"
+        direction="row"
+        style={{ color: white }}
+      >
         {renderSuggestedUsers()}
         {renderSuggestedTags()}
       </Grid>

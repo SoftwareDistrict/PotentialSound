@@ -31,11 +31,7 @@ const Login = () => {
         {"Where You're Bound To Be Found!"}
       </Typography>
       <IconButton className={classes.button} href="/google">
-        <img
-          alt="G"
-          src="https://tinyurl.com/y6kf4vx4"
-          className={classes.icon}
-        />
+        <img alt="G" src="https://tinyurl.com/y6kf4vx4" className={classes.icon} />
         Sign in with Google
       </IconButton>
     </Grid>

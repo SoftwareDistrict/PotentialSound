@@ -182,6 +182,34 @@ const menuStyles = makeStyles({
   },
 });
 
+const profileStyle = makeStyles({
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    color: dark,
+    fontSize: 14,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    align: "center",
+    fontWeight: "bold",
+  },
+  avatar: {
+    width: "120px",
+    height: "120px",
+    position: "absolute",
+    top: "50px",
+    left: "25px",
+    variant: "circle",
+  },
+});
+
 module.exports = {
   dark,
   light,
@@ -191,4 +219,5 @@ module.exports = {
   feedStyles,
   searchStyles,
   menuStyles,
+  profileStyle,
 };

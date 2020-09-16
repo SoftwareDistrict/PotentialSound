@@ -9,38 +9,35 @@ const Login = () => {
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
   return (
     <Grid
-      className={classes.box1}
+      className={classes.loginContainer}
       container
       justify="center"
       alignItems="center"
       direction="column"
     >
-      <Grid item className={classes.box2} align="center">
-        <Typography variant={matches ? "h4" : "h1"} className={classes.header}>
-          Welcome To PotentialSound
-          <img
-            id="logo"
-            src="../styles/logo.png"
-            style={
-              matches
-                ? { height: "90px", width: "90px", marginLeft: "10px" }
-                : { height: "190px", width: "190px", margiLeft: "10px" }
-            }
-          />
-        </Typography>
-        <Typography variant={matches ? "h6" : "h3"} className={classes.header}>
-          {"Where You're Bound To Be Found!"}
-        </Typography>
-        <IconButton className={classes.button} href="/google">
-          <img
-            id="google"
-            alt="PS"
-            src="https://tinyurl.com/y6kf4vx4"
-            style={{ height: "70px", width: "70px", marginRight: "10px" }}
-          />
-          Sign in with Google
-        </IconButton>
-      </Grid>
+      <Typography variant={matches ? "h4" : "h1"} className={classes.header}>
+        Welcome To PotentialSound
+        <img
+          alt="PS"
+          src="../styles/logo.png"
+          style={
+            matches
+              ? { height: "90px", width: "90px", marginLeft: "10px" }
+              : { height: "190px", width: "190px", margiLeft: "10px" }
+          }
+        />
+      </Typography>
+      <Typography variant={matches ? "h6" : "h3"} className={classes.header}>
+        {"Where You're Bound To Be Found!"}
+      </Typography>
+      <IconButton className={classes.button} href="/google">
+        <img
+          alt="G"
+          src="https://tinyurl.com/y6kf4vx4"
+          className={classes.icon}
+        />
+        Sign in with Google
+      </IconButton>
     </Grid>
   );
 };

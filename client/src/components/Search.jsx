@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { IconButton, Grid, TextField } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { searchStyles } from "../styles/styles.js";
+import { searchStyles, white } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const Search = ({ tags, setSearchFeed, setSearched }) => {
@@ -72,8 +72,8 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
     let sortedTagSuggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i");
-      sortedUserSuggestions = usernames.sort().filter((v) => regex.test(v));
-      sortedTagSuggestions = tagNames.sort().filter((v) => regex.test(v));
+      sortedUserSuggestions = usernames.sort().filter((v) => regex.test(v)).filter((username) => !queries.includes(username));
+      sortedTagSuggestions = tagNames.sort().filter((v) => regex.test(v)).filter((tag) => !queries.includes(tag));
     }
     setSuggestedUsers(sortedUserSuggestions);
     setSuggestedTags(sortedTagSuggestions);
@@ -123,10 +123,10 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
 
   return (
     <div>
-      <div style={{ textAlign: "center" }}>{queries.join(", ")}</div>
+      <div className={classes.queryDisplay}>{queries.join(", ")}</div>
       <Grid container justify="center" alignItems="center" direction="row">
         <TextField
-          ref={val}
+          inputRef={val}
           type="text"
           placeholder="Search"
           className={classes.input}
@@ -136,7 +136,7 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
           <SearchOutlinedIcon className={classes.icon} />
         </IconButton>
       </Grid>
-      <Grid container justify="flex-start" alignItems="flex-start" direction="row">
+      <Grid container justify="flex-start" alignItems="flex-start" direction="row" style={{ color: white }}>
         {renderSuggestedUsers()}
         {renderSuggestedTags()}
       </Grid>

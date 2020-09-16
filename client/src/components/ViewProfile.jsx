@@ -61,22 +61,22 @@ const ViewProfile = ({ match, currentUser }) => {
         <div>
           {proInfo.youTube ? (
             <a href={proInfo.youTube}>
-              <FontAwesomeIcon icon={faYoutube} />
+              <FontAwesomeIcon color="red" icon={faYoutube} />
             </a>
           ) : null}
           {proInfo.instagram ? (
             <a href={proInfo.instagram}>
-              <FontAwesomeIcon icon={faInstagram} />
+              <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
             </a>
           ) : null}
           {proInfo.soundCloud ? (
             <a href={proInfo.soundCloud}>
-              <FontAwesomeIcon icon={faSoundcloud} />
+              <FontAwesomeIcon color="red" icon={faSoundcloud} />
             </a>
           ) : null}
           {proInfo.facebook ? (
             <a href={proInfo.facebook}>
-              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon color="blue" icon={faFacebook} />
             </a>
           ) : null}
         </div>

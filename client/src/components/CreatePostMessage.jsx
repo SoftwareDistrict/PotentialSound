@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Appbar from "./Appbar.jsx";
 import ImageUploader from "react-images-upload";
+import PropTypes from "prop-types";
 import axios from "axios";
 
-const CreatePostMessage = () => {
+const CreatePostMessage = ({ currentUser }) => {
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
   const [redirect, setRedirect] = useState("");
@@ -201,7 +202,7 @@ const CreatePostMessage = () => {
     <div>
       {loading === false ? (
         <div>
-          <Appbar />
+          <Appbar currentUser={currentUser} />
           <h1>Make a Post</h1>
           <div>
             {/* // Genres */}
@@ -483,6 +484,10 @@ const CreatePostMessage = () => {
       {!redirect.length ? null : <Redirect to={redirect} />}
     </div>
   );
+};
+
+CreatePostMessage.propTypes = {
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default CreatePostMessage;

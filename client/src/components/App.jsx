@@ -59,20 +59,20 @@ class App extends Component {
               path="/profile/:id"
               render={({ match }) => <Profile match={match} currentUser={currentUser} />}
             />
-            <Route path="/viewprofile/:name" render={(props) => <ViewProfile {...props} />} />
+            <Route path="/viewprofile/:name" render={(props) => <ViewProfile {...props} currentUser={currentUser} />} />
             <Route
               path="/updateProfile"
               render={() => (
                 <UpdateProfile currentUser={currentUser} getCurrentUser={this.getCurrentUser} />
               )}
             />
-            <Route path="/createPostMessage" render={() => <CreatePostMessage />} />
+            <Route path="/createPostMessage" render={() => <CreatePostMessage currentUser={currentUser} />} />
             <Route path="/createChat" render={() => <CreateChat currentUser={currentUser} />} />
             <Route
               path="/createProfile"
-              render={() => <CreateProfile getCurrentUser={this.getCurrentUser} />}
+              render={() => <CreateProfile getCurrentUser={this.getCurrentUser} currentUser={currentUser} />}
             />
-            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} />} />
+            <Route path="/room/:roomId" render={({ match }) => <VCRoom match={match} currentUser={currentUser} />} />
           </Switch>
         </Router>
       </div>

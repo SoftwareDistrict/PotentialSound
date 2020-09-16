@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { AvatarGroup } from "@material-ui/lab";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { dark, light } from "../styles/styles.js";
 
 const ChatEntry = ({ participants, id_chat }) => {
   const members = [];
@@ -23,15 +24,15 @@ const ChatEntry = ({ participants, id_chat }) => {
       color: "#white",
     },
     pDiv: {
-      background: "#8D99AE",
-      boxShadow: "0px 0px 0px 4px #006B96",
-      border: "4px solid #fff",
+      background: light,
+      boxShadow: "0px 0px 0px 4px #8D99AE",
+      border: "5px solid",
+      borderColor: "white",
       margin: "0 auto",
       borderTopLeftRadius: "5px",
       bordeBottomRightRadius: "5px",
       position: "relative",
       alignItems: "center",
-      // width: "350px",
       height: "100px",
     },
   });
@@ -44,7 +45,7 @@ const ChatEntry = ({ participants, id_chat }) => {
   });
 
   return (
-    <Link to={`/chats/${id_chat}`} style={{ textDecoration: "none", color: "orange" }}>
+    <Link to={`/chats/${id_chat}`} style={{ textDecoration: "none", color: dark }}>
       <div className={classes.pDiv}>
         <div
           style={{

@@ -3,11 +3,14 @@ import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Chats = ({ currentUser, menu }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
+
+
 
   const getChats = async () => {
     await axios
@@ -52,7 +55,7 @@ const Chats = ({ currentUser, menu }) => {
   return (
     <div>
       {menu}
-      <h1>Current Messages (Inbox) </h1>
+      <h1>Current Messages</h1>
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />
       ))}

@@ -19,6 +19,21 @@ const ChatEntry = ({ participants, id_chat }) => {
       alignItems: "center",
       justifyContent: "center",
     },
+    text: {
+      color: "#white",
+    },
+    pDiv: {
+      background: "#8D99AE",
+      boxShadow: "0px 0px 0px 4px #006B96",
+      border: "4px solid #fff",
+      margin: "0 auto",
+      borderTopLeftRadius: "5px",
+      bordeBottomRightRadius: "5px",
+      position: "relative",
+      alignItems: "center",
+      // width: "350px",
+      height: "100px",
+    },
   });
   const classes = useStyles();
 
@@ -30,18 +45,7 @@ const ChatEntry = ({ participants, id_chat }) => {
 
   return (
     <Link to={`/chats/${id_chat}`} style={{ textDecoration: "none", color: "orange" }}>
-      <div
-        className="inbox"
-        style={{
-          border: "2px solid black",
-          width: "350px",
-          height: "100px",
-          margin: "0 auto",
-          backgroundColor: "#3F3D3D",
-          position: "relative",
-          alignItems: "center",
-        }}
-      >
+      <div className={classes.pDiv}>
         <div
           style={{
             resize: "both",
@@ -50,6 +54,7 @@ const ChatEntry = ({ participants, id_chat }) => {
             textAlign: "center",
             fontSize: "20px",
           }}
+          className={classes.text}
         >
           <label>Chat Members:</label>
           <AvatarGroup max={4} className={classes.avatarGroup}>

@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
+import { dark, light, white } from "../styles/styles.js";
+import { makeStyles } from "@material-ui/core/styles";
 let socket = io("localhost:8080");
 
 const Chat = ({ match, currentUser, history }) => {
@@ -18,6 +20,17 @@ const Chat = ({ match, currentUser, history }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
+  const chatStyles = makeStyles({
+    header: {
+      textAlign: "center",
+      color: white,
+    },
+    button: {
+      backgroundColor: light,
+      color: dark,
+    },
+  });
+  const chatClasses = chatStyles();
 
   socket.on("receive", (data) => {
     let { array, id_chat } = data.data;
@@ -130,8 +143,8 @@ const Chat = ({ match, currentUser, history }) => {
     <div>
       <Appbar currentUser={currentUser} />
       <div style={{ width: "355px", overflow: "hidden" }}>
-        <h1 style={{ textAlign: "center" }}>Chat</h1>
-        <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>
+        <h1 className={chatClasses.header}>Chat</h1>
+        <div style={{ backgroundColor: white, padding: "7px", width: "350px" }}>
           {allMsgs.map((msg) => {
             if (match.params.id == msg.id_chat) {
               return (
@@ -190,13 +203,16 @@ const Chat = ({ match, currentUser, history }) => {
               type="text"
             />
             <button
+              className={chatClasses.button}
               onClick={() => {
                 sendMsg();
               }}
             >
               Submit
             </button>
-            <button onClick={() => createVCRoom()}>Call</button>
+            <button className={chatClasses.button} onClick={() => createVCRoom()}>
+              Call
+            </button>
           </div>
         </div>
       </div>

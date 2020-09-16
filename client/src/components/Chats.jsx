@@ -3,14 +3,11 @@ import ChatEntry from "./ChatEntry.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import { makeStyles } from "@material-ui/core/styles";
 
 const Chats = ({ currentUser, menu }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
-
-
 
   const getChats = async () => {
     await axios

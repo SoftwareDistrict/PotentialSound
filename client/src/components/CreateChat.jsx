@@ -135,7 +135,7 @@ const CreateChat = ({ currentUser }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <div>
         <label>
           <h3>Send a message</h3>

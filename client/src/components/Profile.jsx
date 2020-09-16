@@ -53,7 +53,7 @@ const Profile = ({ currentUser }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       {youTube ? (

@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "regenerator-runtime/runtime";
 
-const ViewProfile = ({ match }) => {
+const ViewProfile = ({ match, currentUser }) => {
   const username = match.params.name;
   useEffect(() => {
     getUser();
@@ -30,7 +30,7 @@ const ViewProfile = ({ match }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
       <div
         id="profile"
@@ -105,5 +105,6 @@ const ViewProfile = ({ match }) => {
 };
 ViewProfile.propTypes = {
   match: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 export default ViewProfile;

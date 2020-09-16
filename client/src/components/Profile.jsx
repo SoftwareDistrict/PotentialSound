@@ -28,7 +28,7 @@ const Profile = ({ currentUser }) => {
     facebook,
     instaHandle,
   } = currentUser;
-  
+
   useEffect(() => {
     getInstaPosts();
   }, [instaHandle]);

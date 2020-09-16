@@ -123,7 +123,7 @@ const ViewProfile = ({ match, currentUser }) => {
   );
 };
 ViewProfile.propTypes = {
-  match: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 export default ViewProfile;

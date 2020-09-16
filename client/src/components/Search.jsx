@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Grid, TextField } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import { searchStyles } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const Search = ({ tags, setSearchFeed, setSearched }) => {
@@ -12,7 +13,8 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
   const [tagNames, setTagNames] = useState([]);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [suggestedTags, setSuggestedTags] = useState([]);
-  const [queries] = useState([]);
+  const [queries, setQueries] = useState([]);
+  const classes = searchStyles();
 
   useEffect(() => {
     axios
@@ -115,30 +117,29 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
     );
 
     setSearchFeed(finalSearch.flat());
+    setQueries([]);
     setSearched(true);
   };
 
   return (
     <div>
-      <div>{queries.join(", ")}</div>
-      <input
-        ref={val}
-        type="text"
-        placeholder="Search"
-        style={{
-          width: "250px",
-          height: "30px",
-          fontSize: "14px",
-          paddingLeft: "10px",
-          marginRight: "5px",
-        }}
-        onChange={(e) => onTextChange(e)}
-      />
-      <IconButton onClick={onSearch}>
-        <SearchOutlinedIcon />
-      </IconButton>
-      {renderSuggestedUsers()}
-      {renderSuggestedTags()}
+      <div style={{ textAlign: "center" }}>{queries.join(", ")}</div>
+      <Grid container justify="center" alignItems="center" direction="row">
+        <TextField
+          ref={val}
+          type="text"
+          placeholder="Search"
+          className={classes.input}
+          onChange={(e) => onTextChange(e)}
+        />
+        <IconButton onClick={onSearch} className={classes.button}>
+          <SearchOutlinedIcon className={classes.icon} />
+        </IconButton>
+      </Grid>
+      <Grid container justify="flex-start" alignItems="flex-start" direction="row">
+        {renderSuggestedUsers()}
+        {renderSuggestedTags()}
+      </Grid>
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const PostFullMessage = ({ match, menu, currentUser }) => {
+const PostFullMessage = ({ match, currentUser }) => {
   const { id } = match.params;
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
@@ -114,7 +115,7 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
 
   return (
     <div>
-      {menu}
+      <Appbar />
       <div
         id="profile"
         style={{
@@ -199,7 +200,6 @@ const PostFullMessage = ({ match, menu, currentUser }) => {
 
 PostFullMessage.propTypes = {
   match: PropTypes.object.isRequired,
-  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

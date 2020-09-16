@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Grid } from "@material-ui/core";
+import { postStyles } from "../styles/styles.js";
 
 const PostFeedEntry = ({ post, users, tags }) => {
   const [poster, setPoster] = useState({});
   const [postTags] = useState([]);
+  const classes = postStyles();
 
   useEffect(() => {
     users.forEach((user) => {
@@ -23,96 +26,41 @@ const PostFeedEntry = ({ post, users, tags }) => {
   }, [tags]);
 
   return (
-    <div>
-      <Link
-        style={{ color: "#ff8c00", textDecoration: "none" }}
-        to={`/home/${post.id_user}${post.id}`}
-      >
-        <div
-          id="profile"
-          style={{
-            border: "2px solid black",
-            margin: "0 auto",
-            marginTop: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              textAlign: "left",
-              paddingLeft: "5px",
-              float: "left",
-            }}
-          >
-            <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={poster.propic} />
-          </div>
-          <div
-            style={{
-              height: "20px",
-              textAlign: "left",
-              fontSize: "16px",
-              marginLeft: "110px",
-            }}
-          >
-            <Link
-              to={`/viewprofile/${poster.username}`}
-              style={{ color: "orange", textDecoration: "none", fontSize: "20px" }}
-            >
+    <Grid item className={classes.grid}>
+      <Grid container justify="flex-start" alignItems="flex-start" direction="row">
+        <img className={classes.avatar} src={poster.propic} />
+        <div className={classes.grid2}>
+          <Grid container justify="space-between" alignItems="flex-start" direction="column">
+            <Link to={`/viewprofile/${poster.username}`} className={classes.username}>
               {poster.username}
             </Link>
-          </div>
-          <div
-            style={{
-              backgroundColor: "offwhite",
-              height: "60px",
-              textAlign: "left",
-              fontSize: "14px",
-              marginLeft: "110px",
-            }}
-          >
-            <div>{post.message}</div>
+            <Link to={`/home/${post.id_user}${post.id}`} className={classes.tags}>
+              {post.message}
+            </Link>
             {post.audioName ? (
-              <div>
-                <a href={post.audioUrl}>{post.audioName}</a>
-              </div>
+              <a href={post.audioUrl} className={classes.anchor}>
+                HEAR AUDIO
+              </a>
             ) : null}
             {post.imageName ? (
-              <div>
-                <a href={post.imageUrl}>{post.imageName}</a>
-              </div>
+              <a href={post.imageUrl} className={classes.anchor}>
+                SEE IMAGE
+              </a>
             ) : null}
-          </div>
-          <div
-            style={{
-              marginLeft: "180px",
-            }}
-          >
-            {post.youTubeUrl ? (
-              <iframe
-                width="160"
-                height="95"
-                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullscreen
-              ></iframe>
-            ) : null}
-          </div>
-          <div
-            style={{
-              height: "20px",
-              textAlign: "left",
-              marginLeft: "110px",
-              marginTop: "10px",
-            }}
-          >
-            {postTags.join(" ")}
-          </div>
+            <div className={classes.tags}>{postTags.join(" ")}</div>
+          </Grid>
         </div>
-      </Link>
-    </div>
+      </Grid>
+      {post.youTubeUrl ? (
+        <div style={{ padding: "5px" }}>
+          <iframe
+            src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+            allowFullScreen
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </div>
+      ) : null}
+    </Grid>
   );
 };
 

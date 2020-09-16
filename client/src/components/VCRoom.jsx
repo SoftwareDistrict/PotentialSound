@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import Appbar from "./Appbar.jsx";
 import io from "socket.io-client";
 import styled from "styled-components";
 import Peer from "simple-peer";
@@ -110,12 +111,15 @@ const VCRoom = ({ match }) => {
   };
 
   return (
-    <Container>
-      <StyledVideo muted ref={userVideo} autoPlay playsInline />
-      {peers.map((peer, index) => {
-        return <Video key={index} peer={peer} />;
-      })}
-    </Container>
+    <div>
+      <Appbar />
+      <Container>
+        <StyledVideo muted ref={userVideo} autoPlay playsInline />
+        {peers.map((peer, index) => {
+          return <Video key={index} peer={peer} />;
+        })}
+      </Container>
+    </div>
   );
 };
 

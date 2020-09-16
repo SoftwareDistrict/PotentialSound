@@ -1,54 +1,65 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { menuStyles } from "../styles/styles.js";
+import { IconButton, Grid } from "@material-ui/core";
+import MenuOpenOutlinedIcon from "@material-ui/icons/MenuOpenOutlined";
 
-const Nav = ({ currentUser, toggleMenu }) => {
-  const style = {
-    position: "fixed",
-    left: 0,
-    width: "180px",
-    height: "100%",
-    backgroundColor: "#3F3D3D",
-    borderColor: "black",
-    zIndex: 20,
-    borderRadius: "15px",
-    display: "none",
+const Nav = ({ currentUser }) => {
+  const classes = menuStyles();
+
+  const toggleMenu = () => {
+    const nav = document.getElementById("mySidenav");
+    const menu = document.getElementById("menu");
+    if (nav.style.display === "none") {
+      nav.style.display = "block";
+      menu.style.display = "none";
+    } else {
+      nav.style.display = "none";
+      menu.style.display = "block";
+    }
   };
-  const linkStyle = {
-    color: "orange",
-    textDecoration: "none",
-    float: "left",
-    fontSize: "30px",
-    marginTop: "10px",
-    marginBottom: "40px",
+
+  const logout = () => {
+    axios.get("/logout").catch((err) => console.warn("unsucessful logout: ", err));
   };
+
   return (
-    <div style={style} id="mySidenav" className="navbar">
-      <h2 onClick={toggleMenu} style={{ textAlign: "center" }}>
-        Menu
-      </h2>
-      <Link onClick={toggleMenu} style={linkStyle} to="/home">
+    <div className={classes.style} id="mySidenav">
+      <Grid container justify="flex-end" alignItems="flex-start" direction="row">
+        <IconButton id="mySidenav" onClick={toggleMenu} className={classes.button}>
+          <MenuOpenOutlinedIcon className={classes.iconClose} />
+        </IconButton>
+      </Grid>
+      <Link onClick={toggleMenu} className={classes.link} to="/home">
         General
       </Link>
-      <Link onClick={toggleMenu} style={linkStyle} to={"/createChat"}>
+      <Link onClick={toggleMenu} className={classes.link} to={"/createChat"}>
         Create Chat
       </Link>
-      <Link to="/chats" onClick={toggleMenu} style={linkStyle}>
+      <Link to="/chats" onClick={toggleMenu} className={classes.link}>
         Chats
       </Link>
-      <Link onClick={toggleMenu} style={linkStyle} to={`/profile/${currentUser.id}`}>
+      <Link onClick={toggleMenu} className={classes.link} to={`/profile/${currentUser.id}`}>
         My Profile
       </Link>
-      <div style={{ fontSize: "30px", fontWeight: "bold" }} onClick={toggleMenu}>
-        Close
-      </div>
+      <Link
+        to={"/"}
+        className={classes.link}
+        onClick={() => {
+          logout();
+          toggleMenu();
+        }}
+      >
+        Logout
+      </Link>
     </div>
   );
 };
 
 Nav.propTypes = {
   currentUser: PropTypes.object.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
 };
 
 export default Nav;

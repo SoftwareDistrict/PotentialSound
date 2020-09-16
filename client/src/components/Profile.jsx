@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-// import { InstaPosts } from "./Instagram.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
@@ -14,8 +14,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "regenerator-runtime/runtime";
 
-const Profile = ({ menu, currentUser }) => {
-  console.info(currentUser, "this is the current user");
+const Profile = ({ currentUser }) => {
   const {
     username,
     propic,
@@ -54,7 +53,7 @@ const Profile = ({ menu, currentUser }) => {
 
   return (
     <div>
-      {menu}
+      <Appbar />
       <Avatar alt={username} src={propic} className={classes.avatar} />
       <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
       {youTube ? (
@@ -124,7 +123,6 @@ const Profile = ({ menu, currentUser }) => {
 };
 
 Profile.propTypes = {
-  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

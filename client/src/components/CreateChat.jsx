@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 
-const CreateChat = ({ menu, currentUser }) => {
+const CreateChat = ({ currentUser }) => {
   const inputBox = useRef();
   const hist = useHistory();
   const [message, setMessage] = useState("");
@@ -134,7 +135,7 @@ const CreateChat = ({ menu, currentUser }) => {
 
   return (
     <div>
-      {menu}
+      <Appbar />
       <div>
         <label>
           <h3>Send a message</h3>
@@ -188,7 +189,6 @@ const CreateChat = ({ menu, currentUser }) => {
 };
 
 CreateChat.propTypes = {
-  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

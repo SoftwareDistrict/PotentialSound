@@ -52,7 +52,7 @@ const Chats = ({ currentUser }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <h1>Current Messages (Inbox) </h1>
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />

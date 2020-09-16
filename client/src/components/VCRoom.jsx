@@ -36,7 +36,7 @@ const videoConstraints = {
   width: window.innerWidth / 2,
 };
 
-const VCRoom = ({ match }) => {
+const VCRoom = ({ match, currentUser }) => {
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
@@ -112,7 +112,7 @@ const VCRoom = ({ match }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <Container>
         <StyledVideo muted ref={userVideo} autoPlay playsInline />
         {peers.map((peer, index) => {
@@ -125,10 +125,12 @@ const VCRoom = ({ match }) => {
 
 VCRoom.propTypes = {
   match: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 Video.propTypes = {
   peer: PropTypes.object,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default VCRoom;

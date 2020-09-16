@@ -92,7 +92,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
     <div>
       {load === false ? (
         <div>
-          <Appbar />
+          <Appbar currentUser={currentUser} />
           <h1>Update Your Profile</h1>
           <input
             style={{ marginBottom: "10px", display: "block" }}

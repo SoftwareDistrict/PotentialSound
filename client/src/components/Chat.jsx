@@ -128,7 +128,7 @@ const Chat = ({ match, currentUser, history }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <div style={{ width: "355px", overflow: "hidden" }}>
         <h1 style={{ textAlign: "center" }}>Chat</h1>
         <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>

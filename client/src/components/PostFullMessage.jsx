@@ -115,7 +115,7 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar currentUser={currentUser} />
       <div
         id="profile"
         style={{

@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import { dark, light, white } from "../styles/styles.js";
+import { feedStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
   const inputBox = useRef();
@@ -151,6 +153,7 @@ const CreateChat = ({ currentUser }) => {
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i");
       sortedSuggestions = users.sort().filter((v) => regex.test(v));
+      sortedSuggestions = sortedSuggestions.filter(e => !members.includes(e));
     }
     setSuggestions(sortedSuggestions);
     setText(value);
@@ -163,10 +166,9 @@ const CreateChat = ({ currentUser }) => {
   };
 
   return (
-    <div className={classes.pDiv}>
 
-
-
+    <div>
+      <Appbar currentUser={currentUser} />
 
       <Grid
         className={classes.parentGrid}
@@ -175,18 +177,14 @@ const CreateChat = ({ currentUser }) => {
         direction="column"
         justify="center"
         alignItems="center"
+        
       >
-
-
         <Grid container spacing={3} item xs={12}>
-          <Grid item xs={4}>
-            <Appbar />
-          </Grid>
+
           <Grid item xs={8} />
         </Grid>
-
         <Grid spacing={3} container item xs={12}>
-          <Grid align="center" item xs={12}>
+          <Grid align="center" className={feedStyles.feed} item xs={12}>
             <h3>Start a new message</h3>
           </Grid>
         </Grid>
@@ -195,7 +193,7 @@ const CreateChat = ({ currentUser }) => {
             {members.length > 0 ? (
               <h3>Sending to </h3>
             ) : (
-              <h3>Who are you looking to send a message to?</h3>
+              <h3>Start a new chat!</h3>
             )}
 
             <div
@@ -208,13 +206,18 @@ const CreateChat = ({ currentUser }) => {
               {members.map((mem, i) => (
                 <span key={i}>
                   <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
-                    {`${mem}   `}
+
+
+                    {i === 0 && members.length === 1 || members.length - 1 === i ? mem  : `${mem}, `}
+                    {/* {`${mem}, `} */}
                   </span>
                 </span>
               ))}
             </div>
           </Grid>
         </Grid>
+
+
         <Grid container spacing={2} item xs={12}>
           <Grid align="center" container item xs={12}>
             <TextField
@@ -248,6 +251,8 @@ const CreateChat = ({ currentUser }) => {
             />
           </Grid>
         </Grid>
+
+
         <Grid container spacing={3} align="center" item xs={12}>
           <Button onClick={onSubmit} className={classes.button}>
             Submit
@@ -255,6 +260,7 @@ const CreateChat = ({ currentUser }) => {
         </Grid>
       </Grid>
     </div>
+
   );
 };
 

@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
-import { Avatar, Grid, GridList, GridListTile } from "@material-ui/core";
+import {
+  Avatar,
+  Grid,
+  GridList,
+  GridListTile,
+  Button,
+  Container,
+  Typography,
+} from "@material-ui/core";
 import { profileStyle } from "../styles/styles.js";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,7 +36,7 @@ const Profile = ({ currentUser }) => {
     facebook,
     instaHandle,
   } = currentUser;
-  
+
   useEffect(() => {
     getInstaPosts();
   }, [instaHandle]);
@@ -46,57 +54,49 @@ const Profile = ({ currentUser }) => {
     <div>
       <Appbar currentUser={currentUser} />
       <Grid container direction="row" justify="center" alignItems="center">
-        <Avatar alt={username} src={propic} className={classes.avatar} />
-        <h1 style={{ textAlign: "right", marginTop: "80px" }}>{username}</h1>
-        {youTube ? (
-          <a href={youTube}>
-            <FontAwesomeIcon color="red" icon={faYoutube} />
-          </a>
-        ) : null}
-        {instagram ? (
-          <a href={instagram}>
-            <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-          </a>
-        ) : null}
-        {soundCloud ? (
-          <a href={soundCloud}>
-            <FontAwesomeIcon color="orange" icon={faSoundcloud} />
-          </a>
-        ) : null}
-        {facebook ? (
-          <a href={facebook}>
-            <FontAwesomeIcon color="blue" icon={faFacebook} />
-          </a>
-        ) : null}
-        <div
-          id="profile"
-          style={{
-            border: "2px solid black",
-            width: "350px",
-            height: "300px",
-            textAlign: "left",
-            fontSize: "20px",
-            margin: "0 auto",
-            color: "orange",
-          }}
-        >
-          <div style={{ marginBottom: "10px", marginTop: "25px" }} className="profileInfo">
-            Email: {email}
+        <Container className={classes.container}>
+          {/* <Avatar alt={username} src={propic} className={classes.avatar} /> */}
+          {youTube ? (
+            <a href={youTube}>
+              <FontAwesomeIcon color="red" icon={faYoutube} />
+            </a>
+          ) : null}
+          {instagram ? (
+            <a href={instagram}>
+              <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+            </a>
+          ) : null}
+          {soundCloud ? (
+            <a href={soundCloud}>
+              <FontAwesomeIcon color="orange" icon={faSoundcloud} />
+            </a>
+          ) : null}
+          {facebook ? (
+            <a href={facebook}>
+              <FontAwesomeIcon color="blue" icon={faFacebook} />
+            </a>
+          ) : null}
+          <div>
+            <Typography variant="h3" align="center">
+              {username}
+            </Typography>
+            <Avatar alt={username} src={propic} className={classes.avatar} />
+            <div style={{ marginBottom: "10px", marginTop: "25px" }} className="profileInfo">
+              Email: {email}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="profileInfo">
+              Cell Phone Number: {cell}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="profileInfo">
+              Based Out Of: {city}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="profileInfo">
+              Description: {description}
+            </div>
           </div>
-          <div style={{ marginBottom: "10px" }} className="profileInfo">
-            Cell Phone Number: {cell}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="profileInfo">
-            Based Out Of: {city}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="profileInfo">
-            Description: {description}
-          </div>
-        </div>
+        </Container>
         <Link to="/updateProfile">
-          <button style={{ backgroundColor: "#eb8c34", marginTop: "10px" }} type="button">
-            Update Profile
-          </button>
+          <Button className={classes.button}>Update Profile</Button>
         </Link>
         <div>
           {InstaPosts[0] ? (

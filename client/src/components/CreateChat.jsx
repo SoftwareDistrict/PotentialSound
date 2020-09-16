@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
@@ -8,7 +9,7 @@ import { Grid } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-const CreateChat = ({ menu, currentUser }) => {
+const CreateChat = ({ currentUser }) => {
   const inputBox = useRef();
   const hist = useHistory();
   const [message, setMessage] = useState("");
@@ -163,6 +164,10 @@ const CreateChat = ({ menu, currentUser }) => {
 
   return (
     <div className={classes.pDiv}>
+
+
+
+
       <Grid
         className={classes.parentGrid}
         container
@@ -171,9 +176,11 @@ const CreateChat = ({ menu, currentUser }) => {
         justify="center"
         alignItems="center"
       >
+
+
         <Grid container spacing={3} item xs={12}>
           <Grid item xs={4}>
-            {menu}
+            <Appbar />
           </Grid>
           <Grid item xs={8} />
         </Grid>
@@ -190,6 +197,7 @@ const CreateChat = ({ menu, currentUser }) => {
             ) : (
               <h3>Who are you looking to send a message to?</h3>
             )}
+
             <div
               style={{
                 backgroundColor: "#EDF2F4",
@@ -251,7 +259,6 @@ const CreateChat = ({ menu, currentUser }) => {
 };
 
 CreateChat.propTypes = {
-  menu: PropTypes.element,
   currentUser: PropTypes.object.isRequired,
 };
 

@@ -14,7 +14,6 @@ install:
   - npm ci
 
 script:
-  - npm run build
+  - npm run build-dev
   - npm run format
   - npm run lint
-  

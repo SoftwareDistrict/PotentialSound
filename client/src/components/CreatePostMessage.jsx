@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import Appbar from "./Appbar.jsx";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 
@@ -200,6 +201,7 @@ const CreatePostMessage = () => {
     <div>
       {loading === false ? (
         <div>
+          <Appbar />
           <h1>Make a Post</h1>
           <div>
             {/* // Genres */}
@@ -402,6 +404,36 @@ const CreatePostMessage = () => {
               id="tag20"
               name="type"
               value="#instrument"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag21">Image</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag21"
+              name="type"
+              value="#image"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag22">Audio</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag22"
+              name="type"
+              value="#audio"
+              onChange={(event) => onCheck(event)}
+            />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label htmlFor="tag23">Video</label>
+            <input
+              className="messageCheckbox"
+              type="checkbox"
+              id="tag23"
+              name="type"
+              value="#video"
               onChange={(event) => onCheck(event)}
             />
             <ImageUploader

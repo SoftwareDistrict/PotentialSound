@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import { Avatar, Grid, GridList, GridListTile } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { profileStyle } from "../styles/styles.js";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,8 +15,6 @@ import {
 import "regenerator-runtime/runtime";
 
 const Profile = ({ currentUser }) => {
-
-
   const {
     username,
     propic,
@@ -31,16 +28,7 @@ const Profile = ({ currentUser }) => {
     facebook,
     instaHandle,
   } = currentUser;
-  const useStyles = makeStyles({
-    avatar: {
-      width: "120px",
-      height: "120px",
-      position: "absolute",
-      top: "50px",
-      left: "25px",
-      variant: "circle",
-    },
-  });
+  
   useEffect(() => {
     getInstaPosts();
   }, [instaHandle]);
@@ -128,7 +116,7 @@ const Profile = ({ currentUser }) => {
                 </GridListTile>
                 <GridListTile>
                   <img src={InstaPosts[4].imageUrl} />
-                </GridListTile> 
+                </GridListTile>
                 <GridListTile>
                   <img src={InstaPosts[5].imageUrl} />
                 </GridListTile>

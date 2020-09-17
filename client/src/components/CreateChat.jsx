@@ -4,12 +4,13 @@ import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { dark, light, white } from "../styles/styles.js";
+import { light, white } from "../styles/styles.js";
 import Box from "@material-ui/core/Box";
+import { Typography } from "@material-ui/core";
+import { createMessageStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
   const inputBox = useRef();
@@ -21,62 +22,7 @@ const CreateChat = ({ currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
-
-  const useStyles = makeStyles({
-    pDiv: {
-      height: "100vh",
-      backgroundColor: "#2B2D42",
-    },
-    avatarGroup: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    parentGrid: {
-      backgroundColor: "#2B2D42",
-    },
-    username: {
-      backgroundColor: "#EDF2F4",
-    },
-    text: {
-      backgroundColor: "#EDF2F4",
-    },
-    button: {
-      backgroundColor: light,
-      color: dark,
-    },
-    suggestions: {
-      backgroundColor: white,
-      width: 250,
-      fontSize: 14,
-    },
-    list: {
-      listStyle: "none",
-    },
-    chatInput: {
-      border: "4px solid black",
-      width: 250,
-      height: 30,
-      fontSize: 14,
-
-      backgroundColor: "white",
-    },
-
-    chatText: {
-      border: "4px solid black",
-      fontSize: 14,
-
-      backgroundColor: "white",
-    },
-    selectedUser: {
-      color: dark,
-      fontWeight: "bold",
-    },
-    header: {
-      color: white,
-    },
-  });
-  const classes = useStyles();
+  const classes = createMessageStyles();
 
   const getAllUsers = async () => {
     await axios
@@ -186,8 +132,11 @@ const CreateChat = ({ currentUser }) => {
     let sortedSuggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i");
-      sortedSuggestions = users.sort().filter((v) => regex.test(v));
-      sortedSuggestions = sortedSuggestions.filter((e) => !members.includes(e));
+      sortedSuggestions = users
+        .sort()
+        .filter((v) => regex.test(v))
+        .filter((e) => !members.includes(e));
+      // sortedSuggestions = sortedSuggestions.filter((e) => !members.includes(e));
     }
     setSuggestions(sortedSuggestions);
     setText(value);
@@ -213,7 +162,9 @@ const CreateChat = ({ currentUser }) => {
       >
         <Grid spacing={1} container item xs={12}>
           <Grid align="center" className={classes.header} item xs={12}>
-            <h1>Create a chat!</h1>
+            <Typography className={classes.header} align="center" variant="h4">
+              Create a chat!
+            </Typography>
           </Grid>
           <Grid align="center" alignItems="center" justify="center" container item xs={12}>
             <Box

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { Grid, GridList, GridListTile } from "@material-ui/core";
+import { Avatar, Grid, GridList, GridListTile, Container, Typography } from "@material-ui/core";
 import { profileStyle } from "../styles/styles.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -35,63 +35,51 @@ const ViewProfile = ({ match, currentUser }) => {
     <div>
       <Appbar currentUser={currentUser} />
       <Grid container direction="row" justify="center" alignItems="center">
-        <h1 style={{ textAlign: "center" }}>{`${username}'s Profile Information`}</h1>
-        <div
-          id="profile"
-          style={{
-            border: "2px solid black",
-            width: "500px",
-            height: "200px",
-            textAlign: "center",
-            fontSize: "125%",
-            margin: "0 auto",
-          }}
-        >
-          <div style={{ marginBottom: "10px" }} className="ViewProfile">
-            Username: {username}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="ViewProfile">
-            Email: {proInfo.email}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="ViewProfile">
-            Cell Phone Number: {proInfo.cell}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="ViewProfile">
-            Hometown: {proInfo.city}
-          </div>
-          <div style={{ marginBottom: "10px" }} className="ViewProfile">
-            Description: {proInfo.description}
-          </div>
+        <Container className={classes.container}>
+          <Typography variant="h3" align="center">
+            {username}
+          </Typography>
+          <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
           <div>
-            {proInfo.youTube ? (
-              <a href={proInfo.youTube}>
-                <FontAwesomeIcon color="red" icon={faYoutube} />
-              </a>
-            ) : null}
-            {proInfo.instagram ? (
-              <a href={proInfo.instagram}>
-                <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-              </a>
-            ) : null}
-            {proInfo.soundCloud ? (
-              <a href={proInfo.soundCloud}>
-                <FontAwesomeIcon color="red" icon={faSoundcloud} />
-              </a>
-            ) : null}
-            {proInfo.facebook ? (
-              <a href={proInfo.facebook}>
-                <FontAwesomeIcon color="blue" icon={faFacebook} />
-              </a>
-            ) : null}
+            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+              Username: {username}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+              Email: {proInfo.email}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+              Cell Phone Number: {proInfo.cell}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+              Hometown: {proInfo.city}
+            </div>
+            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+              Description: {proInfo.description}
+            </div>
+            <div>
+              {proInfo.youTube ? (
+                <a href={proInfo.youTube}>
+                  <FontAwesomeIcon color="red" icon={faYoutube} />
+                </a>
+              ) : null}
+              {proInfo.instagram ? (
+                <a href={proInfo.instagram}>
+                  <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+                </a>
+              ) : null}
+              {proInfo.soundCloud ? (
+                <a href={proInfo.soundCloud}>
+                  <FontAwesomeIcon color="red" icon={faSoundcloud} />
+                </a>
+              ) : null}
+              {proInfo.facebook ? (
+                <a href={proInfo.facebook}>
+                  <FontAwesomeIcon color="blue" icon={faFacebook} />
+                </a>
+              ) : null}
+            </div>
           </div>
-        </div>
-        <div
-          className="ViewProfile"
-          style={{ margin: "0 auto", textAlign: "center", fontSize: "125%" }}
-        >
-          Profile Picture
-          <img src={proInfo.propic} />
-        </div>
+        </Container>
         <div>
           {instaPic[0] ? (
             <div className={classes.root}>

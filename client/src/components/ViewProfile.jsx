@@ -41,7 +41,7 @@ const ViewProfile = ({ match, currentUser }) => {
           </Typography>
           <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
           <div>
-            <div style={{ marginBottom: "10px" }} className="ViewProfile">
+            {/* <div style={{ marginBottom: "10px" }} className="ViewProfile">
               Username: {username}
             </div>
             <div style={{ marginBottom: "10px" }} className="ViewProfile">
@@ -55,7 +55,7 @@ const ViewProfile = ({ match, currentUser }) => {
             </div>
             <div style={{ marginBottom: "10px" }} className="ViewProfile">
               Description: {proInfo.description}
-            </div>
+            </div> */}
             <div>
               {proInfo.youTube ? (
                 <a href={proInfo.youTube}>
@@ -77,6 +77,14 @@ const ViewProfile = ({ match, currentUser }) => {
                   <FontAwesomeIcon color="blue" icon={faFacebook} />
                 </a>
               ) : null}
+              <Typography className={classes.textStyle} marginTop="25px">
+                Email: {proInfo.email}
+              </Typography>
+              <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
+              <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
+              <Typography className={classes.textStyle}>
+                Description: {proInfo.description}
+              </Typography>
             </div>
           </div>
         </Container>

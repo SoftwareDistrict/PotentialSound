@@ -3,11 +3,8 @@ import PropTypes from "prop-types";
 import ImageUploader from "react-images-upload";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-
-const style = {
-  margin: "10px",
-  display: "block",
-};
+import { Button, Typography, Grid } from "@material-ui/core";
+import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
 const CreateProfile = ({ getCurrentUser }) => {
   const [username, setUsername] = useState("");
@@ -22,6 +19,8 @@ const CreateProfile = ({ getCurrentUser }) => {
   const [instagram, setInstagram] = useState("");
   const [faceBook, setFaceBook] = useState("");
   const [instaHandle, setInstaHandle] = useState("");
+  const classes = profileFormStyles();
+  const loading = loadStyles();
 
   const uploadImg = () => {
     let data = new FormData();
@@ -66,73 +65,90 @@ const CreateProfile = ({ getCurrentUser }) => {
     <div>
       {load === false ? (
         <div>
-          <h1>Create Profile</h1>
-          <input
-            style={style}
-            placeholder="Enter Username"
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            placeholder="Enter City"
-            onChange={(e) => setCity(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            placeholder="Enter Cell"
-            onChange={(e) => setCell(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            placeholder="Enter Descrition"
-            onChange={(e) => setDescription(e.target.value)}
-          ></input>
-          <div>
-            <h3>Add your social media profile urls</h3>
+          <div className={classes.container}>
+            <Typography variant="h5" className={classes.header}>
+              Create Profile
+            </Typography>
             <input
-              style={style}
-              placeholder="Facebook"
-              onChange={(e) => setFaceBook(e.target.value)}
+              className={classes.input}
+              placeholder="Enter Username"
+              onChange={(e) => setUsername(e.target.value)}
             ></input>
             <input
-              style={style}
-              placeholder="Instagram"
-              onChange={(e) => setInstagram(e.target.value)}
+              className={classes.input}
+              placeholder="Enter City"
+              onChange={(e) => setCity(e.target.value)}
             ></input>
             <input
-              style={style}
-              placeholder="Youtube"
-              onChange={(e) => setYouTube(e.target.value)}
+              className={classes.input}
+              placeholder="Enter Cell"
+              onChange={(e) => setCell(e.target.value)}
             ></input>
             <input
-              style={style}
-              placeholder="SoundCloud"
-              onChange={(e) => setSoundCloud(e.target.value)}
+              className={classes.input}
+              placeholder="Enter Descrition"
+              onChange={(e) => setDescription(e.target.value)}
             ></input>
-            <h3>Add Instagram Handle to display your profile Uploads (must be public)</h3>
-            <input
-              style={style}
-              placeholder="Instagram Handle"
-              onChange={(e) => setInstaHandle(e.target.value)}
-            ></input>
+            <div>
+              <Typography variant="h6" className={classes.header}>
+                Add Your Social Media
+              </Typography>
+              <input
+                className={classes.input}
+                placeholder="Facebook"
+                onChange={(e) => setFaceBook(e.target.value)}
+              ></input>
+              <input
+                className={classes.input}
+                placeholder="Instagram"
+                onChange={(e) => setInstagram(e.target.value)}
+              ></input>
+              <input
+                className={classes.input}
+                placeholder="Youtube"
+                onChange={(e) => setYouTube(e.target.value)}
+              ></input>
+              <input
+                className={classes.input}
+                placeholder="SoundCloud"
+                onChange={(e) => setSoundCloud(e.target.value)}
+              ></input>
+              <Typography variant="h7" className={classes.header}>
+                Add Instagram Handle To Display Your Profile Uploads (must be public)
+              </Typography>
+              <input
+                className={classes.input}
+                placeholder="Instagram Handle"
+                onChange={(e) => setInstaHandle(e.target.value)}
+              ></input>
+            </div>
+            <ImageUploader
+              withIcon={false}
+              withPreview={true}
+              singleImage={true}
+              buttonText="Choose images"
+              onChange={onDrop}
+              imgExtension={[".jpg", ".gif", ".png"]}
+              maxFileSize={5242880}
+            />
+            <Button className={classes.button} onClick={() => createProfile()}>
+              Submit
+            </Button>
           </div>
-          <ImageUploader
-            withIcon={false}
-            withPreview={true}
-            singleImage={true}
-            buttonText="Choose images"
-            onChange={onDrop}
-            imgExtension={[".jpg", ".gif", ".png"]}
-            maxFileSize={5242880}
-          />
-          <button style={{ backgroundColor: "#eb8c34" }} onClick={() => createProfile()}>
-            Submit
-          </button>
         </div>
       ) : (
-        <div>
-          <h1>Creating Profile...</h1>
-        </div>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          direction="column"
+          className={classes.loadingGrid}
+        >
+          <img alt="PS" src="../styles/logo.png" className={loading.loadingImg} />
+          <Typography variant="h2" className={loading.loadingText}>
+            Creating Profile...
+          </Typography>
+        </Grid>
       )}
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}
     </div>

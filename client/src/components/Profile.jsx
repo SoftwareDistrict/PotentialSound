@@ -53,70 +53,76 @@ const Profile = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Container className={classes.container}>
-          <div>
-            <Typography variant="h3" align="center">
-              {username}
-            </Typography>
-            <Avatar alt={username} src={propic} className={classes.avatar} />
-            {youTube ? (
-              <a href={youTube}>
-                <FontAwesomeIcon color="red" icon={faYoutube} />
-              </a>
-            ) : null}
-            {instagram ? (
-              <a href={instagram}>
-                <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-              </a>
-            ) : null}
-            {soundCloud ? (
-              <a href={soundCloud}>
-                <FontAwesomeIcon color="orange" icon={faSoundcloud} />
-              </a>
-            ) : null}
-            {facebook ? (
-              <a href={facebook}>
-                <FontAwesomeIcon color="blue" icon={faFacebook} />
-              </a>
-            ) : null}
-            <Typography className={classes.textStyle} marginTop="25px">
-              Email: {email}
-            </Typography>
-            <Typography className={classes.textStyle}>Cell: {cell}</Typography>
-            <Typography className={classes.textStyle}>Location: {city}</Typography>
-            <Typography className={classes.textStyle}>Description: {description}</Typography>
-          </div>
-        </Container>
-        <Link to="/updateProfile">
-          <Button className={classes.button}>Update Profile</Button>
-        </Link>
-        <div>
-          {InstaPosts[0] ? (
-            <div className={classes.root}>
-              <GridList cols={2}>
-                <GridListTile>
-                  <img src={InstaPosts[0].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={InstaPosts[1].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={InstaPosts[2].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={InstaPosts[3].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={InstaPosts[4].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={InstaPosts[5].imageUrl} />
-                </GridListTile>
-              </GridList>
+      <Grid
+        container
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+        className={classes.mainContainer}
+      >
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Container className={classes.container}>
+            <div>
+              <Typography variant="h3" align="center" className={classes.username}>
+                {username}
+              </Typography>
+              <Avatar alt={username} src={propic} className={classes.avatar} />
+              {youTube ? (
+                <a href={youTube}>
+                  <FontAwesomeIcon color="red" icon={faYoutube} />
+                </a>
+              ) : null}
+              {instagram ? (
+                <a href={instagram}>
+                  <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+                </a>
+              ) : null}
+              {soundCloud ? (
+                <a href={soundCloud}>
+                  <FontAwesomeIcon color="orange" icon={faSoundcloud} />
+                </a>
+              ) : null}
+              {facebook ? (
+                <a href={facebook}>
+                  <FontAwesomeIcon color="blue" icon={faFacebook} />
+                </a>
+              ) : null}
+              <Typography className={classes.email}>Email: {email}</Typography>
+              <Typography className={classes.textStyle}>Cell: {cell}</Typography>
+              <Typography className={classes.textStyle}>Location: {city}</Typography>
+              <Typography className={classes.textStyle}>Description: {description}</Typography>
             </div>
-          ) : null}
-        </div>
+          </Container>
+          <Link to="/updateProfile" className={classes.link}>
+            <Button className={classes.button}>Update Profile</Button>
+          </Link>
+          <div>
+            {InstaPosts[0] ? (
+              <div className={classes.root}>
+                <GridList cols={2}>
+                  <GridListTile>
+                    <img src={InstaPosts[0].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={InstaPosts[1].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={InstaPosts[2].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={InstaPosts[3].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={InstaPosts[4].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={InstaPosts[5].imageUrl} />
+                  </GridListTile>
+                </GridList>
+              </div>
+            ) : null}
+          </div>
+        </Grid>
       </Grid>
     </div>
   );

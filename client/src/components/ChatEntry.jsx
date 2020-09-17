@@ -39,6 +39,10 @@ const ChatEntry = ({ participants, id_chat }) => {
         </div>
       </div>
     </Link>
+
+
+
+
   );
 };
 

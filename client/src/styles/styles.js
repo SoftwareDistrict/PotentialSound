@@ -5,38 +5,68 @@ const light = "#8D99AE";
 const white = "#EDF2F4";
 
 const loginStyles = makeStyles({
-  box1: {
+  loginContainer: {
     height: "100%",
     width: "100%",
     background: dark,
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  box2: {
-    background: dark,
-    height: "85%",
-    width: "85%",
-    paddingTop: 40,
-    paddingBottom: 40,
+    paddingTop: 60,
+    paddingBottom: 50,
   },
   header: {
     color: light,
-    marginTop: 20,
-    marginBotom: 10,
+    margin: 15,
+    textAlign: "center",
+    fontWeight: "bold",
   },
   button: {
     variant: "contained",
     disableFocusRipple: true,
     disableRipple: true,
     background: "#037bfc",
-    height: 74,
+    height: 53,
     width: 250,
     borderRadius: 0,
     padding: 0,
-    marginBottom: 200,
     color: "white",
     fontSize: 22,
     marginTop: 60,
+  },
+  icon: {
+    height: 50,
+    width: 50,
+    marginRight: 10,
+  },
+});
+
+const searchStyles = makeStyles({
+  queryDisplay: {
+    textAlign: "center",
+    color: white,
+  },
+  input: {
+    border: "3px solid black",
+    width: 250,
+    height: 30,
+    fontSize: 14,
+    paddingLeft: 10,
+    marginBottom: 20,
+    marginTop: 10,
+    backgroundColor: white,
+  },
+  button: {
+    borderRadius: 0,
+    border: "2px solid black",
+    background: light,
+    padding: 4,
+    marginBottom: 10,
+  },
+  icon: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: dark,
+  },
+  suggestions: {
+    color: white,
   },
 });
 
@@ -118,31 +148,6 @@ const feedStyles = makeStyles({
   header: {
     color: dark,
     fontWeight: "bold",
-  },
-});
-
-const searchStyles = makeStyles({
-  input: {
-    border: "3px solid black",
-    width: 250,
-    height: 30,
-    fontSize: 14,
-    paddingLeft: 10,
-    marginBottom: 20,
-    marginTop: 10,
-    backgroundColor: white,
-  },
-  button: {
-    borderRadius: 0,
-    border: "2px solid black",
-    background: light,
-    padding: 4,
-    marginBottom: 10,
-  },
-  icon: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: dark,
   },
 });
 
@@ -295,16 +300,253 @@ const chatStyles = makeStyles({
     right: "5px",
   },
 });
+const profileStyle = makeStyles({
+  mainContainer: {
+    backgroundColor: white,
+    padding: 20,
+    minHeight: 650,
+    marginTop: 30,
+  },
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    fontWeight: "bold",
+    fontSize: 16,
+    color: dark,
+  },
+  link: {
+    textDecoration: "none",
+  },
+  avatar: {
+    width: "100px",
+    height: "100px",
+    position: "relative",
+    marginLeft: "34%",
+    variant: "circle",
+  },
+  container: {
+    maxWidth: "sm",
+    background: dark,
+  },
+  username: {
+    color: white,
+  },
+  email: {
+    marginTop: 25,
+    marginBottom: 10,
+    color: white,
+    fontSize: 16,
+  },
+  textStyle: {
+    marginBottom: 10,
+    color: white,
+    fontSize: 16,
+  },
+});
+
+const createPostStyles = makeStyles({
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: dark,
+    color: white,
+    fontSize: 14,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 2,
+    paddingBottom: 3,
+    marginBottom: 2,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    align: "center",
+  },
+  tagButton: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    color: dark,
+    fontSize: 18,
+    padding: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    fontWeight: "bold",
+  },
+  grid: {
+    paddingTop: 10,
+    background: light,
+    color: white,
+  },
+  tagGrid: {
+    paddingLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: white,
+    paddingBottom: 15,
+  },
+  formLabel: {
+    fontSize: 16,
+    color: dark,
+  },
+  checkBox: {
+    color: white,
+    boderRadius: 0,
+    padding: 0,
+    border: "1px",
+  },
+  input: {
+    border: "3px solid black",
+    width: 250,
+    height: "100%",
+    fontSize: 14,
+    paddingLeft: 10,
+    marginBottom: 10,
+    marginTop: 30,
+    marginLeft: 5,
+    backgroundColor: white,
+  },
+  fileButton: {
+    marginLeft: 5,
+    background: dark,
+    color: white,
+  },
+});
+
+const loadStyles = makeStyles({
+  loadingGrid: {
+    marginTop: 250,
+  },
+  loadingText: {
+    fontSize: 60,
+    color: white,
+  },
+  loadingImg: {
+    height: 180,
+    width: 160,
+  },
+});
+
+const profileFormStyles = makeStyles({
+  header: {
+    color: white,
+  },
+  input: {
+    marginBottom: 10,
+    display: "block",
+  },
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    backgroundColor: dark,
+    marginTop: 20,
+    background: light,
+    color: white,
+    fontSize: 14,
+    padding: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+  },
+  container: {
+    background: light,
+    margin: 10,
+    marginTop: 20,
+    padding: 10,
+  },
+});
+
+const fullPostStyles = makeStyles({
+  mainContainer: {
+    background: white,
+    padding: 20,
+    marginTop: 30,
+  },
+  container: {
+    background: dark,
+    border: "3px solid black",
+    color: white,
+    paddingBottom: 20,
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    margin: 10,
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+  text: {
+    fontSize: 20,
+    margin: 10,
+    color: white,
+  },
+  link: {
+    color: "#037bfc",
+    fontSize: 18,
+  },
+  input: {
+    width: 230,
+    height: 30,
+    fontSize: 16,
+    marginLeft: 10,
+    paddingLeft: 10,
+  },
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    color: dark,
+    fontSize: 14,
+    padding: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
+    border: "2px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    marginBottom: 3,
+  },
+  header: {
+    color: white,
+    marginTop: 20,
+  },
+});
+
 module.exports = {
   dark,
   light,
   white,
   loginStyles,
+  searchStyles,
   postStyles,
   feedStyles,
-  searchStyles,
   menuStyles,
   createMessageStyles,
   chatEntryStyles,
   chatStyles,
+  profileStyle,
+  createPostStyles,
+  loadStyles,
+  profileFormStyles,
+  fullPostStyles,
 };

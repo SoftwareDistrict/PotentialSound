@@ -6,11 +6,10 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
-import Button from "@material-ui/core/Button";
 import { chatStyles } from "../styles/styles.js";
 import { IconButton, Grid, TextField, Typography } from "@material-ui/core";
-import SendIcon from '@material-ui/icons/Send';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
+import SendIcon from "@material-ui/icons/Send";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 
 let socket = io("localhost:8080");
 

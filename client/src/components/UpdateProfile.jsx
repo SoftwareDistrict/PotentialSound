@@ -4,11 +4,8 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
-
-const style = {
-  margin: "10px",
-  display: "block",
-};
+import { Button, Typography, Grid } from "@material-ui/core";
+import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
 const UpdateProfile = ({ currentUser, getCurrentUser }) => {
   const [newUser, setNewUser] = useState(currentUser.username);
@@ -23,6 +20,8 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
   const [instagram, setInstagram] = useState(currentUser.instagram);
   const [faceBook, setFaceBook] = useState(currentUser.facebook);
   const [instaHandle, setInstaHandle] = useState(currentUser.instaHandle);
+  const loading = loadStyles();
+  const classes = profileFormStyles();
 
   const uploadImg = () => {
     let data = new FormData();
@@ -93,90 +92,99 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
       {load === false ? (
         <div>
           <Appbar currentUser={currentUser} />
-          <h1>Update Your Profile</h1>
-          <input
-            style={{ marginBottom: "10px", display: "block" }}
-            value={newUser}
-            onChange={(e) => {
-              setNewUser(e.target.value);
-            }}
-          ></input>
-          <input
-            style={{ marginBottom: "10px", display: "block" }}
-            value={newCity}
-            onChange={(e) => {
-              setNewCity(e.target.value);
-            }}
-          ></input>
-          <input
-            style={{ marginBottom: "10px", display: "block" }}
-            value={newCell}
-            onChange={(e) => {
-              setNewCell(e.target.value);
-            }}
-          ></input>
-          <input
-            style={{ marginBottom: "10px", display: "block" }}
-            value={newDescription}
-            onChange={(e) => {
-              setNewDescription(e.target.value);
-            }}
-          ></input>
-          <h3>Update your social media profile urls</h3>
-          <input
-            style={style}
-            value={faceBook}
-            placeholder="Facebook"
-            onChange={(e) => setFaceBook(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            value={instagram}
-            placeholder="Instagram"
-            onChange={(e) => setInstagram(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            value={youTube}
-            placeholder="Youtube"
-            onChange={(e) => setYouTube(e.target.value)}
-          ></input>
-          <input
-            style={style}
-            value={soundCloud}
-            placeholder="soundCloud"
-            onChange={(e) => setSoundCloud(e.target.value)}
-          ></input>
-          <h3>Update your Instagram handle</h3>
-          <input
-            style={{ marginBottom: "10px", display: "block" }}
-            value={instaHandle}
-            placeholder="Instagram Handle"
-            onChange={(e) => {
-              setInstaHandle(e.target.value);
-            }}
-          ></input>
-          <ImageUploader
-            withIcon={false}
-            withPreview={true}
-            singleImage={true}
-            buttonText="Select Image"
-            onChange={onDrop}
-            imgExtension={[".jpg", ".gif", ".png"]}
-            maxFileSize={5242880}
-          />
-          <button
-            style={{ backgroundColor: "#eb8c34", marginTop: "30px" }}
-            type="button"
-            onClick={() => updateProfile()}
-          >
-            Submit Change
-          </button>
+          <div className={classes.container}>
+            <Typography variant="h5" className={classes.header}>
+              Update Your Profile
+            </Typography>
+            <input
+              className={classes.input}
+              value={newUser}
+              placeholder={newUser}
+              onChange={(e) => setNewUser(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={newCity}
+              placeholder={newCity}
+              onChange={(e) => setNewCity(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={newCell}
+              placeholder={newCell}
+              onChange={(e) => setNewCell(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={newDescription}
+              placeholder={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            ></input>
+            <Typography variant="h6" className={classes.header}>
+              Update Your Social Media
+            </Typography>
+            <input
+              className={classes.input}
+              value={faceBook}
+              placeholder="Facebook"
+              onChange={(e) => setFaceBook(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={instagram}
+              placeholder="Instagram"
+              onChange={(e) => setInstagram(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={youTube}
+              placeholder="YouTube"
+              onChange={(e) => setYouTube(e.target.value)}
+            ></input>
+            <input
+              className={classes.input}
+              value={soundCloud}
+              placeholder="SoundCloud"
+              onChange={(e) => setSoundCloud(e.target.value)}
+            ></input>
+            <Typography variant="h6" className={classes.header}>
+              Update Your Instagram Handle (must be public)
+            </Typography>
+            <input
+              className={classes.input}
+              value={instaHandle}
+              placeholder="Instagram Handle"
+              onChange={(e) => {
+                setInstaHandle(e.target.value);
+              }}
+            ></input>
+            <ImageUploader
+              withIcon={false}
+              withPreview={true}
+              singleImage={true}
+              buttonText="Select Image"
+              onChange={onDrop}
+              imgExtension={[".jpg", ".gif", ".png"]}
+              maxFileSize={5242880}
+            />
+            <Button className={classes.button} onClick={() => updateProfile()}>
+              Submit Change
+            </Button>
+          </div>
         </div>
       ) : (
-        <div>
-          <h1>Updating Profile...</h1>
-        </div>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          direction="column"
+          className={classes.loadingGrid}
+        >
+          <img alt="PS" src="../styles/logo.png" className={loading.loadingImg} />
+          <Typography variant="h2" className={loading.loadingText}>
+            Updating Profile...
+          </Typography>
+        </Grid>
       )}
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}
     </div>

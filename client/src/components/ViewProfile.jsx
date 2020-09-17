@@ -34,7 +34,13 @@ const ViewProfile = ({ match, currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container justify="center" alignItems="flex-start" direction="row" className={classes.mainContainer}>
+      <Grid
+        container
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+        className={classes.mainContainer}
+      >
         <Grid container direction="row" justify="center" alignItems="center">
           <Container className={classes.container}>
             <Typography variant="h3" align="center">
@@ -63,13 +69,11 @@ const ViewProfile = ({ match, currentUser }) => {
                     <FontAwesomeIcon color="blue" icon={faFacebook} />
                   </a>
                 ) : null}
-                <Typography className={classes.email}>
-                Email: {proInfo.email}
-                </Typography>
+                <Typography className={classes.email}>Email: {proInfo.email}</Typography>
                 <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
                 <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
                 <Typography className={classes.textStyle}>
-                Description: {proInfo.description}
+                  Description: {proInfo.description}
                 </Typography>
               </div>
             </div>

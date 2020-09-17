@@ -53,7 +53,13 @@ const Profile = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container justify="center" alignItems="flex-start" direction="row" className={classes.mainContainer}>
+      <Grid
+        container
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+        className={classes.mainContainer}
+      >
         <Grid container direction="row" justify="center" alignItems="center">
           <Container className={classes.container}>
             <div>
@@ -81,9 +87,7 @@ const Profile = ({ currentUser }) => {
                   <FontAwesomeIcon color="blue" icon={faFacebook} />
                 </a>
               ) : null}
-              <Typography className={classes.email}>
-              Email: {email}
-              </Typography>
+              <Typography className={classes.email}>Email: {email}</Typography>
               <Typography className={classes.textStyle}>Cell: {cell}</Typography>
               <Typography className={classes.textStyle}>Location: {city}</Typography>
               <Typography className={classes.textStyle}>Description: {description}</Typography>

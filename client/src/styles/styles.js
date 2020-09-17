@@ -270,7 +270,7 @@ const createPostStyles = makeStyles({
     border: "3px solid black",
     borderRadius: 0,
     borderColor: "black",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   grid: {
     paddingTop: 10,

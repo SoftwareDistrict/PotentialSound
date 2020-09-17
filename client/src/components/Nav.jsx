@@ -32,28 +32,30 @@ const Nav = ({ currentUser }) => {
           <MenuOpenOutlinedIcon className={classes.iconClose} />
         </IconButton>
       </Grid>
-      <Link onClick={toggleMenu} className={classes.link} to="/home">
-        General
-      </Link>
-      <Link onClick={toggleMenu} className={classes.link} to={"/createChat"}>
-        Create Chat
-      </Link>
-      <Link to="/chats" onClick={toggleMenu} className={classes.link}>
-        Chats
-      </Link>
-      <Link onClick={toggleMenu} className={classes.link} to={`/profile/${currentUser.id}`}>
-        My Profile
-      </Link>
-      <Link
-        to={"/"}
-        className={classes.link}
-        onClick={() => {
-          logout();
-          toggleMenu();
-        }}
-      >
-        Logout
-      </Link>
+      <Grid container justify="center" alignItems="flex-start" direction="column">
+        <Link onClick={toggleMenu} className={classes.link} to="/home">
+          General
+        </Link>
+        <Link onClick={toggleMenu} className={classes.link} to={"/createChat"}>
+          Create Chat
+        </Link>
+        <Link to="/chats" onClick={toggleMenu} className={classes.link}>
+          Chats
+        </Link>
+        <Link onClick={toggleMenu} className={classes.link} to={`/profile/${currentUser.id}`}>
+          My Profile
+        </Link>
+        <Link
+          to={"/"}
+          className={classes.link}
+          onClick={() => {
+            logout();
+            toggleMenu();
+          }}
+        >
+          Logout
+        </Link>
+      </Grid>
     </div>
   );
 };

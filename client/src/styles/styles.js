@@ -142,6 +142,23 @@ const feedStyles = makeStyles({
     align: "center",
     fontWeight: "bold",
   },
+  backButton: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: dark,
+    color: white,
+    fontSize: 14,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    align: "center",
+    fontWeight: "bold",
+  },
   link: {
     textDecoration: "none",
   },
@@ -177,6 +194,7 @@ const menuStyles = makeStyles({
     zIndex: 20,
     borderRadius: 0,
     display: "none",
+    marginTop: 80,
   },
   link: {
     color: white,
@@ -227,14 +245,11 @@ const createMessageStyles = makeStyles({
     width: 250,
     height: 30,
     fontSize: 14,
-
     backgroundColor: "white",
   },
-
   chatText: {
     border: "4px solid black",
     fontSize: 14,
-
     backgroundColor: "white",
   },
   selectedUser: {
@@ -255,7 +270,7 @@ const chatEntryStyles = makeStyles({
     justifyContent: "center",
   },
   text: {
-    color: "#white",
+    color: white,
   },
   pDiv: {
     background: light,
@@ -270,10 +285,14 @@ const chatEntryStyles = makeStyles({
     height: "100px",
   },
 });
+
 const chatStyles = makeStyles({
   header: {
-    textAlign: "center",
     color: white,
+    margin: 10,
+  },
+  header2: {
+    color: dark,
   },
   button: {
     backgroundColor: light,
@@ -281,8 +300,11 @@ const chatStyles = makeStyles({
   },
   chatText: {
     border: "4px solid black",
+    width: "94%",
     fontSize: 14,
-
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 10,
     backgroundColor: "white",
   },
   messageContainer: {
@@ -290,22 +312,21 @@ const chatStyles = makeStyles({
     padding: "7px",
     width: "350px",
     overflow: "auto",
-    maxHeight: "468px",
-  },
-  callButton: {
-    backgroundColor: light,
-    color: dark,
-    position: "absolute",
-    bottom: "18px",
-    right: "5px",
+    maxHeight: "460px",
   },
 });
+
 const profileStyle = makeStyles({
   mainContainer: {
     backgroundColor: white,
     padding: 20,
-    minHeight: 650,
     marginTop: 30,
+    maxWidth: "80%",
+  },
+  img: {
+    height: 30,
+    width: 30,
+    margin: 5,
   },
   button: {
     variant: "contained",
@@ -334,7 +355,6 @@ const profileStyle = makeStyles({
     variant: "circle",
   },
   container: {
-    maxWidth: "sm",
     background: dark,
   },
   username: {
@@ -440,6 +460,7 @@ const loadStyles = makeStyles({
   loadingImg: {
     height: 180,
     width: 160,
+    marginTop: 220,
   },
 });
 
@@ -479,14 +500,12 @@ const profileFormStyles = makeStyles({
 const fullPostStyles = makeStyles({
   mainContainer: {
     background: white,
-    padding: 20,
     marginTop: 30,
   },
   container: {
     background: dark,
     border: "3px solid black",
     color: white,
-    paddingBottom: 20,
   },
   avatar: {
     width: 130,
@@ -532,10 +551,18 @@ const fullPostStyles = makeStyles({
   },
 });
 
+const body = makeStyles({
+  body: {
+    background: dark,
+    padding: 10,
+  },
+});
+
 module.exports = {
   dark,
   light,
   white,
+  body,
   loginStyles,
   searchStyles,
   postStyles,

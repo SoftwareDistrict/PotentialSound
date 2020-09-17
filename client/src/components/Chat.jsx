@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
-import { chatStyles } from "../styles/styles.js";
+import { chatStyles, body } from "../styles/styles.js";
 import { IconButton, Grid, TextField, Typography } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
@@ -25,6 +25,7 @@ const Chat = ({ match, currentUser, history }) => {
   const [load, setLoading] = useState(false);
 
   const chatClasses = chatStyles();
+  const main = body();
 
   socket.on("receive", (data) => {
     let { array, id_chat } = data.data;
@@ -136,18 +137,15 @@ const Chat = ({ match, currentUser, history }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid direction="column" justify="center" alignItems="center" spacing={3}>
-        <Grid justify="center" alignItems="center" xs={12}>
-          <Typography className={chatClasses.header} align="center" variant="h3">
-            Chat
-          </Typography>
-        </Grid>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <Typography className={chatClasses.header} align="center" variant="h3">
+          Chat
+        </Typography>
         <Grid
+          container
           className={chatClasses.messageContainer}
           justify="center"
-          align="center"
           alignItems="center"
-          xs={12}
         >
           {allMsgs.map((msg) => {
             if (match.params.id == msg.id_chat) {
@@ -165,67 +163,75 @@ const Chat = ({ match, currentUser, history }) => {
             }
           })}
         </Grid>
-        <Grid justify="center" align="center" alignItems="center" xs={12}>
-          <div className={chatClasses.messageContainer}>
-            <Typography className={chatClasses.header} align="center" variant="h5">
-              Send message
-            </Typography>
-            {load === false ? null : <p>Sending...</p>}
-            <label className={chatClasses.header}>
-              Image:{" "}
-              <input
-                className={chatClasses.button}
-                type="file"
-                ref={imageRef}
-                name="image"
-                accept=".png, .jpg, .gif"
-                onChange={(e) => onChangePhoto(e)}
-              ></input>
-            </label>
-            <br />
-            <label className={chatClasses.header}>
-              Audio:{" "}
-              <input
-                className={chatClasses.button}
-                type="file"
-                ref={audioRef}
-                name="audio"
-                accept="audio/mpeg"
-                onChange={(e) => onChangeAudio(e)}
-              ></input>
-            </label>
-            <TextField
-              id="msg"
-              value={userMessage}
-              placeholder="Message"
-              onChange={(event) => {
-                setMessage(event.target.value);
-              }}
-              type="text"
-              align="center"
-              className={chatClasses.chatText}
-              multiline={true}
-              rowsMax={15}
-              size="medium"
-              fullWidth
-              borderRadius="50%"
-              style={{ marginBottom: "10px" }}
-            />
+        <Grid
+          container
+          className={main.body}
+          justify="center"
+          alignItems="flex-start"
+          direction="row"
+        >
+          <Grid container justify="center" alignItems="flex-start">
+            <div className={chatClasses.messageContainer}>
+              <Typography className={chatClasses.header2} align="center" variant="h5">
+                Send message
+              </Typography>
+              {load === false ? null : (
+                <Typography variant="h6" className={chatClasses.header2}>
+                  Sending...
+                </Typography>
+              )}
+              <label className={chatClasses.header2}>
+                Image:{" "}
+                <input
+                  className={chatClasses.button}
+                  type="file"
+                  ref={imageRef}
+                  name="image"
+                  accept=".png, .jpg, .gif"
+                  onChange={(e) => onChangePhoto(e)}
+                ></input>
+              </label>
+              <br />
+              <label className={chatClasses.header2}>
+                Audio:{" "}
+                <input
+                  className={chatClasses.button}
+                  type="file"
+                  ref={audioRef}
+                  name="audio"
+                  accept="audio/mpeg"
+                  onChange={(e) => onChangeAudio(e)}
+                ></input>
+              </label>
+              <TextField
+                id="msg"
+                value={userMessage}
+                placeholder="Message"
+                onChange={(event) => setMessage(event.target.value)}
+                type="text"
+                align="center"
+                className={chatClasses.chatText}
+                multiline={true}
+                rowsMax={15}
+                size="medium"
+                fullWidth
+              />
 
-            <Grid justify="space-between" container alignItems="flex-end" direction="row">
-              <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
-                <VideoCallIcon />
-              </IconButton>
-              <IconButton
-                className={chatClasses.button}
-                onClick={() => {
-                  sendMsg();
-                }}
-              >
-                <SendIcon />
-              </IconButton>
-            </Grid>
-          </div>
+              <Grid justify="space-between" container alignItems="flex-end" direction="row">
+                <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
+                  <VideoCallIcon />
+                </IconButton>
+                <IconButton
+                  className={chatClasses.button}
+                  onClick={() => {
+                    sendMsg();
+                  }}
+                >
+                  <SendIcon />
+                </IconButton>
+              </Grid>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
     </div>

@@ -46,17 +46,17 @@ const HomeFeed = ({ currentUser }) => {
       <Search tags={tags} users={users} setSearched={setSearched} setSearchFeed={setSearchFeed} />
       <div className={classes.feed}>
         {!searched ? (
-          <Grid container justify="flex-start" alignItems="center" direction="column">
+          <Grid container justify="flex-start" alignItems="center" direction="column-reverse">
             {feed.map((post) => (
               <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
             ))}
           </Grid>
         ) : (
           <div>
-            <Button onClick={() => setSearched(false)} className={classes.button}>
+            <Button onClick={() => setSearched(false)} className={classes.backButton}>
               Back To General
             </Button>
-            <Grid container justify="center" alignItems="center" direction="column">
+            <Grid container justify="center" alignItems="center" direction="column-reverse">
               {searchFeed.map((post) => (
                 <PostFeedEntry key={post.id} post={post} users={users} tags={tags} />
               ))}

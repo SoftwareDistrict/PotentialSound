@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
+const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
 
   useEffect(() => {
@@ -55,6 +55,13 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
         }}
       >
         {message}
+        {meeting ? (
+          <div>
+            <form action={meeting}>
+              <input type="submit" value="Join"></input>
+            </form>
+          </div>
+        ) : null}
         {img ? (
           <div>
             <img src={img} />
@@ -90,6 +97,7 @@ Message.propTypes = {
   img: PropTypes.string,
   audio: PropTypes.string,
   audioName: PropTypes.string,
+  meeting: PropTypes.string,
 };
 
 export default Message;

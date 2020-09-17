@@ -146,7 +146,7 @@ const feedStyles = makeStyles({
     textDecoration: "none",
   },
   header: {
-    color: dark,
+    color: light,
     fontWeight: "bold",
   },
 });
@@ -273,7 +273,7 @@ const chatEntryStyles = makeStyles({
 const chatStyles = makeStyles({
   header: {
     textAlign: "center",
-    color: white,
+    color: dark,
   },
   button: {
     backgroundColor: light,

@@ -119,18 +119,36 @@ const PostFullMessage = ({ match, currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container justify="center" alignItems="center" direction="column" className={classes.mainContainer}>
-        <Grid container justify="flex-start" alignItems="center" direction="column" className={classes.container}>
-          <Typography variant="h4" className={classes.header} >{poster.username}</Typography>
-          <Avatar
-            src={poster.propic}
-            alt="Avatar"
-            className={classes.avatar}
-          />
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        direction="column"
+        className={classes.mainContainer}
+      >
+        <Grid
+          container
+          justify="flex-start"
+          alignItems="center"
+          direction="column"
+          className={classes.container}
+        >
+          <Typography variant="h4" className={classes.header}>
+            {poster.username}
+          </Typography>
+          <Avatar src={poster.propic} alt="Avatar" className={classes.avatar} />
           <div className={classes.text}>{post.message}</div>
           <div className={classes.text}>{postTags.join(" ")}</div>
-          {post.audioName ? <a href={post.audioUrl} className={classes.link}>AUDIO {post.audioName}</a> : null}
-          {post.imageName ? <a href={post.imageUrl} className={classes.link}>IMAGE {post.imageName}</a> : null}
+          {post.audioName ? (
+            <a href={post.audioUrl} className={classes.link}>
+              AUDIO {post.audioName}
+            </a>
+          ) : null}
+          {post.imageName ? (
+            <a href={post.imageUrl} className={classes.link}>
+              IMAGE {post.imageName}
+            </a>
+          ) : null}
           {post.youTubeUrl ? (
             <iframe
               src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
@@ -141,8 +159,16 @@ const PostFullMessage = ({ match, currentUser }) => {
         </Grid>
       </Grid>
       <div>
-        <Typography variant="h6" className={classes.header}>Send {poster.username} A Message</Typography>
-        {sent ? <Typography variant="h7" className={classes.header}>...Sent</Typography> : <div></div>}
+        <Typography variant="h6" className={classes.header}>
+          Send {poster.username} A Message
+        </Typography>
+        {sent ? (
+          <Typography variant="h7" className={classes.header}>
+            ...Sent
+          </Typography>
+        ) : (
+          <div></div>
+        )}
         <div>
           <label>
             <input
@@ -153,7 +179,7 @@ const PostFullMessage = ({ match, currentUser }) => {
               placeholder="Message"
             />
             <Button onClick={onSubmit} className={classes.button}>
-            Submit
+              Submit
             </Button>
           </label>
         </div>

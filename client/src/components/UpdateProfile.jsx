@@ -93,7 +93,9 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         <div>
           <Appbar currentUser={currentUser} />
           <div className={classes.container}>
-            <Typography variant="h5" className={classes.header}>Update Your Profile</Typography>
+            <Typography variant="h5" className={classes.header}>
+              Update Your Profile
+            </Typography>
             <input
               className={classes.input}
               value={newUser}
@@ -118,7 +120,9 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
               placeHolder={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
             ></input>
-            <Typography variant="h6" className={classes.header}>Update Your Social Media</Typography>
+            <Typography variant="h6" className={classes.header}>
+              Update Your Social Media
+            </Typography>
             <input
               className={classes.input}
               value={faceBook}
@@ -143,7 +147,9 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
               placeholder="soundCloud"
               onChange={(e) => setSoundCloud(e.target.value)}
             ></input>
-            <Typography variant="h7" className={classes.header}>Update Your Instagram Handle (must be public)</Typography>
+            <Typography variant="h7" className={classes.header}>
+              Update Your Instagram Handle (must be public)
+            </Typography>
             <input
               className={classes.input}
               value={instaHandle}
@@ -161,10 +167,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
               imgExtension={[".jpg", ".gif", ".png"]}
               maxFileSize={5242880}
             />
-            <Button
-              className={classes.button}
-              onClick={() => updateProfile()}
-            >
+            <Button className={classes.button} onClick={() => updateProfile()}>
               Submit Change
             </Button>
           </div>

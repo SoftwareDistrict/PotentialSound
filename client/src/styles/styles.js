@@ -343,7 +343,7 @@ const profileFormStyles = makeStyles({
     margin: 10,
     marginTop: 20,
     padding: 10,
-  }
+  },
 });
 
 const fullPostStyles = makeStyles({

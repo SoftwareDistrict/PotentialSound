@@ -66,7 +66,9 @@ const CreateProfile = ({ getCurrentUser }) => {
       {load === false ? (
         <div>
           <div className={classes.container}>
-            <Typography variant="h5" className={classes.header}>Create Profile</Typography>
+            <Typography variant="h5" className={classes.header}>
+              Create Profile
+            </Typography>
             <input
               className={classes.input}
               placeholder="Enter Username"
@@ -88,7 +90,9 @@ const CreateProfile = ({ getCurrentUser }) => {
               onChange={(e) => setDescription(e.target.value)}
             ></input>
             <div>
-              <Typography variant="h6" className={classes.header}>Add Your Social Media</Typography>
+              <Typography variant="h6" className={classes.header}>
+                Add Your Social Media
+              </Typography>
               <input
                 className={classes.input}
                 placeholder="Facebook"
@@ -109,7 +113,9 @@ const CreateProfile = ({ getCurrentUser }) => {
                 placeholder="SoundCloud"
                 onChange={(e) => setSoundCloud(e.target.value)}
               ></input>
-              <Typography variant="h7" className={classes.header}>Add Instagram Handle To Display Your Profile Uploads (must be public)</Typography>
+              <Typography variant="h7" className={classes.header}>
+                Add Instagram Handle To Display Your Profile Uploads (must be public)
+              </Typography>
               <input
                 className={classes.input}
                 placeholder="Instagram Handle"
@@ -125,10 +131,7 @@ const CreateProfile = ({ getCurrentUser }) => {
               imgExtension={[".jpg", ".gif", ".png"]}
               maxFileSize={5242880}
             />
-            <Button
-              className={classes.button}
-              onClick={() => createProfile()}
-            >
+            <Button className={classes.button} onClick={() => createProfile()}>
               Submit
             </Button>
           </div>

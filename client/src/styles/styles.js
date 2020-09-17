@@ -285,7 +285,7 @@ const createPostStyles = makeStyles({
   fileButton: {
     marginLeft: 5,
     background: dark,
-    color: white
+    color: white,
   },
   loadingGrid: {
     marginTop: 250,

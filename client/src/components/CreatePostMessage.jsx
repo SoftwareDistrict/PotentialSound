@@ -5,7 +5,15 @@ import ImageUploader from "react-images-upload";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid, Button, FormControlLabel, Checkbox, InputLabel, Input, Typography } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  InputLabel,
+  Input,
+  Typography,
+} from "@material-ui/core";
 import { createPostStyles, light, white } from "../styles/styles.js";
 
 const BlueCheckbox = withStyles({
@@ -16,7 +24,7 @@ const BlueCheckbox = withStyles({
     },
   },
   checked: {},
-})(props => <Checkbox color="default" {...props} />);
+})((props) => <Checkbox color="default" {...props} />);
 
 const CreatePostMessage = ({ currentUser }) => {
   const classes = createPostStyles();
@@ -248,11 +256,19 @@ const CreatePostMessage = ({ currentUser }) => {
           <Appbar currentUser={currentUser} />
           <div>
             <Grid container justify="center" alignItems="flex-start" direction="row">
-              <button onClick={clickMe} className={classes.tagButton}>Add Some Tags</button>
+              <button onClick={clickMe} className={classes.tagButton}>
+                Add Some Tags
+              </button>
             </Grid>
           </div>
           {clicked ? (
-            <Grid container justify="center" alignItems="flex-start" direction="row" className={classes.tagGrid}>
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-start"
+              direction="row"
+              className={classes.tagGrid}
+            >
               <div>
                 <Grid container justify="flex-start" alignItems="flex-start" direction="column">
                   <FormControlLabel
@@ -518,10 +534,14 @@ const CreatePostMessage = ({ currentUser }) => {
                 </Grid>
               </div>
             </Grid>
-          ) : (
-            null
-          )}
-          <Grid container justify="center" alignItems="flex-start" direction="column" className={classes.grid}>
+          ) : null}
+          <Grid
+            container
+            justify="center"
+            alignItems="flex-start"
+            direction="column"
+            className={classes.grid}
+          >
             <ImageUploader
               withIcon={false}
               withPreview={true}
@@ -536,14 +556,18 @@ const CreatePostMessage = ({ currentUser }) => {
               className={classes.formLabel}
               label="Audio"
               control={
-                <input className={classes.fileButton} type="file" name="file" onChange={(e) => onChangeAudio(e)} />
+                <input
+                  className={classes.fileButton}
+                  type="file"
+                  name="file"
+                  onChange={(e) => onChangeAudio(e)}
+                />
               }
             />
             <div>
-              <InputLabel
-                className={classes.formLabel}
-                variant="outlined"
-              >Share Your YouTube Video</InputLabel>
+              <InputLabel className={classes.formLabel} variant="outlined">
+                Share Your YouTube Video
+              </InputLabel>
               <Input
                 variant="outlined"
                 className={classes.input}
@@ -553,10 +577,9 @@ const CreatePostMessage = ({ currentUser }) => {
               />
             </div>
             <div>
-              <InputLabel
-                className={classes.formLabel}
-                variant="outlined"
-              >Add A Message</InputLabel>
+              <InputLabel className={classes.formLabel} variant="outlined">
+                Add A Message
+              </InputLabel>
               <Input
                 className={classes.input}
                 required={true}
@@ -565,22 +588,21 @@ const CreatePostMessage = ({ currentUser }) => {
                 type="text"
                 multiline={true}
               />
-              <Button
-                className={classes.button}
-                onClick={() => onSubmit()}
-              >
-              Post
+              <Button className={classes.button} onClick={() => onSubmit()}>
+                Post
               </Button>
             </div>
           </Grid>
         </div>
       ) : (
-        <Grid container justify="center" alignItems="center" direction="column" className={classes.loadingGrid}>
-          <img
-            alt="PS"
-            src="../styles/logo.png"
-            className={classes.loadingImg}
-          />
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          direction="column"
+          className={classes.loadingGrid}
+        >
+          <img alt="PS" src="../styles/logo.png" className={classes.loadingImg} />
           <Typography variant="h2" className={classes.loadingText}>
             Posting...
           </Typography>

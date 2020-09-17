@@ -182,6 +182,119 @@ const menuStyles = makeStyles({
   },
 });
 
+const createMessageStyles = makeStyles({
+  pDiv: {
+    height: "100vh",
+    backgroundColor: "#2B2D42",
+  },
+  avatarGroup: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  parentGrid: {
+    backgroundColor: "#2B2D42",
+  },
+  username: {
+    backgroundColor: "#EDF2F4",
+  },
+  header: {
+    textAlign: "center",
+    color: white,
+  },
+  text: {
+    backgroundColor: "#EDF2F4",
+  },
+  button: {
+    backgroundColor: light,
+    color: dark,
+  },
+  suggestions: {
+    backgroundColor: white,
+    width: 250,
+    fontSize: 14,
+  },
+  list: {
+    listStyle: "none",
+  },
+  chatInput: {
+    border: "4px solid black",
+    width: 250,
+    height: 30,
+    fontSize: 14,
+
+    backgroundColor: "white",
+  },
+
+  chatText: {
+    border: "4px solid black",
+    fontSize: 14,
+
+    backgroundColor: "white",
+  },
+  selectedUser: {
+    color: dark,
+    fontWeight: "bold",
+  },
+});
+
+const chatEntryStyles = makeStyles({
+  avatar: {
+    height: 50,
+    width: 50,
+    variant: "circle",
+  },
+  avatarGroup: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    color: "#white",
+  },
+  pDiv: {
+    background: light,
+    boxShadow: "0px 0px 0px 4px #8D99AE",
+    border: "5px solid",
+    borderColor: "white",
+    margin: "0 auto",
+    borderTopLeftRadius: "5px",
+    bordeBottomRightRadius: "5px",
+    position: "relative",
+    alignItems: "center",
+    height: "100px",
+  },
+});
+const chatStyles = makeStyles({
+  header: {
+    textAlign: "center",
+    color: white,
+  },
+  button: {
+    backgroundColor: light,
+    color: dark,
+  },
+  chatText: {
+    border: "4px solid black",
+    fontSize: 14,
+
+    backgroundColor: "white",
+  },
+  messageContainer: {
+    backgroundColor: white,
+    padding: "7px",
+    width: "350px",
+    overflow: "auto",
+    maxHeight: "468px",
+  },
+  callButton: {
+    backgroundColor: light,
+    color: dark,
+    position: "absolute",
+    bottom: "18px",
+    right: "5px",
+  },
+});
 module.exports = {
   dark,
   light,
@@ -191,4 +304,7 @@ module.exports = {
   feedStyles,
   searchStyles,
   menuStyles,
+  createMessageStyles,
+  chatEntryStyles,
+  chatStyles,
 };

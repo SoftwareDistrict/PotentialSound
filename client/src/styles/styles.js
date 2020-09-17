@@ -297,6 +297,9 @@ const createPostStyles = makeStyles({
     background: dark,
     color: white,
   },
+});
+
+const loadStyles = makeStyles({
   loadingGrid: {
     marginTop: 250,
   },
@@ -307,6 +310,95 @@ const createPostStyles = makeStyles({
   loadingImg: {
     height: 180,
     width: 160,
+  },
+});
+
+const profileFormStyles = makeStyles({
+  header: {
+    color: white,
+  },
+  input: {
+    marginBottom: 10,
+    display: "block",
+  },
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    backgroundColor: dark,
+    marginTop: 20,
+    background: light,
+    color: white,
+    fontSize: 14,
+    padding: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+  },
+  container: {
+    background: light,
+    margin: 10,
+    marginTop: 20,
+    padding: 10,
+  }
+});
+
+const fullPostStyles = makeStyles({
+  mainContainer: {
+    background: white,
+    padding: 20,
+    marginTop: 30,
+  },
+  container: {
+    background: dark,
+    border: "3px solid black",
+    color: white,
+    paddingBottom: 20,
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    margin: 10,
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+  text: {
+    fontSize: 20,
+    margin: 10,
+    color: white,
+  },
+  link: {
+    color: "#037bfc",
+    fontSize: 18,
+  },
+  input: {
+    width: 230,
+    height: 30,
+    fontSize: 16,
+    marginLeft: 10,
+    paddingLeft: 10,
+  },
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    color: dark,
+    fontSize: 14,
+    padding: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
+    border: "2px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    marginBottom: 3,
+  },
+  header: {
+    color: white,
+    marginTop: 20,
   },
 });
 
@@ -321,4 +413,7 @@ module.exports = {
   menuStyles,
   profileStyle,
   createPostStyles,
+  loadStyles,
+  profileFormStyles,
+  fullPostStyles,
 };

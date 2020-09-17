@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { Button, Typography, Grid, Avatar } from "@material-ui/core";
+import { fullPostStyles } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const PostFullMessage = ({ match, currentUser }) => {
@@ -13,6 +15,7 @@ const PostFullMessage = ({ match, currentUser }) => {
   const [allChats, setAllChats] = useState([]);
   const [sent, setSent] = useState(false);
   const ids = [currentUser.id, id[0]];
+  const classes = fullPostStyles();
 
   setInterval(() => setSent(false), 7000);
 
@@ -116,83 +119,44 @@ const PostFullMessage = ({ match, currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <div
-        id="profile"
-        style={{
-          backgroundColor: "#3F3D3D",
-          border: "2px solid black",
-          width: "350px",
-          height: "450px",
-          textAlign: "center",
-          margin: "0 auto",
-          position: "relative",
-          color: "#E7912D",
-        }}
-      >
-        <div style={{ fontSize: "125%", marginTop: "10px" }}>{poster.username}</div>
-        <div
-          style={{
-            width: "150px",
-            height: "150px",
-            position: "absolute",
-            top: "40px",
-            left: "100px",
-            overflow: "hidden",
-            borderRadius: "50%",
-          }}
-        >
-          <img
+      <Grid container justify="center" alignItems="center" direction="column" className={classes.mainContainer}>
+        <Grid container justify="flex-start" alignItems="center" direction="column" className={classes.container}>
+          <Typography variant="h4" className={classes.header} >{poster.username}</Typography>
+          <Avatar
             src={poster.propic}
             alt="Avatar"
-            style={{
-              display: "inline-flex",
-              margin: "0 auto",
-              marginLeft: "-25%",
-              height: "100%",
-              width: "auto",
-            }}
+            className={classes.avatar}
           />
-        </div>
-        <div style={{ marginTop: "160px" }}>
-          <div style={{ fontSize: "18px" }}>{post.message}</div>
-          <div style={{ fontSize: "16px", marginTop: "10px" }}>{postTags.join(" ")}</div>
-          {post.audioName ? <a href={post.audioUrl}>{post.audioName}</a> : null}
-          {post.imageName ? <a href={post.imageUrl}>{post.imageName}</a> : null}
-        </div>
-      </div>
+          <div className={classes.text}>{post.message}</div>
+          <div className={classes.text}>{postTags.join(" ")}</div>
+          {post.audioName ? <a href={post.audioUrl} className={classes.link}>AUDIO {post.audioName}</a> : null}
+          {post.imageName ? <a href={post.imageUrl} className={classes.link}>IMAGE {post.imageName}</a> : null}
+          {post.youTubeUrl ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullscreen
+            ></iframe>
+          ) : null}
+        </Grid>
+      </Grid>
       <div>
-        {post.youTubeUrl ? (
-          <iframe
-            width="360"
-            height="215"
-            src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullscreen
-          ></iframe>
-        ) : null}
-      </div>
-      <div>
-        <h3>Send {poster.username} a message</h3>
-        {sent ? <div>...Sent</div> : <div></div>}
-        <label>
-          <input
-            id="input-message"
-            style={{
-              width: "250px",
-              height: "80px",
-              fontSize: "16px",
-              marginLeft: "10px",
-              paddingLeft: "10px",
-            }}
-            onChange={(event) => onEvent(event, setMessage)}
-            type="text"
-            placeholder="Message"
-          />
-          <button onClick={onSubmit} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
+        <Typography variant="h6" className={classes.header}>Send {poster.username} A Message</Typography>
+        {sent ? <Typography variant="h7" className={classes.header}>...Sent</Typography> : <div></div>}
+        <div>
+          <label>
+            <input
+              id="input-message"
+              className={classes.input}
+              onChange={(event) => onEvent(event, setMessage)}
+              type="text"
+              placeholder="Message"
+            />
+            <Button onClick={onSubmit} className={classes.button}>
             Submit
-          </button>
-        </label>
+            </Button>
+          </label>
+        </div>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import {
   Input,
   Typography,
 } from "@material-ui/core";
-import { createPostStyles, light, white } from "../styles/styles.js";
+import { createPostStyles, light, white, loadStyles } from "../styles/styles.js";
 
 const BlueCheckbox = withStyles({
   root: {
@@ -28,6 +28,7 @@ const BlueCheckbox = withStyles({
 
 const CreatePostMessage = ({ currentUser }) => {
   const classes = createPostStyles();
+  const load = loadStyles();
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
   const [redirect, setRedirect] = useState("");
@@ -602,8 +603,8 @@ const CreatePostMessage = ({ currentUser }) => {
           direction="column"
           className={classes.loadingGrid}
         >
-          <img alt="PS" src="../styles/logo.png" className={classes.loadingImg} />
-          <Typography variant="h2" className={classes.loadingText}>
+          <img alt="PS" src="../styles/logo.png" className={load.loadingImg} />
+          <Typography variant="h2" className={load.loadingText}>
             Posting...
           </Typography>
         </Grid>

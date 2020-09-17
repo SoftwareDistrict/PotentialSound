@@ -209,10 +209,14 @@ const profileStyle = makeStyles({
   },
   container: {
     maxWidth: "sm",
+    background: light,
   },
   username: {
     align: "center",
     variant: "h1",
+  },
+  textStyling: {
+    marginBottom: "10px",
   },
 });
 

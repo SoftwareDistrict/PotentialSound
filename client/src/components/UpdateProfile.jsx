@@ -152,7 +152,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
             </Typography>
             <input
               className={classes.input}
-              value={instaHandle || ""}
+              value={instaHandle}
               placeholder="Instagram Handle"
               onChange={(e) => {
                 setInstaHandle(e.target.value);

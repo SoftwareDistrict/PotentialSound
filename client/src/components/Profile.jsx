@@ -55,44 +55,37 @@ const Profile = ({ currentUser }) => {
       <Appbar currentUser={currentUser} />
       <Grid container direction="row" justify="center" alignItems="center">
         <Container className={classes.container}>
-          {/* <Avatar alt={username} src={propic} className={classes.avatar} /> */}
-          {youTube ? (
-            <a href={youTube}>
-              <FontAwesomeIcon color="red" icon={faYoutube} />
-            </a>
-          ) : null}
-          {instagram ? (
-            <a href={instagram}>
-              <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-            </a>
-          ) : null}
-          {soundCloud ? (
-            <a href={soundCloud}>
-              <FontAwesomeIcon color="orange" icon={faSoundcloud} />
-            </a>
-          ) : null}
-          {facebook ? (
-            <a href={facebook}>
-              <FontAwesomeIcon color="blue" icon={faFacebook} />
-            </a>
-          ) : null}
           <div>
             <Typography variant="h3" align="center">
               {username}
             </Typography>
             <Avatar alt={username} src={propic} className={classes.avatar} />
-            <div style={{ marginBottom: "10px", marginTop: "25px" }} className="profileInfo">
+            {youTube ? (
+              <a href={youTube}>
+                <FontAwesomeIcon color="red" icon={faYoutube} />
+              </a>
+            ) : null}
+            {instagram ? (
+              <a href={instagram}>
+                <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+              </a>
+            ) : null}
+            {soundCloud ? (
+              <a href={soundCloud}>
+                <FontAwesomeIcon color="orange" icon={faSoundcloud} />
+              </a>
+            ) : null}
+            {facebook ? (
+              <a href={facebook}>
+                <FontAwesomeIcon color="blue" icon={faFacebook} />
+              </a>
+            ) : null}
+            <Typography className={classes.textStyle} marginTop="25px">
               Email: {email}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="profileInfo">
-              Cell Phone Number: {cell}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="profileInfo">
-              Based Out Of: {city}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="profileInfo">
-              Description: {description}
-            </div>
+            </Typography>
+            <Typography className={classes.textStyle}>Cell: {cell}</Typography>
+            <Typography className={classes.textStyle}>Location: {city}</Typography>
+            <Typography className={classes.textStyle}>Description: {description}</Typography>
           </div>
         </Container>
         <Link to="/updateProfile">

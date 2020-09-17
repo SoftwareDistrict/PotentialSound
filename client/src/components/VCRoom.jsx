@@ -36,7 +36,7 @@ const videoConstraints = {
   width: window.innerWidth / 2,
 };
 
-const VCRoom = ({ match, currentUser }) => {
+const VCRoom = ({ match, currentUser, history }) => {
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
@@ -110,6 +110,13 @@ const VCRoom = ({ match, currentUser }) => {
     return peer;
   };
 
+  const disconnect = () => {
+    userVideo.current.pause();
+    userVideo.current.srcObject.getTracks()[0].stop();
+    socketRef.current.emit("disconnect");
+    history.push("/chats");
+  };
+
   return (
     <div>
       <Appbar currentUser={currentUser} />
@@ -119,6 +126,7 @@ const VCRoom = ({ match, currentUser }) => {
           return <Video key={index} peer={peer} />;
         })}
       </Container>
+      <button onClick={() => disconnect()}>Disconnect</button>
     </div>
   );
 };
@@ -126,6 +134,7 @@ const VCRoom = ({ match, currentUser }) => {
 VCRoom.propTypes = {
   match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 Video.propTypes = {

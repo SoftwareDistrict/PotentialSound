@@ -5,38 +5,68 @@ const light = "#8D99AE";
 const white = "#EDF2F4";
 
 const loginStyles = makeStyles({
-  box1: {
+  loginContainer: {
     height: "100%",
     width: "100%",
     background: dark,
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  box2: {
-    background: dark,
-    height: "85%",
-    width: "85%",
-    paddingTop: 40,
-    paddingBottom: 40,
+    paddingTop: 60,
+    paddingBottom: 50,
   },
   header: {
     color: light,
-    marginTop: 20,
-    marginBotom: 10,
+    margin: 15,
+    textAlign: "center",
+    fontWeight: "bold",
   },
   button: {
     variant: "contained",
     disableFocusRipple: true,
     disableRipple: true,
     background: "#037bfc",
-    height: 74,
+    height: 53,
     width: 250,
     borderRadius: 0,
     padding: 0,
-    marginBottom: 200,
     color: "white",
     fontSize: 22,
     marginTop: 60,
+  },
+  icon: {
+    height: 50,
+    width: 50,
+    marginRight: 10,
+  },
+});
+
+const searchStyles = makeStyles({
+  queryDisplay: {
+    textAlign: "center",
+    color: white,
+  },
+  input: {
+    border: "3px solid black",
+    width: 250,
+    height: 30,
+    fontSize: 14,
+    paddingLeft: 10,
+    marginBottom: 20,
+    marginTop: 10,
+    backgroundColor: white,
+  },
+  button: {
+    borderRadius: 0,
+    border: "2px solid black",
+    background: light,
+    padding: 4,
+    marginBottom: 10,
+  },
+  icon: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: dark,
+  },
+  suggestions: {
+    color: white,
   },
 });
 
@@ -121,31 +151,6 @@ const feedStyles = makeStyles({
   },
 });
 
-const searchStyles = makeStyles({
-  input: {
-    border: "3px solid black",
-    width: 250,
-    height: 30,
-    fontSize: 14,
-    paddingLeft: 10,
-    marginBottom: 20,
-    marginTop: 10,
-    backgroundColor: white,
-  },
-  button: {
-    borderRadius: 0,
-    border: "2px solid black",
-    background: light,
-    padding: 4,
-    marginBottom: 10,
-  },
-  icon: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: dark,
-  },
-});
-
 const menuStyles = makeStyles({
   icon: {
     fontSize: 30,
@@ -215,9 +220,9 @@ module.exports = {
   light,
   white,
   loginStyles,
+  searchStyles,
   postStyles,
   feedStyles,
-  searchStyles,
   menuStyles,
   profileStyle,
 };

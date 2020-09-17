@@ -81,7 +81,9 @@ class App extends Component {
           />
           <Route
             path="/room/:roomId"
-            render={({ match, history }) => <VCRoom history={history} match={match} currentUser={currentUser} />}
+            render={({ match, history }) => (
+              <VCRoom history={history} match={match} currentUser={currentUser} />
+            )}
           />
         </Switch>
       </Router>

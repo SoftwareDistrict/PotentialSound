@@ -41,21 +41,6 @@ const ViewProfile = ({ match, currentUser }) => {
           </Typography>
           <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
           <div>
-            {/* <div style={{ marginBottom: "10px" }} className="ViewProfile">
-              Username: {username}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="ViewProfile">
-              Email: {proInfo.email}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="ViewProfile">
-              Cell Phone Number: {proInfo.cell}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="ViewProfile">
-              Hometown: {proInfo.city}
-            </div>
-            <div style={{ marginBottom: "10px" }} className="ViewProfile">
-              Description: {proInfo.description}
-            </div> */}
             <div>
               {proInfo.youTube ? (
                 <a href={proInfo.youTube}>
@@ -119,7 +104,7 @@ const ViewProfile = ({ match, currentUser }) => {
   );
 };
 ViewProfile.propTypes = {
-  match: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 export default ViewProfile;

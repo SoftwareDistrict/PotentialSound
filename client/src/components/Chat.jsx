@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
-let socket = io("localhost:8080");
+let socket = io("https://069bfdcb45d1.ngrok.io");
 
 const Chat = ({ match, currentUser, history }) => {
   const audioRef = useRef();
@@ -32,6 +32,12 @@ const Chat = ({ match, currentUser, history }) => {
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
+    socket.emit("sending", {
+      id_chat: idChat,
+      id_user: id_user,
+      message: `${currentUser.username} has invited you to join in`,
+      meeting: `https://069bfdcb45d1.ngrok.io${history.location.pathname}`,
+    });
   };
 
   const onChangePhoto = (e) => {
@@ -143,6 +149,7 @@ const Chat = ({ match, currentUser, history }) => {
                   img={msg.url_image}
                   audio={msg.url_audio}
                   audioName={msg.name_audio}
+                  meeting={msg.meeting}
                 />
               );
             }

@@ -142,6 +142,23 @@ const feedStyles = makeStyles({
     align: "center",
     fontWeight: "bold",
   },
+  backButton: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: dark,
+    color: white,
+    fontSize: 14,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    align: "center",
+    fontWeight: "bold",
+  },
   link: {
     textDecoration: "none",
   },
@@ -177,6 +194,7 @@ const menuStyles = makeStyles({
     zIndex: 20,
     borderRadius: 0,
     display: "none",
+    marginTop: 80,
   },
   link: {
     color: white,
@@ -193,6 +211,12 @@ const profileStyle = makeStyles({
     padding: 20,
     minHeight: 650,
     marginTop: 30,
+    maxWidth: "80%",
+  },
+  img: {
+    height: 30,
+    width: 30,
+    margin: 5,
   },
   button: {
     variant: "contained",
@@ -221,7 +245,6 @@ const profileStyle = makeStyles({
     variant: "circle",
   },
   container: {
-    maxWidth: "sm",
     background: dark,
   },
   username: {
@@ -366,14 +389,12 @@ const profileFormStyles = makeStyles({
 const fullPostStyles = makeStyles({
   mainContainer: {
     background: white,
-    padding: 20,
     marginTop: 30,
   },
   container: {
     background: dark,
     border: "3px solid black",
     color: white,
-    paddingBottom: 20,
   },
   avatar: {
     width: 130,
@@ -419,10 +440,18 @@ const fullPostStyles = makeStyles({
   },
 });
 
+const body = makeStyles({
+  body: {
+    background: dark,
+    padding: 10,
+  },
+});
+
 module.exports = {
   dark,
   light,
   white,
+  body,
   loginStyles,
   searchStyles,
   postStyles,

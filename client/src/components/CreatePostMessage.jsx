@@ -14,7 +14,7 @@ import {
   Input,
   Typography,
 } from "@material-ui/core";
-import { createPostStyles, light, white, loadStyles } from "../styles/styles.js";
+import { createPostStyles, light, white, loadStyles, body } from "../styles/styles.js";
 
 const BlueCheckbox = withStyles({
   root: {
@@ -29,6 +29,7 @@ const BlueCheckbox = withStyles({
 const CreatePostMessage = ({ currentUser }) => {
   const classes = createPostStyles();
   const load = loadStyles();
+  const main = body();
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
   const [redirect, setRedirect] = useState("");
@@ -536,63 +537,65 @@ const CreatePostMessage = ({ currentUser }) => {
               </div>
             </Grid>
           ) : null}
-          <Grid
-            container
-            justify="center"
-            alignItems="flex-start"
-            direction="column"
-            className={classes.grid}
-          >
-            <ImageUploader
-              withIcon={false}
-              withPreview={true}
-              singleImage={true}
-              buttonText="Choose Image"
-              onChange={(img) => onChangeImage(img)}
-              imgExtension={[".jpg", ".gif", ".png"]}
-              maxFileSize={5242880}
-            />
-            <FormControlLabel
-              labelPlacement="start"
-              className={classes.formLabel}
-              label="Audio"
-              control={
-                <input
-                  className={classes.fileButton}
-                  type="file"
-                  name="file"
-                  onChange={(e) => onChangeAudio(e)}
-                />
-              }
-            />
-            <div>
-              <InputLabel className={classes.formLabel} variant="outlined">
+          <Grid container className={main.body} justify="center" alignItems="flex-start" direction="row">
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-start"
+              direction="column"
+              className={classes.grid}
+            >
+              <ImageUploader
+                withIcon={false}
+                withPreview={true}
+                singleImage={true}
+                buttonText="Choose Image"
+                onChange={(img) => onChangeImage(img)}
+                imgExtension={[".jpg", ".gif", ".png"]}
+                maxFileSize={5242880}
+              />
+              <FormControlLabel
+                labelPlacement="start"
+                className={classes.formLabel}
+                label="Audio"
+                control={
+                  <input
+                    className={classes.fileButton}
+                    type="file"
+                    name="file"
+                    onChange={(e) => onChangeAudio(e)}
+                  />
+                }
+              />
+              <div>
+                <InputLabel className={classes.formLabel} variant="outlined">
                 Share Your YouTube Video
-              </InputLabel>
-              <Input
-                variant="outlined"
-                className={classes.input}
-                onChange={(event) => onYoutubeUrl(event)}
-                type="text"
-                placeholder="Youtube Url"
-              />
-            </div>
-            <div>
-              <InputLabel className={classes.formLabel} variant="outlined">
+                </InputLabel>
+                <Input
+                  variant="outlined"
+                  className={classes.input}
+                  onChange={(event) => onYoutubeUrl(event)}
+                  type="text"
+                  placeholder="Youtube Url"
+                />
+              </div>
+              <div>
+                <InputLabel className={classes.formLabel} variant="outlined">
                 Add A Message
-              </InputLabel>
-              <Input
-                className={classes.input}
-                required={true}
-                placeholder="Message"
-                onChange={(event) => onEvent(event, setMessage, message)}
-                type="text"
-                multiline={true}
-              />
-              <Button className={classes.button} onClick={() => onSubmit()}>
+                </InputLabel>
+                <Input
+                  className={classes.input}
+                  required={true}
+                  placeholder="Message"
+                  onChange={(event) => onEvent(event, setMessage, message)}
+                  type="text"
+                  multiline={true}
+                />
+                <Button className={classes.button} onClick={() => onSubmit()}>
                 Post
-              </Button>
-            </div>
+                </Button>
+              </div>
+            </Grid>
           </Grid>
         </div>
       ) : (

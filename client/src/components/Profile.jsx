@@ -54,7 +54,13 @@ const Profile = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container className={main.body} justify="center" alignItems="flex-start" direction="row">
+      <Grid
+        container
+        className={main.body}
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+      >
         <Grid
           container
           justify="center"

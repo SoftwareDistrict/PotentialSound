@@ -537,7 +537,13 @@ const CreatePostMessage = ({ currentUser }) => {
               </div>
             </Grid>
           ) : null}
-          <Grid container className={main.body} justify="center" alignItems="flex-start" direction="row">
+          <Grid
+            container
+            className={main.body}
+            justify="center"
+            alignItems="flex-start"
+            direction="row"
+          >
             <Grid
               container
               justify="center"
@@ -569,7 +575,7 @@ const CreatePostMessage = ({ currentUser }) => {
               />
               <div>
                 <InputLabel className={classes.formLabel} variant="outlined">
-                Share Your YouTube Video
+                  Share Your YouTube Video
                 </InputLabel>
                 <Input
                   variant="outlined"
@@ -581,7 +587,7 @@ const CreatePostMessage = ({ currentUser }) => {
               </div>
               <div>
                 <InputLabel className={classes.formLabel} variant="outlined">
-                Add A Message
+                  Add A Message
                 </InputLabel>
                 <Input
                   className={classes.input}
@@ -592,7 +598,7 @@ const CreatePostMessage = ({ currentUser }) => {
                   multiline={true}
                 />
                 <Button className={classes.button} onClick={() => onSubmit()}>
-                Post
+                  Post
                 </Button>
               </div>
             </Grid>

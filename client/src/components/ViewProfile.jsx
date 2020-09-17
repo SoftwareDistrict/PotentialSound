@@ -35,7 +35,13 @@ const ViewProfile = ({ match, currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container className={main.body} justify="center" alignItems="flex-start" direction="row">
+      <Grid
+        container
+        className={main.body}
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+      >
         <Grid
           container
           justify="center"
@@ -75,7 +81,7 @@ const ViewProfile = ({ match, currentUser }) => {
                   <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
                   <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
                   <Typography className={classes.textStyle}>
-                  Description: {proInfo.description}
+                    Description: {proInfo.description}
                   </Typography>
                 </div>
               </div>

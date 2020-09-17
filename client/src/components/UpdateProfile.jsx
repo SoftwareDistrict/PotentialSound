@@ -180,7 +180,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
           direction="column"
           className={classes.loadingGrid}
         >
-          <img alt="PS" src="../styles/logo.png" className={loading.loadingImg} />
+          <img alt="PS" src="https://i.imgur.com/20PNAlU.png" className={loading.loadingImg} />
           <Typography variant="h2" className={loading.loadingText}>
             Updating Profile...
           </Typography>

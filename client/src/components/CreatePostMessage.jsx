@@ -612,7 +612,7 @@ const CreatePostMessage = ({ currentUser }) => {
           direction="column"
           className={classes.loadingGrid}
         >
-          <img alt="PS" src="../styles/logo.png" className={load.loadingImg} />
+          <img alt="PS" src="https://i.imgur.com/20PNAlU.png" className={load.loadingImg} />
           <Typography variant="h2" className={load.loadingText}>
             Posting...
           </Typography>

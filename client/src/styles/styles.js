@@ -245,14 +245,11 @@ const createMessageStyles = makeStyles({
     width: 250,
     height: 30,
     fontSize: 14,
-
     backgroundColor: "white",
   },
-
   chatText: {
     border: "4px solid black",
     fontSize: 14,
-
     backgroundColor: "white",
   },
   selectedUser: {
@@ -273,7 +270,7 @@ const chatEntryStyles = makeStyles({
     justifyContent: "center",
   },
   text: {
-    color: "#white",
+    color: white,
   },
   pDiv: {
     background: light,
@@ -288,10 +285,14 @@ const chatEntryStyles = makeStyles({
     height: "100px",
   },
 });
+
 const chatStyles = makeStyles({
   header: {
-    textAlign: "center",
     color: white,
+    margin: 10,
+  },
+  header2: {
+    color: dark,
   },
   button: {
     backgroundColor: light,
@@ -299,8 +300,11 @@ const chatStyles = makeStyles({
   },
   chatText: {
     border: "4px solid black",
+    width: "94%",
     fontSize: 14,
-
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 10,
     backgroundColor: "white",
   },
   messageContainer: {
@@ -308,21 +312,14 @@ const chatStyles = makeStyles({
     padding: "7px",
     width: "350px",
     overflow: "auto",
-    maxHeight: "468px",
-  },
-  callButton: {
-    backgroundColor: light,
-    color: dark,
-    position: "absolute",
-    bottom: "18px",
-    right: "5px",
+    maxHeight: "460px",
   },
 });
+
 const profileStyle = makeStyles({
   mainContainer: {
     backgroundColor: white,
     padding: 20,
-    minHeight: 650,
     marginTop: 30,
     maxWidth: "80%",
   },
@@ -463,6 +460,7 @@ const loadStyles = makeStyles({
   loadingImg: {
     height: 180,
     width: 160,
+    marginTop: 220,
   },
 });
 

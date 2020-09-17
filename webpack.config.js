@@ -2,7 +2,7 @@ require("dotenv").config();
 const path = require("path");
 
 const { PORT } = process.env;
-//-
+
 module.exports = {
   entry: path.join(__dirname, "/client/src/index.jsx"),
   output: {

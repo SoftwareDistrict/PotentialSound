@@ -4,8 +4,22 @@ import Appbar from "./Appbar.jsx";
 import ImageUploader from "react-images-upload";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { withStyles } from "@material-ui/core/styles";
+import { Grid, Button, FormControlLabel, Checkbox, InputLabel, Input, Typography } from "@material-ui/core";
+import { createPostStyles, light, white } from "../styles/styles.js";
+
+const BlueCheckbox = withStyles({
+  root: {
+    color: white,
+    "&$checked": {
+      color: light,
+    },
+  },
+  checked: {},
+})(props => <Checkbox color="default" {...props} />);
 
 const CreatePostMessage = ({ currentUser }) => {
+  const classes = createPostStyles();
   const [message, setMessage] = useState("");
   const [tags, setTags] = useState([]);
   const [redirect, setRedirect] = useState("");
@@ -15,6 +29,30 @@ const CreatePostMessage = ({ currentUser }) => {
   const [image, setImage] = useState([]);
   const [imageName, setImageName] = useState("");
   const [youTubeUrl, setYouTubeUrl] = useState("");
+  const [clicked, setClicked] = useState(false);
+  const [checked] = useState({
+    rap: false,
+    hiphop: false,
+    country: false,
+    jazz: false,
+    rock: false,
+    electronic: false,
+    instrumental: false,
+    vocalist: false,
+    beats: false,
+    rapper: false,
+    songwriter: false,
+    studio: false,
+    management: false,
+    band: false,
+    helpwanted: false,
+    collab: false,
+    sale: false,
+    instrument: false,
+    image: false,
+    audio: false,
+    video: false,
+  });
 
   const onChangeAudio = (event) => {
     if (!event.target.files.length) {
@@ -76,7 +114,8 @@ const CreatePostMessage = ({ currentUser }) => {
     return match && match[7].length == 11 ? match[7] : false;
   };
 
-  const onCheck = (event) => {
+  const onCheck = (name, event) => {
+    checked[name] = event.target.checked;
     let selectedTag = event.target.value;
     let foundTag = tags.find((tag) => tag === selectedTag);
     if (foundTag) {
@@ -198,245 +237,291 @@ const CreatePostMessage = ({ currentUser }) => {
     }
   };
 
+  const clickMe = () => {
+    setClicked(!clicked);
+  };
+
   return (
     <div>
       {loading === false ? (
         <div>
           <Appbar currentUser={currentUser} />
-          <h1>Make a Post</h1>
           <div>
-            {/* // Genres */}
-            <label htmlFor="tag1">Rap</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag1"
-              name="type"
-              value="#rap"
-              onChange={(event) => onCheck(event)}
-            />
-            <label htmlFor="tag2">{"R&B"}</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag2"
-              name="type"
-              value={"#r&b"}
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag3">Hip-Hop</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag3"
-              name="type"
-              value="#hip-hop"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag4">Country</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag4"
-              name="type"
-              value="#country"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag5">Jazz</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag5"
-              name="type"
-              value="#jazz"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag6">Rock</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag6"
-              name="type"
-              value="#rock"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag7">Metal</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag7"
-              name="type"
-              value="#metal"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag8">Electronic</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag8"
-              name="type"
-              value="#electronic"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag9">Instrumental</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag9"
-              name="type"
-              value="#instrumental"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            {/* // Talent Type */}
-            <label htmlFor="tag10">Vocalist</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag10"
-              name="type"
-              value="#vocalist"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag11">Beats</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag11"
-              name="type"
-              value="#beats"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag12">Rapper</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag12"
-              name="type"
-              value="#rapper"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag13">Song Writer</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag13"
-              name="type"
-              value="#song-writer"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag14">Studio</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag14"
-              name="type"
-              value="#studio"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag15">Management</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag15"
-              name="type"
-              value="#management"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag16">Band</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag16"
-              name="type"
-              value="#band"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            {/* // Other */}
-            <label htmlFor="tag17">Help Wanted</label>
-            <input
-              style={{ marginBottom: "10px" }}
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag17"
-              name="type"
-              value="#help-wanted"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag18">Collab</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag18"
-              name="type"
-              value="#collab"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag19">Sale</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag19"
-              name="type"
-              value="#sale"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag20">Instrument</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag20"
-              name="type"
-              value="#instrument"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag21">Image</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag21"
-              name="type"
-              value="#image"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag22">Audio</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag22"
-              name="type"
-              value="#audio"
-              onChange={(event) => onCheck(event)}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label htmlFor="tag23">Video</label>
-            <input
-              className="messageCheckbox"
-              type="checkbox"
-              id="tag23"
-              name="type"
-              value="#video"
-              onChange={(event) => onCheck(event)}
-            />
+            <Grid container justify="center" alignItems="flex-start" direction="row">
+              <button onClick={clickMe} className={classes.tagButton}>Add Some Tags</button>
+            </Grid>
+          </div>
+          {clicked ? (
+            <Grid container justify="center" alignItems="flex-start" direction="row" className={classes.tagGrid}>
+              <div>
+                <Grid container justify="flex-start" alignItems="flex-start" direction="column">
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Rap</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#rap"
+                        checked={checked.rap}
+                        onChange={(event) => onCheck("rap", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Hip-Hop</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#hip-hop"
+                        checked={checked.hiphop}
+                        onChange={(event) => onCheck("hiphop", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Country</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#country"
+                        checked={checked.country}
+                        onChange={(event) => onCheck("country", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Jazz</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#jazz"
+                        checked={checked.jazz}
+                        onChange={(event) => onCheck("jazz", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Rock</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#rock"
+                        checked={checked.rock}
+                        onChange={(event) => onCheck("rock", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Electronic</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#electronic"
+                        checked={checked.electronic}
+                        onChange={(event) => onCheck("electronic", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Instrumental</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#instrumental"
+                        checked={checked.instrumental}
+                        onChange={(event) => onCheck("instrumental", event)}
+                      />
+                    }
+                  />
+                </Grid>
+              </div>
+              <div>
+                <Grid container justify="flex-start" alignItems="flex-start" direction="column">
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Vocalist</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#vocalist"
+                        checked={checked.vocalist}
+                        onChange={(event) => onCheck("vocalist", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Beats</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#beats"
+                        checked={checked.beats}
+                        onChange={(event) => onCheck("beats", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Rapper</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#rapper"
+                        checked={checked.rapper}
+                        onChange={(event) => onCheck("rapper", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Song Writer</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#song-writer"
+                        checked={checked.songwriter}
+                        onChange={(event) => onCheck("songwriter", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Studio</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#studio"
+                        checked={checked.studio}
+                        onChange={(event) => onCheck("studio", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Management</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#management"
+                        checked={checked.management}
+                        onChange={(event) => onCheck("management", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Band</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#band"
+                        checked={checked.band}
+                        onChange={(event) => onCheck("band", event)}
+                      />
+                    }
+                  />
+                </Grid>
+              </div>
+              <div>
+                <Grid container justify="flex-start" alignItems="flex-start" direction="column">
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Help Wanted</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#help-wanted"
+                        checked={checked.helpwanted}
+                        onChange={(event) => onCheck("helpwanted", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Collab</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#collab"
+                        checked={checked.collab}
+                        onChange={(event) => onCheck("collab", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Sale</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#sale"
+                        checked={checked.sale}
+                        onChange={(event) => onCheck("sale", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Instrument</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#instrument"
+                        checked={checked.instrument}
+                        onChange={(event) => onCheck("instrument", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Image</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#image"
+                        checked={checked.image}
+                        onChange={(event) => onCheck("image", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Audio</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#audio"
+                        checked={checked.audio}
+                        onChange={(event) => onCheck("audio", event)}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    className={classes.label}
+                    label={<span className={classes.label}>Video</span>}
+                    control={
+                      <BlueCheckbox
+                        className={classes.checkBox}
+                        value="#video"
+                        checked={checked.video}
+                        onChange={(event) => onCheck("video", event)}
+                      />
+                    }
+                  />
+                </Grid>
+              </div>
+            </Grid>
+          ) : (
+            null
+          )}
+          <Grid container justify="center" alignItems="flex-start" direction="column" className={classes.grid}>
             <ImageUploader
               withIcon={false}
               withPreview={true}
@@ -446,40 +531,60 @@ const CreatePostMessage = ({ currentUser }) => {
               imgExtension={[".jpg", ".gif", ".png"]}
               maxFileSize={5242880}
             />
-            <label>
-              Audio:
-              <input type="file" name="file" onChange={(e) => onChangeAudio(e)} />
-            </label>
-            <label>
-              Share your YouTube video{" "}
-              <input
-                style={{ width: "250px", paddingLeft: "10px", fontSize: "16px", height: "30px" }}
+            <FormControlLabel
+              labelPlacement="start"
+              className={classes.formLabel}
+              label="Audio"
+              control={
+                <input className={classes.fileButton} type="file" name="file" onChange={(e) => onChangeAudio(e)} />
+              }
+            />
+            <div>
+              <InputLabel
+                className={classes.formLabel}
+                variant="outlined"
+              >Share Your YouTube Video</InputLabel>
+              <Input
+                variant="outlined"
+                className={classes.input}
                 onChange={(event) => onYoutubeUrl(event)}
                 type="text"
-                placeholder={"Youtube Url"}
+                placeholder="Youtube Url"
               />
-            </label>
-            <label>
-              Message{" "}
-              <input
-                style={{ width: "250px", paddingLeft: "10px", fontSize: "16px", height: "30px" }}
+            </div>
+            <div>
+              <InputLabel
+                className={classes.formLabel}
+                variant="outlined"
+              >Add A Message</InputLabel>
+              <Input
+                className={classes.input}
+                required={true}
+                placeholder="Message"
                 onChange={(event) => onEvent(event, setMessage, message)}
                 type="text"
-                placeholder={"Message"}
+                multiline={true}
               />
-            </label>
-            <button
-              style={{ marginTop: "10px", backgroundColor: "#eb8c34" }}
-              onClick={() => onSubmit()}
-            >
-              Submit
-            </button>
-          </div>
+              <Button
+                className={classes.button}
+                onClick={() => onSubmit()}
+              >
+              Post
+              </Button>
+            </div>
+          </Grid>
         </div>
       ) : (
-        <div>
-          <h1>Posting...</h1>
-        </div>
+        <Grid container justify="center" alignItems="center" direction="column" className={classes.loadingGrid}>
+          <img
+            alt="PS"
+            src="../styles/logo.png"
+            className={classes.loadingImg}
+          />
+          <Typography variant="h2" className={classes.loadingText}>
+            Posting...
+          </Typography>
+        </Grid>
       )}
       {!redirect.length ? null : <Redirect to={redirect} />}
     </div>

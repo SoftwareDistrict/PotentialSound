@@ -215,6 +215,91 @@ const profileStyle = makeStyles({
   },
 });
 
+const createPostStyles = makeStyles({
+  button: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: dark,
+    color: white,
+    fontSize: 14,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 2,
+    paddingBottom: 3,
+    marginBottom: 2,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+    align: "center",
+  },
+  tagButton: {
+    variant: "contained",
+    disableFocusRipple: true,
+    disableRipple: true,
+    background: light,
+    color: dark,
+    fontSize: 18,
+    padding: 10,
+    margin: 10,
+    border: "3px solid black",
+    borderRadius: 0,
+    borderColor: "black",
+  },
+  grid: {
+    paddingTop: 10,
+    background: light,
+    color: white,
+  },
+  tagGrid: {
+    paddingLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: white,
+  },
+  formLabel: {
+    fontSize: 16,
+    color: dark,
+  },
+  checkBox: {
+    color: white,
+    boderRadius: 0,
+    padding: 0,
+    border: "1px",
+  },
+  input: {
+    border: "3px solid black",
+    width: 250,
+    height: "100%",
+    fontSize: 14,
+    paddingLeft: 10,
+    marginBottom: 10,
+    marginTop: 30,
+    marginLeft: 5,
+    backgroundColor: white,
+  },
+  fileButton: {
+    marginLeft: 5,
+    background: dark,
+    color: white
+  },
+  loadingGrid: {
+    marginTop: 250,
+  },
+  loadingText: {
+    fontSize: 60,
+    color: white,
+  },
+  loadingImg: {
+    height: 180,
+    width: 160,
+  },
+});
+
 module.exports = {
   dark,
   light,
@@ -225,4 +310,5 @@ module.exports = {
   feedStyles,
   menuStyles,
   profileStyle,
+  createPostStyles,
 };

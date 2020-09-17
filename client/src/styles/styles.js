@@ -188,13 +188,17 @@ const menuStyles = makeStyles({
 });
 
 const profileStyle = makeStyles({
+  mainContainer: {
+    backgroundColor: white,
+    padding: 20,
+    minHeight: 650,
+    marginTop: 30,
+  },
   button: {
     variant: "contained",
     disableFocusRipple: true,
     disableRipple: true,
     background: light,
-    color: dark,
-    fontSize: 14,
     padding: 5,
     paddingLeft: 10,
     paddingRight: 10,
@@ -202,8 +206,12 @@ const profileStyle = makeStyles({
     border: "3px solid black",
     borderRadius: 0,
     borderColor: "black",
-    align: "center",
     fontWeight: "bold",
+    fontSize: 16,
+    color: dark,
+  },
+  link: {
+    textDecoration: "none",
   },
   avatar: {
     width: "100px",
@@ -214,14 +222,21 @@ const profileStyle = makeStyles({
   },
   container: {
     maxWidth: "sm",
-    background: light,
+    background: dark,
   },
   username: {
-    align: "center",
-    variant: "h1",
+    color: white,
   },
-  textStyling: {
-    marginBottom: "10px",
+  email: {
+    marginTop: 25,
+    marginBottom: 10,
+    color: white,
+    fontSize: 16,
+  },
+  textStyle: {
+    marginBottom: 10,
+    color: white,
+    fontSize: 16,
   },
 });
 
@@ -255,6 +270,7 @@ const createPostStyles = makeStyles({
     border: "3px solid black",
     borderRadius: 0,
     borderColor: "black",
+    fontWeight: "bold"
   },
   grid: {
     paddingTop: 10,
@@ -270,6 +286,7 @@ const createPostStyles = makeStyles({
     fontSize: 13,
     fontWeight: "bold",
     color: white,
+    paddingBottom: 15,
   },
   formLabel: {
     fontSize: 16,

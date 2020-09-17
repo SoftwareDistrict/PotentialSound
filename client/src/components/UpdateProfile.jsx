@@ -99,25 +99,25 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
             <input
               className={classes.input}
               value={newUser}
-              placeHolder={newUser}
+              placeholder={newUser}
               onChange={(e) => setNewUser(e.target.value)}
             ></input>
             <input
               className={classes.input}
               value={newCity}
-              placeHolder={newCity}
+              placeholder={newCity}
               onChange={(e) => setNewCity(e.target.value)}
             ></input>
             <input
               className={classes.input}
               value={newCell}
-              placeHolder={newCell}
+              placeholder={newCell}
               onChange={(e) => setNewCell(e.target.value)}
             ></input>
             <input
               className={classes.input}
               value={newDescription}
-              placeHolder={newDescription}
+              placeholder={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
             ></input>
             <Typography variant="h6" className={classes.header}>
@@ -138,21 +138,21 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
             <input
               className={classes.input}
               value={youTube}
-              placeholder="Youtube"
+              placeholder="YouTube"
               onChange={(e) => setYouTube(e.target.value)}
             ></input>
             <input
               className={classes.input}
               value={soundCloud}
-              placeholder="soundCloud"
+              placeholder="SoundCloud"
               onChange={(e) => setSoundCloud(e.target.value)}
             ></input>
-            <Typography variant="h7" className={classes.header}>
+            <Typography variant="h6" className={classes.header}>
               Update Your Instagram Handle (must be public)
             </Typography>
             <input
               className={classes.input}
-              value={instaHandle}
+              value={instaHandle || ""}
               placeholder="Instagram Handle"
               onChange={(e) => {
                 setInstaHandle(e.target.value);

@@ -11,7 +11,7 @@ const Appbar = ({ currentUser }) => {
     <AppBar position="static" className={classes.app}>
       <Grid container justify="space-between" alignItems="flex-end" direction="row">
         <Menu />
-        <Typography variant="h6" className={classes.header}>
+        <Typography variant="h5" className={classes.header}>
           PotentialSound
         </Typography>
         <Avatar alt={currentUser.username} src={currentUser.propic} className={classes.avatar} />

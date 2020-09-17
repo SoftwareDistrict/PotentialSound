@@ -34,71 +34,73 @@ const ViewProfile = ({ match, currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Container className={classes.container}>
-          <Typography variant="h3" align="center">
-            {username}
-          </Typography>
-          <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
-          <div>
+      <Grid container justify="center" alignItems="flex-start" direction="row" className={classes.mainContainer}>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Container className={classes.container}>
+            <Typography variant="h3" align="center">
+              {username}
+            </Typography>
+            <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
             <div>
-              {proInfo.youTube ? (
-                <a href={proInfo.youTube}>
-                  <FontAwesomeIcon color="red" icon={faYoutube} />
-                </a>
-              ) : null}
-              {proInfo.instagram ? (
-                <a href={proInfo.instagram}>
-                  <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-                </a>
-              ) : null}
-              {proInfo.soundCloud ? (
-                <a href={proInfo.soundCloud}>
-                  <FontAwesomeIcon color="red" icon={faSoundcloud} />
-                </a>
-              ) : null}
-              {proInfo.facebook ? (
-                <a href={proInfo.facebook}>
-                  <FontAwesomeIcon color="blue" icon={faFacebook} />
-                </a>
-              ) : null}
-              <Typography className={classes.textStyle} marginTop="25px">
+              <div>
+                {proInfo.youTube ? (
+                  <a href={proInfo.youTube}>
+                    <FontAwesomeIcon color="red" icon={faYoutube} />
+                  </a>
+                ) : null}
+                {proInfo.instagram ? (
+                  <a href={proInfo.instagram}>
+                    <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+                  </a>
+                ) : null}
+                {proInfo.soundCloud ? (
+                  <a href={proInfo.soundCloud}>
+                    <FontAwesomeIcon color="red" icon={faSoundcloud} />
+                  </a>
+                ) : null}
+                {proInfo.facebook ? (
+                  <a href={proInfo.facebook}>
+                    <FontAwesomeIcon color="blue" icon={faFacebook} />
+                  </a>
+                ) : null}
+                <Typography className={classes.email}>
                 Email: {proInfo.email}
-              </Typography>
-              <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
-              <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
-              <Typography className={classes.textStyle}>
+                </Typography>
+                <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
+                <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
+                <Typography className={classes.textStyle}>
                 Description: {proInfo.description}
-              </Typography>
+                </Typography>
+              </div>
             </div>
+          </Container>
+          <div>
+            {instaPic[0] ? (
+              <div className={classes.root}>
+                <GridList cols={2}>
+                  <GridListTile>
+                    <img src={instaPic[0].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={instaPic[1].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={instaPic[2].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={instaPic[3].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={instaPic[4].imageUrl} />
+                  </GridListTile>
+                  <GridListTile>
+                    <img src={instaPic[5].imageUrl} />
+                  </GridListTile>
+                </GridList>
+              </div>
+            ) : null}
           </div>
-        </Container>
-        <div>
-          {instaPic[0] ? (
-            <div className={classes.root}>
-              <GridList cols={2}>
-                <GridListTile>
-                  <img src={instaPic[0].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={instaPic[1].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={instaPic[2].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={instaPic[3].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={instaPic[4].imageUrl} />
-                </GridListTile>
-                <GridListTile>
-                  <img src={instaPic[5].imageUrl} />
-                </GridListTile>
-              </GridList>
-            </div>
-          ) : null}
-        </div>
+        </Grid>
       </Grid>
     </div>
   );

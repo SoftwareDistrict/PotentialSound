@@ -6,11 +6,11 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
-import { Typography } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { TextField } from "@material-ui/core";
 import { chatStyles } from "../styles/styles.js";
+import { IconButton, Grid, TextField, Typography } from "@material-ui/core";
+import SendIcon from '@material-ui/icons/Send';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 
 let socket = io("localhost:8080");
 
@@ -214,17 +214,17 @@ const Chat = ({ match, currentUser, history }) => {
             />
 
             <Grid justify="space-between" container alignItems="flex-end" direction="row">
-              <Button
+              <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
+                <VideoCallIcon />
+              </IconButton>
+              <IconButton
                 className={chatClasses.button}
                 onClick={() => {
                   sendMsg();
                 }}
               >
-                Submit
-              </Button>
-              <Button className={chatClasses.button} onClick={() => createVCRoom()}>
-                Video Call
-              </Button>
+                <SendIcon />
+              </IconButton>
             </Grid>
           </div>
         </Grid>

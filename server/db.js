@@ -40,6 +40,7 @@ const Messages = sequelize.define("Messages", {
   message: Sequelize.TEXT,
   id_user: Sequelize.INTEGER,
   id_chat: Sequelize.INTEGER,
+  meeting: Sequelize.TEXT,
 });
 
 const Chats = sequelize.define("Chats", {

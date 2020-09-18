@@ -40,6 +40,12 @@ const Chat = ({ match, currentUser, history }) => {
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
+    socket.emit("sending", {
+      id_chat: idChat,
+      id_user: id_user,
+      message: `${currentUser.username} has invited you to join in`,
+      meeting: `https://069bfdcb45d1.ngrok.io${history.location.pathname}`,
+    });
   };
 
   const onChangePhoto = (e) => {
@@ -158,6 +164,7 @@ const Chat = ({ match, currentUser, history }) => {
                   img={msg.url_image}
                   audio={msg.url_audio}
                   audioName={msg.name_audio}
+                  meeting={msg.meeting}
                 />
               );
             }

@@ -2,9 +2,23 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { dark, light, white } from "../styles/styles.js";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
+
+  const messageStyles = makeStyles({
+    messageDiv: {
+      border: "2px solid black",
+      borderColor: light,
+      backgroundColor: dark,
+      color: white,
+      width: "337px",
+      marginTop: "5px",
+    },
+  });
+  const messageClasses = messageStyles();
 
   useEffect(() => {
     axios
@@ -14,16 +28,7 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
   }, []);
 
   return (
-    <div
-      id="profile"
-      style={{
-        border: "2px solid black",
-        backgroundColor: "#3F3D3D",
-        color: "orange",
-        width: "337px",
-        marginTop: "5px",
-      }}
-    >
+    <div className={messageClasses.messageDiv}>
       <div
         style={{
           width: "100px",

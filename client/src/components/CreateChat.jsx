@@ -4,6 +4,13 @@ import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
+import { Grid } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import { light, white } from "../styles/styles.js";
+import Box from "@material-ui/core/Box";
+import { Typography } from "@material-ui/core";
+import { createMessageStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
   const inputBox = useRef();
@@ -15,6 +22,7 @@ const CreateChat = ({ currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
+  const classes = createMessageStyles();
 
   const getAllUsers = async () => {
     await axios
@@ -49,7 +57,7 @@ const CreateChat = ({ currentUser }) => {
     .flat();
 
   const suggestionSelected = (value) => {
-    setText(value);
+    setText("");
     setMembers([...members, value]);
     setSuggestions([]);
   };
@@ -59,13 +67,16 @@ const CreateChat = ({ currentUser }) => {
       return null;
     }
     return (
-      <ul>
-        {suggestions.map((user, i) => (
-          <li onClick={() => suggestionSelected(user)} key={i}>
-            {user}
-          </li>
-        ))}
-      </ul>
+      <Box flex-grow justifyContent="center" className={classes.suggestions}>
+        <ul className={classes.list}>
+          <li> Select User: </li>
+          {suggestions.map((user, i) => (
+            <li className={classes.li} onClick={() => suggestionSelected(user)} key={i}>
+              {user}
+            </li>
+          ))}
+        </ul>
+      </Box>
     );
   };
 
@@ -121,7 +132,11 @@ const CreateChat = ({ currentUser }) => {
     let sortedSuggestions = [];
     if (value.length > 0) {
       const regex = new RegExp(`${value}`, "i");
-      sortedSuggestions = users.sort().filter((v) => regex.test(v));
+      sortedSuggestions = users
+        .sort()
+        .filter((v) => regex.test(v))
+        .filter((e) => !members.includes(e));
+      // sortedSuggestions = sortedSuggestions.filter((e) => !members.includes(e));
     }
     setSuggestions(sortedSuggestions);
     setText(value);
@@ -136,54 +151,83 @@ const CreateChat = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <div>
-        <label>
-          <h3>Send a message</h3>
-          <label>
-            {" "}
-            To:
-            <div
+
+      <Grid
+        className={classes.parentGrid}
+        container
+        spacing={3}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid spacing={1} container item xs={12}>
+          <Grid align="center" className={classes.header} item xs={12}>
+            <Typography className={classes.header} align="center" variant="h4">
+              Create a chat!
+            </Typography>
+          </Grid>
+          <Grid align="center" alignItems="center" justify="center" container item xs={12}>
+            <Box
+              width={3 / 4}
               style={{
-                width: "100%",
-                border: "1px solid grey",
-                boxShadow: "2px 2px 1px rgba(50, 50, 50, 0.75)",
+                color: white,
+                backgroundColor: light,
+                border: "4px solid black",
               }}
             >
+              {members.length > 0 ? (
+                <h3>Sending message to </h3>
+              ) : (
+                <h3>Who are you trying to send a message to?</h3>
+              )}
               {members.map((mem, i) => (
-                <div key={i}>
-                  <div id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
-                    {mem}
-                  </div>
-                </div>
+                <span className={classes.selectedUser} key={i}>
+                  <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
+                    {(i === 0 && members.length === 1) || members.length - 1 === i
+                      ? mem
+                      : `${mem}, `}
+                  </span>
+                </span>
               ))}
-              <input
-                style={{ width: "250px" }}
-                value={text}
-                onChange={onTextChange}
-                placeholder="Username"
-              />
-              {renderSuggestions()}
-            </div>
-          </label>
-          <input
-            onChange={(event) => setMessage(event.target.value)}
-            ref={inputBox}
-            style={{
-              width: "250px",
-              height: "60px",
-              fontSize: "16px",
-              marginLeft: "10px",
-              paddingLeft: "10px",
-            }}
-            type="text"
-            placeholder="Message"
-          />
-          <br />
-          <button onClick={onSubmit} style={{ marginLeft: "5px", backgroundColor: "#eb8c34" }}>
+            </Box>
+          </Grid>
+
+          <Grid align="center" justify="center" container item xs={12}>
+            <TextField
+              align="center"
+              rows={2}
+              rowsMax={4}
+              value={text}
+              onChange={onTextChange}
+              placeholder="Username"
+              className={classes.chatInput}
+              borderRadius="50%"
+            />
+            {renderSuggestions()}
+          </Grid>
+          <Grid align="center" justify="center" container item xs={12}>
+            <TextField
+              align="center"
+              className={classes.chatText}
+              multiline
+              rows={14}
+              onChange={(event) => setMessage(event.target.value)}
+              ref={inputBox}
+              type="text"
+              placeholder="Message"
+              rowsMax={15}
+              size="medium"
+              fullWidth
+              borderRadius="50%"
+            />
+          </Grid>
+        </Grid>
+        <Grid container justify="center" spacing={3} align="center" item xs={12}>
+          <Button onClick={onSubmit} className={classes.button}>
             Submit
-          </button>
-        </label>
-      </div>
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

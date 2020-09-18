@@ -19,7 +19,7 @@ const Login = () => {
         Welcome To PotentialSound
         <img
           alt="PS"
-          src="../styles/logo.png"
+          src="https://i.imgur.com/20PNAlU.png"
           style={
             matches
               ? { height: "90px", width: "90px", marginLeft: "10px" }

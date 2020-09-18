@@ -372,7 +372,7 @@ const Tags = sequelize.define("Tags", {
 //         ]);
 //       })
 //       .catch((err) => console.warn("Tagssssssss", err));
-//   })
+//   });
 Users.sync()
   .then(() => {
     Posts.sync();

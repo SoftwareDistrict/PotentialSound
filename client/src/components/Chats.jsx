@@ -4,6 +4,7 @@ import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
+import { white } from "../styles/styles.js";
 
 const Chats = ({ currentUser }) => {
   const [participants, setParticipants] = useState([]);
@@ -53,7 +54,7 @@ const Chats = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <h1>Current Messages (Inbox) </h1>
+      <h1 style={{ color: white, textAlign: "center" }}>Current Messages</h1>
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />
       ))}

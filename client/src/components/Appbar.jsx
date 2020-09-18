@@ -8,7 +8,7 @@ const Appbar = ({ currentUser }) => {
   const classes = feedStyles();
 
   return (
-    <AppBar position="static" className={classes.app}>
+    <AppBar position="sticky" className={classes.app}>
       <Grid container justify="space-between" alignItems="flex-end" direction="row">
         <Menu />
         <Typography variant="h5" className={classes.header}>

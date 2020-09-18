@@ -49,32 +49,48 @@ const ViewProfile = ({ match, currentUser }) => {
             <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
             <div>
               <div>
-                {proInfo.youTube ? (
-                  <a href={proInfo.youTube}>
-                    <FontAwesomeIcon color="red" icon={faYoutube} />
-                  </a>
-                ) : null}
-                {proInfo.instagram ? (
-                  <a href={proInfo.instagram}>
-                    <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-                  </a>
-                ) : null}
-                {proInfo.soundCloud ? (
-                  <a href={proInfo.soundCloud}>
-                    <FontAwesomeIcon color="red" icon={faSoundcloud} />
-                  </a>
-                ) : null}
-                {proInfo.facebook ? (
-                  <a href={proInfo.facebook}>
-                    <FontAwesomeIcon color="blue" icon={faFacebook} />
-                  </a>
-                ) : null}
-                <Typography className={classes.email}>Email: {proInfo.email}</Typography>
-                <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
-                <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
-                <Typography className={classes.textStyle}>
-                  Description: {proInfo.description}
-                </Typography>
+                <Grid container justify="center" alignItems="flex-start" direction="column">
+                  <Grid container justify="space-evenly" alignItems="center" direction="row">
+                    <div style={{ fontSize: "24px", paddingLeft: 20, marginTop: "20px" }}>
+                      {proInfo.youTube ? (
+
+                        <a href={proInfo.youTube} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="red" icon={faYoutube} size="lg" />
+                        </a>
+
+                      ) : null}
+                      {proInfo.instagram ? (
+
+                        <a href={proInfo.instagram} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="lg" />
+                        </a>
+
+                      ) : null}
+                      {proInfo.soundCloud ? (
+
+                        <a href={proInfo.soundCloud} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="red" icon={faSoundcloud} size="lg" />
+                        </a>
+
+                      ) : null}
+                      {proInfo.facebook ? (
+
+                        <a href={proInfo.facebook} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="blue" icon={faFacebook} size="lg" />
+                        </a>
+
+                      ) : null}
+                    </div>
+                  </Grid>
+                  <Grid container justify="center" alignItems="flex-start" direction="column">
+                    <Typography className={classes.email}>Email: {proInfo.email}</Typography>
+                    <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
+                    <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
+                    <Typography className={classes.textStyle}>
+                      Description: {proInfo.description}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </div>
             </div>
           </Container>

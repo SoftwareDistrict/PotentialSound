@@ -68,23 +68,23 @@ const Profile = ({ currentUser }) => {
               </Typography>
               <Avatar alt={username} src={propic} className={classes.avatar} />
               {youTube ? (
-                <a href={youTube}>
-                  <FontAwesomeIcon color="red" icon={faYoutube} />
+                <a href={youTube} >
+                  <FontAwesomeIcon color="red" icon={faYoutube} size="lg" />
                 </a>
               ) : null}
               {instagram ? (
                 <a href={instagram}>
-                  <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
+                  <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="lg" />
                 </a>
               ) : null}
               {soundCloud ? (
                 <a href={soundCloud}>
-                  <FontAwesomeIcon color="orange" icon={faSoundcloud} />
+                  <FontAwesomeIcon color="orange" icon={faSoundcloud} size="lg" />
                 </a>
               ) : null}
               {facebook ? (
                 <a href={facebook}>
-                  <FontAwesomeIcon color="blue" icon={faFacebook} />
+                  <FontAwesomeIcon color="blue" icon={faFacebook} size="lg" />
                 </a>
               ) : null}
               <Typography className={classes.email}>Email: {email}</Typography>

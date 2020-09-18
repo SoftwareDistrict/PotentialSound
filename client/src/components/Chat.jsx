@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
+import { chatStyles, body } from "../styles/styles.js";
+import { IconButton, Grid, TextField, Typography } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
+
 let socket = io("localhost:8080");
 
 const Chat = ({ match, currentUser, history }) => {
@@ -18,6 +23,9 @@ const Chat = ({ match, currentUser, history }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
+
+  const chatClasses = chatStyles();
+  const main = body();
 
   socket.on("receive", (data) => {
     let { array, id_chat } = data.data;
@@ -129,9 +137,16 @@ const Chat = ({ match, currentUser, history }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <div style={{ width: "355px", overflow: "hidden" }}>
-        <h1 style={{ textAlign: "center" }}>Chat</h1>
-        <div style={{ backgroundColor: "orange", padding: "7px", width: "350px" }}>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <Typography className={chatClasses.header} align="center" variant="h3">
+          Chat
+        </Typography>
+        <Grid
+          container
+          className={chatClasses.messageContainer}
+          justify="center"
+          alignItems="center"
+        >
           {allMsgs.map((msg) => {
             if (match.params.id == msg.id_chat) {
               return (
@@ -147,59 +162,78 @@ const Chat = ({ match, currentUser, history }) => {
               );
             }
           })}
-        </div>
-        <div>
-          <div>
-            <h2>Send message</h2>
-            {load === false ? null : <p>Sending...</p>}
-            <label>
-              Image:{" "}
-              <input
-                type="file"
-                ref={imageRef}
-                name="image"
-                accept=".png, .jpg, .gif"
-                onChange={(e) => onChangePhoto(e)}
-              ></input>
-            </label>
-            <br />
-            <label>
-              Audio:{" "}
-              <input
-                type="file"
-                ref={audioRef}
-                name="audio"
-                accept="audio/mpeg"
-                onChange={(e) => onChangeAudio(e)}
-              ></input>
-            </label>
-            <input
-              id="msg"
-              style={{
-                width: "200px",
-                height: "40px",
-                fontSize: "16px",
-                marginLeft: "10px",
-                paddingLeft: "10px",
-              }}
-              value={userMessage}
-              placeholder="Message"
-              onChange={(event) => {
-                setMessage(event.target.value);
-              }}
-              type="text"
-            />
-            <button
-              onClick={() => {
-                sendMsg();
-              }}
-            >
-              Submit
-            </button>
-            <button onClick={() => createVCRoom()}>Call</button>
-          </div>
-        </div>
-      </div>
+        </Grid>
+        <Grid
+          container
+          className={main.body}
+          justify="center"
+          alignItems="flex-start"
+          direction="row"
+        >
+          <Grid container justify="center" alignItems="flex-start">
+            <div className={chatClasses.messageContainer}>
+              <Typography className={chatClasses.header2} align="center" variant="h5">
+                Send message
+              </Typography>
+              {load === false ? null : (
+                <Typography variant="h6" className={chatClasses.header2}>
+                  Sending...
+                </Typography>
+              )}
+              <label className={chatClasses.header2}>
+                Image:{" "}
+                <input
+                  className={chatClasses.button}
+                  type="file"
+                  ref={imageRef}
+                  name="image"
+                  accept=".png, .jpg, .gif"
+                  onChange={(e) => onChangePhoto(e)}
+                ></input>
+              </label>
+              <br />
+              <label className={chatClasses.header2}>
+                Audio:{" "}
+                <input
+                  className={chatClasses.button}
+                  type="file"
+                  ref={audioRef}
+                  name="audio"
+                  accept="audio/mpeg"
+                  onChange={(e) => onChangeAudio(e)}
+                ></input>
+              </label>
+              <TextField
+                id="msg"
+                value={userMessage}
+                placeholder="Message"
+                onChange={(event) => setMessage(event.target.value)}
+                type="text"
+                align="center"
+                className={chatClasses.chatText}
+                multiline={true}
+                rowsMax={15}
+                size="medium"
+                fullWidth
+              />
+
+              <Grid justify="space-between" container alignItems="flex-end" direction="row">
+                <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
+                  <VideoCallIcon />
+                </IconButton>
+                <IconButton
+                  className={chatClasses.button}
+                  onClick={() => {
+                    sendMsg();
+                  }}
+                >
+                  <SendIcon />
+                </IconButton>
+              </Grid>
+            </div>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 };

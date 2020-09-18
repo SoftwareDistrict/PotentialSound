@@ -112,7 +112,7 @@ const VCRoom = ({ match, currentUser, history }) => {
 
   const disconnect = () => {
     userVideo.current.pause();
-    userVideo.current.srcObject.getTracks()[0].stop();
+    userVideo.current.srcObject.getTracks().forEach((track) => track.stop());
     socketRef.current.emit("disconnect");
     history.push("/chats");
   };

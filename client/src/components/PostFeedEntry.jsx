@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { postStyles } from "../styles/styles.js";
 
 const PostFeedEntry = ({ post, users, tags }) => {
@@ -39,12 +39,12 @@ const PostFeedEntry = ({ post, users, tags }) => {
             </Link>
             {post.audioName ? (
               <a href={post.audioUrl} className={classes.anchor}>
-                HEAR AUDIO
+                <Typography variant="h6">HEAR AUDIO</Typography>
               </a>
             ) : null}
             {post.imageName ? (
               <a href={post.imageUrl} className={classes.anchor}>
-                SEE IMAGE
+                <Typography variant="h6">SEE IMAGE</Typography>
               </a>
             ) : null}
             <div className={classes.tags}>{postTags.join(" ")}</div>
@@ -52,7 +52,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
         </div>
       </Grid>
       {post.youTubeUrl ? (
-        <div style={{ padding: "5px" }}>
+        <div align="center">
           <iframe
             src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
             allowFullScreen

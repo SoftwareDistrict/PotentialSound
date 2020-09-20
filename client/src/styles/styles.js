@@ -65,6 +65,9 @@ const searchStyles = makeStyles({
     marginTop: 10,
     backgroundColor: white,
   },
+  suggestions: {
+    color: white,
+  },
   button: {
     borderRadius: 0,
     border: "2px solid black",
@@ -88,9 +91,6 @@ const searchStyles = makeStyles({
     fontSize: 25,
     fontWeight: "bold",
     color: dark,
-  },
-  suggestions: {
-    color: white,
   },
 });
 
@@ -425,7 +425,8 @@ const profileStyle = makeStyles({
   },
   link: {
     textDecoration: "none",
-    marginRight: "20px",
+    marginRight: "10px",
+    marginLeft: "10px",
   },
   avatar: {
     width: "100px",
@@ -575,9 +576,29 @@ const profileFormStyles = makeStyles({
   header: {
     color: white,
   },
+  header2: {
+    color: white,
+    marginTop: 30,
+  },
+  formLabel: {
+    fontSize: 16,
+    color: dark,
+  },
+  formLabelImage: {
+    fontSize: 16,
+    color: dark,
+    marginTop: 20,
+    marginBottom: 22
+  },
   input: {
-    marginBottom: 10,
-    display: "block",
+    border: "3px solid black",
+    width: 250,
+    height: "100%",
+    fontSize: 14,
+    paddingLeft: 10,
+    marginTop: 22,
+    color: "black",
+    backgroundColor: white,
   },
   button: {
     variant: "contained",

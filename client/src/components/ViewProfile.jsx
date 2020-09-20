@@ -56,30 +56,28 @@ const ViewProfile = ({ match, currentUser }) => {
                 <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
               </Grid>
               <Grid container justify="center" alignItems="flex-start" direction="column">
-                <Grid container justify="center" alignItems="center" direction="row">
-                  <div className={classes.iconContainer}>
-                    {proInfo.youTube ? (
-                      <a href={proInfo.youTube} className={classes.link}>
-                        <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
-                      </a>
-                    ) : null}
-                    {proInfo.instagram ? (
-                      <a href={proInfo.instagram} className={classes.link}>
-                        <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
-                      </a>
-                    ) : null}
-                    {proInfo.soundCloud ? (
-                      <a href={proInfo.soundCloud} className={classes.link}>
-                        <FontAwesomeIcon color="red" icon={faSoundcloud} size="sm" />
-                      </a>
-                    ) : null}
-                    {proInfo.facebook ? (
-                      <a href={proInfo.facebook} className={classes.link}>
-                        <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
-                      </a>
-                    ) : null}
-                  </div>
-                </Grid>
+                <div className={classes.iconContainer}>
+                  {proInfo.youTube ? (
+                    <a href={proInfo.youTube} className={classes.link}>
+                      <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
+                    </a>
+                  ) : null}
+                  {proInfo.instagram ? (
+                    <a href={proInfo.instagram} className={classes.link}>
+                      <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
+                    </a>
+                  ) : null}
+                  {proInfo.soundCloud ? (
+                    <a href={proInfo.soundCloud} className={classes.link}>
+                      <FontAwesomeIcon color="red" icon={faSoundcloud} size="sm" />
+                    </a>
+                  ) : null}
+                  {proInfo.facebook ? (
+                    <a href={proInfo.facebook} className={classes.link}>
+                      <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
+                    </a>
+                  ) : null}
+                </div>
                 <Grid container justify="center" alignItems="flex-start" direction="column">
                   <Typography className={classes.email}>Email: {proInfo.email}</Typography>
                   <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>

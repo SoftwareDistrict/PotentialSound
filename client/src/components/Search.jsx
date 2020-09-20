@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { IconButton, Grid, TextField } from "@material-ui/core";
+import { IconButton, Grid, TextField, List, ListItemText, Typography } from "@material-ui/core";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import { searchStyles, white } from "../styles/styles.js";
+import { searchStyles } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const Search = ({ tags, setSearchFeed, setSearched }) => {
@@ -43,14 +43,14 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
       return null;
     }
     return (
-      <ul>
-        Users:
+      <List component="ul" disablePadding={true}>
+        <Typography variant="h6">Users:</Typography>
         {suggestedUsers.map((user, i) => (
-          <li key={i} onClick={() => suggestionSelected(user)}>
+          <ListItemText key={i} onClick={() => suggestionSelected(user)}>
             {user}
-          </li>
+          </ListItemText>
         ))}
-      </ul>
+      </List>
     );
   };
 
@@ -59,14 +59,14 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
       return null;
     }
     return (
-      <ul>
-        Tags:
+      <List component="ul" disablePadding={true}>
+        <Typography variant="h6">Tags:</Typography>
         {suggestedTags.map((tag, i) => (
-          <li key={i} onClick={() => suggestionSelected(tag)}>
+          <ListItemText key={i} onClick={() => suggestionSelected(tag)}>
             {tag}
-          </li>
+          </ListItemText>
         ))}
-      </ul>
+      </List>
     );
   };
 
@@ -148,17 +148,17 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
       </Grid>
       <Grid
         container
-        justify="flex-start"
+        justify="space-evenly"
         alignItems="flex-start"
         direction="row"
-        style={{ color: white }}
+        className={classes.suggestions}
       >
         <div>
           <Grid container justify="flex-start" alignItems="flex-start" direction="column">
             {renderSuggestedUsers()}
           </Grid>
         </div>
-        <div style={{ marginLeft: 20 }}>
+        <div>
           <Grid container justify="flex-start" alignItems="flex-start" direction="column">
             {renderSuggestedTags()}
           </Grid>

@@ -55,37 +55,35 @@ const Profile = ({ currentUser }) => {
                 <Avatar alt={username} src={propic} className={classes.avatar} />
               </Grid>
               <Grid container justify="center" alignItems="flex-start" direction="column">
-                <Grid container justify="center" alignItems="center" direction="row">
-                  <div className={classes.iconContainer}>
-                    {youTube ? (
-                      <a href={youTube} className={classes.link}>
-                        <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
-                      </a>
-                    ) : null}
-                    {instagram ? (
-                      <a href={instagram} className={classes.link}>
-                        <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
-                      </a>
-                    ) : null}
-                    {soundCloud ? (
-                      <a href={soundCloud} className={classes.link}>
-                        <FontAwesomeIcon color="orange" icon={faSoundcloud} size="sm" />
-                      </a>
-                    ) : null}
-                    {facebook ? (
-                      <a href={facebook} className={classes.link}>
-                        <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
-                      </a>
-                    ) : null}
-                  </div>
-                  <Grid container justify="center" alignItems="flex-start" direction="column">
-                    <Typography className={classes.email}>Email: {email}</Typography>
-                    <Typography className={classes.textStyle}>Cell: {cell}</Typography>
-                    <Typography className={classes.textStyle}>Location: {city}</Typography>
-                    <Typography className={classes.textStyle}>
+                <div className={classes.iconContainer}>
+                  {youTube ? (
+                    <a href={youTube} className={classes.link}>
+                      <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
+                    </a>
+                  ) : null}
+                  {instagram ? (
+                    <a href={instagram} className={classes.link}>
+                      <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
+                    </a>
+                  ) : null}
+                  {soundCloud ? (
+                    <a href={soundCloud} className={classes.link}>
+                      <FontAwesomeIcon color="orange" icon={faSoundcloud} size="sm" />
+                    </a>
+                  ) : null}
+                  {facebook ? (
+                    <a href={facebook} className={classes.link}>
+                      <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
+                    </a>
+                  ) : null}
+                </div>
+                <Grid container justify="center" alignItems="flex-start" direction="column">
+                  <Typography className={classes.email}>Email: {email}</Typography>
+                  <Typography className={classes.textStyle}>Cell: {cell}</Typography>
+                  <Typography className={classes.textStyle}>Location: {city}</Typography>
+                  <Typography className={classes.textStyle}>
                       Description: {description}
-                    </Typography>
-                  </Grid>
+                  </Typography>
                 </Grid>
               </Grid>
             </Container>

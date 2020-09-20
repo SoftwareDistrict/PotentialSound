@@ -21,12 +21,10 @@ const ViewProfile = ({ match, currentUser }) => {
     getUser();
   }, []);
   const [proInfo, setInfo] = useState({});
-  const [instaPic, setInstaPic] = useState([]);
   const getUser = async () => {
     const data = await axios.get(`/viewOtherProfiles/${username}`);
     if (data.data[0]) {
       setInfo(data.data[0]);
-      setInstaPic(data.data[1]);
     } else {
       setInfo(data.data);
     }
@@ -87,7 +85,7 @@ const ViewProfile = ({ match, currentUser }) => {
                   <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
                   <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
                   <Typography className={classes.textStyle}>
-                      Description: {proInfo.description}
+                    Description: {proInfo.description}
                   </Typography>
                 </Grid>
               </Grid>

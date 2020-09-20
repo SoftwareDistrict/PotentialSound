@@ -7,7 +7,6 @@ import { feedStyles } from "../styles/styles.js";
 const Appbar = ({ currentUser }) => {
   const classes = feedStyles();
 
-
   window.addEventListener("click", function (e) {
     const nav = document.getElementById("mySidenav");
     const menu = document.getElementById("menu");

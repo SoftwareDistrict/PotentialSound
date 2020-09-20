@@ -453,7 +453,7 @@ const profileStyle = makeStyles({
   iconContainer: {
     fontSize: 35,
     marginTop: 20,
-  }
+  },
 });
 
 const createPostStyles = makeStyles({

@@ -2,13 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
-import {
-  Avatar,
-  Grid,
-  Button,
-  Container,
-  Typography,
-} from "@material-ui/core";
+import { Avatar, Grid, Button, Container, Typography } from "@material-ui/core";
 import { profileStyle, body } from "../styles/styles.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

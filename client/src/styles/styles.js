@@ -395,10 +395,6 @@ const profileStyle = makeStyles({
     marginTop: 30,
     maxWidth: "80%",
   },
-  gridList: {
-    width: 160,
-    height: 160,
-  },
   button: {
     variant: "contained",
     disableFocusRipple: true,
@@ -429,12 +425,12 @@ const profileStyle = makeStyles({
   },
   link: {
     textDecoration: "none",
+    marginRight: "20px",
   },
   avatar: {
     width: "100px",
     height: "100px",
     position: "relative",
-    marginLeft: "34%",
     variant: "circle",
   },
   container: {
@@ -454,6 +450,10 @@ const profileStyle = makeStyles({
     color: white,
     fontSize: 16,
   },
+  iconContainer: {
+    fontSize: 35,
+    marginTop: 20,
+  }
 });
 
 const createPostStyles = makeStyles({

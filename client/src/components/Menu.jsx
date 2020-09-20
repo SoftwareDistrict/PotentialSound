@@ -17,7 +17,7 @@ const Menu = () => {
       menu.style.display = "block";
     }
   };
-  
+
   window.addEventListener("click", function (e) {
     const nav = document.getElementById("mySidenav");
     const menu = document.getElementById("menu");

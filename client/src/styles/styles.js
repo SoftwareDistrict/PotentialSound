@@ -588,7 +588,7 @@ const profileFormStyles = makeStyles({
     fontSize: 16,
     color: dark,
     marginTop: 20,
-    marginBottom: 22
+    marginBottom: 22,
   },
   input: {
     border: "3px solid black",

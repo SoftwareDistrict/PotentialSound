@@ -81,9 +81,7 @@ const Profile = ({ currentUser }) => {
                   <Typography className={classes.email}>Email: {email}</Typography>
                   <Typography className={classes.textStyle}>Cell: {cell}</Typography>
                   <Typography className={classes.textStyle}>Location: {city}</Typography>
-                  <Typography className={classes.textStyle}>
-                      Description: {description}
-                  </Typography>
+                  <Typography className={classes.textStyle}>Description: {description}</Typography>
                 </Grid>
               </Grid>
             </Container>

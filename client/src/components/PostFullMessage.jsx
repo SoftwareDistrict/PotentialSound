@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { Button, Typography, Grid, Avatar } from "@material-ui/core";
+import { IconButton, Typography, Grid, Avatar } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
 import { fullPostStyles } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
@@ -163,7 +164,7 @@ const PostFullMessage = ({ match, currentUser }) => {
           Send {poster.username} A Message
         </Typography>
         {sent ? (
-          <Typography variant="h7" className={classes.header}>
+          <Typography variant="h6" className={classes.header}>
             ...Sent
           </Typography>
         ) : (
@@ -178,9 +179,9 @@ const PostFullMessage = ({ match, currentUser }) => {
               type="text"
               placeholder="Message"
             />
-            <Button onClick={onSubmit} className={classes.button}>
-              Submit
-            </Button>
+            <IconButton onClick={onSubmit} className={classes.button}>
+              <SendIcon />
+            </IconButton>
           </label>
         </div>
       </div>

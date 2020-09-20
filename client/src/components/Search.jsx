@@ -10,7 +10,7 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
   const val = useRef();
   const [users, setUsers] = useState([]);
   const [usernames, setUsernames] = useState([]);
-  const [tagNames, setTagNames] = useState([]);
+  const [tagNames] = useState([]);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [suggestedTags, setSuggestedTags] = useState([]);
   const [queries, setQueries] = useState([]);
@@ -24,7 +24,11 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
         setUsernames(data.map((user) => user.username));
       })
       .catch((err) => console.warn("could not get users: ", err));
-    setTagNames(tags.map((tag) => tag.tag));
+    tags.forEach((tag) => {
+      if(!tagNames.includes(tag.tag)) {
+        tagNames.push(tag.tag);
+      }
+    });
   }, [tags]);
 
   const suggestionSelected = (value) => {
@@ -149,8 +153,16 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
         direction="row"
         style={{ color: white }}
       >
-        {renderSuggestedUsers()}
-        {renderSuggestedTags()}
+        <div>
+          <Grid container justify="flex-start" alignItems="flex-start" direction="column">
+            {renderSuggestedUsers()}
+          </Grid>
+        </div>
+        <div style={{ marginLeft: 20 }}>
+          <Grid container justify="flex-start" alignItems="flex-start" direction="column">
+            {renderSuggestedTags()}
+          </Grid>
+        </div>
       </Grid>
     </div>
   );

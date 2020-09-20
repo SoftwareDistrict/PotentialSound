@@ -19,7 +19,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
   const [youTube, setYouTube] = useState(currentUser.youTube);
   const [instagram, setInstagram] = useState(currentUser.instagram);
   const [faceBook, setFaceBook] = useState(currentUser.facebook);
-  const [instaHandle, setInstaHandle] = useState(currentUser.instaHandle);
   const loading = loadStyles();
   const classes = profileFormStyles();
 
@@ -43,7 +42,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
-        instaHandle: instaHandle,
       });
     } else {
       return axios.post("/profileUpdate", {
@@ -56,7 +54,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
-        instaHandle: instaHandle,
       });
     }
   };
@@ -147,24 +144,13 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
               placeholder="SoundCloud"
               onChange={(e) => setSoundCloud(e.target.value)}
             ></input>
-            <Typography variant="h6" className={classes.header}>
-              Update Your Instagram Handle (must be public)
-            </Typography>
-            <input
-              className={classes.input}
-              value={instaHandle}
-              placeholder="Instagram Handle"
-              onChange={(e) => {
-                setInstaHandle(e.target.value);
-              }}
-            ></input>
             <ImageUploader
               withIcon={false}
               withPreview={true}
               singleImage={true}
               buttonText="Select Image"
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png"]}
+              imgExtension={[".jpg", ".gif", ".png", "jpeg"]}
               maxFileSize={5242880}
             />
             <Button className={classes.button} onClick={() => updateProfile()}>

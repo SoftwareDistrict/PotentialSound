@@ -258,9 +258,9 @@ const CreatePostMessage = ({ currentUser }) => {
           <Appbar currentUser={currentUser} />
           <div>
             <Grid container justify="center" alignItems="flex-start" direction="row">
-              <button onClick={clickMe} className={classes.tagButton}>
+              <Button onClick={clickMe} className={classes.tagButton}>
                 Add Some Tags
-              </button>
+              </Button>
             </Grid>
           </div>
           {clicked ? (
@@ -557,7 +557,7 @@ const CreatePostMessage = ({ currentUser }) => {
                 singleImage={true}
                 buttonText="Choose Image"
                 onChange={(img) => onChangeImage(img)}
-                imgExtension={[".jpg", ".gif", ".png"]}
+                imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
                 maxFileSize={5242880}
               />
               <FormControlLabel

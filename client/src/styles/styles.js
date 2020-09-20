@@ -13,7 +13,7 @@ const loginStyles = makeStyles({
     paddingBottom: 50,
   },
   header: {
-    color: light,
+    color: white,
     margin: 15,
     textAlign: "center",
     fontWeight: "bold",
@@ -30,6 +30,18 @@ const loginStyles = makeStyles({
     color: "white",
     fontSize: 22,
     marginTop: 60,
+    "&:hover": {
+      backgroundColor: "#037bfc",
+      "@media (hover: none)": {
+        backgroundColor: "#037bfc",
+        "&:active": {
+          backgroundColor: "#037bfc",
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: "#037bfc",
+    },
   },
   icon: {
     height: 50,
@@ -59,6 +71,18 @@ const searchStyles = makeStyles({
     background: light,
     padding: 4,
     marginBottom: 10,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   icon: {
     fontSize: 25,
@@ -141,6 +165,18 @@ const feedStyles = makeStyles({
     borderColor: "black",
     align: "center",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   backButton: {
     variant: "contained",
@@ -158,6 +194,18 @@ const feedStyles = makeStyles({
     borderColor: "black",
     align: "center",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   link: {
     textDecoration: "none",
@@ -231,6 +279,18 @@ const createMessageStyles = makeStyles({
   button: {
     backgroundColor: light,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   suggestions: {
     backgroundColor: white,
@@ -297,6 +357,18 @@ const chatStyles = makeStyles({
   button: {
     backgroundColor: light,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   chatText: {
     border: "4px solid black",
@@ -343,6 +415,18 @@ const profileStyle = makeStyles({
     fontWeight: "bold",
     fontSize: 16,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   link: {
     textDecoration: "none",
@@ -390,6 +474,18 @@ const createPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     align: "center",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   tagButton: {
     variant: "contained",
@@ -404,6 +500,18 @@ const createPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   grid: {
     paddingTop: 10,
@@ -488,6 +596,18 @@ const profileFormStyles = makeStyles({
     border: "3px solid black",
     borderRadius: 0,
     borderColor: "black",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   container: {
     background: light,
@@ -544,6 +664,18 @@ const fullPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     marginBottom: 3,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        }
+      }
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   header: {
     color: white,

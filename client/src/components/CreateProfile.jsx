@@ -18,7 +18,6 @@ const CreateProfile = ({ getCurrentUser }) => {
   const [youTube, setYouTube] = useState("");
   const [instagram, setInstagram] = useState("");
   const [faceBook, setFaceBook] = useState("");
-  const [instaHandle, setInstaHandle] = useState("");
   const classes = profileFormStyles();
   const loading = loadStyles();
 
@@ -41,7 +40,6 @@ const CreateProfile = ({ getCurrentUser }) => {
       facebook: faceBook,
       instagram: instagram,
       soundCloud: soundCloud,
-      instaHandle: instaHandle,
     });
   };
 
@@ -86,7 +84,7 @@ const CreateProfile = ({ getCurrentUser }) => {
             ></input>
             <input
               className={classes.input}
-              placeholder="Enter Descrition"
+              placeholder="Enter Description"
               onChange={(e) => setDescription(e.target.value)}
             ></input>
             <div>
@@ -113,14 +111,6 @@ const CreateProfile = ({ getCurrentUser }) => {
                 placeholder="SoundCloud"
                 onChange={(e) => setSoundCloud(e.target.value)}
               ></input>
-              <Typography variant="h7" className={classes.header}>
-                Add Instagram Handle To Display Your Profile Uploads (must be public)
-              </Typography>
-              <input
-                className={classes.input}
-                placeholder="Instagram Handle"
-                onChange={(e) => setInstaHandle(e.target.value)}
-              ></input>
             </div>
             <ImageUploader
               withIcon={false}
@@ -128,7 +118,7 @@ const CreateProfile = ({ getCurrentUser }) => {
               singleImage={true}
               buttonText="Choose images"
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png"]}
+              imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
               maxFileSize={5242880}
             />
             <Button className={classes.button} onClick={() => createProfile()}>

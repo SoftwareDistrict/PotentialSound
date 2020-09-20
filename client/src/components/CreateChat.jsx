@@ -136,7 +136,6 @@ const CreateChat = ({ currentUser }) => {
         .sort()
         .filter((v) => regex.test(v))
         .filter((e) => !members.includes(e));
-      // sortedSuggestions = sortedSuggestions.filter((e) => !members.includes(e));
     }
     setSuggestions(sortedSuggestions);
     setText(value);
@@ -160,13 +159,13 @@ const CreateChat = ({ currentUser }) => {
         justify="center"
         alignItems="center"
       >
-        <Grid spacing={1} container item xs={12}>
+        <Grid spacing={1} container>
           <Grid align="center" className={classes.header} item xs={12}>
             <Typography className={classes.header} align="center" variant="h4">
               Create a chat!
             </Typography>
           </Grid>
-          <Grid align="center" alignItems="center" justify="center" container item xs={12}>
+          <Grid align="center" alignItems="center" justify="center" container>
             <Box
               width={3 / 4}
               style={{
@@ -192,7 +191,7 @@ const CreateChat = ({ currentUser }) => {
             </Box>
           </Grid>
 
-          <Grid align="center" justify="center" container item xs={12}>
+          <Grid align="center" justify="center" container>
             <TextField
               align="center"
               rows={2}
@@ -201,28 +200,26 @@ const CreateChat = ({ currentUser }) => {
               onChange={onTextChange}
               placeholder="Username"
               className={classes.chatInput}
-              borderRadius="50%"
             />
             {renderSuggestions()}
           </Grid>
-          <Grid align="center" justify="center" container item xs={12}>
+          <Grid align="center" justify="center" container>
             <TextField
               align="center"
               className={classes.chatText}
               multiline
-              rows={14}
+              rows={8}
               onChange={(event) => setMessage(event.target.value)}
               ref={inputBox}
               type="text"
               placeholder="Message"
-              rowsMax={15}
+              rowsMax={8}
               size="medium"
               fullWidth
-              borderRadius="50%"
             />
           </Grid>
         </Grid>
-        <Grid container justify="center" spacing={3} align="center" item xs={12}>
+        <Grid container justify="center" spacing={3} align="center">
           <Button onClick={onSubmit} className={classes.button}>
             Submit
           </Button>

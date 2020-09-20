@@ -223,9 +223,7 @@ const Chat = ({ match, currentUser, history }) => {
                 </IconButton>
                 <IconButton
                   className={chatClasses.button}
-                  onClick={() => {
-                    sendMsg();
-                  }}
+                  onClick={() => sendMsg()}
                 >
                   <SendIcon />
                 </IconButton>

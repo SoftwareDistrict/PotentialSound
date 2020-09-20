@@ -21,11 +21,7 @@ const Login = () => {
       <img
         alt="PS"
         src="https://i.imgur.com/20PNAlU.png"
-        style={
-          matches
-            ? { height: "100px", width: "100px" }
-            : { height: "190px", width: "190px" }
-        }
+        style={matches ? { height: "100px", width: "100px" } : { height: "190px", width: "190px" }}
       />
       <Typography variant={matches ? "h4" : "h1"} className={classes.header}>
         PotentialSound

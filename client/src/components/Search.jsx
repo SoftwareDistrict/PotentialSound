@@ -25,7 +25,7 @@ const Search = ({ tags, setSearchFeed, setSearched }) => {
       })
       .catch((err) => console.warn("could not get users: ", err));
     tags.forEach((tag) => {
-      if(!tagNames.includes(tag.tag)) {
+      if (!tagNames.includes(tag.tag)) {
         tagNames.push(tag.tag);
       }
     });

@@ -36,8 +36,8 @@ const loginStyles = makeStyles({
         backgroundColor: "#037bfc",
         "&:active": {
           backgroundColor: "#037bfc",
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: "#037bfc",
@@ -77,8 +77,8 @@ const searchStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -171,8 +171,8 @@ const feedStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -200,8 +200,8 @@ const feedStyles = makeStyles({
         backgroundColor: dark,
         "&:active": {
           backgroundColor: dark,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: dark,
@@ -285,8 +285,8 @@ const createMessageStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -363,8 +363,8 @@ const chatStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -421,8 +421,8 @@ const profileStyle = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -480,8 +480,8 @@ const createPostStyles = makeStyles({
         backgroundColor: dark,
         "&:active": {
           backgroundColor: dark,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: dark,
@@ -506,8 +506,8 @@ const createPostStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,
@@ -602,8 +602,8 @@ const profileFormStyles = makeStyles({
         backgroundColor: dark,
         "&:active": {
           backgroundColor: dark,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: dark,
@@ -670,8 +670,8 @@ const fullPostStyles = makeStyles({
         backgroundColor: light,
         "&:active": {
           backgroundColor: light,
-        }
-      }
+        },
+      },
     },
     "&:active": {
       backgroundColor: light,

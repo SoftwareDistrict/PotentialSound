@@ -221,10 +221,7 @@ const Chat = ({ match, currentUser, history }) => {
                 <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
                   <VideoCallIcon />
                 </IconButton>
-                <IconButton
-                  className={chatClasses.button}
-                  onClick={() => sendMsg()}
-                >
+                <IconButton className={chatClasses.button} onClick={() => sendMsg()}>
                   <SendIcon />
                 </IconButton>
               </Grid>

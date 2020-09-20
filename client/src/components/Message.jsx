@@ -5,7 +5,7 @@ import axios from "axios";
 import { dark, light, white } from "../styles/styles.js";
 import { makeStyles } from "@material-ui/core/styles";
 
-const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
+const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
 
   const messageStyles = makeStyles({
@@ -60,6 +60,13 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName }) => {
         }}
       >
         {message}
+        {meeting ? (
+          <div>
+            <form action={meeting}>
+              <input type="submit" value="Join"></input>
+            </form>
+          </div>
+        ) : null}
         {img ? (
           <div>
             <img src={img} />
@@ -95,6 +102,7 @@ Message.propTypes = {
   img: PropTypes.string,
   audio: PropTypes.string,
   audioName: PropTypes.string,
+  meeting: PropTypes.string,
 };
 
 export default Message;

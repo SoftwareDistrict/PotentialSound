@@ -395,10 +395,9 @@ const profileStyle = makeStyles({
     marginTop: 30,
     maxWidth: "80%",
   },
-  img: {
-    height: 30,
-    width: 30,
-    margin: 5,
+  gridList: {
+    width: 160,
+    height: 160,
   },
   button: {
     variant: "contained",

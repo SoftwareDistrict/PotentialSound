@@ -75,30 +75,42 @@ const Profile = ({ currentUser }) => {
                   {username}
                 </Typography>
                 <Avatar alt={username} src={propic} className={classes.avatar} />
-                {youTube ? (
-                  <a href={youTube}>
-                    <FontAwesomeIcon color="red" icon={faYoutube} />
-                  </a>
-                ) : null}
-                {instagram ? (
-                  <a href={instagram}>
-                    <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-                  </a>
-                ) : null}
-                {soundCloud ? (
-                  <a href={soundCloud}>
-                    <FontAwesomeIcon color="orange" icon={faSoundcloud} />
-                  </a>
-                ) : null}
-                {facebook ? (
-                  <a href={facebook}>
-                    <FontAwesomeIcon color="blue" icon={faFacebook} />
-                  </a>
-                ) : null}
-                <Typography className={classes.email}>Email: {email}</Typography>
-                <Typography className={classes.textStyle}>Cell: {cell}</Typography>
-                <Typography className={classes.textStyle}>Location: {city}</Typography>
-                <Typography className={classes.textStyle}>Description: {description}</Typography>
+                <div>
+                  <Grid container justify="center" alignItems="flex-start" direction="column">
+                    <Grid container justify="center" alignItems="center" direction="row">
+                      <div style={{ fontSize: 35, marginTop: "20px" }}>
+                        {youTube ? (
+                          <a href={youTube} style={{ marginRight: "20px" }}>
+                            <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
+                          </a>
+                        ) : null}
+                        {instagram ? (
+                          <a href={instagram} style={{ marginRight: "20px" }}>
+                            <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
+                          </a>
+                        ) : null}
+                        {soundCloud ? (
+                          <a href={soundCloud} style={{ marginRight: "20px" }}>
+                            <FontAwesomeIcon color="orange" icon={faSoundcloud} size="sm" />
+                          </a>
+                        ) : null}
+                        {facebook ? (
+                          <a href={facebook} style={{ marginRight: "20px" }}>
+                            <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
+                          </a>
+                        ) : null}
+                      </div>
+                      <Grid container justify="center" alignItems="flex-start" direction="column">
+                        <Typography className={classes.email}>Email: {email}</Typography>
+                        <Typography className={classes.textStyle}>Cell: {cell}</Typography>
+                        <Typography className={classes.textStyle}>Location: {city}</Typography>
+                        <Typography className={classes.textStyle}>
+                          Description: {description}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </div>
               </div>
             </Container>
             <Link to="/updateProfile" className={classes.link}>
@@ -106,25 +118,25 @@ const Profile = ({ currentUser }) => {
             </Link>
             <div>
               {InstaPosts[0] ? (
-                <div className={classes.root}>
+                <div>
                   <GridList cols={2}>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[0].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[0].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[1].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[1].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[2].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[2].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[3].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[3].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[4].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[4].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={InstaPosts[5].imageUrl} />
+                    <GridListTile>
+                      <img src={InstaPosts[5].imageUrl} className={classes.gridList} />
                     </GridListTile>
                   </GridList>
                 </div>

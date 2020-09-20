@@ -51,62 +51,68 @@ const ViewProfile = ({ match, currentUser }) => {
         >
           <Grid container direction="row" justify="center" alignItems="center">
             <Container className={classes.container}>
-              <Typography variant="h3" align="center">
+              <Typography variant="h3" align="center" className={classes.username}>
                 {username}
               </Typography>
               <Avatar alt={username} src={proInfo.propic} className={classes.avatar} />
               <div>
-                <div>
-                  {proInfo.youTube ? (
-                    <a href={proInfo.youTube}>
-                      <FontAwesomeIcon color="red" icon={faYoutube} />
-                    </a>
-                  ) : null}
-                  {proInfo.instagram ? (
-                    <a href={proInfo.instagram}>
-                      <FontAwesomeIcon color="#e4405f" icon={faInstagram} />
-                    </a>
-                  ) : null}
-                  {proInfo.soundCloud ? (
-                    <a href={proInfo.soundCloud}>
-                      <FontAwesomeIcon color="red" icon={faSoundcloud} />
-                    </a>
-                  ) : null}
-                  {proInfo.facebook ? (
-                    <a href={proInfo.facebook}>
-                      <FontAwesomeIcon color="blue" icon={faFacebook} />
-                    </a>
-                  ) : null}
-                  <Typography className={classes.email}>Email: {proInfo.email}</Typography>
-                  <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
-                  <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
-                  <Typography className={classes.textStyle}>
-                    Description: {proInfo.description}
-                  </Typography>
-                </div>
+                <Grid container justify="center" alignItems="flex-start" direction="column">
+                  <Grid container justify="center" alignItems="center" direction="row">
+                    <div style={{ fontSize: 35, marginTop: "20px" }}>
+                      {proInfo.youTube ? (
+                        <a href={proInfo.youTube} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="red" icon={faYoutube} size="sm" />
+                        </a>
+                      ) : null}
+                      {proInfo.instagram ? (
+                        <a href={proInfo.instagram} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="#e4405f" icon={faInstagram} size="sm" />
+                        </a>
+                      ) : null}
+                      {proInfo.soundCloud ? (
+                        <a href={proInfo.soundCloud} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="red" icon={faSoundcloud} size="sm" />
+                        </a>
+                      ) : null}
+                      {proInfo.facebook ? (
+                        <a href={proInfo.facebook} style={{ marginRight: "20px" }}>
+                          <FontAwesomeIcon color="blue" icon={faFacebook} size="sm" />
+                        </a>
+                      ) : null}
+                    </div>
+                  </Grid>
+                  <Grid container justify="center" alignItems="flex-start" direction="column">
+                    <Typography className={classes.email}>Email: {proInfo.email}</Typography>
+                    <Typography className={classes.textStyle}>Cell: {proInfo.cell}</Typography>
+                    <Typography className={classes.textStyle}>Location: {proInfo.city}</Typography>
+                    <Typography className={classes.textStyle}>
+                      Description: {proInfo.description}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </div>
             </Container>
             <div>
               {instaPic[0] ? (
-                <div className={classes.root}>
+                <div>
                   <GridList cols={2}>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[0].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[0].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[1].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[1].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[2].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[2].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[3].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[3].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[4].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[4].imageUrl} className={classes.gridList} />
                     </GridListTile>
-                    <GridListTile className={classes.img}>
-                      <img src={instaPic[5].imageUrl} />
+                    <GridListTile>
+                      <img src={instaPic[5].imageUrl} className={classes.gridList} />
                     </GridListTile>
                   </GridList>
                 </div>

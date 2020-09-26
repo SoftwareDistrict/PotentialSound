@@ -375,6 +375,12 @@ const chatStyles = makeStyles({
   },
   header2: {
     color: dark,
+    fontSize: 16,
+    marginBottom: 25,
+  },
+  header3: {
+    color: dark,
+    fontSize: 20,
   },
   button: {
     backgroundColor: light,
@@ -392,6 +398,10 @@ const chatStyles = makeStyles({
       backgroundColor: light,
     },
   },
+  fileButton: {
+    padding: 5,
+    backgroundColor: light,
+  },
   chatText: {
     border: "4px solid black",
     width: "94%",
@@ -406,7 +416,7 @@ const chatStyles = makeStyles({
     padding: "7px",
     width: "350px",
     overflow: "auto",
-    maxHeight: "460px",
+    maxHeight: "320px",
   },
 });
 

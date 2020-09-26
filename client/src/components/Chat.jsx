@@ -3,11 +3,11 @@ import { withRouter } from "react-router-dom";
 import Message from "./Message.jsx";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
-import Axios from "axios";
+import axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
 import { chatStyles, body } from "../styles/styles.js";
-import { IconButton, Grid, TextField, Typography } from "@material-ui/core";
+import { IconButton, Grid, TextField, Typography, InputLabel, Input } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 
@@ -23,6 +23,7 @@ const Chat = ({ match, currentUser, history }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
+  // const [participants, setParticipants] = useState([]);
 
   const chatClasses = chatStyles();
   const main = body();
@@ -37,6 +38,9 @@ const Chat = ({ match, currentUser, history }) => {
   useEffect(() => {
     socket.emit("getMessages", idChat);
   }, [allMsgs]);
+
+  // useEffect(() => getPics(), []);
+
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
@@ -47,6 +51,14 @@ const Chat = ({ match, currentUser, history }) => {
       meeting: `https://069bfdcb45d1.ngrok.io${history.location.pathname}`,
     });
   };
+
+  // const getPics = () => {
+  //   axios.get(`participants/${idChat}`)
+  //     .then((participants) => {
+  //       console.log("partssss: ", participants);
+  //     })
+  //     .catch((err) => console.warn("could not get partisipants", err));
+  // };
 
   const onChangePhoto = (e) => {
     if (!e.target.files[0]) {
@@ -67,13 +79,13 @@ const Chat = ({ match, currentUser, history }) => {
   const uploadImg = () => {
     const data = new FormData();
     data.append("image", photo[0], photo[0].name);
-    return Axios.post("/api/uploadImage", data);
+    return axios.post("/api/uploadImage", data);
   };
 
   const uploadAudio = () => {
     const data = new FormData();
     data.append("audio", audio[0], audio[0].name);
-    return Axios.post("/api/uploadAudio", data);
+    return axios.post("/api/uploadAudio", data);
   };
 
   const sendMsg = () => {
@@ -112,7 +124,8 @@ const Chat = ({ match, currentUser, history }) => {
         .catch((err) => console.warn(err));
     } else if (photo.length && audio.length) {
       setLoading(true);
-      Axios.all([uploadImg(), uploadAudio()])
+      axios
+        .all([uploadImg(), uploadAudio()])
         .then((res) => {
           socket.emit("sending", {
             id_chat: idChat,
@@ -179,37 +192,36 @@ const Chat = ({ match, currentUser, history }) => {
         >
           <Grid container justify="center" alignItems="flex-start">
             <div className={chatClasses.messageContainer}>
-              <Typography className={chatClasses.header2} align="center" variant="h5">
+              <Typography className={chatClasses.header3} align="center" variant="h5">
                 Send message
               </Typography>
+              <InputLabel className={chatClasses.header2} variant="outlined">
+                  Add Image: 
+              </InputLabel>
+              <Input
+                className={chatClasses.fileButton}
+                type="file"
+                ref={imageRef}
+                name="image"
+                accept=".png, .jpg, .gif"
+                onChange={(e) => onChangePhoto(e)}
+              />
+              <InputLabel className={chatClasses.header2} variant="outlined">
+                  Add Audio: 
+              </InputLabel>
+              <Input
+                className={chatClasses.fileButton}
+                type="file"
+                ref={audioRef}
+                name="audio"
+                accept="audio/mpeg"
+                onChange={(e) => onChangeAudio(e)}
+              />
               {load === false ? null : (
-                <Typography variant="h6" className={chatClasses.header2}>
+                <Typography variant="h5" className={chatClasses.header3}>
                   Sending...
                 </Typography>
               )}
-              <label className={chatClasses.header2}>
-                Image:{" "}
-                <input
-                  className={chatClasses.button}
-                  type="file"
-                  ref={imageRef}
-                  name="image"
-                  accept=".png, .jpg, .gif"
-                  onChange={(e) => onChangePhoto(e)}
-                ></input>
-              </label>
-              <br />
-              <label className={chatClasses.header2}>
-                Audio:{" "}
-                <input
-                  className={chatClasses.button}
-                  type="file"
-                  ref={audioRef}
-                  name="audio"
-                  accept="audio/mpeg"
-                  onChange={(e) => onChangeAudio(e)}
-                ></input>
-              </label>
               <TextField
                 id="msg"
                 value={userMessage}

@@ -173,15 +173,13 @@ const PostFullMessage = ({ match, currentUser }) => {
         </Grid>
         <div>
           <Typography variant="h6" className={classes.header}>
-          Send {poster.username} A Message
+            Send {poster.username} A Message
           </Typography>
           {sent ? (
             <Typography variant="h6" className={classes.header}>
-            ...Sent
+              ...Sent
             </Typography>
-          ) : (
-            null
-          )}
+          ) : null}
           <div>
             <Input
               id="input-message"

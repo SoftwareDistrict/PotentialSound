@@ -356,7 +356,7 @@ const chatEntryStyles = makeStyles({
   },
   link: {
     textDecoration: "none",
-    color: dark
+    color: dark,
   },
 });
 
@@ -365,7 +365,7 @@ const chats = makeStyles({
     color: white,
     marginTop: 10,
     marginBottom: 10,
-  }
+  },
 });
 
 const chatStyles = makeStyles({
@@ -684,7 +684,7 @@ const fullPostStyles = makeStyles({
     color: white,
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
   },
   input: {
     border: "3px solid black",

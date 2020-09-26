@@ -65,7 +65,13 @@ const CreateChat = ({ currentUser }) => {
       return null;
     }
     return (
-      <Grid container direction="column" justify="center" alignItems="center" className={classes.suggestions}>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.suggestions}
+      >
         <List component="ul" disablePadding={true} className={classes.list}>
           <Typography variant="h6"> Select User: </Typography>
           {suggestions.map((user, i) => (
@@ -158,7 +164,13 @@ const CreateChat = ({ currentUser }) => {
         <Typography className={classes.header} align="center" variant="h4">
           Create a chat!
         </Typography>
-        <Grid direction="column" alignItems="center" justify="center" container className={classes.box}>
+        <Grid
+          direction="column"
+          alignItems="center"
+          justify="center"
+          container
+          className={classes.box}
+        >
           {members.length > 0 ? (
             <Typography variant="h6">Sending message to</Typography>
           ) : (
@@ -167,9 +179,7 @@ const CreateChat = ({ currentUser }) => {
           {members.map((mem, i) => (
             <span className={classes.selectedUser} key={i}>
               <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
-                {(i === 0 && members.length === 1) || members.length - 1 === i
-                  ? mem
-                  : `${mem}, `}
+                {(i === 0 && members.length === 1) || members.length - 1 === i ? mem : `${mem}, `}
               </span>
             </span>
           ))}

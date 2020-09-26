@@ -220,7 +220,7 @@ const menuStyles = makeStyles({
   icon: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "white",
+    color: white,
   },
   button: {
     borderRadius: 0,
@@ -229,14 +229,14 @@ const menuStyles = makeStyles({
   iconClose: {
     fontSize: 50,
     fontWeight: "bold",
-    color: "white",
+    color: white,
   },
   style: {
     position: "fixed",
     padding: 10,
     left: 0,
     width: 180,
-    height: "60%",
+    height: "70%",
     backgroundColor: light,
     border: "4px solid black",
     zIndex: 20,
@@ -305,16 +305,25 @@ const createMessageStyles = makeStyles({
     width: 250,
     height: 30,
     fontSize: 14,
-    backgroundColor: "white",
+    backgroundColor: white,
+    paddingLeft: 10,
   },
   chatText: {
     border: "4px solid black",
     fontSize: 14,
-    backgroundColor: "white",
+    backgroundColor: white,
+    width: "90%",
+    paddingLeft: 10,
   },
   selectedUser: {
     color: dark,
     fontWeight: "bold",
+  },
+  box: {
+    color: white,
+    backgroundColor: light,
+    border: "4px solid black",
+    width: "75%",
   },
 });
 
@@ -331,19 +340,32 @@ const chatEntryStyles = makeStyles({
   },
   text: {
     color: white,
+    width: "350px",
+    textAlign: "center",
+    fontSize: "20px",
+    marginBottom: 5,
   },
   pDiv: {
     background: light,
     boxShadow: "0px 0px 0px 4px #8D99AE",
     border: "5px solid",
-    borderColor: "white",
-    margin: "0 auto",
-    borderTopLeftRadius: "5px",
-    bordeBottomRightRadius: "5px",
+    borderColor: white,
     position: "relative",
     alignItems: "center",
     height: "100px",
   },
+  link: {
+    textDecoration: "none",
+    color: dark
+  },
+});
+
+const chats = makeStyles({
+  header: {
+    color: white,
+    marginTop: 10,
+    marginBottom: 10,
+  }
 });
 
 const chatStyles = makeStyles({
@@ -377,7 +399,7 @@ const chatStyles = makeStyles({
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 10,
-    backgroundColor: "white",
+    backgroundColor: white,
   },
   messageContainer: {
     backgroundColor: white,
@@ -641,11 +663,13 @@ const fullPostStyles = makeStyles({
   mainContainer: {
     background: white,
     marginTop: 30,
+    padding: 10,
   },
   container: {
     background: dark,
     border: "3px solid black",
     color: white,
+    paddingBottom: 10,
   },
   avatar: {
     width: 130,
@@ -660,15 +684,16 @@ const fullPostStyles = makeStyles({
     color: white,
   },
   link: {
-    color: "#037bfc",
-    fontSize: 18,
+    textDecoration: "none"
   },
   input: {
-    width: 230,
-    height: 30,
+    border: "3px solid black",
+    width: 250,
+    height: "100%",
     fontSize: 16,
-    marginLeft: 10,
     paddingLeft: 10,
+    color: "black",
+    backgroundColor: white,
   },
   button: {
     variant: "contained",
@@ -701,6 +726,10 @@ const fullPostStyles = makeStyles({
     color: white,
     marginTop: 20,
   },
+  header2: {
+    color: "#037bfc",
+    marginTop: 20,
+  },
 });
 
 const body = makeStyles({
@@ -722,6 +751,7 @@ module.exports = {
   menuStyles,
   createMessageStyles,
   chatEntryStyles,
+  chats,
   chatStyles,
   profileStyle,
   createPostStyles,

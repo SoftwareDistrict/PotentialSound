@@ -23,7 +23,6 @@ const Chat = ({ match, currentUser, history }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
-  // const [participants, setParticipants] = useState([]);
 
   const classes = chatStyles();
   const main = body();
@@ -39,8 +38,6 @@ const Chat = ({ match, currentUser, history }) => {
     socket.emit("getMessages", idChat);
   }, [allMsgs]);
 
-  // useEffect(() => getPics(), []);
-
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
@@ -51,14 +48,6 @@ const Chat = ({ match, currentUser, history }) => {
       meeting: `https://069bfdcb45d1.ngrok.io${history.location.pathname}`,
     });
   };
-
-  // const getPics = () => {
-  //   axios.get(`participants/${idChat}`)
-  //     .then((participants) => {
-  //       console.log("partssss: ", participants);
-  //     })
-  //     .catch((err) => console.warn("could not get partisipants", err));
-  // };
 
   const onChangePhoto = (e) => {
     if (!e.target.files[0]) {
@@ -156,47 +145,49 @@ const Chat = ({ match, currentUser, history }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Typography className={classes.header} align="center" variant="h3">
-          Chat
-        </Typography>
-        <div className={classes.messageContainer}>
-          {allMsgs.map((msg) => {
-            if (match.params.id == msg.id_chat) {
-              return (
-                <Grid
-                  container
-                  justify="flex-start"
-                  alignItems="center"
-                  direction="column-reverse"
-                  key={msg.id}
-                >
-                  <Message
-                    id_user={msg.id_user}
-                    message={msg.message}
-                    createdAt={msg.createdAt}
-                    img={msg.url_image}
-                    audio={msg.url_audio}
-                    audioName={msg.name_audio}
-                    meeting={msg.meeting}
-                  />
-                </Grid>
-              );
-            }
-          })}
-        </div>
-        <Grid
-          container
-          className={main.body}
-          justify="center"
-          alignItems="flex-start"
-          direction="row"
-        >
-          <Grid container justify="center" alignItems="flex-start">
-            <div className={classes.messageContainer}>
+      <Grid
+        container
+        className={main.body}
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+      >
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Typography className={classes.header} align="center" variant="h3">
+            Chat
+          </Typography>
+          <Grid item className={classes.messageContainer}>
+            {allMsgs.map((msg) => {
+              if (match.params.id == msg.id_chat) {
+                return (
+                  <Grid
+                    container
+                    justify="flex-start"
+                    alignItems="center"
+                    direction="column-reverse"
+                    key={msg.id}
+                  >
+                    <Message
+                      id_user={msg.id_user}
+                      message={msg.message}
+                      createdAt={msg.createdAt}
+                      img={msg.url_image}
+                      audio={msg.url_audio}
+                      audioName={msg.name_audio}
+                      meeting={msg.meeting}
+                    />
+                  </Grid>
+                );
+              }
+            })}
+          </Grid>
+          <Grid item className={classes.formContainer}>
+            <Grid container justify="center" alignItems="center" direction="column">
               <Typography className={classes.header3} align="center" variant="h5">
                 Send message
               </Typography>
+            </Grid>
+            <Grid container justify="center" alignItems="flex-start" direction="column">
               <InputLabel className={classes.header2} variant="outlined">
                 Add Image:
               </InputLabel>
@@ -225,19 +216,14 @@ const Chat = ({ match, currentUser, history }) => {
                 </Typography>
               )}
               <TextField
-                id="msg"
                 value={userMessage}
                 placeholder="Message"
                 onChange={(event) => setMessage(event.target.value)}
                 type="text"
-                align="center"
                 className={classes.chatText}
                 multiline={true}
                 rowsMax={15}
-                size="medium"
-                fullWidth
               />
-
               <Grid justify="space-between" container alignItems="flex-end" direction="row">
                 <IconButton className={classes.button} onClick={() => createVCRoom()}>
                   <VideoCallIcon />
@@ -246,7 +232,7 @@ const Chat = ({ match, currentUser, history }) => {
                   <SendIcon />
                 </IconButton>
               </Grid>
-            </div>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

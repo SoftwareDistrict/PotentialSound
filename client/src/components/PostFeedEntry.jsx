@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Grid, Typography } from "@material-ui/core";
+import Moment from "react-moment";
+import { Grid, Typography, Avatar } from "@material-ui/core";
 import { postStyles } from "../styles/styles.js";
 
 const PostFeedEntry = ({ post, users, tags }) => {
@@ -28,13 +29,13 @@ const PostFeedEntry = ({ post, users, tags }) => {
   return (
     <Grid item className={classes.grid}>
       <Grid container justify="flex-start" alignItems="flex-start" direction="row">
-        <img className={classes.avatar} src={poster.propic} />
+        <Avatar alt={poster.username} src={poster.propic} className={classes.avatar} />
         <div className={classes.grid2}>
           <Grid container justify="space-between" alignItems="flex-start" direction="column">
             <Link to={`/viewprofile/${poster.username}`} className={classes.username}>
               {poster.username}
             </Link>
-            <Link to={`/home/${post.id_user}${post.id}`} className={classes.tags}>
+            <Link to={`/home/${post.id_user}${post.id}`} className={classes.msg}>
               {post.message}
             </Link>
             {post.audioName ? (
@@ -60,21 +61,15 @@ const PostFeedEntry = ({ post, users, tags }) => {
           />
         </div>
       ) : null}
+      <div className={classes.time}>
+        <Moment fromNow>{post.createdAt}</Moment>
+      </div>
     </Grid>
   );
 };
 
 PostFeedEntry.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number,
-    id_user: PropTypes.number,
-    message: PropTypes.string,
-    audioUrl: PropTypes.string,
-    audioName: PropTypes.string,
-    imageUrl: PropTypes.string,
-    imageName: PropTypes.string,
-    youTubeUrl: PropTypes.string,
-  }),
+  post: PropTypes.object.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

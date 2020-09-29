@@ -26,7 +26,7 @@ const loginStyles = makeStyles({
     height: 53,
     width: 250,
     borderRadius: 0,
-    padding: 0,
+    padding: "0 10px 0 0",
     color: "white",
     fontSize: 22,
     marginTop: 60,
@@ -96,12 +96,9 @@ const searchStyles = makeStyles({
 
 const postStyles = makeStyles({
   avatar: {
-    width: 80,
-    height: 70,
-    margin: 5,
-    maxWidth: "100%",
-    maxHeight: "100%",
-    float: "left",
+    height: 50,
+    width: 50,
+    marginRight: 10,
   },
   grid: {
     border: "4px solid black",
@@ -112,24 +109,35 @@ const postStyles = makeStyles({
     minHeight: 120,
   },
   grid2: {
-    width: "70%",
+    width: "81%",
   },
   username: {
-    fontSize: 16,
+    fontSize: 20,
     textDecoration: "none",
     color: white,
+    fontWeight: "bold",
   },
-  tags: {
-    fontSize: 14,
+  msg: {
+    fontSize: 18,
     textDecoration: "none",
     color: white,
     marginTop: 5,
+  },
+  tags: {
+    fontSize: 16,
+    color: white,
+    marginTop: 5,
+  },
+  time: {
+    fontSize: 16,
+    color: white,
+    marginTop: 5,
+    textAlign: "right",
   },
   anchor: {
     textDecoration: "none",
     textAlign: "left",
     marginTop: 5,
-    fontSize: 16,
     color: "#037bfc",
   },
 });
@@ -148,6 +156,7 @@ const feedStyles = makeStyles({
   app: {
     backgroundColor: light,
     padding: 10,
+    width: "100%",
   },
   button: {
     variant: "contained",
@@ -399,12 +408,12 @@ const chatStyles = makeStyles({
     },
   },
   fileButton: {
-    padding: 5,
+    padding: "0 5px 5px 5px",
     backgroundColor: light,
   },
   chatText: {
-    border: "4px solid black",
-    width: "94%",
+    border: "2px solid black",
+    width: "90%",
     fontSize: 14,
     marginTop: 10,
     marginBottom: 10,
@@ -412,11 +421,17 @@ const chatStyles = makeStyles({
     backgroundColor: white,
   },
   messageContainer: {
+    overflow: "auto",
+    width: "100%",
+    backgroundColor: white,
+    maxHeight: 335,
+    padding: 7,
+  },
+  formContainer: {
+    overflow: "auto",
+    width: "100%",
     backgroundColor: white,
     padding: 7,
-    width: 350,
-    overflow: "auto",
-    maxHeight: 300,
   },
 });
 
@@ -431,19 +446,16 @@ const messageStyles = makeStyles({
     minHeight: 100,
   },
   grid2: {
-    width: "65%",
+    width: "81%",
   },
-  img: {
-    width: 100,
-    height: 80,
-    margin: 5,
-    maxWidth: "100%",
-    maxHeight: "100%",
-    float: "left",
+  avatar: {
+    height: 50,
+    width: 50,
+    marginRight: 10,
   },
   username: {
     textAlign: "left",
-    fontSize: 20,
+    fontSize: 24,
     color: white,
     fontWeight: "bold",
     marginBottom: 3,
@@ -457,6 +469,7 @@ const messageStyles = makeStyles({
     fontSize: 16,
     marginTop: 5,
     color: white,
+    textAlign: "right",
   },
   msgImg: {
     width: 100,

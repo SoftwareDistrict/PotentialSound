@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { messageStyles } from "../styles/styles.js";
-import { Grid } from "@material-ui/core";
+import { Grid, Avatar } from "@material-ui/core";
 
 const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
@@ -20,7 +20,7 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
   return (
     <Grid item className={classes.messageDiv}>
       <Grid container justify="flex-start" alignItems="flex-start" direction="row">
-        <img className={classes.img} src={messenger.propic} />
+        <Avatar alt={messenger.username} src={messenger.propic} className={classes.avatar} />
         <div className={classes.grid2}>
           <div className={classes.username}>{messenger.username}</div>
           <div className={classes.message}>{message}</div>
@@ -43,11 +43,11 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
               </form>
             ) : null}
           </Grid>
-          <div className={classes.time}>
-            <Moment fromNow>{createdAt}</Moment>
-          </div>
         </div>
       </Grid>
+      <div className={classes.time}>
+        <Moment fromNow>{createdAt}</Moment>
+      </div>
     </Grid>
   );
 };

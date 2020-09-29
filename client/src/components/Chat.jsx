@@ -25,7 +25,7 @@ const Chat = ({ match, currentUser, history }) => {
   const [load, setLoading] = useState(false);
   // const [participants, setParticipants] = useState([]);
 
-  const chatClasses = chatStyles();
+  const classes = chatStyles();
   const main = body();
 
   socket.on("receive", (data) => {
@@ -157,32 +157,28 @@ const Chat = ({ match, currentUser, history }) => {
     <div>
       <Appbar currentUser={currentUser} />
       <Grid container direction="column" justify="center" alignItems="center">
-        <Typography className={chatClasses.header} align="center" variant="h3">
+        <Typography className={classes.header} align="center" variant="h3">
           Chat
         </Typography>
-        <Grid
-          container
-          className={chatClasses.messageContainer}
-          justify="center"
-          alignItems="center"
-        >
+        <div className={classes.messageContainer}>
           {allMsgs.map((msg) => {
             if (match.params.id == msg.id_chat) {
               return (
-                <Message
-                  id_user={msg.id_user}
-                  message={msg.message}
-                  createdAt={msg.createdAt}
-                  key={msg.id}
-                  img={msg.url_image}
-                  audio={msg.url_audio}
-                  audioName={msg.name_audio}
-                  meeting={msg.meeting}
-                />
+                <Grid container justify="flex-start" alignItems="center" direction="column-reverse" key={msg.id}>
+                  <Message
+                    id_user={msg.id_user}
+                    message={msg.message}
+                    createdAt={msg.createdAt}
+                    img={msg.url_image}
+                    audio={msg.url_audio}
+                    audioName={msg.name_audio}
+                    meeting={msg.meeting}
+                  />
+                </Grid>
               );
             }
           })}
-        </Grid>
+        </div>
         <Grid
           container
           className={main.body}
@@ -191,26 +187,26 @@ const Chat = ({ match, currentUser, history }) => {
           direction="row"
         >
           <Grid container justify="center" alignItems="flex-start">
-            <div className={chatClasses.messageContainer}>
-              <Typography className={chatClasses.header3} align="center" variant="h5">
+            <div className={classes.messageContainer}>
+              <Typography className={classes.header3} align="center" variant="h5">
                 Send message
               </Typography>
-              <InputLabel className={chatClasses.header2} variant="outlined">
-                  Add Image: 
+              <InputLabel className={classes.header2} variant="outlined">
+                Add Image:
               </InputLabel>
               <Input
-                className={chatClasses.fileButton}
+                className={classes.fileButton}
                 type="file"
                 ref={imageRef}
                 name="image"
                 accept=".png, .jpg, .gif"
                 onChange={(e) => onChangePhoto(e)}
               />
-              <InputLabel className={chatClasses.header2} variant="outlined">
-                  Add Audio: 
+              <InputLabel className={classes.header2} variant="outlined">
+                Add Audio:
               </InputLabel>
               <Input
-                className={chatClasses.fileButton}
+                className={classes.fileButton}
                 type="file"
                 ref={audioRef}
                 name="audio"
@@ -218,7 +214,7 @@ const Chat = ({ match, currentUser, history }) => {
                 onChange={(e) => onChangeAudio(e)}
               />
               {load === false ? null : (
-                <Typography variant="h5" className={chatClasses.header3}>
+                <Typography variant="h5" className={classes.header3}>
                   Sending...
                 </Typography>
               )}
@@ -229,7 +225,7 @@ const Chat = ({ match, currentUser, history }) => {
                 onChange={(event) => setMessage(event.target.value)}
                 type="text"
                 align="center"
-                className={chatClasses.chatText}
+                className={classes.chatText}
                 multiline={true}
                 rowsMax={15}
                 size="medium"
@@ -237,10 +233,10 @@ const Chat = ({ match, currentUser, history }) => {
               />
 
               <Grid justify="space-between" container alignItems="flex-end" direction="row">
-                <IconButton className={chatClasses.button} onClick={() => createVCRoom()}>
+                <IconButton className={classes.button} onClick={() => createVCRoom()}>
                   <VideoCallIcon />
                 </IconButton>
-                <IconButton className={chatClasses.button} onClick={() => sendMsg()}>
+                <IconButton className={classes.button} onClick={() => sendMsg()}>
                   <SendIcon />
                 </IconButton>
               </Grid>

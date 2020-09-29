@@ -2,23 +2,13 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { dark, light, white } from "../styles/styles.js";
-import { makeStyles } from "@material-ui/core/styles";
+import { messageStyles } from "../styles/styles.js";
+import { Grid } from "@material-ui/core";
 
 const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
 
-  const messageStyles = makeStyles({
-    messageDiv: {
-      border: "2px solid black",
-      borderColor: light,
-      backgroundColor: dark,
-      color: white,
-      width: "337px",
-      marginTop: "5px",
-    },
-  });
-  const messageClasses = messageStyles();
+  const classes = messageStyles();
 
   useEffect(() => {
     axios
@@ -28,71 +18,33 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
   }, []);
 
   return (
-    <div className={messageClasses.messageDiv}>
-      <div
-        style={{
-          width: "100px",
-          height: "100px",
-          float: "left",
-        }}
-      >
-        <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={messenger.propic} />
-      </div>
-      <div
-        style={{
-          width: "280px",
-          height: "20px",
-          textAlign: "left",
-          fontSize: "18px",
-          marginLeft: "110px",
-        }}
-      >
-        {messenger.username}
-      </div>
-      <div
-        style={{
-          backgroundColor: "offwhite",
-          width: "220px",
-          height: "60px",
-          textAlign: "left",
-          fontSize: "16px",
-          marginLeft: "110px",
-        }}
-      >
-        {message}
-        {meeting ? (
-          <div>
-            <form action={meeting}>
-              <input type="submit" value="Join"></input>
-            </form>
+    <Grid item className={classes.messageDiv}>
+      <Grid container justify="flex-start" alignItems="flex-start" direction="row">
+        <img className={classes.img} src={messenger.propic} />
+        <div className={classes.grid2}>
+          <div className={classes.username}>{messenger.username}</div>
+          <div className={classes.message}>{message}</div>
+          <Grid container justify="center" alignItems="center" direction="column" className={classes.msgItemCon}>
+            {meeting ? (
+              <form action={meeting}>
+                <input type="submit" value="Join"></input>
+              </form>
+            ) : null}
+            {img ? (
+              <img className={classes.msgImg} src={img} />
+            ) : null}
+            {audio ? (
+              <form action={audio}>
+                <input type="submit" value={`Download ${audioName}`} />
+              </form>
+            ) : null}
+          </Grid>
+          <div className={classes.time}>
+            <Moment fromNow>{createdAt}</Moment>
           </div>
-        ) : null}
-        {img ? (
-          <div>
-            <img src={img} />
-          </div>
-        ) : null}
-        {audio ? (
-          <div>
-            <form action={audio}>
-              <input type="submit" value={`Download ${audioName}`} />
-            </form>
-          </div>
-        ) : null}
-      </div>
-      <div
-        style={{
-          width: "260px",
-          height: "20px",
-          textAlign: "left",
-          marginLeft: "110px",
-          marginTop: "10px",
-          marginBottom: "5px",
-        }}
-      >
-        <Moment fromNow>{createdAt}</Moment>
-      </div>
-    </div>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 Message.propTypes = {

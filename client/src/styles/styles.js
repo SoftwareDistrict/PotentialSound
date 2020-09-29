@@ -413,10 +413,57 @@ const chatStyles = makeStyles({
   },
   messageContainer: {
     backgroundColor: white,
-    padding: "7px",
-    width: "350px",
+    padding: 7,
+    width: 350,
     overflow: "auto",
-    maxHeight: "320px",
+    maxHeight: 300,
+  },
+});
+
+const messageStyles = makeStyles({
+  messageDiv: {
+    border: `3px solid ${light}`,
+    marginTop: 1,
+    marginBottom: 2,
+    padding: 5,
+    width: "98%",
+    background: dark,
+    minHeight: 100,
+  },
+  grid2: {
+    width: "65%",
+  },
+  img: {
+    width: 100,
+    height: 80,
+    margin: 5,
+    maxWidth: "100%",
+    maxHeight: "100%",
+    float: "left",
+  },
+  username: {
+    textAlign: "left",
+    fontSize: 20,
+    color: white,
+    fontWeight: "bold",
+    marginBottom: 3,
+  },
+  message: {
+    textAlign: "left",
+    fontSize: 18,
+    color: white,
+  },
+  time: {
+    fontSize: 16,
+    marginTop: 5,
+    color: white,
+  },
+  msgImg: {
+    width: 100,
+    height: 80,
+  },
+  msgItemCon: {
+    padding: 5,
   },
 });
 
@@ -763,6 +810,7 @@ module.exports = {
   chatEntryStyles,
   chats,
   chatStyles,
+  messageStyles,
   profileStyle,
   createPostStyles,
   loadStyles,

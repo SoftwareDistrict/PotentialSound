@@ -24,15 +24,19 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
         <div className={classes.grid2}>
           <div className={classes.username}>{messenger.username}</div>
           <div className={classes.message}>{message}</div>
-          <Grid container justify="center" alignItems="center" direction="column" className={classes.msgItemCon}>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            direction="column"
+            className={classes.msgItemCon}
+          >
             {meeting ? (
               <form action={meeting}>
                 <input type="submit" value="Join"></input>
               </form>
             ) : null}
-            {img ? (
-              <img className={classes.msgImg} src={img} />
-            ) : null}
+            {img ? <img className={classes.msgImg} src={img} /> : null}
             {audio ? (
               <form action={audio}>
                 <input type="submit" value={`Download ${audioName}`} />

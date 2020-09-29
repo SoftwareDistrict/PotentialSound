@@ -164,7 +164,13 @@ const Chat = ({ match, currentUser, history }) => {
           {allMsgs.map((msg) => {
             if (match.params.id == msg.id_chat) {
               return (
-                <Grid container justify="flex-start" alignItems="center" direction="column-reverse" key={msg.id}>
+                <Grid
+                  container
+                  justify="flex-start"
+                  alignItems="center"
+                  direction="column-reverse"
+                  key={msg.id}
+                >
                   <Message
                     id_user={msg.id_user}
                     message={msg.message}

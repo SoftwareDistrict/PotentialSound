@@ -234,6 +234,7 @@ const menuStyles = makeStyles({
   button: {
     borderRadius: 0,
     padding: 0,
+    display: "block",
   },
   iconClose: {
     fontSize: 50,
@@ -742,8 +743,8 @@ const fullPostStyles = makeStyles({
     paddingBottom: 10,
   },
   avatar: {
-    width: 130,
-    height: 130,
+    width: 120,
+    height: 120,
     margin: 10,
     maxWidth: "100%",
     maxHeight: "100%",
@@ -753,17 +754,25 @@ const fullPostStyles = makeStyles({
     margin: 10,
     color: white,
   },
+  tags: {
+    fontSize: 18,
+    margin: 10,
+    color: white,
+  },
   link: {
     textDecoration: "none",
   },
   input: {
-    border: "3px solid black",
-    width: 250,
+    border: "2px solid black",
+    width: "83%",
     height: "100%",
     fontSize: 16,
     paddingLeft: 10,
     color: "black",
     backgroundColor: white,
+  },
+  inputDiv: {
+    width: "100%",
   },
   button: {
     variant: "contained",
@@ -794,10 +803,14 @@ const fullPostStyles = makeStyles({
   },
   header: {
     color: white,
-    marginTop: 20,
+    marginTop: 5,
   },
   header2: {
     color: "#037bfc",
+    marginTop: 20,
+  },
+  header3: {
+    color: white,
     marginTop: 20,
   },
 });

@@ -9,12 +9,12 @@ const Menu = () => {
   const toggleMenu = () => {
     const nav = document.getElementById("mySidenav");
     const menu = document.getElementById("menu");
-    if (nav.style.display === "none") {
-      nav.style.display = "block";
-      menu.style.display = "none";
-    } else {
+    if (nav.style.display === "block") {
       nav.style.display = "none";
       menu.style.display = "block";
+    } else {
+      nav.style.display = "block";
+      menu.style.display = "none";
     }
   };
 

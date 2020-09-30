@@ -35,7 +35,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
             <Link to={`/viewprofile/${poster.username}`} className={classes.username}>
               {poster.username}
             </Link>
-            <Link to={`/home/${post.id_user}${post.id}`} className={classes.msg}>
+            <Link to={`/home/${post.id_user}y${post.id}`} className={classes.msg}>
               {post.message}
             </Link>
             {post.audioName ? (

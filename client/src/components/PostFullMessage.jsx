@@ -8,14 +8,16 @@ import { fullPostStyles, body } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const PostFullMessage = ({ match, currentUser }) => {
-  const { id } = match.params;
+  const matchIds = match.params.id.split("y");
+  const posterId = matchIds[0];
+  const postId = matchIds[1];
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
   const [postTags, setPostTags] = useState([]);
   const [userMessage, setMessage] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [sent, setSent] = useState(false);
-  const ids = [currentUser.id, id[0]];
+  const ids = [currentUser.id, posterId];
   const classes = fullPostStyles();
   const main = body();
 
@@ -23,7 +25,7 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   const getPoster = async () => {
     await axios
-      .get(`/poster/${id[0]}`)
+      .get(`/poster/${posterId}`)
       .then((poster) => setPoster(poster.data))
       .catch((err) => console.warn("could not get this poster.", err));
   };
@@ -33,7 +35,7 @@ const PostFullMessage = ({ match, currentUser }) => {
       .get("/posttags")
       .then(({ data }) => {
         const tagsForPost = data.map((tag) => {
-          if (tag.id_post == id[1]) {
+          if (tag.id_post == postId) {
             return tag.tag;
           }
         });
@@ -44,7 +46,7 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   const currentPost = () => {
     axios
-      .get(`/thispost/${id[1]}`)
+      .get(`/thispost/${postId}`)
       .then((post) => setPost(post.data))
       .catch((err) => console.warn("could not get this post.", err));
   };
@@ -146,8 +148,8 @@ const PostFullMessage = ({ match, currentUser }) => {
               {poster.username}
             </Typography>
             <Avatar src={poster.propic} alt="Avatar" className={classes.avatar} />
-            <Typography className={classes.text}>{post.message}</Typography>
-            <Typography className={classes.text}>{postTags.join(" ")}</Typography>
+            <div className={classes.text}>{post.message}</div>
+            <div className={classes.tags}>{postTags.join(" ")}</div>
             {post.audioName ? (
               <a href={post.audioUrl} className={classes.link}>
                 <Typography variant="h6" className={classes.header2}>
@@ -171,8 +173,8 @@ const PostFullMessage = ({ match, currentUser }) => {
             ) : null}
           </Grid>
         </Grid>
-        <div>
-          <Typography variant="h6" className={classes.header}>
+        <div className={classes.inputDiv}>
+          <Typography variant="h6" className={classes.header3}>
             Send {poster.username} A Message
           </Typography>
           {sent ? (

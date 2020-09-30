@@ -7,9 +7,7 @@ import "regenerator-runtime/runtime";
 import { Grid } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { light, white } from "../styles/styles.js";
-import Box from "@material-ui/core/Box";
-import { Typography } from "@material-ui/core";
+import { Typography, List, ListItemText } from "@material-ui/core";
 import { createMessageStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
@@ -67,16 +65,22 @@ const CreateChat = ({ currentUser }) => {
       return null;
     }
     return (
-      <Box flex-grow justifyContent="center" className={classes.suggestions}>
-        <ul className={classes.list}>
-          <li> Select User: </li>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.suggestions}
+      >
+        <List component="ul" disablePadding={true} className={classes.list}>
+          <Typography variant="h6"> Select User: </Typography>
           {suggestions.map((user, i) => (
-            <li className={classes.li} onClick={() => suggestionSelected(user)} key={i}>
+            <ListItemText className={classes.li} onClick={() => suggestionSelected(user)} key={i}>
               {user}
-            </li>
+            </ListItemText>
           ))}
-        </ul>
-      </Box>
+        </List>
+      </Grid>
     );
   };
 
@@ -136,7 +140,6 @@ const CreateChat = ({ currentUser }) => {
         .sort()
         .filter((v) => regex.test(v))
         .filter((e) => !members.includes(e));
-      // sortedSuggestions = sortedSuggestions.filter((e) => !members.includes(e));
     }
     setSuggestions(sortedSuggestions);
     setText(value);
@@ -151,78 +154,57 @@ const CreateChat = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-
       <Grid
         className={classes.parentGrid}
         container
-        spacing={3}
         direction="column"
         justify="center"
         alignItems="center"
       >
-        <Grid spacing={1} container item xs={12}>
-          <Grid align="center" className={classes.header} item xs={12}>
-            <Typography className={classes.header} align="center" variant="h4">
-              Create a chat!
-            </Typography>
-          </Grid>
-          <Grid align="center" alignItems="center" justify="center" container item xs={12}>
-            <Box
-              width={3 / 4}
-              style={{
-                color: white,
-                backgroundColor: light,
-                border: "4px solid black",
-              }}
-            >
-              {members.length > 0 ? (
-                <h3>Sending message to </h3>
-              ) : (
-                <h3>Who are you trying to send a message to?</h3>
-              )}
-              {members.map((mem, i) => (
-                <span className={classes.selectedUser} key={i}>
-                  <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
-                    {(i === 0 && members.length === 1) || members.length - 1 === i
-                      ? mem
-                      : `${mem}, `}
-                  </span>
-                </span>
-              ))}
-            </Box>
-          </Grid>
-
-          <Grid align="center" justify="center" container item xs={12}>
-            <TextField
-              align="center"
-              rows={2}
-              rowsMax={4}
-              value={text}
-              onChange={onTextChange}
-              placeholder="Username"
-              className={classes.chatInput}
-              borderRadius="50%"
-            />
-            {renderSuggestions()}
-          </Grid>
-          <Grid align="center" justify="center" container item xs={12}>
-            <TextField
-              align="center"
-              className={classes.chatText}
-              multiline
-              rows={14}
-              onChange={(event) => setMessage(event.target.value)}
-              ref={inputBox}
-              type="text"
-              placeholder="Message"
-              rowsMax={15}
-              size="medium"
-              fullWidth
-              borderRadius="50%"
-            />
-          </Grid>
+        <Typography className={classes.header} align="center" variant="h4">
+          Create a chat!
+        </Typography>
+        <Grid
+          direction="column"
+          alignItems="center"
+          justify="center"
+          container
+          className={classes.box}
+        >
+          {members.length > 0 ? (
+            <Typography variant="h6">Sending message to</Typography>
+          ) : (
+            <Typography variant="h6">Who are you trying to send a message to?</Typography>
+          )}
+          {members.map((mem, i) => (
+            <span className={classes.selectedUser} key={i}>
+              <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
+                {(i === 0 && members.length === 1) || members.length - 1 === i ? mem : `${mem}, `}
+              </span>
+            </span>
+          ))}
         </Grid>
-        <Grid container justify="center" spacing={3} align="center" item xs={12}>
+        <Grid alignItems="center" justify="center" direction="column" container>
+          <TextField
+            value={text}
+            type="text"
+            onChange={onTextChange}
+            placeholder="Username"
+            className={classes.chatInput}
+          />
+          {renderSuggestions()}
+        </Grid>
+        <Grid direction="column" alignItems="center" justify="center" container>
+          <TextField
+            className={classes.chatText}
+            multiline
+            rows={3}
+            onChange={(event) => setMessage(event.target.value)}
+            inputRef={inputBox}
+            type="text"
+            placeholder="Message"
+            rowsMax={8}
+          />
           <Button onClick={onSubmit} className={classes.button}>
             Submit
           </Button>

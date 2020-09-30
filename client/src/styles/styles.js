@@ -13,7 +13,7 @@ const loginStyles = makeStyles({
     paddingBottom: 50,
   },
   header: {
-    color: light,
+    color: white,
     margin: 15,
     textAlign: "center",
     fontWeight: "bold",
@@ -26,10 +26,22 @@ const loginStyles = makeStyles({
     height: 53,
     width: 250,
     borderRadius: 0,
-    padding: 0,
+    padding: "0 10px 0 0",
     color: "white",
     fontSize: 22,
     marginTop: 60,
+    "&:hover": {
+      backgroundColor: "#037bfc",
+      "@media (hover: none)": {
+        backgroundColor: "#037bfc",
+        "&:active": {
+          backgroundColor: "#037bfc",
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: "#037bfc",
+    },
   },
   icon: {
     height: 50,
@@ -53,31 +65,40 @@ const searchStyles = makeStyles({
     marginTop: 10,
     backgroundColor: white,
   },
+  suggestions: {
+    color: white,
+  },
   button: {
     borderRadius: 0,
     border: "2px solid black",
     background: light,
     padding: 4,
     marginBottom: 10,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   icon: {
     fontSize: 25,
     fontWeight: "bold",
     color: dark,
   },
-  suggestions: {
-    color: white,
-  },
 });
 
 const postStyles = makeStyles({
   avatar: {
-    width: 80,
-    height: 70,
-    margin: 5,
-    maxWidth: "100%",
-    maxHeight: "100%",
-    float: "left",
+    height: 50,
+    width: 50,
+    marginRight: 10,
   },
   grid: {
     border: "4px solid black",
@@ -88,24 +109,35 @@ const postStyles = makeStyles({
     minHeight: 120,
   },
   grid2: {
-    width: "70%",
+    width: "81%",
   },
   username: {
-    fontSize: 16,
+    fontSize: 20,
     textDecoration: "none",
     color: white,
+    fontWeight: "bold",
   },
-  tags: {
-    fontSize: 14,
+  msg: {
+    fontSize: 18,
     textDecoration: "none",
     color: white,
     marginTop: 5,
+  },
+  tags: {
+    fontSize: 16,
+    color: white,
+    marginTop: 5,
+  },
+  time: {
+    fontSize: 16,
+    color: white,
+    marginTop: 5,
+    textAlign: "right",
   },
   anchor: {
     textDecoration: "none",
     textAlign: "left",
     marginTop: 5,
-    fontSize: 16,
     color: "#037bfc",
   },
 });
@@ -124,6 +156,7 @@ const feedStyles = makeStyles({
   app: {
     backgroundColor: light,
     padding: 10,
+    width: "100%",
   },
   button: {
     variant: "contained",
@@ -141,6 +174,18 @@ const feedStyles = makeStyles({
     borderColor: "black",
     align: "center",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   backButton: {
     variant: "contained",
@@ -158,6 +203,18 @@ const feedStyles = makeStyles({
     borderColor: "black",
     align: "center",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   link: {
     textDecoration: "none",
@@ -172,23 +229,24 @@ const menuStyles = makeStyles({
   icon: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "white",
+    color: white,
   },
   button: {
     borderRadius: 0,
     padding: 0,
+    display: "block",
   },
   iconClose: {
     fontSize: 50,
     fontWeight: "bold",
-    color: "white",
+    color: white,
   },
   style: {
     position: "fixed",
     padding: 10,
     left: 0,
     width: 180,
-    height: "60%",
+    height: "70%",
     backgroundColor: light,
     border: "4px solid black",
     zIndex: 20,
@@ -231,6 +289,18 @@ const createMessageStyles = makeStyles({
   button: {
     backgroundColor: light,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   suggestions: {
     backgroundColor: white,
@@ -245,16 +315,25 @@ const createMessageStyles = makeStyles({
     width: 250,
     height: 30,
     fontSize: 14,
-    backgroundColor: "white",
+    backgroundColor: white,
+    paddingLeft: 10,
   },
   chatText: {
     border: "4px solid black",
     fontSize: 14,
-    backgroundColor: "white",
+    backgroundColor: white,
+    width: "90%",
+    paddingLeft: 10,
   },
   selectedUser: {
     color: dark,
     fontWeight: "bold",
+  },
+  box: {
+    color: white,
+    backgroundColor: light,
+    border: "4px solid black",
+    width: "75%",
   },
 });
 
@@ -271,18 +350,31 @@ const chatEntryStyles = makeStyles({
   },
   text: {
     color: white,
+    width: "350px",
+    textAlign: "center",
+    fontSize: "20px",
+    marginBottom: 5,
   },
   pDiv: {
     background: light,
     boxShadow: "0px 0px 0px 4px #8D99AE",
     border: "5px solid",
-    borderColor: "white",
-    margin: "0 auto",
-    borderTopLeftRadius: "5px",
-    bordeBottomRightRadius: "5px",
+    borderColor: white,
     position: "relative",
     alignItems: "center",
     height: "100px",
+  },
+  link: {
+    textDecoration: "none",
+    color: dark,
+  },
+});
+
+const chats = makeStyles({
+  header: {
+    color: white,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
@@ -293,26 +385,99 @@ const chatStyles = makeStyles({
   },
   header2: {
     color: dark,
+    fontSize: 16,
+    marginBottom: 25,
+  },
+  header3: {
+    color: dark,
+    fontSize: 20,
   },
   button: {
     backgroundColor: light,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
+  },
+  fileButton: {
+    padding: "0 5px 5px 5px",
+    backgroundColor: light,
   },
   chatText: {
-    border: "4px solid black",
-    width: "94%",
+    border: "2px solid black",
+    width: "90%",
     fontSize: 14,
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 10,
-    backgroundColor: "white",
+    backgroundColor: white,
   },
   messageContainer: {
-    backgroundColor: white,
-    padding: "7px",
-    width: "350px",
     overflow: "auto",
-    maxHeight: "460px",
+    width: "100%",
+    backgroundColor: white,
+    maxHeight: 335,
+    padding: 7,
+  },
+  formContainer: {
+    overflow: "auto",
+    width: "100%",
+    backgroundColor: white,
+    padding: 7,
+  },
+});
+
+const messageStyles = makeStyles({
+  messageDiv: {
+    border: `3px solid ${light}`,
+    marginTop: 1,
+    marginBottom: 2,
+    padding: 5,
+    width: "98%",
+    background: dark,
+    minHeight: 100,
+  },
+  grid2: {
+    width: "81%",
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    marginRight: 10,
+  },
+  username: {
+    textAlign: "left",
+    fontSize: 24,
+    color: white,
+    fontWeight: "bold",
+    marginBottom: 3,
+  },
+  message: {
+    textAlign: "left",
+    fontSize: 18,
+    color: white,
+  },
+  time: {
+    fontSize: 16,
+    marginTop: 5,
+    color: white,
+    textAlign: "right",
+  },
+  msgImg: {
+    width: 100,
+    height: 80,
+  },
+  msgItemCon: {
+    padding: 5,
   },
 });
 
@@ -322,10 +487,6 @@ const profileStyle = makeStyles({
     padding: 20,
     marginTop: 30,
     maxWidth: "80%",
-  },
-  gridList: {
-    width: 160,
-    height: 160,
   },
   button: {
     variant: "contained",
@@ -342,15 +503,28 @@ const profileStyle = makeStyles({
     fontWeight: "bold",
     fontSize: 16,
     color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   link: {
     textDecoration: "none",
+    marginRight: "10px",
+    marginLeft: "10px",
   },
   avatar: {
     width: "100px",
     height: "100px",
     position: "relative",
-    marginLeft: "34%",
     variant: "circle",
   },
   container: {
@@ -369,6 +543,10 @@ const profileStyle = makeStyles({
     marginBottom: 10,
     color: white,
     fontSize: 16,
+  },
+  iconContainer: {
+    fontSize: 35,
+    marginTop: 20,
   },
 });
 
@@ -389,6 +567,18 @@ const createPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     align: "center",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   tagButton: {
     variant: "contained",
@@ -403,6 +593,18 @@ const createPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   grid: {
     paddingTop: 10,
@@ -467,9 +669,29 @@ const profileFormStyles = makeStyles({
   header: {
     color: white,
   },
+  header2: {
+    color: white,
+    marginTop: 30,
+  },
+  formLabel: {
+    fontSize: 16,
+    color: dark,
+  },
+  formLabelImage: {
+    fontSize: 16,
+    color: dark,
+    marginTop: 20,
+    marginBottom: 22,
+  },
   input: {
-    marginBottom: 10,
-    display: "block",
+    border: "3px solid black",
+    width: 250,
+    height: "100%",
+    fontSize: 14,
+    paddingLeft: 10,
+    marginTop: 22,
+    color: "black",
+    backgroundColor: white,
   },
   button: {
     variant: "contained",
@@ -487,6 +709,18 @@ const profileFormStyles = makeStyles({
     border: "3px solid black",
     borderRadius: 0,
     borderColor: "black",
+    "&:hover": {
+      backgroundColor: dark,
+      "@media (hover: none)": {
+        backgroundColor: dark,
+        "&:active": {
+          backgroundColor: dark,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: dark,
+    },
   },
   container: {
     background: light,
@@ -500,15 +734,17 @@ const fullPostStyles = makeStyles({
   mainContainer: {
     background: white,
     marginTop: 30,
+    padding: 10,
   },
   container: {
     background: dark,
     border: "3px solid black",
     color: white,
+    paddingBottom: 10,
   },
   avatar: {
-    width: 130,
-    height: 130,
+    width: 120,
+    height: 120,
     margin: 10,
     maxWidth: "100%",
     maxHeight: "100%",
@@ -518,16 +754,25 @@ const fullPostStyles = makeStyles({
     margin: 10,
     color: white,
   },
-  link: {
-    color: "#037bfc",
+  tags: {
     fontSize: 18,
+    margin: 10,
+    color: white,
+  },
+  link: {
+    textDecoration: "none",
   },
   input: {
-    width: 230,
-    height: 30,
+    border: "2px solid black",
+    width: "83%",
+    height: "100%",
     fontSize: 16,
-    marginLeft: 10,
     paddingLeft: 10,
+    color: "black",
+    backgroundColor: white,
+  },
+  inputDiv: {
+    width: "100%",
   },
   button: {
     variant: "contained",
@@ -543,8 +788,28 @@ const fullPostStyles = makeStyles({
     borderRadius: 0,
     borderColor: "black",
     marginBottom: 3,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
   header: {
+    color: white,
+    marginTop: 5,
+  },
+  header2: {
+    color: "#037bfc",
+    marginTop: 20,
+  },
+  header3: {
     color: white,
     marginTop: 20,
   },
@@ -569,7 +834,9 @@ module.exports = {
   menuStyles,
   createMessageStyles,
   chatEntryStyles,
+  chats,
   chatStyles,
+  messageStyles,
   profileStyle,
   createPostStyles,
   loadStyles,

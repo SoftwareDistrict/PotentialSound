@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ImageUploader from "react-images-upload";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { Button, Typography, Grid } from "@material-ui/core";
+import { Button, Typography, Grid, Input, InputLabel } from "@material-ui/core";
 import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
 const CreateProfile = ({ getCurrentUser }) => {
@@ -18,7 +18,6 @@ const CreateProfile = ({ getCurrentUser }) => {
   const [youTube, setYouTube] = useState("");
   const [instagram, setInstagram] = useState("");
   const [faceBook, setFaceBook] = useState("");
-  const [instaHandle, setInstaHandle] = useState("");
   const classes = profileFormStyles();
   const loading = loadStyles();
 
@@ -41,7 +40,6 @@ const CreateProfile = ({ getCurrentUser }) => {
       facebook: faceBook,
       instagram: instagram,
       soundCloud: soundCloud,
-      instaHandle: instaHandle,
     });
   };
 
@@ -69,66 +67,92 @@ const CreateProfile = ({ getCurrentUser }) => {
             <Typography variant="h5" className={classes.header}>
               Create Profile
             </Typography>
-            <input
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Username
+            </InputLabel>
+            <Input
               className={classes.input}
               placeholder="Enter Username"
               onChange={(e) => setUsername(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              City
+            </InputLabel>
+            <Input
               className={classes.input}
               placeholder="Enter City"
               onChange={(e) => setCity(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Phone Number
+            </InputLabel>
+            <Input
               className={classes.input}
               placeholder="Enter Cell"
               onChange={(e) => setCell(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Bio
+            </InputLabel>
+            <Input
               className={classes.input}
-              placeholder="Enter Descrition"
+              placeholder="Enter Description"
               onChange={(e) => setDescription(e.target.value)}
-            ></input>
-            <div>
-              <Typography variant="h6" className={classes.header}>
-                Add Your Social Media
-              </Typography>
-              <input
-                className={classes.input}
-                placeholder="Facebook"
-                onChange={(e) => setFaceBook(e.target.value)}
-              ></input>
-              <input
-                className={classes.input}
-                placeholder="Instagram"
-                onChange={(e) => setInstagram(e.target.value)}
-              ></input>
-              <input
-                className={classes.input}
-                placeholder="Youtube"
-                onChange={(e) => setYouTube(e.target.value)}
-              ></input>
-              <input
-                className={classes.input}
-                placeholder="SoundCloud"
-                onChange={(e) => setSoundCloud(e.target.value)}
-              ></input>
-              <Typography variant="h7" className={classes.header}>
-                Add Instagram Handle To Display Your Profile Uploads (must be public)
-              </Typography>
-              <input
-                className={classes.input}
-                placeholder="Instagram Handle"
-                onChange={(e) => setInstaHandle(e.target.value)}
-              ></input>
-            </div>
+              multiline={true}
+              type="text"
+            />
+            <Typography variant="h5" className={classes.header2}>
+              Add Your Social Media
+            </Typography>
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your Facebook
+            </InputLabel>
+            <Input
+              className={classes.input}
+              placeholder="Facebook"
+              onChange={(e) => setFaceBook(e.target.value)}
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your Instagram
+            </InputLabel>
+            <Input
+              className={classes.input}
+              placeholder="Instagram"
+              onChange={(e) => setInstagram(e.target.value)}
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your YouTube
+            </InputLabel>
+            <Input
+              className={classes.input}
+              placeholder="YouTube"
+              onChange={(e) => setYouTube(e.target.value)}
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your SoundCloud
+            </InputLabel>
+            <Input
+              className={classes.input}
+              placeholder="SoundCloud"
+              onChange={(e) => setSoundCloud(e.target.value)}
+              type="text"
+            />
+            <InputLabel className={classes.formLabelImage} variant="outlined">
+              Profile Picture
+            </InputLabel>
             <ImageUploader
               withIcon={false}
               withPreview={true}
               singleImage={true}
               buttonText="Choose images"
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png"]}
+              imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
               maxFileSize={5242880}
             />
             <Button className={classes.button} onClick={() => createProfile()}>

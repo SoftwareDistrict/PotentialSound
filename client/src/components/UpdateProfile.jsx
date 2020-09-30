@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
-import { Button, Typography, Grid } from "@material-ui/core";
+import { Button, Typography, Grid, Input, InputLabel } from "@material-ui/core";
 import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
 const UpdateProfile = ({ currentUser, getCurrentUser }) => {
@@ -19,7 +19,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
   const [youTube, setYouTube] = useState(currentUser.youTube);
   const [instagram, setInstagram] = useState(currentUser.instagram);
   const [faceBook, setFaceBook] = useState(currentUser.facebook);
-  const [instaHandle, setInstaHandle] = useState(currentUser.instaHandle);
   const loading = loadStyles();
   const classes = profileFormStyles();
 
@@ -43,7 +42,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
-        instaHandle: instaHandle,
       });
     } else {
       return axios.post("/profileUpdate", {
@@ -56,7 +54,6 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         facebook: faceBook,
         instagram: instagram,
         soundCloud: soundCloud,
-        instaHandle: instaHandle,
       });
     }
   };
@@ -96,75 +93,100 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
             <Typography variant="h5" className={classes.header}>
               Update Your Profile
             </Typography>
-            <input
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Username
+            </InputLabel>
+            <Input
               className={classes.input}
               value={newUser}
               placeholder={newUser}
               onChange={(e) => setNewUser(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              City
+            </InputLabel>
+            <Input
               className={classes.input}
               value={newCity}
               placeholder={newCity}
               onChange={(e) => setNewCity(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Phone Number
+            </InputLabel>
+            <Input
               className={classes.input}
               value={newCell}
               placeholder={newCell}
               onChange={(e) => setNewCell(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Bio
+            </InputLabel>
+            <Input
               className={classes.input}
               value={newDescription}
               placeholder={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
-            ></input>
-            <Typography variant="h6" className={classes.header}>
+              multiline={true}
+              type="text"
+            />
+            <Typography variant="h5" className={classes.header2}>
               Update Your Social Media
             </Typography>
-            <input
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your Facebook
+            </InputLabel>
+            <Input
               className={classes.input}
               value={faceBook}
               placeholder="Facebook"
               onChange={(e) => setFaceBook(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your Instagram
+            </InputLabel>
+            <Input
               className={classes.input}
               value={instagram}
               placeholder="Instagram"
               onChange={(e) => setInstagram(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your YouTube
+            </InputLabel>
+            <Input
               className={classes.input}
               value={youTube}
               placeholder="YouTube"
               onChange={(e) => setYouTube(e.target.value)}
-            ></input>
-            <input
+              type="text"
+            />
+            <InputLabel className={classes.formLabel} variant="outlined">
+              Add Your SoundCloud
+            </InputLabel>
+            <Input
               className={classes.input}
               value={soundCloud}
               placeholder="SoundCloud"
               onChange={(e) => setSoundCloud(e.target.value)}
-            ></input>
-            <Typography variant="h6" className={classes.header}>
-              Update Your Instagram Handle (must be public)
-            </Typography>
-            <input
-              className={classes.input}
-              value={instaHandle}
-              placeholder="Instagram Handle"
-              onChange={(e) => {
-                setInstaHandle(e.target.value);
-              }}
-            ></input>
+              type="text"
+            />
+            <InputLabel className={classes.formLabelImage} variant="outlined">
+              Profile Picture
+            </InputLabel>
             <ImageUploader
               withIcon={false}
               withPreview={true}
               singleImage={true}
               buttonText="Select Image"
               onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png"]}
+              imgExtension={[".jpg", ".gif", ".png", "jpeg"]}
               maxFileSize={5242880}
             />
             <Button className={classes.button} onClick={() => updateProfile()}>

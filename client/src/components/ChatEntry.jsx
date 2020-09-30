@@ -2,13 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { AvatarGroup } from "@material-ui/lab";
-import { Avatar } from "@material-ui/core";
-import { dark } from "../styles/styles.js";
+import { Avatar, Typography } from "@material-ui/core";
 import { chatEntryStyles } from "../styles/styles.js";
 
 const ChatEntry = ({ participants, id_chat }) => {
   const members = [];
-
   const classes = chatEntryStyles();
 
   participants.forEach((member) => {
@@ -18,25 +16,14 @@ const ChatEntry = ({ participants, id_chat }) => {
   });
 
   return (
-    <Link to={`/chats/${id_chat}`} style={{ textDecoration: "none", color: dark }}>
+    <Link to={`/chats/${id_chat}`} className={classes.link}>
       <div className={classes.pDiv}>
-        <div
-          style={{
-            resize: "both",
-            overflow: "auto",
-            width: "350px",
-            textAlign: "center",
-            fontSize: "20px",
-          }}
-          className={classes.text}
-        >
-          <label>Chat Members:</label>
-          <AvatarGroup max={4} className={classes.avatarGroup}>
-            {members.map(({ username, chatId, pic }, i) => (
-              <Avatar key={i} id={chatId} alt={username} src={pic} className={classes.avatar} />
-            ))}
-          </AvatarGroup>
-        </div>
+        <Typography className={classes.text}>Chat Members:</Typography>
+        <AvatarGroup max={4} className={classes.avatarGroup}>
+          {members.map(({ username, chatId, pic }, i) => (
+            <Avatar key={i} id={chatId} alt={username} src={pic} className={classes.avatar} />
+          ))}
+        </AvatarGroup>
       </div>
     </Link>
   );

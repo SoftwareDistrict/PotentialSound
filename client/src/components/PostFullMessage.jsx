@@ -2,26 +2,30 @@ import React, { useState, useEffect } from "react";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { Button, Typography, Grid, Avatar } from "@material-ui/core";
-import { fullPostStyles } from "../styles/styles.js";
+import { IconButton, Typography, Grid, Avatar, Input } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
+import { fullPostStyles, body } from "../styles/styles.js";
 import "regenerator-runtime/runtime";
 
 const PostFullMessage = ({ match, currentUser }) => {
-  const { id } = match.params;
+  const matchIds = match.params.id.split("y");
+  const posterId = matchIds[0];
+  const postId = matchIds[1];
   const [poster, setPoster] = useState({});
   const [post, setPost] = useState({});
   const [postTags, setPostTags] = useState([]);
   const [userMessage, setMessage] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [sent, setSent] = useState(false);
-  const ids = [currentUser.id, id[0]];
+  const ids = [currentUser.id, posterId];
   const classes = fullPostStyles();
+  const main = body();
 
   setInterval(() => setSent(false), 7000);
 
   const getPoster = async () => {
     await axios
-      .get(`/poster/${id[0]}`)
+      .get(`/poster/${posterId}`)
       .then((poster) => setPoster(poster.data))
       .catch((err) => console.warn("could not get this poster.", err));
   };
@@ -31,7 +35,7 @@ const PostFullMessage = ({ match, currentUser }) => {
       .get("/posttags")
       .then(({ data }) => {
         const tagsForPost = data.map((tag) => {
-          if (tag.id_post == id[1]) {
+          if (tag.id_post == postId) {
             return tag.tag;
           }
         });
@@ -42,7 +46,7 @@ const PostFullMessage = ({ match, currentUser }) => {
 
   const currentPost = () => {
     axios
-      .get(`/thispost/${id[1]}`)
+      .get(`/thispost/${postId}`)
       .then((post) => setPost(post.data))
       .catch((err) => console.warn("could not get this post.", err));
   };
@@ -121,69 +125,78 @@ const PostFullMessage = ({ match, currentUser }) => {
       <Appbar currentUser={currentUser} />
       <Grid
         container
+        className={main.body}
         justify="center"
-        alignItems="center"
-        direction="column"
-        className={classes.mainContainer}
+        alignItems="flex-start"
+        direction="row"
       >
         <Grid
           container
-          justify="flex-start"
+          justify="center"
           alignItems="center"
           direction="column"
-          className={classes.container}
+          className={classes.mainContainer}
         >
-          <Typography variant="h4" className={classes.header}>
-            {poster.username}
-          </Typography>
-          <Avatar src={poster.propic} alt="Avatar" className={classes.avatar} />
-          <div className={classes.text}>{post.message}</div>
-          <div className={classes.text}>{postTags.join(" ")}</div>
-          {post.audioName ? (
-            <a href={post.audioUrl} className={classes.link}>
-              AUDIO {post.audioName}
-            </a>
-          ) : null}
-          {post.imageName ? (
-            <a href={post.imageUrl} className={classes.link}>
-              IMAGE {post.imageName}
-            </a>
-          ) : null}
-          {post.youTubeUrl ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullscreen
-            ></iframe>
-          ) : null}
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            direction="column"
+            className={classes.container}
+          >
+            <Typography variant="h4" className={classes.header}>
+              {poster.username}
+            </Typography>
+            <Avatar src={poster.propic} alt="Avatar" className={classes.avatar} />
+            <div className={classes.text}>{post.message}</div>
+            <div className={classes.tags}>{postTags.join(" ")}</div>
+            {post.audioName ? (
+              <a href={post.audioUrl} className={classes.link}>
+                <Typography variant="h6" className={classes.header2}>
+                  HEAR AUDIO
+                </Typography>
+              </a>
+            ) : null}
+            {post.imageName ? (
+              <a href={post.imageUrl} className={classes.link}>
+                <Typography variant="h6" className={classes.header2}>
+                  SEE IMAGE
+                </Typography>
+              </a>
+            ) : null}
+            {post.youTubeUrl ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${post.youTubeUrl}`}
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : null}
+          </Grid>
         </Grid>
-      </Grid>
-      <div>
-        <Typography variant="h6" className={classes.header}>
-          Send {poster.username} A Message
-        </Typography>
-        {sent ? (
-          <Typography variant="h7" className={classes.header}>
-            ...Sent
+        <div className={classes.inputDiv}>
+          <Typography variant="h6" className={classes.header3}>
+            Send {poster.username} A Message
           </Typography>
-        ) : (
-          <div></div>
-        )}
-        <div>
-          <label>
-            <input
+          {sent ? (
+            <Typography variant="h6" className={classes.header}>
+              ...Sent
+            </Typography>
+          ) : null}
+          <div>
+            <Input
               id="input-message"
               className={classes.input}
               onChange={(event) => onEvent(event, setMessage)}
               type="text"
               placeholder="Message"
+              multiline={true}
             />
-            <Button onClick={onSubmit} className={classes.button}>
-              Submit
-            </Button>
-          </label>
+            <IconButton onClick={onSubmit} className={classes.button}>
+              <SendIcon />
+            </IconButton>
+          </div>
         </div>
-      </div>
+      </Grid>
     </div>
   );
 };

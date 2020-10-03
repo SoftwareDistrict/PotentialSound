@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import ImageUploader from "react-images-upload";
 import axios from "axios";
 import { Button, Typography, Grid, Input, InputLabel } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
 const UpdateProfile = ({ currentUser, getCurrentUser }) => {
@@ -70,7 +71,9 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
         .catch((err) => console.warn(err));
     } else {
       uploadImg()
-        .then(({ data }) => sendUpdates(data))
+        .then(({ data }) => {
+          return sendUpdates(data);
+        })
         .then(({ data }) => {
           setEndPt(data.redirectUrl);
           setLoad(false);
@@ -206,6 +209,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
           <Typography variant="h2" className={loading.loadingText}>
             Updating Profile...
           </Typography>
+          <CircularProgress />
         </Grid>
       )}
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}

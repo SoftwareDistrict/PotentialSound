@@ -6,10 +6,11 @@ const white = "#EDF2F4";
 
 const videoChatStyles = makeStyles({
   video: {
-    paddingRight: "30px",
-    paddingBottom: "10px",
+    border: "solid",
+    borderColor: light,
+    marginRight: 27.3,
     height: "40%",
-    width: "35%",
+    width: "40%",
   },
   container: {
     padding: "20px",

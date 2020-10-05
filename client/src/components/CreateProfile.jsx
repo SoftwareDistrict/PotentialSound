@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import ImageUploader from "react-images-upload";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { Button, Typography, Grid, Input, InputLabel } from "@material-ui/core";
 import { profileFormStyles, loadStyles } from "../styles/styles.js";
 
@@ -172,6 +173,7 @@ const CreateProfile = ({ getCurrentUser }) => {
           <Typography variant="h2" className={loading.loadingText}>
             Creating Profile...
           </Typography>
+          <CircularProgress />
         </Grid>
       )}
       {!endPt.length ? null : <Redirect to={`${endPt}`} />}

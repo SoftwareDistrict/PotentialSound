@@ -5,6 +5,7 @@ import ImageUploader from "react-images-upload";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   Grid,
   Button,
@@ -616,6 +617,7 @@ const CreatePostMessage = ({ currentUser }) => {
           <Typography variant="h2" className={load.loadingText}>
             Posting...
           </Typography>
+          <CircularProgress />
         </Grid>
       )}
       {!redirect.length ? null : <Redirect to={redirect} />}

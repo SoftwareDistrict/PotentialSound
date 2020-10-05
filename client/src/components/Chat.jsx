@@ -45,7 +45,7 @@ const Chat = ({ match, currentUser, history }) => {
       id_chat: idChat,
       id_user: id_user,
       message: `${currentUser.username} has invited you to join in`,
-      meeting: `https://069bfdcb45d1.ngrok.io${history.location.pathname}`,
+      meeting: `http://localhost:8080${history.location.pathname}`,
     });
   };
 

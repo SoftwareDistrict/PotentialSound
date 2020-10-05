@@ -1,26 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
+import { CardMedia, Container, IconButton } from "@material-ui/core";
 import Appbar from "./Appbar.jsx";
 import io from "socket.io-client";
-import styled from "styled-components";
 import Peer from "simple-peer";
 import PropTypes from "prop-types";
-
-const Container = styled.div`
-  padding: 20px;
-  display: flex;
-  height: 100vh;
-  width: 90%;
-  margin: auto;
-  flex-wrap: wrap;
-`;
-
-const StyledVideo = styled.video`
-  height: 40%;
-  width: 50%;
-`;
+import { videoChatStyles, chatStyles } from "../styles/styles.js";
+import CallEndIcon from "@material-ui/icons/CallEnd";
 
 const Video = (props) => {
   const ref = useRef();
+  const classes = videoChatStyles();
 
   useEffect(() => {
     props.peer.on("stream", (stream) => {
@@ -28,7 +17,7 @@ const Video = (props) => {
     });
   }, []);
 
-  return <StyledVideo playsInline autoPlay ref={ref} />;
+  return <CardMedia className={classes.video} component="video" playsInline autoPlay ref={ref} />;
 };
 
 const videoConstraints = {
@@ -42,6 +31,8 @@ const VCRoom = ({ match, currentUser, history }) => {
   const userVideo = useRef();
   const peersRef = useRef([]);
   const roomID = match.params.roomID;
+  const classes = videoChatStyles();
+  const button = chatStyles().button;
 
   useEffect(() => {
     socketRef.current = io.connect("/");
@@ -120,13 +111,22 @@ const VCRoom = ({ match, currentUser, history }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Container>
-        <StyledVideo muted ref={userVideo} autoPlay playsInline />
+      <Container component="div" className={classes.container} maxWidth="sm">
+        <CardMedia
+          className={classes.video}
+          component="video"
+          muted
+          ref={userVideo}
+          autoPlay
+          playsInline
+        />
         {peers.map((peer, index) => {
           return <Video key={index} peer={peer} />;
         })}
       </Container>
-      <button onClick={() => disconnect()}>Disconnect</button>
+      <IconButton className={button} onClick={() => disconnect()}>
+        <CallEndIcon />
+      </IconButton>
     </div>
   );
 };

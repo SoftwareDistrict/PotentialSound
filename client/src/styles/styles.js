@@ -4,6 +4,22 @@ const dark = "#2B2D42";
 const light = "#8D99AE";
 const white = "#EDF2F4";
 
+const videoChatStyles = makeStyles({
+  video: {
+    border: "solid",
+    borderColor: light,
+    marginRight: 27.3,
+    height: "40%",
+    width: "40%",
+  },
+  container: {
+    padding: "20px",
+    display: "flex",
+    margin: "auto",
+    flexWrap: "wrap",
+  },
+});
+
 const loginStyles = makeStyles({
   loginContainer: {
     height: "100%",
@@ -842,4 +858,5 @@ module.exports = {
   loadStyles,
   profileFormStyles,
   fullPostStyles,
+  videoChatStyles,
 };

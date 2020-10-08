@@ -468,18 +468,34 @@ const chatStyles = makeStyles({
     paddingLeft: 10,
     backgroundColor: white,
   },
-  messageContainer: {
+  messageContainerContainer: {
     overflow: "auto",
     width: "100%",
     backgroundColor: white,
     maxHeight: 335,
     padding: 7,
   },
+  messageContainer: {
+    overflow: "auto",
+    width: "100%",
+    backgroundColor: white,
+    maxHeight: 335,
+    padding: 0,
+  },
   formContainer: {
     overflow: "auto",
     width: "100%",
     backgroundColor: white,
     padding: 7,
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    variant: "circle",
+  },
+  avatarGroup: {
+    display: "flex",
+    margin: "5px 0 15px 0",
   },
 });
 

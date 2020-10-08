@@ -30,6 +30,8 @@ const {
   sendMessage,
   search,
   searchPostByUser,
+  getParts,
+  getUser,
 } = require("./queries.js");
 
 const PORT = process.env.PORT || 3000;
@@ -145,6 +147,20 @@ app.post("/createProfile", (req, res) => {
   const userId = req.session.passport.user;
   addUser(userId, userInfoObj)
     .then(() => res.status(200).json({ redirectUrl: "/home" }))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/getParts/:id", (req, res) => {
+  const chatId = req.params.id;
+  getParts(chatId)
+    .then((chatRows) => res.send(chatRows))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.get("/getUser/:id", (req, res) => {
+  const userId = req.params.id;
+  getUser(userId)
+    .then((user) => res.send(user))
     .catch((err) => res.status(500).send(err));
 });
 

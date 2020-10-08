@@ -549,16 +549,16 @@ const messageStyles = makeStyles({
     fontWeight: "bold",
     fontSize: 18,
     "&:hover": {
-      backgroundColor: light,
+      backgroundColor: white,
       "@media (hover: none)": {
-        backgroundColor: light,
+        backgroundColor: white,
         "&:active": {
-          backgroundColor: light,
+          backgroundColor: white,
         },
       },
     },
     "&:active": {
-      backgroundColor: light,
+      backgroundColor: white,
     },
   },
 });

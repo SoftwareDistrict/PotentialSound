@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { messageStyles, chatStyles } from "../styles/styles.js";
+import { messageStyles } from "../styles/styles.js";
 import { Grid, Avatar, FormControl, Input } from "@material-ui/core";
 
 const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }) => {
   const [messenger, setMessenger] = useState("");
 
   const classes = messageStyles();
-  const joinButton = chatStyles().button;
 
   useEffect(() => {
     axios
@@ -34,7 +33,7 @@ const Message = ({ id_user, message, createdAt, img, audio, audioName, meeting }
           >
             {meeting ? (
               <FormControl component="form" action={meeting}>
-                <Input className={joinButton} type="submit" value="Join"></Input>
+                <Input className={classes.button} type="submit" value="JOIN" />
               </FormControl>
             ) : null}
             {img ? <img className={classes.msgImg} src={img} /> : null}

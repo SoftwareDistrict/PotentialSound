@@ -44,9 +44,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
               </a>
             ) : null}
             {post.imageName ? (
-              <a href={post.imageUrl} className={classes.anchor}>
-                <Typography variant="h6">SEE IMAGE</Typography>
-              </a>
+              <img className={classes.msgImg} src={post.imageUrl} />
             ) : null}
             <div className={classes.tags}>{postTags.join(" ")}</div>
           </Grid>

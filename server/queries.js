@@ -12,7 +12,7 @@ const isAccCreated = (googleId) =>
 
 const getCurrentUser = (userId) => Users.findOne({ where: { id: userId } });
 const getUser = (userId) => Users.findOne({ where: { id: userId } });
-    
+
 const getPosts = () => Posts.findAll();
 const getThisPost = (id) => Posts.findOne({ where: { id: id } });
 const searchPostByUser = (id) => Posts.findAll({ where: { id_user: id } });
@@ -21,7 +21,6 @@ const search = (id) => Posts.findAll({ where: { id: id } });
 const getUsers = () => Users.findAll();
 const getUsername = (username) => Users.findOne({ where: { username: username } });
 const getPoster = (id) => Users.findOne({ where: { id: id } });
-
 
 const getTags = () => Tags.findAll();
 

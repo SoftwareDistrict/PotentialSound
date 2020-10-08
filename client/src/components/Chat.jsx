@@ -7,7 +7,15 @@ import axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
 import { chatStyles, body } from "../styles/styles.js";
-import { IconButton, Grid, TextField, Typography, InputLabel, Input, Avatar } from "@material-ui/core";
+import {
+  IconButton,
+  Grid,
+  TextField,
+  Typography,
+  InputLabel,
+  Input,
+  Avatar,
+} from "@material-ui/core";
 import { AvatarGroup } from "@material-ui/lab";
 import SendIcon from "@material-ui/icons/Send";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
@@ -57,14 +65,17 @@ const Chat = ({ match, currentUser, history }) => {
   };
 
   const getParticipants = async () => {
-    await axios.get(`/getParts/${idChat}`)
+    await axios
+      .get(`/getParts/${idChat}`)
       .then(async (chatRows) => {
         const parts = await Promise.all(
           chatRows.data.map(async (chatRow) => {
-            return await axios.get(`/getUser/${chatRow.id_user}`)
+            return await axios
+              .get(`/getUser/${chatRow.id_user}`)
               .then((user) => user.data)
               .catch((err) => console.warn("user: this no work", err));
-          }));
+          })
+        );
         setParticipants(parts);
       })
       .catch((err) => console.warn("chatRows: this did not work", err));
@@ -199,7 +210,7 @@ const Chat = ({ match, currentUser, history }) => {
                         audio={msg.url_audio}
                         audioName={msg.name_audio}
                         meeting={msg.meeting}
-                      />                                            
+                      />
                     </Grid>
                   );
                 }

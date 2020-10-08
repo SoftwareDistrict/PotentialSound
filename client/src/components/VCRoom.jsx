@@ -34,7 +34,6 @@ const VCRoom = ({ match, currentUser, history }) => {
   const classes = videoChatStyles();
   const main = body();
 
-
   useEffect(() => {
     socketRef.current = io.connect("/");
     navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then((stream) => {

@@ -41,7 +41,6 @@ const videoChatStyles = makeStyles({
   },
   icon: {
     fontSize: 40,
-
   },
 });
 

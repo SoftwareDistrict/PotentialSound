@@ -2,7 +2,7 @@
 
 # INTRODUCTION
 
-PotentialSound is a hub for musicians to be discovered and connect or collaberate with other arists. Potential sound gives artists a platform to showcase themselves along with what they have to offer. Users of this application will have the ability to make posts and connect through direct messaging and video chatting, and link their profile to other social media accounts. The end goal is to bring together these artists and through their future collaboration bring out their PotentialSound.
+PotentialSound is a hub for talent to be found, and offers a new world of talented individuals. Whether new to the industry, or already established, PotentialSound provides a convenient platform for artists to collaborate, showcase their skill, or provide their services. These artists can contribute to the main feed by creating posts with custom messages, images, audio snippets, and videos. PotentialSound offers a wide range of connectivity. Provide links to your other social media, so people can discover your talent faster. Direct message a user from their post or create a chat and add as many people as you want. If you need to discuss business, or you just can't get your point across over the message thread, start a video call for the entire chat to join. The end goal is to bring these artists together and help them find what they're looking for, and through their future collaboration, bring out their PotentialSound.
 
 # Tech
 

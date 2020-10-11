@@ -11,6 +11,7 @@ const isAccCreated = (googleId) =>
     .catch((err) => err);
 
 const getCurrentUser = (userId) => Users.findOne({ where: { id: userId } });
+const getUser = (userId) => Users.findOne({ where: { id: userId } });
 
 const getPosts = () => Posts.findAll();
 const getThisPost = (id) => Posts.findOne({ where: { id: id } });
@@ -25,6 +26,7 @@ const getTags = () => Tags.findAll();
 
 const getChats = () => ChatJoin.findAll();
 const getChatIds = (id) => ChatJoin.findAll({ where: { id_user: id } });
+const getParts = (chatId) => ChatJoin.findAll({ where: { id_chat: chatId } });
 
 const getMessagesForChat = (id_chat) => Messages.findAll({ where: { id_chat: id_chat } });
 
@@ -57,4 +59,6 @@ module.exports = {
   createJoin,
   sendMessage,
   searchPostByUser,
+  getParts,
+  getUser,
 };

@@ -7,7 +7,16 @@ import axios from "axios";
 import io from "socket.io-client";
 import { v4 as uuid } from "uuid";
 import { chatStyles, body } from "../styles/styles.js";
-import { IconButton, Grid, TextField, Typography, InputLabel, Input } from "@material-ui/core";
+import {
+  IconButton,
+  Grid,
+  TextField,
+  Typography,
+  InputLabel,
+  Input,
+  Avatar,
+} from "@material-ui/core";
+import { AvatarGroup } from "@material-ui/lab";
 import SendIcon from "@material-ui/icons/Send";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 
@@ -16,6 +25,7 @@ let socket = io("localhost:8080");
 const Chat = ({ match, currentUser, history }) => {
   const audioRef = useRef();
   const imageRef = useRef();
+
   const idChat = match.params.id;
   const id_user = currentUser.id;
   const [userMessage, setMessage] = useState("");
@@ -23,6 +33,7 @@ const Chat = ({ match, currentUser, history }) => {
   const [photo, setPhoto] = useState([]);
   const [audio, setAudio] = useState([]);
   const [load, setLoading] = useState(false);
+  const [participants, setParticipants] = useState([]);
 
   const classes = chatStyles();
   const main = body();
@@ -38,6 +49,10 @@ const Chat = ({ match, currentUser, history }) => {
     socket.emit("getMessages", idChat);
   }, [allMsgs]);
 
+  useEffect(() => {
+    getParticipants();
+  }, []);
+
   const createVCRoom = () => {
     const id = uuid();
     history.push(`/room/${id}`);
@@ -47,6 +62,23 @@ const Chat = ({ match, currentUser, history }) => {
       message: `${currentUser.username} has invited you to join in`,
       meeting: `http://localhost:8080${history.location.pathname}`,
     });
+  };
+
+  const getParticipants = async () => {
+    await axios
+      .get(`/getParts/${idChat}`)
+      .then(async (chatRows) => {
+        const parts = await Promise.all(
+          chatRows.data.map(async (chatRow) => {
+            return await axios
+              .get(`/getUser/${chatRow.id_user}`)
+              .then((user) => user.data)
+              .catch((err) => console.warn("user: this no work", err));
+          })
+        );
+        setParticipants(parts);
+      })
+      .catch((err) => console.warn("chatRows: this did not work", err));
   };
 
   const onChangePhoto = (e) => {
@@ -153,33 +185,37 @@ const Chat = ({ match, currentUser, history }) => {
         direction="row"
       >
         <Grid container direction="column" justify="center" alignItems="center">
-          <Typography className={classes.header} align="center" variant="h3">
-            Chat
-          </Typography>
-          <Grid item className={classes.messageContainer}>
-            {allMsgs.map((msg) => {
-              if (match.params.id == msg.id_chat) {
-                return (
-                  <Grid
-                    container
-                    justify="flex-start"
-                    alignItems="center"
-                    direction="column-reverse"
-                    key={msg.id}
-                  >
-                    <Message
-                      id_user={msg.id_user}
-                      message={msg.message}
-                      createdAt={msg.createdAt}
-                      img={msg.url_image}
-                      audio={msg.url_audio}
-                      audioName={msg.name_audio}
-                      meeting={msg.meeting}
-                    />
-                  </Grid>
-                );
-              }
-            })}
+          <AvatarGroup max={4} className={classes.avatarGroup}>
+            {participants.map(({ username, propic }, i) => (
+              <Avatar key={i} alt={username} src={propic} className={classes.avatar} />
+            ))}
+          </AvatarGroup>
+          <Grid item className={classes.messageContainerContainer}>
+            <Grid item className={classes.messageContainer}>
+              {allMsgs.map((msg) => {
+                if (match.params.id == msg.id_chat) {
+                  return (
+                    <Grid
+                      container
+                      justify="flex-start"
+                      alignItems="center"
+                      direction="column-reverse"
+                      key={msg.id}
+                    >
+                      <Message
+                        id_user={msg.id_user}
+                        message={msg.message}
+                        createdAt={msg.createdAt}
+                        img={msg.url_image}
+                        audio={msg.url_audio}
+                        audioName={msg.name_audio}
+                        meeting={msg.meeting}
+                      />
+                    </Grid>
+                  );
+                }
+              })}
+            </Grid>
           </Grid>
           <Grid item className={classes.formContainer}>
             <Grid container justify="center" alignItems="center" direction="column">

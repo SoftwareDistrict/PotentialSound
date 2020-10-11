@@ -43,11 +43,7 @@ const PostFeedEntry = ({ post, users, tags }) => {
                 <Typography variant="h6">HEAR AUDIO</Typography>
               </a>
             ) : null}
-            {post.imageName ? (
-              <a href={post.imageUrl} className={classes.anchor}>
-                <Typography variant="h6">SEE IMAGE</Typography>
-              </a>
-            ) : null}
+            {post.imageName ? <img className={classes.msgImg} src={post.imageUrl} /> : null}
             <div className={classes.tags}>{postTags.join(" ")}</div>
           </Grid>
         </div>

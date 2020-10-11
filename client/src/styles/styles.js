@@ -6,17 +6,41 @@ const white = "#EDF2F4";
 
 const videoChatStyles = makeStyles({
   video: {
-    border: "solid",
-    borderColor: light,
-    marginRight: 27.3,
-    height: "40%",
+    border: `3px solid ${light}`,
+    borderRadius: 30,
+    height: "42%",
     width: "40%",
+    marginBottom: 10,
   },
-  container: {
-    padding: "20px",
-    display: "flex",
-    margin: "auto",
-    flexWrap: "wrap",
+  grid1: {
+    background: white,
+    padding: 10,
+    marginTop: 10,
+    maxHeight: 740,
+  },
+  grid2: {
+    background: dark,
+    marginBottom: 20,
+    padding: "10px 10px 0 10px",
+  },
+  button: {
+    backgroundColor: light,
+    color: dark,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
+  },
+  icon: {
+    fontSize: 40,
   },
 });
 
@@ -155,6 +179,13 @@ const postStyles = makeStyles({
     textAlign: "left",
     marginTop: 5,
     color: "#037bfc",
+  },
+  msgImg: {
+    width: 140,
+    height: 100,
+    marginTop: 5,
+    marginBottom: 5,
+    border: `solid ${white}`,
   },
 });
 
@@ -437,18 +468,34 @@ const chatStyles = makeStyles({
     paddingLeft: 10,
     backgroundColor: white,
   },
-  messageContainer: {
+  messageContainerContainer: {
     overflow: "auto",
     width: "100%",
     backgroundColor: white,
     maxHeight: 335,
     padding: 7,
   },
+  messageContainer: {
+    overflow: "auto",
+    width: "100%",
+    backgroundColor: white,
+    maxHeight: 335,
+    padding: 0,
+  },
   formContainer: {
     overflow: "auto",
     width: "100%",
     backgroundColor: white,
     padding: 7,
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    variant: "circle",
+  },
+  avatarGroup: {
+    display: "flex",
+    margin: "5px 0 15px 0",
   },
 });
 
@@ -494,6 +541,25 @@ const messageStyles = makeStyles({
   },
   msgItemCon: {
     padding: 5,
+  },
+  button: {
+    backgroundColor: white,
+    color: dark,
+    padding: "0 15px 0 15px",
+    fontWeight: "bold",
+    fontSize: 18,
+    "&:hover": {
+      backgroundColor: white,
+      "@media (hover: none)": {
+        backgroundColor: white,
+        "&:active": {
+          backgroundColor: white,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: white,
+    },
   },
 });
 

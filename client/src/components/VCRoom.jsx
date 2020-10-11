@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import { CardMedia, Container, IconButton } from "@material-ui/core";
+import { CardMedia, IconButton, Grid } from "@material-ui/core";
 import Appbar from "./Appbar.jsx";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import PropTypes from "prop-types";
-import { videoChatStyles, chatStyles } from "../styles/styles.js";
+import { videoChatStyles, body } from "../styles/styles.js";
 import CallEndIcon from "@material-ui/icons/CallEnd";
 
 const Video = (props) => {
@@ -32,7 +32,7 @@ const VCRoom = ({ match, currentUser, history }) => {
   const peersRef = useRef([]);
   const roomID = match.params.roomID;
   const classes = videoChatStyles();
-  const button = chatStyles().button;
+  const main = body();
 
   useEffect(() => {
     socketRef.current = io.connect("/");
@@ -111,22 +111,44 @@ const VCRoom = ({ match, currentUser, history }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Container component="div" className={classes.container} maxWidth="sm">
-        <CardMedia
-          className={classes.video}
-          component="video"
-          muted
-          ref={userVideo}
-          autoPlay
-          playsInline
-        />
-        {peers.map((peer, index) => {
-          return <Video key={index} peer={peer} />;
-        })}
-      </Container>
-      <IconButton className={button} onClick={() => disconnect()}>
-        <CallEndIcon />
-      </IconButton>
+      <Grid
+        container
+        className={main.body}
+        justify="center"
+        alignItems="flex-start"
+        direction="row"
+      >
+        <Grid
+          container
+          className={classes.grid1}
+          justify="flex-start"
+          alignItems="center"
+          direction="column"
+        >
+          <Grid
+            container
+            className={classes.grid2}
+            justify="space-evenly"
+            alignItems="flex-start"
+            direction="row"
+          >
+            <CardMedia
+              className={classes.video}
+              component="video"
+              muted
+              ref={userVideo}
+              autoPlay
+              playsInline
+            />
+            {peers.map((peer, index) => {
+              return <Video key={index} peer={peer} />;
+            })}
+          </Grid>
+          <IconButton className={classes.button} onClick={() => disconnect()}>
+            <CallEndIcon className={classes.icon} />
+          </IconButton>
+        </Grid>
+      </Grid>
     </div>
   );
 };

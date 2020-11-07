@@ -4,7 +4,15 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 import CloseIcon from "@material-ui/icons/Close";
-import { Typography, List, ListItemText, Button, TextField, Grid, IconButton } from "@material-ui/core";
+import {
+  Typography,
+  List,
+  ListItemText,
+  Button,
+  TextField,
+  Grid,
+  IconButton,
+} from "@material-ui/core";
 import { createMessageStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
@@ -151,10 +159,12 @@ const CreateChat = ({ currentUser }) => {
 
   const startNewChat = () => setClicked(!clicked);
 
-  if(!clicked) {
+  if (!clicked) {
     return (
       <div>
-        <Button onClick={startNewChat} className={classes.newButton}>Start A New Chat</Button>
+        <Button onClick={startNewChat} className={classes.newButton}>
+          Start A New Chat
+        </Button>
       </div>
     );
   }
@@ -162,7 +172,9 @@ const CreateChat = ({ currentUser }) => {
     <div>
       <div className={classes.main}>
         <Grid container direction="row" justify="space-between" alignItems="center">
-          <Typography variant="h5" className={classes.header}>New Chat</Typography>
+          <Typography variant="h5" className={classes.header}>
+            New Chat
+          </Typography>
           <IconButton onClick={startNewChat} className={classes.closeButton}>
             <CloseIcon className={classes.iconClose} />
           </IconButton>

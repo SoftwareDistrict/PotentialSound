@@ -155,7 +155,6 @@ const CreateChat = ({ currentUser }) => {
     <div>
       <Appbar currentUser={currentUser} />
       <Grid
-        className={classes.parentGrid}
         container
         direction="column"
         justify="center"

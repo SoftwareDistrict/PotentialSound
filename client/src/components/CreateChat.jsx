@@ -154,12 +154,7 @@ const CreateChat = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
+      <Grid container direction="column" justify="center" alignItems="center">
         <Typography className={classes.header} align="center" variant="h4">
           Create a chat!
         </Typography>

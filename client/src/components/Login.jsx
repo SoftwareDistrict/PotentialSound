@@ -28,8 +28,12 @@ const Login = () => {
         <img alt="G" src="https://tinyurl.com/y6kf4vx4" className={classes.icon} />
         Sign in with Google
       </IconButton>
-      <div className={classes.textDiv}>------------------------------  OR  ------------------------------</div>
-      <IconButton className={classes.textButton} href="/google">Sign Up</IconButton>
+      <div className={classes.textDiv}>
+        ------------------------------ OR ------------------------------
+      </div>
+      <IconButton className={classes.textButton} href="/google">
+        Sign Up
+      </IconButton>
     </Grid>
   );
 };

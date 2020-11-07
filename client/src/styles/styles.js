@@ -54,7 +54,6 @@ const loginStyles = makeStyles({
     color: white,
     fontSize: 22,
     marginTop: 20,
-
   },
   loginContainer: {
     height: "100%",

@@ -328,28 +328,31 @@ const menuStyles = makeStyles({
 });
 
 const createMessageStyles = makeStyles({
-  pDiv: {
-    height: "100vh",
-    backgroundColor: "#2B2D42",
-  },
-  avatarGroup: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  username: {
-    backgroundColor: "#EDF2F4",
-  },
   header: {
-    textAlign: "center",
-    color: white,
-  },
-  text: {
-    backgroundColor: "#EDF2F4",
+    color: dark,
+    fontWeight: "bold",
   },
   button: {
-    backgroundColor: light,
+    backgroundColor: white,
     color: dark,
+    margin: 10,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
+  },
+  newButton: {
+    backgroundColor: white,
+    color: dark,
+    margin: "20px 0 20px 10px",
     "&:hover": {
       backgroundColor: light,
       "@media (hover: none)": {
@@ -371,30 +374,55 @@ const createMessageStyles = makeStyles({
   list: {
     listStyle: "none",
   },
+  main: {
+    backgroundColor: light,
+    margin: 20,
+    padding: 10,
+    border: `4px solid ${white}`,
+  },
   chatInput: {
-    border: "4px solid black",
+    border: "3px solid black",
     width: 250,
     height: 30,
     fontSize: 14,
     backgroundColor: white,
     paddingLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   chatText: {
-    border: "4px solid black",
+    border: "3px solid black",
     fontSize: 14,
     backgroundColor: white,
     width: "90%",
     paddingLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   selectedUser: {
     color: dark,
     fontWeight: "bold",
   },
-  box: {
+  iconClose: {
+    fontSize: 30,
+    fontWeight: "bold",
     color: white,
+  },
+  closeButton: {
     backgroundColor: light,
-    border: "4px solid black",
-    width: "75%",
+    padding: 0,
+    "&:hover": {
+      backgroundColor: light,
+      "@media (hover: none)": {
+        backgroundColor: light,
+        "&:active": {
+          backgroundColor: light,
+        },
+      },
+    },
+    "&:active": {
+      backgroundColor: light,
+    },
   },
 });
 
@@ -428,14 +456,6 @@ const chatEntryStyles = makeStyles({
   link: {
     textDecoration: "none",
     color: dark,
-  },
-});
-
-const chats = makeStyles({
-  header: {
-    color: white,
-    marginTop: 10,
-    marginBottom: 10,
   },
 });
 
@@ -748,7 +768,8 @@ const createPostStyles = makeStyles({
 
 const loadStyles = makeStyles({
   loadingGrid: {
-    marginTop: 250,
+    minHeight: 850,
+    minWidth: 360,
   },
   loadingText: {
     fontSize: 60,
@@ -929,7 +950,6 @@ module.exports = {
   menuStyles,
   createMessageStyles,
   chatEntryStyles,
-  chats,
   chatStyles,
   messageStyles,
   profileStyle,

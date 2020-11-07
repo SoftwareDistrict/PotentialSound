@@ -203,7 +203,7 @@ const UpdateProfile = ({ currentUser, getCurrentUser }) => {
           justify="center"
           alignItems="center"
           direction="column"
-          className={classes.loadingGrid}
+          className={loading.loadingGrid}
         >
           <img alt="PS" src="https://i.imgur.com/20PNAlU.png" className={loading.loadingImg} />
           <Typography variant="h2" className={loading.loadingText}>

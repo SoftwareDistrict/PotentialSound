@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ChatEntry from "./ChatEntry.jsx";
+import CreateChat from "./CreateChat.jsx";
 import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import { Typography } from "@material-ui/core";
-import { chats } from "../styles/styles.js";
 
 const Chats = ({ currentUser }) => {
   const [participants, setParticipants] = useState([]);
   const [chatIds, setChatIds] = useState([]);
   const [allChats, setAllChats] = useState([]);
-  const classes = chats();
 
   const getChats = async () => {
     await axios
@@ -56,9 +54,7 @@ const Chats = ({ currentUser }) => {
   return (
     <div>
       <Appbar currentUser={currentUser} />
-      <Typography variant="h4" align="center" className={classes.header}>
-        Current Messages
-      </Typography>
+      <CreateChat currentUser={currentUser} />
       {chatIds.map((id) => (
         <ChatEntry key={id} id_chat={id} participants={participants} />
       ))}

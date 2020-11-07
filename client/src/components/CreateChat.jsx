@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Appbar from "./Appbar.jsx";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import { Grid } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { Typography, List, ListItemText } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import { Typography, List, ListItemText, Button, TextField, Grid, IconButton } from "@material-ui/core";
 import { createMessageStyles } from "../styles/styles.js";
 
 const CreateChat = ({ currentUser }) => {
@@ -20,6 +17,7 @@ const CreateChat = ({ currentUser }) => {
   const [text, setText] = useState("");
   const [allChats, setAllChats] = useState([]);
   const [members, setMembers] = useState([]);
+  const [clicked, setClicked] = useState(false);
   const classes = createMessageStyles();
 
   const getAllUsers = async () => {
@@ -75,7 +73,7 @@ const CreateChat = ({ currentUser }) => {
         <List component="ul" disablePadding={true} className={classes.list}>
           <Typography variant="h6"> Select User: </Typography>
           {suggestions.map((user, i) => (
-            <ListItemText className={classes.li} onClick={() => suggestionSelected(user)} key={i}>
+            <ListItemText onClick={() => suggestionSelected(user)} key={i}>
               {user}
             </ListItemText>
           ))}
@@ -151,25 +149,33 @@ const CreateChat = ({ currentUser }) => {
     setMembers(newMems);
   };
 
+  const startNewChat = () => setClicked(!clicked);
+
+  if(!clicked) {
+    return (
+      <div>
+        <Button onClick={startNewChat} className={classes.newButton}>Start A New Chat</Button>
+      </div>
+    );
+  }
   return (
     <div>
-      <Appbar currentUser={currentUser} />
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Typography className={classes.header} align="center" variant="h4">
-          Create a chat!
-        </Typography>
-        <Grid
-          direction="column"
-          alignItems="center"
-          justify="center"
-          container
-          className={classes.box}
-        >
-          {members.length > 0 ? (
-            <Typography variant="h6">Sending message to</Typography>
-          ) : (
-            <Typography variant="h6">Who are you trying to send a message to?</Typography>
-          )}
+      <div className={classes.main}>
+        <Grid container direction="row" justify="space-between" alignItems="center">
+          <Typography variant="h5" className={classes.header}>New Chat</Typography>
+          <IconButton onClick={startNewChat} className={classes.closeButton}>
+            <CloseIcon className={classes.iconClose} />
+          </IconButton>
+        </Grid>
+        <Grid container direction="column" justify="space-between" alignItems="center">
+          <TextField
+            value={text}
+            type="text"
+            onChange={onTextChange}
+            placeholder="Who do you want to message?"
+            className={classes.chatInput}
+          />
+          {renderSuggestions()}
           {members.map((mem, i) => (
             <span className={classes.selectedUser} key={i}>
               <span id={`child${i}`} key={i} value={mem} onClick={() => removeMem(`child${i}`)}>
@@ -177,18 +183,6 @@ const CreateChat = ({ currentUser }) => {
               </span>
             </span>
           ))}
-        </Grid>
-        <Grid alignItems="center" justify="center" direction="column" container>
-          <TextField
-            value={text}
-            type="text"
-            onChange={onTextChange}
-            placeholder="Username"
-            className={classes.chatInput}
-          />
-          {renderSuggestions()}
-        </Grid>
-        <Grid direction="column" alignItems="center" justify="center" container>
           <TextField
             className={classes.chatText}
             multiline
@@ -196,14 +190,14 @@ const CreateChat = ({ currentUser }) => {
             onChange={(event) => setMessage(event.target.value)}
             inputRef={inputBox}
             type="text"
-            placeholder="Message"
+            placeholder="Start a new message"
             rowsMax={8}
           />
           <Button onClick={onSubmit} className={classes.button}>
             Submit
           </Button>
         </Grid>
-      </Grid>
+      </div>
     </div>
   );
 };

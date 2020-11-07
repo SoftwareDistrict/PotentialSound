@@ -36,9 +36,6 @@ const Nav = ({ currentUser }) => {
         <Link onClick={toggleMenu} className={classes.link} to="/home">
           General
         </Link>
-        <Link onClick={toggleMenu} className={classes.link} to={"/createChat"}>
-          Create Chat
-        </Link>
         <Link to="/chats" onClick={toggleMenu} className={classes.link}>
           Chats
         </Link>

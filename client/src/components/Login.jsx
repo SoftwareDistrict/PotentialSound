@@ -15,23 +15,24 @@ const Login = () => {
       alignItems="center"
       direction="column"
     >
-      <Typography variant={matches ? "h4" : "h1"} className={classes.header}>
+      <Typography variant={matches ? "h4" : "h2"} className={classes.header}>
         Welcome To
       </Typography>
-      <img
-        alt="PS"
-        src="https://i.imgur.com/20PNAlU.png"
-        style={matches ? { height: "100px", width: "100px" } : { height: "190px", width: "190px" }}
-      />
-      <Typography variant={matches ? "h4" : "h1"} className={classes.header}>
+      <Typography variant={matches ? "h3" : "h2"} className={classes.header}>
         PotentialSound
       </Typography>
-      <Typography variant={matches ? "h6" : "h3"} className={classes.header}>
+      <Typography variant={matches ? "h6" : "h5"} className={classes.header2}>
         {"Where You're Bound To Be Found!"}
       </Typography>
       <IconButton className={classes.button} href="/google">
         <img alt="G" src="https://tinyurl.com/y6kf4vx4" className={classes.icon} />
         Sign in with Google
+      </IconButton>
+      <div className={classes.textDiv}>
+        ------------------------------ OR ------------------------------
+      </div>
+      <IconButton className={classes.textButton} href="/google">
+        Sign Up
       </IconButton>
     </Grid>
   );

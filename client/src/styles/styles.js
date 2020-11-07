@@ -45,10 +45,19 @@ const videoChatStyles = makeStyles({
 });
 
 const loginStyles = makeStyles({
+  textDiv: {
+    color: "black",
+    fontSize: 18,
+    marginTop: 30,
+  },
+  textButton: {
+    color: white,
+    fontSize: 22,
+    marginTop: 20,
+  },
   loginContainer: {
     height: "100%",
     width: "100%",
-    background: dark,
     paddingTop: 60,
     paddingBottom: 50,
   },
@@ -58,18 +67,25 @@ const loginStyles = makeStyles({
     textAlign: "center",
     fontWeight: "bold",
   },
+  header2: {
+    color: white,
+    margin: 15,
+    marginTop: 80,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
   button: {
     variant: "contained",
     disableFocusRipple: true,
     disableRipple: true,
     background: "#037bfc",
-    height: 53,
+    height: 35,
     width: 250,
-    borderRadius: 0,
-    padding: "0 10px 0 0",
+    borderRadius: 5,
+    padding: "0 25px 0 0",
     color: "white",
-    fontSize: 22,
-    marginTop: 60,
+    fontSize: 18,
+    marginTop: 15,
     "&:hover": {
       backgroundColor: "#037bfc",
       "@media (hover: none)": {
@@ -84,9 +100,10 @@ const loginStyles = makeStyles({
     },
   },
   icon: {
-    height: 50,
+    height: 35,
     width: 50,
-    marginRight: 10,
+    marginRight: 45,
+    borderRadius: "5px 0 0 5px",
   },
 });
 
@@ -319,9 +336,6 @@ const createMessageStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  parentGrid: {
-    backgroundColor: "#2B2D42",
   },
   username: {
     backgroundColor: "#EDF2F4",
@@ -899,7 +913,6 @@ const fullPostStyles = makeStyles({
 
 const body = makeStyles({
   body: {
-    background: dark,
     padding: 10,
   },
 });
